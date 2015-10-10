@@ -1,0 +1,374 @@
+﻿/*-----Prevents iPhone from resizing in landscape mode -----*/
+html {
+    -webkit-text-size-adjust: none;
+}
+
+/*----------- apply a natural box layout model to all elements --------------*/
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+
+
+
+
+/*-----BODY -----*/
+body {
+    background-color: #E6E1D8;
+    font-size: 16px;
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 300; /*also loaded 600 for bold*/
+    color: #494948;
+}
+
+
+
+
+/*-----COLOR BAR -----*/
+#colorbar {
+    height: 44px;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #212121;
+}
+
+
+
+
+
+/*-----HEADER -----*/
+#headerWrapper {
+    background-color: #3B4044;
+}
+
+header {
+    padding: 1em 2% .5em 2%;
+}
+
+    header h1 {
+        font-size: 2.1em;
+        color: #fff;
+    }
+
+    header h2 {
+        font-size: .9em;
+        font-weight: 300;
+        color: #ddd;
+        margin-top: .75em;
+    }
+
+
+
+
+
+/*-----NAVIGATION -----*/
+#navWrapper {
+    background-color: #e22121;
+}
+
+nav ul li {
+    float: left;
+    width: 25%;
+}
+
+    nav ul li a {
+        display: block;
+        font-size: .9em;
+        font-weight: 600;
+        color: #fff;
+        text-decoration: none;
+        margin: .6em 0;
+        border-right: 3px solid rgba(255,255,255,0.3);
+        text-align: center;
+    }
+    /*this turns off the last border*/
+    nav ul li:last-child a {
+        border-right: none;
+    }
+
+
+
+
+
+/*-----CONTENT -----*/
+#contentWrapper {
+    background-color: #fff;
+    transition: 1s all;
+}
+
+    #contentWrapper .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+    #contentWrapper h1 {
+        color: #e22121;
+        font-size: 2em;
+        padding-top: 1em;
+        text-shadow: 1px 1px 2px #999;
+    }
+
+.column1-center {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.uppercontent, .lowercontent {
+    padding: 0;
+    font-family: verdana;
+    height: auto;
+    z-index: 1;
+}
+
+.lowercontent {
+    background-color: #febe00;
+    font-family: verdana;
+    height: auto;
+    text-align: center;
+}
+
+    .lowercontent .header {
+        padding: 1em;                
+        font-weight: 600;        
+    }
+
+    .lowercontent div p:first-child {
+        padding: .4em 0 .2em 0;     
+        font-size:.8em;           
+        font-weight: 400; 
+        text-align:justify;               
+    }
+
+    .lowercontent div p {           
+        padding: 0 0 .4em 0;          
+        font-size:.8em;           
+        font-weight: 400;        
+        text-align:right;
+    }
+
+.uppercontent .row, .uppercontent-home .row {
+    color: #000;
+}
+
+    .uppercontent .row img, .uppercontent-home .row img {
+        transform: scale(.8,.8);
+    }
+
+    .uppercontent .row span, .uppercontent .quote span {
+        font-size: .8em;
+    }
+
+.home-search-content {
+    background-color: rgba(0,0,0,.6);
+    padding: 2em;
+    margin: 0 auto;
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+.slide {
+    margin-top: 250px;
+    transition: 1s all;
+}
+/*-----COLUMNS -----*/
+.column-12, .column-6, .column-4, .column-3, .column-2, .column-1, .column-0 {
+    padding: .5em 2%;
+}
+
+.column-0 {
+    width: 1.5em;
+    float: left;
+}
+
+.column-1 {
+    width: 20%;
+    float: left;
+}
+
+.button a {
+    height: 1em;
+    font-size: .8em;
+    border: 1px solid #000;
+    padding: .2em 1.2em;
+    background-color: rgb(255,255,255);
+    outline: none;
+    cursor: pointer;
+    color: #000;
+    margin: 0 auto;
+    transition: 0.5s all;
+    border-radius: 5px;
+}
+
+.column-2 {
+    width: 70%;
+    float: left;
+}
+
+.color-1, .color-2 {
+    padding: .4em 1em .5em 1em;
+}
+
+.color-1 {
+    background: #f9f8c1; /*yellow*/
+}
+
+.color-2 {
+    background: #ffddc1; /*orange*/
+}
+
+/*-- Bullet Navigator Skin Begin */
+.jssorb21 div, .jssorb21 div:hover, .jssorb21 .av {
+    background: url(../Images/Icons/b21.png) no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+    margin: 1em 0;
+}
+
+.jssorb21 div {
+    background-position: -5px -5px;
+}
+
+    .jssorb21 div:hover, .jssorb21 .av:hover {
+        background-position: -35px -5px;
+    }
+
+.jssorb21 .av {
+    background-position: -65px -5px;
+}
+
+.jssorb21 .dn, .jssorb21 .dn:hover {
+    background-position: -95px -5px;
+}
+
+/*--SLIDER NAVIGATION --*/
+
+.slider {
+    position: relative;
+    margin: 0em auto 0em auto;
+    left: 0px;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.sliderContainer, .sliderContainer > div img {
+    cursor: move;
+    left: 0px;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.sliderCaption {
+    display: none;
+}
+
+
+.jssora21l, .jssora21r, .jssora21ldn, .jssora21rdn {
+    position: absolute;
+    cursor: pointer;
+    display: block;
+    background: url(../Images/Icons/a21.png) center center no-repeat;
+    overflow: hidden;
+}
+
+.jssora21l {
+    background-position: -3px -33px;
+}
+
+.jssora21r {
+    background-position: -63px -33px;
+}
+
+.jssora21l:hover {
+    background-position: -123px -33px;
+}
+
+.jssora21r:hover {
+    background-position: -183px -33px;
+}
+
+.jssora21ldn {
+    background-position: -243px -33px;
+}
+
+.jssora21rdn {
+    background-position: -303px -33px;
+}
+
+.imageDiv {
+    background-color: rgba(0,0,0,.6);
+    padding: 0 .5em;
+    width: 100%;
+    position: absolute;
+    margin-top: -2.4em;
+    color: white;
+    font-family: verdana;
+}
+
+    .imageDiv div {
+        padding: .6em 0;
+    }
+
+    .imageDiv .leftDiv {
+        float: left;
+        font-size: 1em;
+    }
+
+    .imageDiv .rightDiv {
+        float: right;
+        font-size: 0.7em;
+    }
+
+        .imageDiv .rightDiv p:first-child {
+            text-align: right;
+            padding: 0 0 .2em 0;
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*----- FOOTER -----*/
+#footerWrapper {
+    background-color: #979791;
+}
+
+footer {
+    clear: both;
+    font-size: .7em;
+    color: #fff;
+    text-align: center;
+    padding: .6em;
+}
+
+    footer a {
+        color: #fff;
+    }
+
+
+/*----- OTHER -----*/
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}

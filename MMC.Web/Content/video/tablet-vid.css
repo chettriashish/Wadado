@@ -1,0 +1,215 @@
+﻿@media only screen and (min-width: 768px) {
+    .cd-header {
+        height: 70px;
+        background-color: transparent;
+    }
+
+    #cd-logo {
+        margin: 23px 0 0 5%;
+    }
+
+    .cd-primary-nav {
+        /* reset navigation values */
+        width: auto;
+        height: auto;
+        background: none;
+    }
+
+        .cd-primary-nav ul {
+            position: static;
+            width: auto;
+            -webkit-transform: translateY(0);
+            -moz-transform: translateY(0);
+            -ms-transform: translateY(0);
+            -o-transform: translateY(0);
+            transform: translateY(0);
+            line-height: 70px;
+        }
+
+            .cd-primary-nav ul.is-visible {
+                -webkit-transform: translateY(0);
+                -moz-transform: translateY(0);
+                -ms-transform: translateY(0);
+                -o-transform: translateY(0);
+                transform: translateY(0);
+            }
+
+        .cd-primary-nav li {
+            display: inline-block;
+            margin-left: 1em;
+        }
+
+        .cd-primary-nav a {
+            display: inline-block;
+            height: auto;
+            font-weight: 600;
+            line-height: normal;
+            background: transparent;
+            padding: .6em 1em;
+            border-top: none;
+        }
+
+    .cd-hero-slider {
+        height: 500px;
+    }
+
+        .cd-hero-slider .cd-half-width {
+            opacity: 0;
+            -webkit-transform: translateX(40px);
+            -moz-transform: translateX(40px);
+            -ms-transform: translateX(40px);
+            -o-transform: translateX(40px);
+            transform: translateX(40px);
+        }
+
+        .cd-hero-slider .move-left .cd-half-width {
+            -webkit-transform: translateX(-40px);
+            -moz-transform: translateX(-40px);
+            -ms-transform: translateX(-40px);
+            -o-transform: translateX(-40px);
+            transform: translateX(-40px);
+        }
+
+        .cd-hero-slider .selected .cd-half-width {
+            /* this is the visible slide */
+            opacity: 1;
+            -webkit-transform: translateX(0);
+            -moz-transform: translateX(0);
+            -ms-transform: translateX(0);
+            -o-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        .cd-hero-slider .is-moving .cd-half-width {
+            /* this is the slide moving outside the viewport 
+    wait for the end of the transition on the <li> parent before set opacity to 0 and translate to 40px/-40px */
+            -webkit-transition: opacity 0s 0.5s, -webkit-transform 0s 0.5s;
+            -moz-transition: opacity 0s 0.5s, -moz-transform 0s 0.5s;
+            transition: opacity 0s 0.5s, transform 0s 0.5s;
+        }
+
+        .cd-hero-slider li.selected.from-left .cd-half-width:nth-of-type(2),
+        .cd-hero-slider li.selected.from-right .cd-half-width:first-of-type {
+            /* this is the selected slide - different animation if it's entering from left or right */
+            -webkit-transition: opacity 0.4s 0.2s, -webkit-transform 0.5s 0.2s;
+            -moz-transition: opacity 0.4s 0.2s, -moz-transform 0.5s 0.2s;
+            transition: opacity 0.4s 0.2s, transform 0.5s 0.2s;
+        }
+
+        .cd-hero-slider li.selected.from-left .cd-half-width:first-of-type,
+        .cd-hero-slider li.selected.from-right .cd-half-width:nth-of-type(2) {
+            /* this is the selected slide - different animation if it's entering from left or right */
+            -webkit-transition: opacity 0.4s 0.4s, -webkit-transform 0.5s 0.4s;
+            -moz-transition: opacity 0.4s 0.4s, -moz-transform 0.5s 0.4s;
+            transition: opacity 0.4s 0.4s, transform 0.5s 0.4s;
+        }
+
+        .cd-hero-slider .cd-full-width h2,
+        .cd-hero-slider .cd-full-width p,
+        .cd-hero-slider .cd-full-width .cd-btn {
+            opacity: 0;
+            -webkit-transform: translateX(100px);
+            -moz-transform: translateX(100px);
+            -ms-transform: translateX(100px);
+            -o-transform: translateX(100px);
+            transform: translateX(100px);
+        }
+
+        .cd-hero-slider .move-left .cd-full-width h2,
+        .cd-hero-slider .move-left .cd-full-width p,
+        .cd-hero-slider .move-left .cd-full-width .cd-btn {
+            opacity: 0;
+            -webkit-transform: translateX(-100px);
+            -moz-transform: translateX(-100px);
+            -ms-transform: translateX(-100px);
+            -o-transform: translateX(-100px);
+            transform: translateX(-100px);
+        }
+
+        .cd-hero-slider .selected .cd-full-width h2,
+        .cd-hero-slider .selected .cd-full-width p,
+        .cd-hero-slider .selected .cd-full-width .cd-btn {
+            /* this is the visible slide */
+            opacity: 1;
+            -webkit-transform: translateX(0);
+            -moz-transform: translateX(0);
+            -ms-transform: translateX(0);
+            -o-transform: translateX(0);
+            transform: translateX(0);
+        }
+
+        .cd-hero-slider li.is-moving .cd-full-width h2,
+        .cd-hero-slider li.is-moving .cd-full-width p,
+        .cd-hero-slider li.is-moving .cd-full-width .cd-btn {
+            /* this is the slide moving outside the viewport 
+    wait for the end of the transition on the li parent before set opacity to 0 and translate to 100px/-100px */
+            -webkit-transition: opacity 0s 0.5s, -webkit-transform 0s 0.5s;
+            -moz-transition: opacity 0s 0.5s, -moz-transform 0s 0.5s;
+            transition: opacity 0s 0.5s, transform 0s 0.5s;
+        }
+
+        .cd-hero-slider li.selected h2 {
+            -webkit-transition: opacity 0.4s 0.2s, -webkit-transform 0.5s 0.2s;
+            -moz-transition: opacity 0.4s 0.2s, -moz-transform 0.5s 0.2s;
+            transition: opacity 0.4s 0.2s, transform 0.5s 0.2s;
+        }
+
+        .cd-hero-slider li.selected p {
+            -webkit-transition: opacity 0.4s 0.3s, -webkit-transform 0.5s 0.3s;
+            -moz-transition: opacity 0.4s 0.3s, -moz-transform 0.5s 0.3s;
+            transition: opacity 0.4s 0.3s, transform 0.5s 0.3s;
+        }
+
+        .cd-hero-slider li.selected .cd-btn {
+            -webkit-transition: opacity 0.4s 0.4s, -webkit-transform 0.5s 0.4s, background-color 0.2s 0s;
+            -moz-transition: opacity 0.4s 0.4s, -moz-transform 0.5s 0.4s, background-color 0.2s 0s;
+            transition: opacity 0.4s 0.4s, transform 0.5s 0.4s, background-color 0.2s 0s;
+        }
+
+        .cd-hero-slider li:nth-of-type(2) {
+            background-image: none;
+        }
+
+        .cd-hero-slider li:nth-of-type(3) {
+            background-image: none;
+        }
+
+        .cd-hero-slider li:nth-of-type(4) {
+            background-image: none;
+        }
+
+        .cd-hero-slider .cd-full-width,
+        .cd-hero-slider .cd-half-width {
+            padding-top: 150px;
+        }
+
+        .cd-hero-slider .cd-bg-video-wrapper {
+            display: block;
+        }
+
+        .cd-hero-slider .cd-half-width {
+            width: 45%;
+        }
+
+            .cd-hero-slider .cd-half-width:first-of-type {
+                left: 5%;
+            }
+
+            .cd-hero-slider .cd-half-width:nth-of-type(2) {
+                right: 5%;
+                left: auto;
+            }
+
+        .cd-hero-slider .cd-img-container {
+            display: block;
+        }
+      
+        .cd-hero-slider h2 {
+            font-size: 2.4em;
+            font-weight: 300;
+        }
+
+        .cd-hero-slider .cd-btn {
+            font-size: 1.4rem;
+        }
+}

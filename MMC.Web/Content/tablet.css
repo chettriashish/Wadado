@@ -1,0 +1,37 @@
+﻿@media only screen and (min-width: 768px) {
+    /*-----NAVIGATION -----*/
+    nav ul li a br {
+        display: none;
+    }
+
+
+
+    /*-----CONTENT -----*/
+
+    .home-search-content { 
+        width: 60%;
+        top:20%;
+        position:relative;
+    }
+
+    /*-----COLUMNS -----*/
+    .column-6, .column-4, .column-3 {
+        float: left;
+    }
+
+    .column-6 {
+        width: 50%;
+    }
+
+    .column-4 {
+        width: 33.3%;
+    }
+
+    .column-3 {
+        width: 25%;
+    }
+
+    .column-2 {
+        width: 33.33%;
+    }
+}

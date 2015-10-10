@@ -1,0 +1,30 @@
+﻿@media only screen and (min-width: 1140px) {
+    .cd-hero-slider {
+        height: 600px;
+    }
+
+        .cd-hero-slider .cd-full-width,
+        .cd-hero-slider .cd-half-width {
+            padding-top: 220px;
+        }
+
+        .cd-hero-slider h2, .cd-hero-slider p {
+            margin-bottom: 20px;            
+        }
+
+        .cd-hero-slider h2 {
+            font-size: 2em;
+        }
+
+        .cd-hero-slider p {
+            font-size: 1.4em;
+        }
+
+    .cd-main-content {
+        padding: 3em 0;
+    }
+
+        .cd-main-content p {
+            font-size: 1.6rem;
+        }
+}

@@ -1,0 +1,39 @@
+﻿@media only screen and (min-width: 1140px) {
+    
+/*-----INSIDE THE WRAPPERS-----*/
+	header, nav, footer, .row {
+		max-width: 1140px;
+		margin: 0 auto; /*centers everything on the page*/
+	}
+
+/*-----HEADER -----*/
+	header {
+		padding-top: 2em;
+		padding-bottom:1em;
+	}
+
+
+
+/*-----NAVIGATION -----*/	
+nav ul {padding-left: 1%;}
+nav ul li a:hover{text-decoration:underline;}
+nav ul li {width: auto;}
+nav ul li a {padding: .2em 1.5em;}
+
+	
+	
+	
+
+/*-----CONTENT -----*/
+
+
+
+	
+	
+/*-----COLUMNS -----*/
+
+.column-2{
+    width:16.66%;
+}
+
+}

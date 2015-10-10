@@ -1,0 +1,130 @@
+/*             file downloaded from https://www.astuteo.com/mobilemenu/             */
+
+
+.nav-button { display: none; } /* hide the navigation button by default */
+
+@media only screen and (min-width: 0px) and (max-width: 1141px) {
+
+	/* Navigation Button
+	-------------------------------------------------------- */
+
+	.nav-button {
+		display: block;
+		position: fixed;
+		top: 7px;
+		right: 7px;
+        float:right;
+		width: 50px;
+		height: 35px;
+		background: url('../Images/Icons/menu-icon-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background: url('../Images/Icons/menu-icon-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background: url('../Images/Icons/menu-icon-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background: url('../Images/Icons/menu-icon-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 21px, 100%;
+		cursor: pointer;
+		border: 0 none;				
+		border-radius: 5px;
+		z-index: 999;
+		text-indent: -9999px;
+        outline:none;
+	}
+	.nav-button:hover { 
+		
+	}
+	.nav-button.open {
+		background: url('../images/Icons/close-icon-large.png'), -webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background: url('../images/Icons/close-icon-large.png'),    -moz-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background: url('../images/Icons/close-icon-large.png'),     -ms-linear-gradient(top,rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background: url('../images/Icons/close-icon-large.png'),      -o-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+		background-position: center center;
+		background-repeat: no-repeat;
+		background-size: 21px, 100%;
+	}
+
+	/* Navigation Bar
+	-------------------------------------------------------- */
+
+	body { padding-top: 44px; } 
+
+	.primary-nav {
+		width: 100%;
+		float: none;
+		background-color: rgba(33,33,33,0.8); /* change the menu color */	
+        border-bottom:2px solid #febe00;	
+		display: block;
+		height: 44px;
+		margin: 0;
+		padding: 0;
+		overflow: hidden;		
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		z-index: 998;
+		clear: both;
+	}
+	.primary-nav li {
+		display: none;
+		width: 105%;
+		font-family: Arial;
+	}
+	.primary-nav li a {
+		display: block;
+		width: 100%;	
+		font-size: 14px;
+		font-weight: bold;	
+        padding:10px 0;	
+		color: white;
+		text-decoration: none;		
+	}
+	.primary-nav li a:hover {
+		background-color: rgba(0,0,0,.5);
+		border-top-color: transparent;
+	}
+	.primary-nav > li:first-child {
+		border-top: 1px solid rgba(0,0,0,.2);
+	}
+
+	/* Toggle the navigation bar open  */
+
+	.primary-nav.open { 
+		height: auto; 
+		padding-top: 44px;
+	}
+	.primary-nav.open li { 
+		display: block; 
+	}
+
+	/* Submenus – optional .parent class indicates dropdowns */
+
+	.primary-nav > li:hover > a {
+		background: rgba(0,0,0,.5);
+		border-bottom-color: transparent;
+	}
+	.primary-nav li.parent > a:after {
+		content: "▼";
+		color: rgba(255,255,255,.5);
+		float: right;
+	}
+	.primary-nav li.parent > a:hover {
+		background: rgba(0,0,0,.75);
+	}
+	.primary-nav li ul {
+		display: none;
+		background: rgba(0,0,0,.5);
+		border-top: 0 none;
+		padding: 0;
+	}
+	.primary-nav li ul a {
+		border: 0 none;
+		font-size: 12px;
+		padding: 10px;
+		font-weight: normal;
+	}
+	.primary-nav li:hover ul {
+		display: block;
+		border-top: 0 none;
+	}
+
+} /* End Mobile Styles */

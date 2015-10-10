@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/Home/services/HomeDataService.js"></script>
+<script src="~/Scripts/Home/controllers/HomeController.js"></script>
+<link href="~/Content/video/default-vid.css" rel="stylesheet" />
+<link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
+<link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
+
+<div id="contentWrapper" data-ng-controller="HomeController">
+    <section class="cd-hero">
+        <ul class="cd-hero-slider">
+            <li class="cd-bg-video selected">                
+                <div class="row">
+                    <div class="column-12">
+                        <div class="cd-full-width">
+                            <div class="home-search-content">
+                                <div>
+                                    <h2>Wadado</h2>
+                                </div>
+                                <div>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                    </p>
+                                </div>
+                                <div class="column1-center">
+                                    <ui-select ng-model="locations.selected" theme="select2" class="form-control"
+                                               append-to-body="true">
+                                        <ui-select-match placeholder="Pick a place">{{$select.selected.LocationName}}</ui-select-match>
+                                        <ui-select-choices group-by="'Country'" repeat="item in location | filter: $select.search">
+                                            <div ng-bind-html="item.LocationName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+                <div class="cd-bg-video-wrapper" data-video="Video/video">
+                </div>
+            </li>
+        </ul>
+    </section>    
+</div>
+

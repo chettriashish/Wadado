@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+<html ng-app="appMain">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>wadado.in</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    @Styles.Render("~/Content/themes/base/css")
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/angular")      
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type='text/javascript' src="//wurfl.io/wurfl.js"></script> 
+    <!-- *************** LOAD THE GOOGLE FONT ****************** -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>  
+    <script src="~/Scripts/app.js"></script>    
+    
+
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+        <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+          <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/2.2.0/es5-shim.js"></script>
+      <script>
+        document.createElement('ui-select');
+        document.createElement('ui-select-match');
+        document.createElement('ui-select-choices');
+      </script>
+    <![endif]-->
+    
+</head>
+<body>
+    <div id="body">
+        <section>
+            @RenderBody()
+        </section>
+    </div>
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>An Ashish Chettri Production</p>
+            </div>
+        </div>
+    </footer>  
+    @RenderSection("scripts", required: false)
+
+    <!-- *************** SCRIPT TO MAKE THE MOBILE NAV EXPAND DOWN ****************** -->
+    <script>
+        window.wadado = {};
+        (function (cr) {
+            var rootPath;
+            cr.rootPath = rootPath;
+        }(window.wadado));
+        wadado.rootPath = '@Url.Content("~")';
+
+        $(document).ready(function () {
+            $(".nav-button").click(function () {
+                $(".nav-button,.primary-nav").toggleClass("open");
+                $("#contentWrapper").toggleClass("slide");
+            });
+        });
+    </script>
+</body>
+</html>

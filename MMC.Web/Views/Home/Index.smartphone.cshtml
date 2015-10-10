@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = "WADADO.IN";
+}
+
+<!--SLIDER REFERENCE-->
+<script src="~/Scripts/slider/jssor.js"></script>
+<script src="~/Scripts/slider/jssor.slider.js"></script>
+<script src="~/Scripts/slider/slider.js"></script>
+
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+
+<script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Home/services/HomeDataService.js"></script>
+<script src="~/Scripts/Home/controllers/HomeController.js"></script>
+
+<!--VIDEO REFERENCE-->
+<link href="~/Content/video/default-vid.css" rel="stylesheet" />
+<link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
+<link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
+<link href="~/Content/phone.css" rel="stylesheet" />
+
+<!--MOBILE MENU REFERENCE-->
+<link href="~/Content/mobilemenu.css" rel="stylesheet" />
+
+<div id="colorbar">
+</div>
+<div>
+    <div id="navWrapper">
+        <nav>
+            <ul class="clearfix primary-nav">
+                <li class="active" id="aboutus"><a href="#/home">ABOUT US</a></li>
+                <li id="portfolio"><a href="#">OUR WORK</a></li>
+                <li id="services"><a href="#">WHAT WE DO</a></li>
+                <li id="careers"><a href="#">CAREERS</a></li>
+                <li id="contact"><a href="#">CONTACT US</a></li>
+            </ul>
+            <button class="nav-button">Toggle Button</button>
+        </nav>
+    </div>
+</div>
+<div id="contentWrapper" data-ng-controller="HomeController">
+    <section class="cd-hero">
+        <ul class="cd-hero-slider">
+            <li class="selected">
+                <div class="row">
+                    <div class="column-12">
+                        <div class="cd-full-width">
+                            <div class="home-search-content">
+                                <div>
+                                    <h2>Wadado</h2>
+                                </div>
+                                <div>
+                                    <p>
+                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                                    </p>
+                                </div>
+                                <div class="column1-center">
+                                    <ui-select ng-model="locations.selected" theme="select2" class="form-control"
+                                               append-to-body="true">
+                                        <ui-select-match placeholder="Pick a place">{{$select.selected.LocationName}}</ui-select-match>
+                                        <ui-select-choices group-by="'Country'" repeat="item in location | filter: $select.search">
+                                            <div ng-bind-html="item.LocationName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="cd-bg-image-wrapper" data-image="images/mobile/default">
+                </div>
+            </li>
+        </ul>
+    </section>
+    <div class="uppercontent">
+        <!--Row start-->
+        <div class="row">
+            <div class="column-0">
+                <img src="~/Images/Icons/offer_icon_mobile.png" />
+            </div>
+            <div class="column-2">
+                <span>Top Offers of the Day</span>
+            </div>
+            <div class="column-1">
+                <div class="button">
+                    <a>More</a>
+                </div>
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row start-->
+        <!-- Slider Begin -->
+        <div id="slider1_container" class="slider">
+            <!-- Slides Container -->
+            <div u="slides" class="sliderContainer">
+                <div ng-repeat="item in topOffer">
+                    <div>
+                        <img u="image" ng-src="{{item.ImageURL}}">
+                    </div>
+                </div>
+            </div>
+            <!-- bullet navigator container -->
+            <div u="navigator" class="jssorb21" style="position: absolute; bottom: 26px; left: 6px;">
+                <!-- bullet navigator item prototype -->
+                <div u="prototype" style="position: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
+            </div>
+            <!-- Arrow Left -->
+            <span u="arrowleft" class="jssora21l" style="width: 55px; height: 55px; top: 123px; left: 8px;">
+            </span>
+            <!-- Arrow Right -->
+            <span u="arrowright" class="jssora21r" style="width: 55px; height: 55px; top: 123px; right: 8px">
+            </span>
+        </div>
+        <!-- Slider End -->
+        <!--Row end-->
+        <!--Row start-->
+        <div class="row">
+            <div class="column-0">
+                <img src="~/Images/Icons/events_icon_mobile.png" />
+            </div>
+            <div class="column-2">
+                <span>Top Trending Activities</span>
+            </div>
+            <div class="column-1">
+                <div class="button">
+                    <a>More</a>
+                </div>
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row start-->
+        <div ng-repeat="item in topActivity">
+            <div>
+                <div>
+                    <img ng-src="{{item.ImageURL}}" style="width:100%;">
+                </div>
+                <div class="imageDiv">
+                    <div class="leftDiv">
+                        <span>$ {{item.Activity.Cost}}</span>
+                    </div>
+                    <div class="rightDiv">
+                        <p>
+                            <span>{{item.Activity.Name}}</span>
+                        </p>
+                        <p>
+                            <span>{{item.Activity.Address}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row start-->
+        <div class="row">
+            <div class="column-12 lowercontent">
+                <div class="header">
+                    <span>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</span>
+                </div>
+                <div ng-repeat="item in latestNews">
+                    <p>
+                        {{item.Details}}
+                    </p>
+                    <p>
+                        - {{item.Agency}}
+                    </p>
+                </div>
+            </div>            
+        </div>
+        <!--Row end-->
+    </div>
+</div>
+
