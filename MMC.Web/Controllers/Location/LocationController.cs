@@ -1,4 +1,5 @@
-﻿using MMC.Web.Contracts;
+﻿using MMC.Client.Entities;
+using MMC.Web.Contracts;
 using MMC.Web.Model;
 using System;
 using System.Collections.Generic;
@@ -17,15 +18,22 @@ namespace MMC.Web.Controllers.Location
             _locationDataService = locationDataService;
         }
         
-        public ActionResult Location()
-        {
+        public ActionResult Index(string locationName)
+        {            
             return View();
         }
-
-        public ActionResult GetAllActivitiesForSelectedLocation(string locationKey)
-        {
-            IEnumerable<LocationModel> results = _locationDataService.GetAllActivitiesForSelectedLocation(locationKey);
+                
+        [HttpGet]
+        public ActionResult GetSelectedLocation(string selectedLocation)
+        {                    
+            LocationModel results = _locationDataService.GetAllActivitiesForSelectedLocation(selectedLocation, Request.UserAgent);         
             return Json(results, JsonRequestBehavior.AllowGet);
-        }       
+        }
+        [HttpGet]
+        public ActionResult GetAllOtherLocations()
+        {
+            IEnumerable<LocationsMaster> results = _locationDataService.GetAllLocations();
+            return Json(results, JsonRequestBehavior.AllowGet);
+        }
     }
 }

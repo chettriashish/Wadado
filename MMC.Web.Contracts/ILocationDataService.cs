@@ -1,4 +1,5 @@
-﻿using MMC.Web.Model;
+﻿using MMC.Client.Entities;
+using MMC.Web.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,7 @@ namespace MMC.Web.Contracts
 {
     public interface ILocationDataService
     {
-        IEnumerable<LocationModel> GetAllActivitiesForSelectedLocation(string locationKey);
+        LocationModel GetAllActivitiesForSelectedLocation(string locationName, string userAgent);
+        IEnumerable<LocationsMaster> GetAllLocations();
     }
 }

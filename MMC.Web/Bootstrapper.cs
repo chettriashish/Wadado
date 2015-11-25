@@ -29,9 +29,11 @@ namespace MMC.Web
         {
             container.RegisterTypes(AllClasses.FromLoadedAssemblies(),
                 WithMappings.FromMatchingInterface,
-                WithName.Default);          
- 
+                WithName.Default);
+
+            container.RegisterType<ISearchDataService, SearchDataService>();
             container.RegisterType<IHomeDataService,HomeDataService>();
+            container.RegisterType<ILocationDataService, LocationDataService>();
         }
     }
 }

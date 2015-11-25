@@ -6,13 +6,7 @@
             var deferred = $q.defer();
             $http.get('/Home').success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
-        }
-
-        var getAllLocations = function () {
-            var deferred = $q.defer();
-            $http.get('/Home/GetAllLocations').success(deferred.resolve).error(deferred.reject);
-            return deferred.promise;
-        }
+        }     
 
         var getTopOffers = function () {
             var deferred = $q.defer();
@@ -32,15 +26,11 @@
             return deferred.promise;
         }
 
-        var searchForLocation = function (loc) {
-
+        var searchForLocation = function (locationName) {
+            $window.location.href = "/Location/" + locationName;
         }
 
         var setSlider = function () {
-            /* -------------------- SCRIPT TO MAKE THE MOBILE NAV EXPAND DOWN -------------------*/
-            $(".nav-button").click(function () {
-                $(".nav-button,.primary-nav").toggleClass("open");
-            });
             var _CaptionTransitions = [];
             _CaptionTransitions["L"] = { $Duration: 900, x: 0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
             _CaptionTransitions["R"] = { $Duration: 900, x: -0.6, $Easing: { $Left: $JssorEasing$.$EaseInOutSine }, $Opacity: 2 };
@@ -109,7 +99,7 @@
                 if (bodyWidth)
                     jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1920));
                 else
-                    window.setTimeout(ScaleSlider, 30);
+                    window.setTimeout(ScaleSlider, 100);
             }            
             $(window).bind("resize", ScaleSlider);          
             //responsive code end
@@ -117,8 +107,7 @@
 
         /*USING THE REVEALING MODULE PATTERN TO EXPOSE ONLY THE METHODS THAT WE CHOOSE TO*/
         return {
-            getHomeScreendetails: getHomeScreenDetails,
-            getAllLocations: getAllLocations,
+            getHomeScreendetails: getHomeScreenDetails,            
             getTopOffers: getTopOffers,
             getTopTrendingActivities: getTopTrendingActivities,
             searchForLocation: searchForLocation,

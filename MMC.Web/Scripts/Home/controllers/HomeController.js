@@ -32,14 +32,9 @@
         };
     });
 
-    var homeController = function ($scope, $http, $timeout, $interval, HomeDataService) {
-
-        $scope.counter = 0;
-        $scope.locations = {};
-        HomeDataService.getAllLocations().then(function (locations) {
-            $scope.location = locations;
-        });
-
+    var homeController = function ($scope, $http, $timeout, $interval, $location, HomeDataService) {
+        $scope.selectedLocation = 'What to do?  Where to go? ';
+        $scope.counter = 0;        
         /*****************************TOP ACTIVITIES****************************************/
 
         var setImages = function () {
@@ -81,10 +76,10 @@
                 $.each($scope.topOffer, function (key, value) {
 
                     if (WURFL.form_factor == "Smartphone") {
-                        if (window.styleMedia.matchMedium("screen and (max-width:500px)")) {
+                        if (window.styleMedia.matchMedium("screen and (max-width:479px)")) {
                             $scope.topOffer[key].ImageURL = $scope.topOffer[key].Offer.ImageUrl + "_potrait.jpg";
                         }
-                        else if (window.styleMedia.matchMedium("screen and (min-width:550px)")) {
+                        else if (window.styleMedia.matchMedium("screen and (min-width:480px)")) {
                             $scope.topOffer[key].ImageURL = $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
                         }
                     }
@@ -110,15 +105,7 @@
         HomeDataService.getLatestNews().then(function (latestNews) {
             $scope.latestNews = latestNews;
         });
-        /*END LATEST NEWS*/
-
-        /***************************LOADING SELECTED LOCATION *************************/
-
-        $scope.loadSelectedLocationDetails = function (item, model) {
-            //$location.path("Location");
-        };
-
-        /*END LOADING SELECTED LOCATION*/
+        /*END LATEST NEWS*/        
 
         $(window).resize(function () {
             setImages();

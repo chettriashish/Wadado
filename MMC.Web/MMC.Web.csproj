@@ -50,18 +50,6 @@
     <Reference Include="CookComputing.XmlRpcV2">
       <HintPath>..\packages\xmlrpcnet.2.5.0\lib\net20\CookComputing.XmlRpcV2.dll</HintPath>
     </Reference>
-    <Reference Include="DevExpress.Data.v7.1">
-      <HintPath>..\packages\JetBrains.Platform.Lib.DevExpress.2.0.20150224.0\lib\Net\DevExpress.Data.v7.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.Utils.v7.1">
-      <HintPath>..\packages\JetBrains.Platform.Lib.DevExpress.2.0.20150224.0\lib\Net\DevExpress.Utils.v7.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraEditors.v7.1">
-      <HintPath>..\packages\JetBrains.Platform.Lib.DevExpress.2.0.20150224.0\lib\Net\DevExpress.XtraEditors.v7.1.dll</HintPath>
-    </Reference>
-    <Reference Include="DevExpress.XtraTreeList.v7.1">
-      <HintPath>..\packages\JetBrains.Platform.Lib.DevExpress.2.0.20150224.0\lib\Net\DevExpress.XtraTreeList.v7.1.dll</HintPath>
-    </Reference>
     <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
@@ -108,9 +96,6 @@
     </Reference>
     <Reference Include="JbUnixUtils">
       <HintPath>..\packages\JetBrains.Unix.Utils.20150702.4\lib\net40\JbUnixUtils.dll</HintPath>
-    </Reference>
-    <Reference Include="JetBrains.Annotations">
-      <HintPath>..\packages\JetBrains.Annotations.9.2.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -184,6 +169,9 @@
     </Reference>
     <Reference Include="NVelocity">
       <HintPath>..\packages\NVelocity.1.0.3\lib\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteDebugger">
+      <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
     </Reference>
     <Reference Include="Sprache">
       <HintPath>..\packages\Sprache.JetBrains.2.0.0.44\lib\portable-net4+netcore45+win8+wp8+sl5+MonoAndroid1+MonoTouch1\Sprache.dll</HintPath>
@@ -314,8 +302,11 @@
     <Compile Include="App_Start\WurflConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Activities\ActivitiesController.cs" />
+    <Compile Include="Controllers\ActivityDetails\ActivityDetailsController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Location\LocationController.cs" />
+    <Compile Include="Controllers\Search\SearchController.cs" />
     <Compile Include="Core\ISecurityAdapter.cs" />
     <Compile Include="Core\ViewControllerBase.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -324,14 +315,20 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\HomeBasePage.cs" />
+    <Compile Include="Services\ActivitiesDataService.cs" />
+    <Compile Include="Services\ActivityDetailsDataService.cs" />
     <Compile Include="Services\HomeDataService.cs" />
+    <Compile Include="Services\LocationDataService.cs" />
+    <Compile Include="Services\SearchDataService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binding\Models\AccountLoginModel.js" />
     <Content Include="Binding\ViewModels\AccountLoginViewModel.js" />
+    <Content Include="Content\cangas.datepicker.css" />
     <Content Include="Content\desktop.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\default.css" />
+    <Content Include="Content\jquery-ui-1.10.1.css" />
     <Content Include="Content\phone.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\tablet.css" />
@@ -342,7 +339,6 @@
     <Content Include="Content\themes\base\base.css" />
     <Content Include="Content\themes\base\button.css" />
     <Content Include="Content\themes\base\core.css" />
-    <Content Include="Content\themes\base\datepicker.css" />
     <Content Include="Content\themes\base\dialog.css" />
     <Content Include="Content\themes\base\draggable.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -380,21 +376,38 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Images\Icons\a21.png" />
+    <Content Include="Images\Icons\Adventure.png" />
     <Content Include="Images\Icons\b21.png" />
     <Content Include="Images\Icons\close-icon-large.png" />
+    <Content Include="Images\Icons\EcoTourism.png" />
+    <Content Include="Images\Icons\Entertainment.png" />
     <Content Include="Images\Icons\events_icon_mobile.png" />
     <Content Include="Images\Icons\events_icon_web.png" />
     <Content Include="Images\Icons\fb_icon_mobile.png" />
     <Content Include="Images\Icons\fb_icon_web.png" />
+    <Content Include="Images\Icons\FoodDrinks.png" />
+    <Content Include="Images\Icons\GroupActivities.png" />
+    <Content Include="Images\Icons\HealthBeauty.png" />
     <Content Include="Images\Icons\insta_icon_mobile.png" />
     <Content Include="Images\Icons\insta_icon_web.png" />
+    <Content Include="Images\Icons\Learn.png" />
+    <Content Include="Images\Icons\location_nav.png" />
     <Content Include="Images\Icons\menu-icon-large.png" />
+    <Content Include="Images\Icons\MustDo.png" />
+    <Content Include="Images\Icons\NightLife.png" />
     <Content Include="Images\Icons\offer_icon_mobile.png" />
     <Content Include="Images\Icons\offer_icon_web.png" />
     <Content Include="Images\Icons\select2.png" />
     <Content Include="Images\Icons\twitter_icon_mobile.png" />
     <Content Include="Images\Icons\twitter_icon_web.png" />
+    <Content Include="Images\Icons\wadado_m.png" />
+    <Content Include="Images\Icons\WeekendGetaways.png" />
+    <Content Include="Images\Icons\WithKids.png" />
+    <Content Include="Images\Mobile\darjeeling_landscape.jpg" />
+    <Content Include="Images\Mobile\darjeeling_portrait.jpg" />
     <Content Include="Images\Mobile\default.jpg" />
+    <Content Include="Scripts\Activities\controllers\ActivityController.js" />
+    <Content Include="Scripts\Activities\services\ActivityDataService.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -428,6 +441,10 @@
     <Content Include="Scripts\angular.js" />
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app.js" />
+    <Content Include="Scripts\clickoutside.directive.js" />
+    <Content Include="Scripts\Common\controllers\SearchController.js" />
+    <Content Include="Scripts\Common\services\SearchDataService.js" />
+    <Content Include="Scripts\Directives\Date\datedirective.js" />
     <Content Include="Scripts\Home\controllers\HomeController.js" />
     <Content Include="Scripts\Home\directives\HomeDirective.js" />
     <Content Include="Scripts\Home\services\HomeDataService.js" />
@@ -1182,22 +1199,25 @@
     <Content Include="Scripts\angular-ui\ui-select\uiSelectSingleDirective.js" />
     <Content Include="Scripts\angular-ui\ui-select\uiSelectSortDirective.js" />
     <Content Include="Scripts\angular-ui\ui-select\uisRepeatParserService.js" />
+    <Content Include="Scripts\Location\controllers\LocationController.js" />
+    <Content Include="Scripts\Location\services\LocationDataService.js" />
     <Content Include="Scripts\slider\jssor.js" />
     <Content Include="Scripts\slider\jssor.slider.js" />
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
     <Content Include="Video\video.mp4" />
-    <Content Include="Templates\choices.tpl.html" />
-    <Content Include="Templates\match-multiple.tpl.html" />
-    <Content Include="Templates\match.tpl.html" />
-    <Content Include="Templates\select-multiple.tpl.html" />
-    <Content Include="Templates\select.tpl.html" />
+    <Content Include="Views\Templates\choices.tpl.html" />
+    <Content Include="Views\Templates\match-multiple.tpl.html" />
+    <Content Include="Views\Templates\match.tpl.html" />
+    <Content Include="Views\Templates\select-multiple.tpl.html" />
+    <Content Include="Views\Templates\select.tpl.html" />
     <Content Include="WURFL AGPL License.txt" />
     <Content Include="Introspector\Introspector.pdf" />
     <Content Include="Introspector\Introspector.ashx" />
     <Content Include="App_Readme\WURFL-v.1.6.1.0.chm" />
     <Content Include="App_Readme\WURFL Quick Guide_v1_5.pdf" />
     <Content Include="App_Data\wurfl-latest.zip" />
+    <None Include="Properties\PublishProfiles\wadado.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -1249,18 +1269,23 @@
     <Content Include="Scripts\angular-moment.min.js.map" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Video\video.webm" />
-    <Content Include="Views\Location\Location.cshtml" />
-    <Content Include="Views\Location\Location.legacy.cshtml" />
-    <Content Include="Views\Location\Location.smartphone.cshtml" />
-    <Content Include="Views\Location\Location.tablet.cshtml" />
+    <Content Include="Views\Location\Index.cshtml" />
+    <Content Include="Views\Location\Index.legacy.cshtml" />
+    <Content Include="Views\Location\Index.smartphone.cshtml" />
+    <Content Include="Views\Location\Index.tablet.cshtml" />
+    <Content Include="Views\Activities\Index.cshtml" />
+    <Content Include="Views\Activities\Index.legacy.cshtml" />
+    <Content Include="Views\Activities\Index.smartphone.cshtml" />
+    <Content Include="Views\Activities\Index.tablet.cshtml" />
+    <Content Include="Views\Partial\_search.cshtml" />
+    <Content Include="Views\Partial\_booking.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Controllers\Activities\" />
-    <Folder Include="Scripts\Actvities\controllers\" />
-    <Folder Include="Scripts\Actvities\directives\" />
-    <Folder Include="Scripts\Actvities\services\" />
-    <Folder Include="Views\Partial\" />
-    <Folder Include="Views\Templates\" />
+    <Folder Include="Scripts\Activities\directives\" />
+    <Folder Include="Scripts\Location\directives\" />
+    <Folder Include="Templates\" />
+    <Folder Include="Views\ActivityDetails\" />
+    <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
