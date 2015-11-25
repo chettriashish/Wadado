@@ -2,16 +2,12 @@
     display: none;
 }
 
-@media only screen and (min-width: 550px) {
+/*-----------LANDSCAPE MODE FOR PHONES-------------*/
+
+@media only screen and (min-width: 480px) {
     .column-0 {
         width: 1.5em;
         float: left;
-    }
-
-    .column-1 {        
-        float: right;
-        right:0;
-        width:auto;
     }
 
     .button a {
@@ -28,14 +24,59 @@
         border-radius: 5px;
     }
 
-    .column-2 {        
-        float: left;
-    } 
+    .search-input {
+        width: 400px;
+    }
 
-     .lowercontent div p:first-child {
-        padding: .4em 0 .2em 0;     
-        font-size:.8em;           
-        font-weight: 400; 
-        text-align:center;               
+    .search-input-result {
+        width: 250px;
+    }
+
+    .lowercontent div p:first-child {
+        padding: .4em 0 .2em 0;
+        font-size: .8em;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    /*---------------LOCATION-----------------*/
+
+    .location-image {
+        width: 100%;
+    }
+
+    .location {
+        top: 7em;
+    }
+
+    .bestMonthsToVisitWrapper .item {
+        padding: .8em 1.5% 0 1.5%;
+        margin: 0 .9em;
+    }
+
+    /*------RIGHT ARROW*/
+    .hairline-down-arrow {
+        width: 15px;
+        height: 15px;
+        position: relative;
+        background-color: white;
+    }
+
+        .hairline-down-arrow:after {
+            content: "";
+            position: absolute;
+            top: 70%;
+            left: 75%;
+            width: 10px;
+            height: 10px;
+            border-width: 0px 1px 1px 0px;
+            transform: rotate(-45deg) translate(-50%, 100%) skew(5deg, 5deg);
+            transform-origin: left;
+            border-style: solid;
+            border-color: grey;
+        }
+
+    .search-wrapper {
+        margin: 2em auto;
     }
 }

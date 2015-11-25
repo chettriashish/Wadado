@@ -152,7 +152,7 @@ Single slide style
 .cd-hero-slider .cd-full-width,
 .cd-hero-slider .cd-half-width {
     position: absolute;
-    font-family: verdana;
+    font-family: 'Lato', sans-serif;
     width: 100%;
     height: 100%;
     z-index: 1;

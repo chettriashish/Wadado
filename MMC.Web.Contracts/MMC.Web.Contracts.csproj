@@ -40,8 +40,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IActivitiesDataService.cs" />
+    <Compile Include="IActivityDetailsDataService.cs" />
     <Compile Include="IHomeDataService.cs" />
     <Compile Include="ILocationDataService.cs" />
+    <Compile Include="ISearchDataService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

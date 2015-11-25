@@ -21,6 +21,13 @@ namespace MMC.Business.Entities
         [DataMember]
         public string LocationImage { get; set; }
         public string Country { get; set; }
+        public string Season1Start { get; set; }
+        public string Season1End { get; set; }
+        public string Season2Start { get; set; }
+        public string Season2End { get; set; }
+        public string Season3Start { get; set; }
+        public string Season3End { get; set; }
+
         #endregion
 
         [DataMember]

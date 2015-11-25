@@ -12,8 +12,14 @@
 <link href="~/Content/ui-select/select2.css" rel="stylesheet" />
 <link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
 
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--WADADO REFERENCE-->
 <script src="~/Scripts/Video/video.js"></script>
 <script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
 <script src="~/Scripts/Home/services/HomeDataService.js"></script>
 <script src="~/Scripts/Home/controllers/HomeController.js"></script>
 
@@ -23,23 +29,34 @@
 <link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
 <link href="~/Content/phone.css" rel="stylesheet" />
 
+<!--DATE REFERENCE-->
+<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
+<script src="~/Scripts/Directives/Date/datedirective.js"></script>
+
 <div id="colorbar">
 </div>
+<div class="cover"></div>
 <div>
     <div id="navWrapper">
         <nav>
-            <ul class="clearfix primary-nav">
-                <li class="active" id="aboutus"><a href="#/home">ABOUT US</a></li>
-                <li id="portfolio"><a href="#">OUR WORK</a></li>
-                <li id="services"><a href="#">WHAT WE DO</a></li>
-                <li id="careers"><a href="#">CAREERS</a></li>
-                <li id="contact"><a href="#">CONTACT US</a></li>
+            <div class="clearfix primary-nav">
+            </div>
+            <ul class="clearfix menu-nav">
+                <li class="active" id="portfolio"><a href="#">Sign Up</a></li>
+                <li id="services"><a href="#">Login</a></li>
+                <li id="careers"><a href="#">About Us</a></li>
+                <li id="contact"><a href="#">FAQs</a></li>
             </ul>
+            <button class="logo-button">Logo Button</button>
             <button class="nav-button">Toggle Button</button>
         </nav>
     </div>
 </div>
-<div id="contentWrapper" data-ng-controller="HomeController">
+
+<div class="contentWrapper" data-ng-controller="HomeController">    
+    <div>
+        @Html.Partial("../Partial/_search")
+    </div>
     <section class="cd-hero">
         <ul class="cd-hero-slider">
             <li class="selected">
@@ -55,14 +72,9 @@
                                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                                     </p>
                                 </div>
-                                <div class="column1-center">
-                                    <ui-select ng-model="locations.selected" theme="select2" on-select="loadSelectedLocationDetails($item, $model)" class="form-control"
-                                               append-to-body="true">
-                                        <ui-select-match placeholder="Pick a place">{{$select.selected.LocationName}}</ui-select-match>
-                                        <ui-select-choices group-by="'Country'" repeat="item in location | filter: $select.search">
-                                            <div ng-bind-html="item.LocationName | highlight: $select.search"></div>
-                                        </ui-select-choices>
-                                    </ui-select>
+                                <div class="search-input">
+                                    <div><span>{{selectedLocation}}</span></div>
+                                    <div><img src="~/Images/Icons/search-icon.png" /></div>
                                 </div>
                             </div>
                         </div>
@@ -79,7 +91,7 @@
             <div class="column-0">
                 <img src="~/Images/Icons/offer_icon_mobile.png" />
             </div>
-            <div class="column-2">
+            <div class="column-6">
                 <span>Top Offers of the Day</span>
             </div>
             <div class="column-1">
@@ -117,7 +129,7 @@
             <div class="column-0">
                 <img src="~/Images/Icons/events_icon_mobile.png" />
             </div>
-            <div class="column-2">
+            <div class="column-6">
                 <span>Top Trending Activities</span>
             </div>
             <div class="column-1">
@@ -128,11 +140,11 @@
         </div>
         <!--Row end-->
         <!--Row start-->
-        <div ng-repeat="item in topActivity">                       
-            <div>                               
+        <div ng-repeat="item in topActivity">
+            <div>
                 <div>
-                    <img ng-src="{{item.ImageURL}}" style="width:100%;">                   
-                </div>                
+                    <img ng-src="{{item.ImageURL}}" style="width:100%;">
+                </div>
                 <div class="imageDiv">
                     <div class="leftDiv">
                         <span>$ {{item.Activity.Cost}}</span>
@@ -140,13 +152,13 @@
                     <div class="rightDiv">
                         <p>
                             <span>{{item.Activity.Name}}</span>
-                        </p>                                                    
+                        </p>
                         <p>
                             <span>{{item.Activity.Address}}</span>
                         </p>
                     </div>
                 </div>
-            </div>            
+            </div>
         </div>
         <!--Row end-->
         <!--Row start-->

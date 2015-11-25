@@ -9,6 +9,8 @@ namespace MMC.Web.Model
     public class LocationModel
     {
         public LocationsMaster SelectedLocation { get; set; }
-        public IEnumerable<ActivityCategoryModel> AllActivities { get; set; }
+        public string DefaultLocationImageURL { get; set; }
+        public List<ActivityCategoryModel> AllActivities { get; set; }
+        public List<string> BestMonthsToVisit { get; set; }
     }
 }

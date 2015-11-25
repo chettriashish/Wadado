@@ -48,30 +48,7 @@ body > .select2-container.open {
     z-index: 9999; /* The z-index Select2 applies to the select2-drop */
 }
 
-/* Handle up direction Select2 */
-.ui-select-container[theme="select2"].direction-up .ui-select-match {
-    border-radius: 4px; /* FIXME hardcoded value :-/ */
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-}
 
-.ui-select-container[theme="select2"].direction-up .ui-select-dropdown {
-    border-radius: 4px; /* FIXME hardcoded value :-/ */
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    border-top-width: 1px; /* FIXME hardcoded value :-/ */
-    border-top-style: solid;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
-    margin-top: -4px; /* FIXME hardcoded value :-/ */
-}
-
-    .ui-select-container[theme="select2"].direction-up .ui-select-dropdown .select2-search {
-        margin-top: 4px; /* FIXME hardcoded value :-/ */
-    }
-
-.ui-select-container[theme="select2"].direction-up.select2-dropdown-open .ui-select-match {
-    border-bottom-color: #5897fb;
-}
 
 /* Selectize theme */
 
@@ -92,12 +69,11 @@ body > .select2-container.open {
 
 /* Mark invalid Selectize */
 .ng-dirty.ng-invalid > div.selectize-input {
-    border-color: #D44950;
+    border-color: #8ec73f;
 }
 
 /* Handle up direction Selectize */
-.ui-select-container[theme="selectize"].direction-up .ui-select-dropdown {
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
+.ui-select-container[theme="selectize"].direction-up .ui-select-dropdown {    
     margin-top: -2px; /* FIXME hardcoded value :-/ */
 }
 
@@ -107,11 +83,10 @@ body > .select2-container.open {
 .btn-default-focus {
     color: #333;
     background-color: #EBEBEB;
-    border-color: #ADADAD;
+    border-color: #8ec73f;
     text-decoration: none;
     outline: 5px auto -webkit-focus-ring-color;
-    outline-offset: -2px;
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+    outline-offset: -2px;    
 }
 
 .ui-select-bootstrap .ui-select-toggle {
@@ -133,13 +108,13 @@ body > .select2-container.open {
 }
 
 .input-group > .ui-select-bootstrap > input.ui-select-search.form-control {
-    border-radius: 4px; /* FIXME hardcoded value :-/ */
+    border-radius: 2px; /* FIXME hardcoded value :-/ */
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
 }
 
     .input-group > .ui-select-bootstrap > input.ui-select-search.form-control.direction-up {
-        border-radius: 4px !important; /* FIXME hardcoded value :-/ */
+        border-radius: 2px !important; /* FIXME hardcoded value :-/ */
         border-top-right-radius: 0 !important;
         border-bottom-right-radius: 0 !important;
     }
@@ -202,7 +177,7 @@ body > .ui-select-bootstrap.open {
         right: 100%;
         height: 100%;
         margin-right: 2px;
-        border-left: 1px solid #428bca;
+        border-left: 1px solid #8ec73f;
     }
 
     .ui-select-multiple .ui-select-match-item.dropping-after:after {
@@ -212,7 +187,7 @@ body > .ui-select-bootstrap.open {
         left: 100%;
         height: 100%;
         margin-left: 2px;
-        border-right: 1px solid #428bca;
+        border-right: 1px solid #8ec73f;
     }
 
 .ui-select-bootstrap .ui-select-choices-row > a {
@@ -257,6 +232,5 @@ body > .ui-select-bootstrap.open {
 }
 
 /* Handle up direction Bootstrap */
-.ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.25);
+.ui-select-container[theme="bootstrap"].direction-up .ui-select-dropdown {    
 }

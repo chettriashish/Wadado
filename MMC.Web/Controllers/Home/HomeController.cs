@@ -23,13 +23,7 @@ namespace MMC.Web.Controllers.Home
         public ActionResult Index()
         {            
             return View();
-        }
-
-        public ActionResult GetAllLocations()
-        {                    
-            IEnumerable<LocationsMaster> results =_homeDataService.GetAllLocations();            
-            return Json(results, JsonRequestBehavior.AllowGet);
-        }
+        }       
 
         public ActionResult GetTopOffers()
         {
@@ -39,7 +33,7 @@ namespace MMC.Web.Controllers.Home
 
         public ActionResult GetTopTrendingActivities()
         {   
-            IEnumerable<TopTrendingActivitiesModel> results =  _homeDataService.GetTrendingActivities(Request.UserAgent);
+            IEnumerable<ActivitiesModel> results =  _homeDataService.GetTrendingActivities(Request.UserAgent);
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 

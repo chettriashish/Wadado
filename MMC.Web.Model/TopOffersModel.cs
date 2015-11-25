@@ -12,7 +12,6 @@ namespace MMC.Web.Model
         public TopOffers Offer { get; set; }        
         public ActivitiesMaster Activity { get; set; }
         public string ImageURL { get; set; }
-
         public decimal DiscountedPrice { get; set; }
     }
 }

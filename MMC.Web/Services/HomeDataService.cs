@@ -41,10 +41,10 @@ namespace MMC.Web.Services
             return results;
         }
 
-        public IEnumerable<TopTrendingActivitiesModel> GetTrendingActivities(string userAgent)
+        public IEnumerable<ActivitiesModel> GetTrendingActivities(string userAgent)
         {
             var deviceInfo = WURFL.WURFLManagerBuilder.Instance.GetDeviceForRequest(userAgent);
-            List<TopTrendingActivitiesModel> results = GetDummyData().ToList();
+            IEnumerable<ActivitiesModel> results = GetDummyData();
 
             if (deviceInfo.GetVirtualCapability("is_mobile") == "true")
             {
@@ -69,11 +69,11 @@ namespace MMC.Web.Services
             }
             return results;
         }
-        private IEnumerable<TopTrendingActivitiesModel> GetDummyData()
+        private IEnumerable<ActivitiesModel> GetDummyData()
         {
-            List<TopTrendingActivitiesModel> results = new List<TopTrendingActivitiesModel>();
+            List<ActivitiesModel> results = new List<ActivitiesModel>();
 
-            TopTrendingActivitiesModel activityOne = new TopTrendingActivitiesModel();
+            ActivitiesModel activityOne = new ActivitiesModel();
             activityOne.Activity = new ActivitiesMaster();
             activityOne.DefaultActivityImage = new ActivityImages();
 
@@ -88,7 +88,7 @@ namespace MMC.Web.Services
             ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/bakery";
             results.Add(activityOne);
 
-            TopTrendingActivitiesModel activityTwo = new TopTrendingActivitiesModel();
+            ActivitiesModel activityTwo = new ActivitiesModel();
             activityTwo.Activity = new ActivitiesMaster();
             activityTwo.DefaultActivityImage = new ActivityImages();
 
@@ -103,7 +103,7 @@ namespace MMC.Web.Services
             ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/herbalbath";
             results.Add(activityTwo);
 
-            TopTrendingActivitiesModel activityThree = new TopTrendingActivitiesModel();
+            ActivitiesModel activityThree = new ActivitiesModel();
             activityThree.Activity = new ActivitiesMaster();
             activityThree.DefaultActivityImage = new ActivityImages();
 
@@ -119,7 +119,7 @@ namespace MMC.Web.Services
             results.Add(activityThree);
 
 
-            TopTrendingActivitiesModel activityFour = new TopTrendingActivitiesModel();
+            ActivitiesModel activityFour = new ActivitiesModel();
             activityFour.Activity = new ActivitiesMaster();
             activityFour.DefaultActivityImage = new ActivityImages();
 
@@ -134,7 +134,7 @@ namespace MMC.Web.Services
             ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/family";
             results.Add(activityFour);
 
-            TopTrendingActivitiesModel activityFive = new TopTrendingActivitiesModel();
+            ActivitiesModel activityFive = new ActivitiesModel();
             activityFive.Activity = new ActivitiesMaster();
             activityFive.DefaultActivityImage = new ActivityImages();
 
@@ -193,14 +193,34 @@ namespace MMC.Web.Services
             List<LocationsMaster> results = new List<LocationsMaster>();
             LocationsMaster location1 = new LocationsMaster();
             location1.LocationKey = Guid.NewGuid().ToString();
-            location1.LocationName = "GANGTOK";
+            location1.LocationName = "Gangtok";
             location1.Country = "INDIA";
             results.Add(location1);
             LocationsMaster location2 = new LocationsMaster();
             location2.LocationKey = Guid.NewGuid().ToString();
-            location2.LocationName = "DARJEELING";
+            location2.LocationName = "Darjeeling";
             location2.Country = "INDIA";
             results.Add(location2);
+            LocationsMaster location3 = new LocationsMaster();
+            location3.LocationKey = Guid.NewGuid().ToString();
+            location3.LocationName = "Kalimpong";
+            location3.Country = "INDIA";
+            results.Add(location3);
+            LocationsMaster location4 = new LocationsMaster();
+            location4.LocationKey = Guid.NewGuid().ToString();
+            location4.LocationName = "Namchi";
+            location4.Country = "INDIA";
+            results.Add(location4);
+            LocationsMaster location5 = new LocationsMaster();
+            location5.LocationKey = Guid.NewGuid().ToString();
+            location5.LocationName = "Siliguri";
+            location5.Country = "INDIA";
+            results.Add(location5);
+            LocationsMaster location6 = new LocationsMaster();
+            location6.LocationKey = Guid.NewGuid().ToString();
+            location6.LocationName = "Pelling";
+            location6.Country = "INDIA";
+            results.Add(location6);
             return results;
         }
 

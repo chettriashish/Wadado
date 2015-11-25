@@ -7,9 +7,9 @@
 
 
 (function () {
-    "use strict";  
+    "use strict";
 
-   
+
     var KEY = {
         TAB: 9,
         ENTER: 13,
@@ -95,7 +95,7 @@
     }
 
     var latestId = 0;
-
+    var event = null;
     var uis = angular.module('ui.select', [])
 
     .constant('uiSelectConfig', {
@@ -308,7 +308,7 @@
               }
               return result;
           }
-         
+
 
           // When the user clicks on ui-select, displays the dropdown list
           ctrl.activate = function (initSearchValue, avoidReset) {
@@ -320,18 +320,16 @@
                   ctrl.open = true;
 
                   ctrl.activeIndex = ctrl.activeIndex >= ctrl.items.length ? 0 : ctrl.activeIndex;
-
                   // ensure that the index is set to zero for tagging variants
                   // that where first option is auto-selected
                   if (ctrl.activeIndex === -1 && ctrl.taggingLabel !== false) {
                       ctrl.activeIndex = 0;
                   }
-
                   // Give it time to appear before focus
                   $timeout(function () {
                       ctrl.search = initSearchValue || ctrl.search;
-                      ctrl.searchInput[0].focus();
-                  });                  
+                      //ctrl.searchInput[0].focus();
+                  }, 200);
               }
           };
 
@@ -458,7 +456,7 @@
 
               return isActive;
           };
-          
+
 
           ctrl.isDisabled = function (itemScope) {
 
@@ -553,11 +551,16 @@
               }
           };
 
+          $scope.$on("BUTTONCLICK", function (e, data) {
+              ctrl.toggle();
+              event = e;
+          });
+
           // Closes the dropdown
           ctrl.close = function (skipFocusser) {
               if (!ctrl.open) return;
               if (ctrl.ngModel && ctrl.ngModel.$setTouched) ctrl.ngModel.$setTouched();
-              _resetSearchInput();              
+              _resetSearchInput();
               ctrl.open = false;
               $scope.$broadcast('uis:close', skipFocusser);
 
@@ -573,16 +576,22 @@
               $timeout(function () {
                   ctrl.focusser[0].focus();
               }, 0, false);
-          };         
+          };
 
           // Toggle dropdown
           ctrl.toggle = function (e) {
-              if (ctrl.open) {
-                  ctrl.close();
-                  e.preventDefault();
-                  e.stopPropagation();
-              } else {
-                  ctrl.activate();
+              if (event == null) {
+                  if (ctrl.open) {
+                      ctrl.close();
+                      e.preventDefault();
+                      e.stopPropagation();
+                  }
+                  else {
+                      ctrl.activate();
+                  }
+              }
+              else {
+                  event = null;
               }
           };
 
@@ -909,21 +918,22 @@
 
                           if (!contains && !$select.clickTriggeredSelect) {
                               //Will lose focus only with certain targets
-                              var focusableControls = ['input', 'button', 'textarea'];
-                              var targetScope = angular.element(e.target).scope(); //To check if target is other ui-select
-                              var skipFocusser = targetScope && targetScope.$select && targetScope.$select !== $select; //To check if target is other ui-select
-                              if (!skipFocusser) skipFocusser = ~focusableControls.indexOf(e.target.tagName.toLowerCase()); //Check if target is input, button or textarea
-                              $select.close(skipFocusser);
+                              //var focusableControls = ['input', 'button', 'textarea'];
+                              //var targetScope = angular.element(e.target).scope(); //To check if target is other ui-select
+                              //var skipFocusser = targetScope && targetScope.$select && targetScope.$select !== $select; //To check if target is other ui-select
+                              //if (!skipFocusser) skipFocusser = ~focusableControls.indexOf(e.target.tagName.toLowerCase()); //Check if target is input, button or textarea
+                              //$select.close(skipFocusser);                             
+                              $select.toggle();
                               scope.$digest();
                           }
                           $select.clickTriggeredSelect = false;
                       }
 
                       // See Click everywhere but here event http://stackoverflow.com/questions/12931369
-                      $document.on('click', onDocumentClick);
+                      $document.on('click touchstart', onDocumentClick);
 
                       scope.$on('$destroy', function () {
-                          $document.off('click', onDocumentClick);
+                          $document.off('click touchstart', onDocumentClick);
                       });
 
                       // Move transcluded elements to their correct position in main template
@@ -977,7 +987,8 @@
                       function positionDropdown() {
                           // Remember the absolute position of the element
                           var offset = uisOffset(element);
-
+                          var position = element.offset();
+                          var scrollTop = $(window).scrollTop();
                           // Clone the element into a placeholder element to take its original place in the DOM
                           placeholder = angular.element('<div class="ui-select-placeholder"></div>');
                           placeholder[0].style.width = offset.width + 'px';
@@ -990,10 +1001,9 @@
 
                           // Now move the actual dropdown element to the end of the body
                           $document.find('body').append(element);
-
-                          element[0].style.position = 'absolute';
+                          element[0].style.position = 'fixed';
                           element[0].style.left = offset.left + 'px';
-                          element[0].style.top = offset.top + 'px';
+                          element[0].style.top = (position.top - scrollTop) + 'px';
                           element[0].style.width = offset.width + 'px';
                       }
 
@@ -1034,11 +1044,11 @@
                                   var offsetDropdown = uisOffset(dropdown);
 
                                   // Determine if the direction of the dropdown needs to be changed.
-                                  if (offset.top + offset.height + offsetDropdown.height > $document[0].documentElement.scrollTop + $document[0].documentElement.clientHeight) {
-                                      dropdown[0].style.position = 'absolute';
-                                      dropdown[0].style.top = (offsetDropdown.height * -1) + 'px';
-                                      element.addClass(directionUpClassName);
-                                  }
+                                  //if (offset.top + offset.height + offsetDropdown.height > $document[0].documentElement.scrollTop + $document[0].documentElement.clientHeight) {
+                                  //    dropdown[0].style.position = 'absolute';
+                                  //    dropdown[0].style.top = (offsetDropdown.height * -1) + 'px';
+                                  //    element.addClass(directionUpClassName);
+                                  //}
 
                                   // Display the dropdown once it has been positioned.
                                   dropdown[0].style.opacity = 1;

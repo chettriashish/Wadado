@@ -11,7 +11,7 @@ namespace MMC.Web.Contracts
     public interface IHomeDataService
     {
         IEnumerable<TopOffersModel> GetTopOffers(string userAgent);
-        IEnumerable<TopTrendingActivitiesModel> GetTrendingActivities(string userAgent);
+        IEnumerable<ActivitiesModel> GetTrendingActivities(string userAgent);
         IEnumerable<LocationsMaster> GetAllLocations();
         IEnumerable<NewsModel> GetLastestNews();
     }

@@ -14,7 +14,12 @@ namespace MMC.Client.Entities
         private string _LocationName;
         private string _LocationImage;
         private string _country;
-
+        private string _season1Start;
+        private string _season2Start;
+        private string _season3Start;
+        private string _season1End;
+        private string _season2End;
+        private string _season3End;
         public string LocationKey
         {
             get { return _LocationKey; }
@@ -55,7 +60,65 @@ namespace MMC.Client.Entities
             }
         }
 
+        public string Season1Start
+        {
+            get { return _season1Start; }
+            set
+            {
+                _season1Start = value;
+                OnPropertyChanged(() => Season1Start);
+            }
+        }       
 
+        public string Season1End
+        {
+            get { return _season1End; }
+            set
+            {
+                _season1End = value;
+                OnPropertyChanged(() => Season1End);
+            }
+        }
+
+
+        public string Season2Start
+        {
+            get { return _season2Start; }
+            set
+            {
+                _season2Start = value;
+                OnPropertyChanged(() => Season2Start);
+            }
+        }
+
+        public string Season2End
+        {
+            get { return _season2End; }
+            set
+            {
+                _season2End = value;
+                OnPropertyChanged(() => Season2End);
+            }
+        }
+        public string Season3Start
+        {
+            get { return _season3Start; }
+            set
+            {
+                _season3Start = value;
+                OnPropertyChanged(() => Season3Start);
+            }
+        }
+
+        public string Season3End
+        {
+            get { return _season3End; }
+            set
+            {
+                _season3End = value;
+                OnPropertyChanged(() => Season3End);
+            }
+        }
         class LocationMasterValidator : AbstractValidator<LocationsMaster>
         {
             public LocationMasterValidator()

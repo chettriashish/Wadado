@@ -1,0 +1,108 @@
+.ll-skin-cangas {    
+	font-size: 90%;
+    width:275px;
+    margin:0 auto;        
+}
+
+.ll-skin-cangas .ui-widget {
+	font-family: 'Lato', sans-serif;
+	background: #f0f4f7;
+	border-radius: 0;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;    
+}
+
+.ll-skin-cangas .ui-datepicker {
+	padding: 0;
+}
+
+.ll-skin-cangas .ui-datepicker-header {
+	border: none;
+	background: #8ec73f;
+	border-radius: 0;
+	-webkit-border-radius: 0;				
+}
+
+.ll-skin-cangas .ui-datepicker-header .ui-state-hover {
+	background: #8dc532;
+	border-color: transparent;
+	cursor: pointer;
+	border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+}
+
+.ll-skin-cangas .ui-datepicker .ui-datepicker-next span,
+.ll-skin-cangas .ui-datepicker .ui-datepicker-prev span {
+	background-image: url(../Images/Icons/ui-icons_ffffff_256x240.png);
+	background-position: -32px -16px;
+}
+
+.ll-skin-cangas .ui-datepicker .ui-datepicker-prev span {
+	background-position: -96px -16px;
+}
+
+.ll-skin-cangas .ui-datepicker table {
+	margin: 0;
+}
+
+.ll-skin-cangas .ui-datepicker th {
+	font-size: 9px;
+	color: #6c7173;
+	font-size: 9px;
+	text-shadow: 0 1px 0 rgba(255,255,255,.55);
+	text-transform: uppercase;
+	font-weight: normal;
+	border: none;
+	border-top: 1px solid rgba(186,194,200,.6);
+	border-bottom: 1px solid rgba(186,194,200,.6);
+	background-color: #e6ebf0;
+}
+
+.ll-skin-cangas .ui-datepicker td {
+	border: none;
+	border-top: 1px solid #e7e9ea;
+	border-right: 1px solid #e7e9ea;
+	padding: 0;
+	background: #eee;
+}
+
+.ll-skin-cangas .ui-datepicker tr:first-child td {
+	border-top: none;
+}
+
+.ll-skin-cangas .ui-datepicker td:last-child {
+	border-right: none;
+}
+
+.ll-skin-cangas td .ui-state-default {
+	border: 1px solid transparent;
+	text-align: center;
+	padding: .7em 0;
+	margin:0;
+	font-size: 12px;
+	font-weight: bold;
+	background: #99CCFF;
+	color: #6c7173;
+	text-shadow: 0 1px 0 rgba(255,255,255,.55);
+
+}
+
+.ll-skin-cangas td.ui-state-disabled .ui-state-default {
+	text-shadow: none;
+	opacity: .8;
+	/*color: #6c7173;
+    background: #f5f8fa;*/
+}
+
+.ll-skin-cangas td .ui-state-active,
+.ll-skin-cangas td .ui-state-hover {
+	border: 1px solid rgba(121,188,27,.68);
+	background: #8ec73f;
+	color: #fff;
+	text-shadow: 0 -1px 0 #30332a;
+}
+
+
+
+

@@ -1,0 +1,61 @@
+﻿@*<div class="mobile-search-cover"></div>*@
+<div class="mobile-search" ng-controller="SearchController">
+    <!--ROW START-->
+    <div class="row">
+        <div class="header-upper">
+            <div>
+                <span>Search</span>
+            </div>
+            <div>
+                <button class="close-button">Search Button</button>
+            </div>
+        </div>
+    </div>
+    <!--ROW END-->    
+    <div class="search-wrapper">
+        <!--ROW START-->
+        <div class="row">
+            <div class="column-12">
+                <div class="mobile-search-input">
+                    <ui-select ng-model="alllocations.selected" theme="select2" on-select="loadSelectedLocationDetails($item, $model)" class="form-control"
+                               append-to-body="true">
+                        <ui-select-match placeholder="Pick a place">{{$select.selected.LocationName}}</ui-select-match>
+                        <ui-select-choices group-by="'Country'" repeat="item in alllocation | filter: $select.search">
+                            <div ng-bind-html="item.LocationName | highlight: $select.search"></div>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+        <!--ROW END-->
+       
+        <div>
+            <!--ROW START-->
+            <div class="row">
+                <div class="column-12">
+                    <div class="mobile-search-input">
+                        <ui-select ng-model="activities.selected" theme="select2" on-select="setSelectedActivityDetails($item, $model)" class="form-control"
+                                   append-to-body="true">
+                            <ui-select-match placeholder="Select an activity">{{$select.selected.Name}}</ui-select-match>
+                            <ui-select-choices group-by="'ActivityTypeKey'" repeat="item in activities | filter: $select.search">
+                                <div ng-bind-html="item.Name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+            </div>
+            <!--ROW END-->            
+            <!--ROW START-->
+            <div class="row">
+                <div class="column-12">
+                    <div>
+                        <div class="search-button">
+                            <a ng-click="loadSelectedDetails()" class="search-button">{{selectionInformation}}</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ROW END-->
+        </div>
+    </div>       
+</div>

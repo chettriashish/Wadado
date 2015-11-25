@@ -6,17 +6,19 @@
     <title>wadado.in</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    @Styles.Render("~/Content/themes/base/css")
+    @*@Styles.Render("~/Content/themes/base/css")*@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/angular")      
+    @Scripts.Render("~/bundles/jqueryui")
+    @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/modernizr")
 
-    <script type='text/javascript' src="//wurfl.io/wurfl.js"></script> 
+    <script type='text/javascript' src="//wurfl.io/wurfl.js"></script>
     <!-- *************** LOAD THE GOOGLE FONT ****************** -->
-    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>  
-    <script src="~/Scripts/app.js"></script>    
-    
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-url-parser/2.3.1/purl.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/app.js"></script>
+
 
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -29,7 +31,7 @@
         document.createElement('ui-select-choices');
       </script>
     <![endif]-->
-    
+
 </head>
 <body>
     <div id="body">
@@ -43,7 +45,7 @@
                 <p>An Ashish Chettri Production</p>
             </div>
         </div>
-    </footer>  
+    </footer>
     @RenderSection("scripts", required: false)
 
     <!-- *************** SCRIPT TO MAKE THE MOBILE NAV EXPAND DOWN ****************** -->
@@ -56,10 +58,23 @@
         wadado.rootPath = '@Url.Content("~")';
 
         $(document).ready(function () {
-            $(".nav-button").click(function () {
-                $(".nav-button,.primary-nav").toggleClass("open");
-                $("#contentWrapper").toggleClass("slide");
+            $(".location-button").click(function () {
+                $(".location-button,.primary-nav").toggleClass("open");
+                $(".nav-button,.primary-nav").toggleClass("absolute");
+                $(".logo-button,.primary-nav").toggleClass("absolute");
             });
+
+            $(".nav-button").click(function () {
+                $(".nav-button,.menu-nav").toggleClass("open");
+                $(".cover").toggleClass("open");
+            });
+            $(".cover").click(function () {
+                $(".nav-button,.menu-nav").toggleClass("open");
+                $(".cover").toggleClass("open");
+            });
+            $(".logo-button").click(function () {
+                window.location.href = "http://www.thefigtree.in";
+            });              
         });
     </script>
 </body>

@@ -6,10 +6,12 @@ using System.Web;
 
 namespace MMC.Web.Model
 {
-    public class TopTrendingActivitiesModel
+    public class ActivitiesModel
     {
         public ActivityImages DefaultActivityImage { get; set; }
+        public List<ActivityImages> AllImagesForActivity { get; set; }
         public ActivitiesMaster Activity { get; set; }
         public string ImageURL { get; set; }
+        public string ActivityType { get; set; }
     }
 }
