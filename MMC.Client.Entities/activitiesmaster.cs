@@ -5,6 +5,7 @@ using System.Text;
 using Core.Common.Core;
 using FluentValidation;
 using FluentValidation.Validators;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace MMC.Client.Entities
 {
     public class ActivitiesMaster : ObjectBase
@@ -12,6 +13,7 @@ namespace MMC.Client.Entities
         #region Private Variables
         private string _activitesKey;
         private string _ActivityTypeKey;
+        private string _locationKey;
         private string _name;
         private string _description;
         private decimal _cost;
@@ -21,6 +23,8 @@ namespace MMC.Client.Entities
         private string _pickup;
         private int _maxPeople;
         private int _minPeople;
+        private int _numAdults;
+        private int _numChildren;
         private string _thingsToCarry;
         private string _included;
         private bool _isPermitRequired;
@@ -46,6 +50,7 @@ namespace MMC.Client.Entities
                 }
             }
         }
+        [ForeignKey("ActivitiesTypeMaster")]
         public string ActivityTypeKey
         {
             get { return _ActivityTypeKey; }
@@ -55,7 +60,16 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => ActivityTypeKey, true);
             }
         }
-
+        [ForeignKey("LocationsMaster")]
+        public string LocationKey
+        {
+            get { return _locationKey; }
+            set
+            {
+                _locationKey = value;
+                OnPropertyChanged(() => LocationKey);
+            }
+        }
         public string Name
         {
             get { return _name; }
@@ -178,6 +192,27 @@ namespace MMC.Client.Entities
                 }
             }
         }
+
+        public int NumAdults
+        {
+            get { return _numAdults; }
+            set
+            {
+                _numAdults = value;
+                OnPropertyChanged(() => NumAdults);
+            }
+        }        
+
+        public int NumChildren
+        {
+            get { return _numChildren; }
+            set
+            {
+                _numChildren = value;
+                OnPropertyChanged(() => NumChildren);
+            }
+        }
+
 
         public string ThingsToCarry
         {
@@ -318,15 +353,18 @@ namespace MMC.Client.Entities
             {
                 RuleFor(obj => obj.ActivitesKey).NotEmpty();
                 RuleFor(obj => obj.ActivityTypeKey).NotEmpty();
+                RuleFor(obj => obj.LocationKey).NotEmpty();
                 RuleFor(obj => obj.Pickup).NotEmpty();
                 RuleFor(obj => obj.Cost).GreaterThanOrEqualTo(0);
                 RuleFor(obj => obj.Description).NotEmpty();
                 RuleFor(obj => obj.Name).NotEmpty();
                 RuleFor(obj => obj.MaxPeople).GreaterThanOrEqualTo(1);
                 RuleFor(obj => obj.MinPeople).GreaterThanOrEqualTo(1);
+                RuleFor(obj => obj.NumAdults).GreaterThanOrEqualTo(1);
+                RuleFor(obj => obj.NumChildren).GreaterThanOrEqualTo(0);
                 RuleFor(obj => obj.CancellationPolicy).NotEmpty();
-                RuleFor(obj => obj.CreatedDate).NotNull();
-                RuleFor(obj => obj.CreatedBy).NotEmpty();
+                //RuleFor(obj => obj.CreatedDate).NotNull();
+                //RuleFor(obj => obj.CreatedBy).NotEmpty();
             }
         }
         /// <summary>

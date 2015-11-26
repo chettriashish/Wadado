@@ -63,6 +63,7 @@
     <Compile Include="Account.cs" />
     <Compile Include="ActivitiesMaster.cs" />
     <Compile Include="ActivityBooking.cs" />
+    <Compile Include="ActivityCategoryMaster.cs" />
     <Compile Include="ActivityCompany.cs" />
     <Compile Include="ActivityDayScheduler.cs" />
     <Compile Include="ActivityDiscount.cs" />

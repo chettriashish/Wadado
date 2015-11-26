@@ -22,6 +22,7 @@ namespace MMC.Data
         /// DbSet represents the collection of entities that we want to query
         /// </summary>
         public DbSet<ActivitiesMaster> ActivitiesMasterSet { get; set; }
+        public DbSet<ActivityCategoryMaster> ActivityCategoryMasterSet { get; set; }
         public DbSet<LocationsMaster> LocationMasterSet { get; set; }
         public DbSet<ActivityBooking> ActivityBookingSet { get; set; }
         public DbSet<ActivityCompany> ActivityCompanySet { get; set; }
@@ -56,6 +57,7 @@ namespace MMC.Data
             modelBuilder.Entity<ActivityRates>().HasKey<string>(e => e.ActivityRatesKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<ActivityTimeScheduler>().HasKey<string>(e => e.ActivityTimeSchedulerKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<ActivityTypeMaster>().HasKey<string>(e => e.ActivityTypeKey).Ignore<string>(e => e.EntityId);
+            modelBuilder.Entity<ActivityCategoryMaster>().HasKey<string>(e => e.ActivityCategoryKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<CompanyMaster>().HasKey<string>(e => e.CompanyKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<GuestInformationMaster>().HasKey<string>(e => e.GuestKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<LocationsMaster>().HasKey<string>(e => e.LocationKey).Ignore<string>(e => e.EntityId);

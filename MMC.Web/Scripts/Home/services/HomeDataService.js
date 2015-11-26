@@ -90,7 +90,7 @@
                 }
             };
 
-            var jssor_slider1 = new $JssorSlider$("slider1_container", options);
+            var jssor_slider1 = new $JssorSlider$("slider_container", options);
 
             //responsive code begin
             //you can remove responsive code if you don't want the slider scales while window resizes
@@ -99,7 +99,7 @@
                 if (bodyWidth)
                     jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1920));
                 else
-                    window.setTimeout(ScaleSlider, 100);
+                    window.setTimeout(ScaleSlider, 150);
             }            
             $(window).bind("resize", ScaleSlider);          
             //responsive code end

@@ -57,6 +57,7 @@
     <Compile Include="Data Repositories\AccountRepository.cs" />
     <Compile Include="Data Repositories\ActivitiesMasterRepository.cs" />
     <Compile Include="Data Repositories\ActivityBookingRepository.cs" />
+    <Compile Include="Data Repositories\ActivityCategoryMasterRepository.cs" />
     <Compile Include="Data Repositories\ActivityCompanyRepository.cs" />
     <Compile Include="Data Repositories\ActivityDaySchedulerRepository.cs" />
     <Compile Include="Data Repositories\ActivityDiscountRepository.cs" />

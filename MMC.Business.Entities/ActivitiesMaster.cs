@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.Serialization;
 using Core.Common.Contracts;
 using Core.Common.Core;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MMC.Business.Entities
 {
@@ -17,7 +18,11 @@ namespace MMC.Business.Entities
         public string ActivitesKey { get; set; }
 
         [DataMember]
+        [ForeignKey("ActivitiesTypeMaster")]
         public string ActivityTypeKey { get; set; }
+
+        [ForeignKey("LocationsMaster")]
+        public string LocationKey { get; set; }
         [DataMember]
         public string Name { get; set; }
 
@@ -41,6 +46,8 @@ namespace MMC.Business.Entities
         public int MaxAdults { get; set; }
         [DataMember]
         public int MinAdults { get; set; }
+        public int NumAdults { get; set; }
+        public int NumChildren { get; set; }
         [DataMember]
         public int MaxChildren { get; set; }
         [DataMember]

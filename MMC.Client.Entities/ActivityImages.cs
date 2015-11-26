@@ -13,9 +13,11 @@ namespace MMC.Client.Entities
     {
         #region Private variables
         private string _activityImageKey;
-        private string _activityKey;
+        private string _activityTypeKey;
+        private string _locationKey;
         private bool _isDefault;
-        private string _imageURL; 
+        private string _imageURL;
+        private bool _isThumbnail;
         #endregion
 
         #region Properties
@@ -29,14 +31,24 @@ namespace MMC.Client.Entities
             }
         }
 
-        [ForeignKey("ActivitiesMaster")]
-        public string ActivityKey
+        [ForeignKey("ActivitiesTypeMaster")]
+        public string ActivityTypeKey
         {
-            get { return _activityKey; }
+            get { return _activityTypeKey; }
             set
             {
-                _activityKey = value;
-                OnPropertyChanged(() => ActivityKey);
+                _activityTypeKey = value;
+                OnPropertyChanged(() => ActivityTypeKey);
+            }
+        }
+        [ForeignKey("LocationsMaster")]
+        public string LocationKey
+        {
+            get { return _locationKey; }
+            set
+            {
+                _locationKey = value;
+                OnPropertyChanged(() => LocationKey);
             }
         }
 
@@ -59,7 +71,18 @@ namespace MMC.Client.Entities
                 _isDefault = value;
                 OnPropertyChanged(() => IsDefault);
             }
-        } 
+        }        
+
+        public bool IsThumbnail
+        {
+            get { return _isThumbnail; }
+            set
+            {
+                _isThumbnail = value;
+                OnPropertyChanged(() => IsThumbnail);
+            }
+        }
+
         #endregion
 
         class ActivityImagesValidator : AbstractValidator<ActivityImages>
@@ -67,7 +90,8 @@ namespace MMC.Client.Entities
             public ActivityImagesValidator()
             {
                 RuleFor(obj => obj.ActivityImageKey).NotNull();
-                RuleFor(obj => obj.ActivityKey).NotNull();
+                RuleFor(obj => obj.ActivityTypeKey).NotNull();
+                RuleFor(obj => obj.LocationKey).NotNull();
                 RuleFor(obj => obj.ImageURL).NotNull();
             }
         }

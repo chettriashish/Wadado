@@ -408,6 +408,8 @@
     <Content Include="Images\Mobile\default.jpg" />
     <Content Include="Scripts\Activities\controllers\ActivityController.js" />
     <Content Include="Scripts\Activities\services\ActivityDataService.js" />
+    <Content Include="Scripts\ActivityDetails\controllers\ActivityDetailsController.js" />
+    <Content Include="Scripts\ActivityDetails\services\ActivityDetailsDataService.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -1279,12 +1281,16 @@
     <Content Include="Views\Activities\Index.tablet.cshtml" />
     <Content Include="Views\Partial\_search.cshtml" />
     <Content Include="Views\Partial\_booking.cshtml" />
+    <Content Include="Views\ActivityDetails\Index.cshtml" />
+    <Content Include="Views\ActivityDetails\Index.tablet.cshtml" />
+    <Content Include="Views\ActivityDetails\Index.legacy.cshtml" />
+    <Content Include="Views\ActivityDetails\Index.smartphone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\Activities\directives\" />
+    <Folder Include="Scripts\ActivityDetails\directives\" />
     <Folder Include="Scripts\Location\directives\" />
     <Folder Include="Templates\" />
-    <Folder Include="Views\ActivityDetails\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

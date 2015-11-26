@@ -11,6 +11,6 @@ namespace MMC.Web.Contracts
     {
         ActivitiesModel GetSelectedActivityDetails(string userAgent, string activityKey);
         bool CheckForSlotAvailability(string activityKey, DateTime selectedDate, decimal selectedTime, int numberOfAdults, int numberOfChildren);
-        List<ActivitiesModel> GetTwoSimilarActivitiesNearby(string userAgent, string activityKey);
+        List<ActivitiesModel> GetTwoSimilarActivitiesNearby(string userAgent, string activityType, string locationCode);
     }
 }

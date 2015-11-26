@@ -46,6 +46,7 @@
     <Compile Include="Repository Interfaces\IAccountRepository.cs" />
     <Compile Include="Repository Interfaces\IActivitiesMasterRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityBookingRepository.cs" />
+    <Compile Include="Repository Interfaces\IActivityCategoryMasterRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityCompanyRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityDaySchedulerRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityDiscountRepository.cs" />

@@ -83,7 +83,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityOne.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityOne.Activity).Address = "Gangtok,Sikkim";
             ((ActivitiesMaster)activityOne.Activity).Cost = 1000;
-            ((ActivityImages)activityOne.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
+            ((ActivityImages)activityOne.DefaultActivityImage).ActivityTypeKey = "ACTIVITY ONE";
             ((ActivityImages)activityOne.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
             ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/bakery";
             results.Add(activityOne);
@@ -98,7 +98,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityTwo.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityTwo.Activity).Address = "Rumtek,Sikkim";
             ((ActivitiesMaster)activityTwo.Activity).Cost = 2000;
-            ((ActivityImages)activityTwo.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
+            ((ActivityImages)activityTwo.DefaultActivityImage).ActivityTypeKey = "ACTIVITY ONE";
             ((ActivityImages)activityTwo.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
             ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/herbalbath";
             results.Add(activityTwo);
@@ -113,7 +113,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityThree.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityThree.Activity).Address = "Melli,Sikkim";
             ((ActivitiesMaster)activityThree.Activity).Cost = 3000;
-            ((ActivityImages)activityThree.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
+            ((ActivityImages)activityThree.DefaultActivityImage).ActivityTypeKey = "ACTIVITY ONE";
             ((ActivityImages)activityThree.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
             ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/beerfactorytour";
             results.Add(activityThree);
@@ -129,7 +129,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityFour.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityFour.Activity).Address = "Gangtok,Sikkim";
             ((ActivitiesMaster)activityFour.Activity).Cost = 4000;
-            ((ActivityImages)activityFour.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
+            ((ActivityImages)activityFour.DefaultActivityImage).ActivityTypeKey = "ACTIVITY ONE";
             ((ActivityImages)activityFour.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
             ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/family";
             results.Add(activityFour);
@@ -144,7 +144,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityFive.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityFive.Activity).Address = "Kundau Residency,Sikkim";
             ((ActivitiesMaster)activityFive.Activity).Cost = 5000;
-            ((ActivityImages)activityFive.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
+            ((ActivityImages)activityFive.DefaultActivityImage).ActivityTypeKey = "ACTIVITY ONE";
             ((ActivityImages)activityFive.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
             ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/riverside";
             results.Add(activityFive);

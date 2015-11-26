@@ -2,19 +2,21 @@
 using FluentValidation;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Client.Entities
 {
-    public class ActivityTypeMaster:ObjectBase
+    public class ActivityTypeMaster : ObjectBase
     {
         #region Private variables
         private string _ActivityTypeKey;
+        private string _activityCategoryKey;
         private string _ActivityType;
         private DateTime _CreatedDate;
-        private string _CreatedBy; 
+        private string _CreatedBy;
         #endregion
 
         #region Properties
@@ -27,6 +29,17 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => ActivityTypeKey);
             }
         }
+        [ForeignKey("ActivityCategoryMaster")]
+        public string ActivityCategoryKey
+        {
+            get { return _activityCategoryKey; }
+            set
+            {
+                _activityCategoryKey = value;
+                OnPropertyChanged(() => ActivityCategoryKey);
+            }
+        }
+
         public string ActivityType
         {
             get { return _ActivityType; }
@@ -42,10 +55,10 @@ namespace MMC.Client.Entities
         {
             get { return _CreatedBy; }
             set { _CreatedBy = value; }
-        } 
+        }
         #endregion
-        
-        class ActivityTypeMasterValidator:AbstractValidator<ActivityTypeMaster>
+
+        class ActivityTypeMasterValidator : AbstractValidator<ActivityTypeMaster>
         {
             public ActivityTypeMasterValidator()
             {

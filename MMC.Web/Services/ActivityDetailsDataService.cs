@@ -1,4 +1,5 @@
 ﻿using MMC.Web.Contracts;
+using MMC.Web.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ namespace MMC.Web.Services
 {
     public class ActivityDetailsDataService : IActivityDetailsDataService
     {
-        public Model.ActivitiesModel GetSelectedActivityDetails(string userAgent , string activityKey)
+        public ActivitiesModel GetSelectedActivityDetails(string userAgent , string activityKey)
         {
             throw new NotImplementedException();
         }
@@ -18,7 +19,7 @@ namespace MMC.Web.Services
             throw new NotImplementedException();
         }
 
-        public List<Model.ActivitiesModel> GetTwoSimilarActivitiesNearby(string userAgent, string activityKey)
+        public List<ActivitiesModel> GetTwoSimilarActivitiesNearby(string userAgent, string activityType, string locationCode)
         {
             throw new NotImplementedException();
         }

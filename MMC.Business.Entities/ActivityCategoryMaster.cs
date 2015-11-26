@@ -2,7 +2,6 @@
 using Core.Common.Core;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
@@ -11,32 +10,25 @@ using System.Threading.Tasks;
 namespace MMC.Business.Entities
 {
     [DataContract]
-    public class ActivityTypeMaster:EntityBase,IIdentifiableEntity
+    public class ActivityCategoryMaster : EntityBase, IIdentifiableEntity
     {
         #region Properties
         [DataMember]
-        public string ActivityTypeKey { get; set; }
-        [ForeignKey("ActivityCategoryMaster")]
         public string ActivityCategoryKey { get; set; }
-
         [DataMember]
-        public string ActivityType { get; set; }
-        [DataMember]
-        public string CreatedBy { get; set; }
-        [DataMember]
-        public string CreatedDate { get; set; } 
+        public string ActivityCategory { get; set; }
+        
         #endregion
-
         [DataMember]
         public string EntityId
         {
             get
             {
-                throw new NotImplementedException();
+                return ActivityCategoryKey;
             }
             set
             {
-                throw new NotImplementedException();
+                ActivityCategoryKey = value;
             }
         }
     }

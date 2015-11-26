@@ -56,7 +56,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityOne.Activity).Address = "Gangtok,Sikkim";
             ((ActivitiesMaster)activityOne.Activity).Cost = 1000;
             ((ActivitiesMaster)activityOne.Activity).ActivityTypeKey = "ADVENTURE";
-            ((ActivityImages)activityOne.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
+            ((ActivityImages)activityOne.DefaultActivityImage).ActivityTypeKey = "ACTIVITY ONE";
             ((ActivityImages)activityOne.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
             ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "ropesactivity";
             results.Add(activityOne);
@@ -71,7 +71,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityTwo.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityTwo.Activity).Address = "Rumtek,Sikkim";
             ((ActivitiesMaster)activityTwo.Activity).Cost = 2000;
-            ((ActivityImages)activityTwo.DefaultActivityImage).ActivityKey = "ADVENTURE";
+            ((ActivityImages)activityTwo.DefaultActivityImage).ActivityTypeKey = "ADVENTURE";
             ((ActivityImages)activityTwo.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
             ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "paragliding";
             results.Add(activityTwo);
@@ -86,7 +86,7 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityThree.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityThree.Activity).Address = "Melli,Sikkim";
             ((ActivitiesMaster)activityThree.Activity).Cost = 3000;
-            ((ActivityImages)activityThree.DefaultActivityImage).ActivityKey = "ADVENTURE";
+            ((ActivityImages)activityThree.DefaultActivityImage).ActivityTypeKey = "ADVENTURE";
             ((ActivityImages)activityThree.DefaultActivityImage).ActivityImageKey = "ACTIVITY TWO IMAGE";
             ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "rockclimbing";
             results.Add(activityThree);          

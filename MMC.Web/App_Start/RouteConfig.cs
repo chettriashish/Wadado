@@ -18,29 +18,25 @@ namespace MMC.Web
                 "location/GetSelectedLocation",
                 new { controller = "Location", action = "GetSelectedLocation", selectedLocation = UrlParameter.Optional });
 
-            routes.MapRoute("GetAllOtherLocations",
-               "location/GetAllOtherLocations",
-               new { controller = "Location", action = "GetAllOtherLocations", selectedLocation = UrlParameter.Optional });
-
             // /Location/locationkey
             routes.MapRoute("Location",
                 "location/{locationName}",
-                new { controller = "Location", action = "Index", selectedLocation = UrlParameter.Optional });
-
-            // /Getting details of selected location
-            routes.MapRoute("GetLocationsForActivities",
-                "activities/GetAllOtherLocations",
-                new { controller = "Activities", action = "GetAllOtherLocations", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
+                new { controller = "Location", action = "Index", selectedLocation = UrlParameter.Optional });            
 
             // /Getting all locations for activitiesListing
             routes.MapRoute("GetSelectedActivity",
                 "activities/GetSelectedActivityType",
                 new { controller = "Activities", action = "GetSelectedActivityType", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
 
-            // /Location/locationkey/ActivityCategory
+            // /Activity/locationName/ActivityCategory
             routes.MapRoute("Activity",
               "activities/{locationName}/{activityType}",
               new { controller = "Activities", action = "Index", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
+
+            // /ActivityDetails/LocationName/ActivityCode
+            routes.MapRoute("ActivityDetails",
+              "ActivityDetails/{locationName}/{activityCode}",
+              new { controller = "Activities", action = "Index", locationName = UrlParameter.Optional, activityCode = UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",
