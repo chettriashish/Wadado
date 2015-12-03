@@ -35,6 +35,10 @@ namespace MMC.Client.Entities
         private DateTime _createdDate;
         private string _createdBy;
         private bool _isValidated;
+        private string _activityLocation;
+        private string _distanceFromNearestCity;
+        private string _currency;
+        private decimal _averageUserRating;
         #endregion
 
         #region Properties
@@ -108,6 +112,16 @@ namespace MMC.Client.Entities
                     _cost = value;
                     OnPropertyChanged(() => Cost);
                 }
+            }
+        }
+
+        public string Currency
+        {
+            get { return _currency; }
+            set
+            {
+                _currency = value;
+                OnPropertyChanged(() => Currency);
             }
         }
 
@@ -201,7 +215,7 @@ namespace MMC.Client.Entities
                 _numAdults = value;
                 OnPropertyChanged(() => NumAdults);
             }
-        }        
+        }
 
         public int NumChildren
         {
@@ -343,6 +357,37 @@ namespace MMC.Client.Entities
             }
         }
 
+        public string ActivityLocation
+        {
+            get { return _activityLocation; }
+            set
+            {
+                _activityLocation = value;
+                OnPropertyChanged(() => ActivityLocation);
+            }
+        }
+
+        public string DistanceFromNearestCity
+        {
+            get { return _distanceFromNearestCity; }
+            set
+            {
+                _distanceFromNearestCity = value;
+                OnPropertyChanged(() => DistanceFromNearestCity);
+            }
+        }        
+
+        public decimal AverageUserRating
+        {
+            get { return _averageUserRating; }
+            set
+            {
+                _averageUserRating = value;
+                OnPropertyChanged(() => AverageUserRating);
+            }
+        }
+
+
         #endregion
         /// <summary>
         /// This class is used to validate the entity
@@ -355,7 +400,8 @@ namespace MMC.Client.Entities
                 RuleFor(obj => obj.ActivityTypeKey).NotEmpty();
                 RuleFor(obj => obj.LocationKey).NotEmpty();
                 RuleFor(obj => obj.Pickup).NotEmpty();
-                RuleFor(obj => obj.Cost).GreaterThanOrEqualTo(0);
+                RuleFor(obj => obj.Cost).GreaterThan(0);
+                RuleFor(obj => obj.Currency).NotEmpty();
                 RuleFor(obj => obj.Description).NotEmpty();
                 RuleFor(obj => obj.Name).NotEmpty();
                 RuleFor(obj => obj.MaxPeople).GreaterThanOrEqualTo(1);
@@ -363,7 +409,7 @@ namespace MMC.Client.Entities
                 RuleFor(obj => obj.NumAdults).GreaterThanOrEqualTo(1);
                 RuleFor(obj => obj.NumChildren).GreaterThanOrEqualTo(0);
                 RuleFor(obj => obj.CancellationPolicy).NotEmpty();
-                //RuleFor(obj => obj.CreatedDate).NotNull();
+                RuleFor(obj => obj.AverageUserRating).GreaterThanOrEqualTo(0);
                 //RuleFor(obj => obj.CreatedBy).NotEmpty();
             }
         }

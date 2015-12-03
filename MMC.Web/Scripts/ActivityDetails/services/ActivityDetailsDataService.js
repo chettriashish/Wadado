@@ -6,12 +6,13 @@
         var getSelectedActivityDetails = function () {
             var deferred = $q.defer();
             if ($.url().segment().length > 2) {
-                if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {                    
+                if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {
+                    var selectedLocation = $.url().segment(2);
                     var selectedActivityKey = $.url().segment(3);
                     $http({
                         url: '/ActivityDetails/GetSelectedActivityDetails',
                         method: 'GET',
-                        params: { activityKey: activityKey }
+                        params: { selectedLocation: selectedLocation, activityKey: selectedActivityKey }
                     }).success(deferred.resolve).error(deferred.reject);
                 }
             }

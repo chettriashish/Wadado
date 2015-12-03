@@ -13,7 +13,7 @@ namespace MMC.Client.Entities
     {
         #region Private variables
         private string _activityImageKey;
-        private string _activityTypeKey;
+        private string _activityKey;
         private string _locationKey;
         private bool _isDefault;
         private string _imageURL;
@@ -31,14 +31,14 @@ namespace MMC.Client.Entities
             }
         }
 
-        [ForeignKey("ActivitiesTypeMaster")]
-        public string ActivityTypeKey
+        [ForeignKey("ActivitiesMaster")]
+        public string ActivityKey
         {
-            get { return _activityTypeKey; }
+            get { return _activityKey; }
             set
             {
-                _activityTypeKey = value;
-                OnPropertyChanged(() => ActivityTypeKey);
+                _activityKey = value;
+                OnPropertyChanged(() => ActivityKey);
             }
         }
         [ForeignKey("LocationsMaster")]
@@ -90,7 +90,7 @@ namespace MMC.Client.Entities
             public ActivityImagesValidator()
             {
                 RuleFor(obj => obj.ActivityImageKey).NotNull();
-                RuleFor(obj => obj.ActivityTypeKey).NotNull();
+                RuleFor(obj => obj.ActivityKey).NotNull();
                 RuleFor(obj => obj.LocationKey).NotNull();
                 RuleFor(obj => obj.ImageURL).NotNull();
             }

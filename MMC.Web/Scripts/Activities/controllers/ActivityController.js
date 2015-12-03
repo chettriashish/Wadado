@@ -68,7 +68,13 @@
             }
             setImages();
         });
-        /*END SELECTED ACTIVITY TYPE*/      
+        /*END SELECTED ACTIVITY TYPE*/
+
+        $scope.loadActivityDetails = function (item) {
+            $scope.ActivityKey = item.Activity.ActivitesKey;
+            ActivityDataService.getSelectedActivity($scope.ActivityKey);
+        };
+
         $(window).resize(function () {
             setImages();
             $scope.$apply();

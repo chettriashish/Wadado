@@ -1,4 +1,5 @@
-﻿using MMC.Business.Entities;
+﻿using MMC.Business.Contracts.DataContracts;
+using MMC.Business.Entities;
 using MMC.Common;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace MMC.Business.Contracts
     [ServiceContract]    
     public interface IActivitiesService
     {
-        [OperationContract]        
-        IEnumerable<ActivitiesMaster> GetAllActivities(string locationKey);
+        [OperationContract]
+        ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent);
 
         [OperationContract]
         [FaultContract(typeof(AuthorizationValidationException))]

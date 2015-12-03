@@ -14,6 +14,7 @@ using MMC.Business.Common;
 using System.Security.Permissions;
 using MMC.Common;
 using Core.Common.Exceptions;
+using MMC.Business.Contracts.DataContracts;
 
 namespace MMC.Business.Managers
 {
@@ -21,28 +22,29 @@ namespace MMC.Business.Managers
         ConcurrencyMode = ConcurrencyMode.Multiple,
         ReleaseServiceInstanceOnTransactionComplete = false)]
     public class ActivitiesManager : ManagerBase, IActivitiesService
-    {
+    {        
         public ActivitiesManager(IDataRepositoryFactory dataRepositoryFactory, IBusinessEngineFactory businessEngineFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
             _BusinessEngineFactory = businessEngineFactory;
+            ObjectBase.Container = Bootstrapper.Bootstrapper.Initialise();
         }
 
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]
-        public IEnumerable<ActivitiesMaster> GetAllActivities(string locationKey)
+        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
+        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]
+        public ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IActivitiesMasterRepository activitiesMasterRepository
                 = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
 
-                IEnumerable<ActivitiesMaster> allActivitiesForLocation = activitiesMasterRepository.GetActivityByLocation(locationKey: locationKey);
+                ActivityDetailsDataContract allActivitiesForLocation = activitiesMasterRepository.GetActivityByLocation(locationKey: locationKey, activityKey: activityKey, userAgent: userAgent);
                 return allActivitiesForLocation;
             });
         }
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
+        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
+        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
         public IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName)
         {            
             return ExecuteFaultHandledOperation(() =>

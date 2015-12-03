@@ -6,9 +6,9 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMC.Client.Contracts.Data_Contracts
+namespace MMC.Client.Contracts.DataContracts
 {
-    [DataContract]
+    [DataContract(Namespace="wadado.in")]
     public class ActivityDetailsDataContract : DataContractBase
     {
         [DataMember]
@@ -43,6 +43,16 @@ namespace MMC.Client.Contracts.Data_Contracts
         public string CancellationPolicy { get; set; }
         [DataMember]
         public decimal Cost { get; set; }
+        [DataMember]
+        public string Currency { get; set; }
+        [DataMember]
+        public string ActivityLocation { get; set; }
+        [DataMember]
+        public string DistanceFromNearestCity { get; set; }
+        [DataMember]
+        public List<string> AllActivityTimes { get; set; }
+        [DataMember]
+        public List<int> AllActivityDates { get; set; }
         [DataMember]
         public List<string> Reviews { get; set; }
     }

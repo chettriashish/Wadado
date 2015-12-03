@@ -18,7 +18,7 @@ namespace MMC.Business.Managers
             container.RegisterType<IActivitiesMasterRepository, ActivitiesMasterRepository>();
             container.RegisterType<IDataRepositoryFactory, DataRepositoryFactory>();
             container.RegisterType<IBusinessEngineFactory, BusinessEngineFactory>();
-            container.RegisterType<IActivitiesBookingEngine, ActivitiesBookingEngine>();            
+            container.RegisterType<IActivitiesBookingEngine, ActivitiesBookingEngine>();         
         }
     }    
 }

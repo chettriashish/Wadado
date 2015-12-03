@@ -1,4 +1,5 @@
 ﻿using Core.Common.Contracts;
+using MMC.Client.Contracts.DataContracts;
 using MMC.Client.Entities;
 using MMC.Common;
 using System;
@@ -15,7 +16,7 @@ namespace MMC.Client.Contracts
     {
         #region Sync Operations
         [OperationContract]
-        IEnumerable<ActivitiesMaster> GetAllActivities(string locationKey);
+        ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent);
         [OperationContract]
         [FaultContract(typeof(AuthorizationValidationException))]
         IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName);
@@ -28,7 +29,7 @@ namespace MMC.Client.Contracts
 
         #region Async Operations
         [OperationContract]
-        Task<IEnumerable<ActivitiesMaster>> GetAllActivitiesAsync(string locationKey);
+        Task<ActivityDetailsDataContract> GetAllActivitiesAsync(string locationKey, string activityKey, string userAgent);
         [OperationContract]        
         Task<IEnumerable<ActivitiesMaster>> GetAllBookedActivitiesAsync(string loginName);
         [OperationContract]

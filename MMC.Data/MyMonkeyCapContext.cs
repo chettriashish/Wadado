@@ -16,7 +16,7 @@ namespace MMC.Data
         public MyMonkeyCapContext()
             : base("name=monkeycapEntities")
         {
-            Database.SetInitializer<MyMonkeyCapContext>(new CreateDatabaseIfNotExists<MyMonkeyCapContext>());
+            Database.SetInitializer<MyMonkeyCapContext>(null);
         }
         /// <summary>
         /// DbSet represents the collection of entities that we want to query

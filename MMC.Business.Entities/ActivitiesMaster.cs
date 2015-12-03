@@ -31,7 +31,8 @@ namespace MMC.Business.Entities
 
         [DataMember]
         public decimal Cost { get; set; }
-
+        [DataMember]
+        public string Currency { get; set; }
         [DataMember]
         public string Address { get; set; }
 
@@ -72,7 +73,9 @@ namespace MMC.Business.Entities
         public string CreatedBy { get; set; }
         [DataMember]
         public bool IsValidated { get; set; }
-
+        public string ActivityLocation { get; set; }
+        public string DistanceFromNearestCity { get; set; }
+        public decimal AverageUserRating { get; set; }
         #endregion
         [DataMember]
         public string EntityId

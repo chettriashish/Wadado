@@ -33,10 +33,15 @@ namespace MMC.Web
               "activities/{locationName}/{activityType}",
               new { controller = "Activities", action = "Index", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
 
+            // /Getting all details for selected activity
+            routes.MapRoute("GetSelectedActivityDetails",
+                "ActivityDetails/GetSelectedActivityDetails",
+                new { controller = "ActivityDetails", action = "GetSelectedActivityDetails", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
+
             // /ActivityDetails/LocationName/ActivityCode
             routes.MapRoute("ActivityDetails",
-              "ActivityDetails/{locationName}/{activityCode}",
-              new { controller = "Activities", action = "Index", locationName = UrlParameter.Optional, activityCode = UrlParameter.Optional });
+              "ActivityDetails/{selectedLocation}/{activityKey}",
+              new { controller = "ActivityDetails", action = "Index", locationName = UrlParameter.Optional, activityCode = UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",

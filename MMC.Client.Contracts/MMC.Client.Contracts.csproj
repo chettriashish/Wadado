@@ -48,7 +48,9 @@
     <Compile Include="Service Contracts\IActivitiesService.cs" />
     <Compile Include="Service Contracts\ILocationService.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.Common.Contracts\Core.Common.Contracts.csproj">
       <Project>{b4c1331e-a761-45a4-9c75-ab4d2b36f5d5}</Project>

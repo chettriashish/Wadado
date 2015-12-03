@@ -18,8 +18,8 @@ namespace MMC.Business.Entities
         [DataMember]
         public string ActivityImageKey { get; set; }
         [DataMember]
-        [ForeignKey("ActivitiesTypeMaster")]
-        public string ActivityTypeKey { get; set; }
+        [ForeignKey("ActivitiesMaster")]
+        public string ActivityKey { get; set; }
 
         [ForeignKey("LocationsMaster")]
         public string LocationKey { get; set; }

@@ -24,7 +24,8 @@ namespace MMC.Data.Tests
         {
             ///Creates a new instance every time
             RepositoryClassTest repositoryTest = ObjectBase.Container.Resolve<RepositoryClassTest>();
-            IEnumerable<ActivitiesMaster> activities = repositoryTest.GetActivities();
+            IEnumerable<ActivitiesMaster> activities = repositoryTest.ActivityMasterRepository.Get();
+            //ActivityDetailsDataContract activities = repositoryTest.GetActivities();
             Assert.IsTrue(activities != null);
         }
 
@@ -33,9 +34,9 @@ namespace MMC.Data.Tests
         {
             ///Creates a new instance every time
             RepositoryFactoryClassTest repositoryTest = ObjectBase.Container.Resolve<RepositoryFactoryClassTest>();
-            IEnumerable<ActivitiesMaster> activities = repositoryTest.GetActivities();
+            //ActivityDetailsDataContract activities = repositoryTest.GetActivities();
             IEnumerable<LocationsMaster> locations = repositoryTest.GetLocations();
-            Assert.IsTrue(activities != null);
+            //Assert.IsTrue(activities != null);
             Assert.IsTrue(locations != null);
         }
     }
@@ -52,11 +53,11 @@ namespace MMC.Data.Tests
 
         public IActivitiesMasterRepository ActivityMasterRepository { get; set; }
 
-        public IEnumerable<ActivitiesMaster> GetActivities()
-        {
-            IEnumerable<ActivitiesMaster> activities = ActivityMasterRepository.Get();
-            return activities;
-        }
+        //public ActivityDetailsDataContract GetActivities()
+        //{
+        //    ActivityDetailsDataContract activities = ActivityMasterRepository.GetActivityByLocation("GANGTOK","HIGHFLY",null);
+        //    return activities;
+        //}
     }
 
     public class RepositoryFactoryClassTest

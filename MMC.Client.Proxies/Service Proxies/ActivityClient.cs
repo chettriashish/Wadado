@@ -1,5 +1,6 @@
 ﻿using Core.Common.ServiceModel;
 using MMC.Client.Contracts;
+using MMC.Client.Contracts.DataContracts;
 using MMC.Client.Entities;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,9 @@ namespace MMC.Client.Proxies.Proxies
 {
     public class ActivityClient : UserClientBase<IActivitiesService>, IActivitiesService
     {
-        public IEnumerable<ActivitiesMaster> GetAllActivities(string locationKey)
-        {
-            return Channel.GetAllActivities(locationKey);
+        public ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent)
+        {            
+            return Channel.GetAllActivities(locationKey,activityKey,userAgent);
         }
 
         public IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName)
@@ -36,9 +37,9 @@ namespace MMC.Client.Proxies.Proxies
             return Channel.BookActivityForUserAsync(loginUser, activityKey, bookingDate, time, accountKey, adults, children);
         }
 
-        public Task<IEnumerable<ActivitiesMaster>> GetAllActivitiesAsync(string locationKey)
+        public Task<ActivityDetailsDataContract> GetAllActivitiesAsync(string locationKey, string activityKey, string userAgent)
         {
-            return Channel.GetAllActivitiesAsync(locationKey);
+            return Channel.GetAllActivitiesAsync(locationKey, activityKey, userAgent);
         }
 
         public Task<IEnumerable<ActivitiesMaster>> GetAllBookedActivitiesAsync(string loginName)

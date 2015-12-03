@@ -19,15 +19,15 @@ namespace MMC.Business.Managers
         protected string _LoginName;
         public ManagerBase()
         {
-            OperationContext context = OperationContext.Current;
-            if(context != null)
-            {
-                _LoginName = context.IncomingMessageHeaders.GetHeader<string>("String", "System");
-            }
-            if(!string.IsNullOrWhiteSpace(_LoginName))
-            {
-                _AuthorizationAccount = LoadAuthorizationValidationAccount(_LoginName);
-            }
+            //OperationContext context = OperationContext.Current;
+            //if(context != null)
+            //{
+            //    _LoginName = context.IncomingMessageHeaders.GetHeader<string>("String", "System");
+            //}
+            //if(!string.IsNullOrWhiteSpace(_LoginName))
+            //{
+            //    _AuthorizationAccount = LoadAuthorizationValidationAccount(_LoginName);
+            //}
         }
 
         protected virtual Account LoadAuthorizationValidationAccount(string loginName)
