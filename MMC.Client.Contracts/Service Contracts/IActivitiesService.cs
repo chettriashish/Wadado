@@ -21,10 +21,25 @@ namespace MMC.Client.Contracts
         [FaultContract(typeof(AuthorizationValidationException))]
         IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName);
         [OperationContract]
-        bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time);
+        bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time);        
+
+        ///TBD ONCE LOGIN IS COMPLETE
+        //[OperationContract]
+        //[TransactionFlow(TransactionFlowOption.Allowed)]
+        //ActivityBooking BookActivityForUser(string loginUser, ActivityBooking bookingDetails);
+
+        ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        ActivityBooking BookActivityForUser(string loginUser, string activityKey, DateTime bookingDate, string time, string accountKey, int adults, int children);              
+        ActivityBooking BookActivityForUser(ActivityBooking bookingDetails);
+
+        ///TBD ONCE LOGIN IS COMPLETE
+        //[OperationContract]
+        //IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string loginUser, string sessionKey);
+
+        ///TO BE REMOVED ONCE LOGIN IS COMPLETE
+        [OperationContract]
+        IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey); 
         #endregion
 
         #region Async Operations
@@ -34,8 +49,10 @@ namespace MMC.Client.Contracts
         Task<IEnumerable<ActivitiesMaster>> GetAllBookedActivitiesAsync(string loginName);
         [OperationContract]
         Task<bool> CheckForActivityAvailablityAsync(string activityKey, int adults, int children, DateTime bookingDate, string time);
-        [OperationContract]        
-        Task<ActivityBooking> BookActivityForUserAsync(string loginUser, string activityKey, DateTime bookingDate, string time, string accountKey, int adults, int children);        
+        [OperationContract]
+        Task<ActivityBooking> BookActivityForUserAsync(ActivityBooking bookingDetails);
+        Task<ActivityBooking> AddUserActivityToCart(ActivityDetailsDataContract activityDetails, int adults, 
+            int children, DateTime bookingDate, string time, decimal total);
         #endregion
     }
 }

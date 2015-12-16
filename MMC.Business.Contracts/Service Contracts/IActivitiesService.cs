@@ -21,8 +21,23 @@ namespace MMC.Business.Contracts
         IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName);
         [OperationContract]
         bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time);
+
+        ///TBD ONCE LOGIN IS COMPLETE
+        //[OperationContract]
+        //[TransactionFlow(TransactionFlowOption.Allowed)]
+        //ActivityBooking BookActivityForUser(string loginUser, ActivityBooking bookingDetails);
+
+        ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        ActivityBooking BookActivityForUser(string loginUser, string activityKey, DateTime bookingDate, string time, string accountKey, int adults, int children);
+        ActivityBooking BookActivityForUser(ActivityBooking bookingDetails);
+
+        ///TBD ONCE LOGIN IS COMPLETE
+        //[OperationContract]
+        //IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string loginUser, string sessionKey); 
+
+        ///TO BE REMOVED ONCE LOGIN IS COMPLETE
+        [OperationContract]
+        IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey); 
     }
 }

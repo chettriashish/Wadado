@@ -1030,7 +1030,7 @@ var $Jssor$ = window.$Jssor$ = new function () {
             elmt.style[transformProperty + "Origin"] = transformOrigin;
     };
 
-    _This.$CssScale = function (elmt, scale) {
+    _This.$CssScale = function (elmt, scale, width) {
 
         if (IsBrowserIE() && browserEngineVersion < 9 || (browserEngineVersion < 10 && IsBrowserIeQuirks())) {
             elmt.style.zoom = (scale == 1) ? "" : scale;
@@ -1045,8 +1045,7 @@ var $Jssor$ = window.$Jssor$ = new function () {
                 var oldTransformValue = elmt.style[transformProperty];
                 var scaleReg = new RegExp(/[\s]*scale\(.*?\)/g);
 
-                var newTransformValue = BuildNewCss(oldTransformValue, [scaleReg], transformValue);
-
+                var newTransformValue = BuildNewCss(oldTransformValue, [scaleReg], transformValue);                          
                 elmt.style[transformProperty] = newTransformValue;
             }
         }

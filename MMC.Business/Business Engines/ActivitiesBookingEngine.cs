@@ -156,7 +156,7 @@ namespace MMC.Business.BusinessEngines
                 throw new FaultException(ex.Message);
             }
         }
-        public ActivityBooking BookActivityForUser(string loginUser, string activityKey, DateTime bookingDate, string time, string accountKey, int adults, int children)
+        public ActivityBooking BookActivityForUser(ActivityBooking bookingDetails)
         {
             IActivitiesMasterRepository activitiesMasterRepository
                    = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
@@ -168,36 +168,25 @@ namespace MMC.Business.BusinessEngines
 
             IEnumerable<ActivityBooking> allBookedActivites = activityBookingRepository.Get();
 
-            if (bookingDate < DateTime.Now.Date)
+            if (bookingDetails.BookingDate < DateTime.Now.Date)
             {
-                throw new UnableToRentForDateException(string.Format("Cannot book activity for date {0} yet.", bookingDate.ToShortDateString()));
+                throw new UnableToRentForDateException(string.Format("Cannot book activity for date {0} yet.", bookingDetails.BookingDate.ToShortDateString()));
             }
-            bool isActivityAvailable = IsActivityAvailable(activityKey, bookingDate, time, allBookedActivites, adults, children, allActivities);
+            bool isActivityAvailable = IsActivityAvailable(bookingDetails.ActivityKey, bookingDetails.BookingDate, bookingDetails.Time, allBookedActivites,
+                bookingDetails.Participants, bookingDetails.ChildParticipants, allActivities);
 
-            IAccountRepository accountRepository
-                  = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+            ///TBD ONCE LOGIN IS IMPLEMENTED
+            //IAccountRepository accountRepository
+                  //= _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
-            Account authAccount = accountRepository.ValidateUserByLogin(loginUser);
+            //Account authAccount = accountRepository.ValidateUserByLogin(loginUser);
 
-            if (authAccount == null)
-            {
-                throw new NotFoundException(string.Format("No account found for login '{0}'.", loginUser));
-            }
+            //if (authAccount == null)
+            //{
+            //    throw new NotFoundException(string.Format("No account found for login '{0}'.", loginUser));
+            //}
 
-            ActivityBooking activityBooking = new ActivityBooking()
-            {
-                ActivityBookingKey = Guid.NewGuid().ToString(),
-                BookingDate = bookingDate,
-                Time = time,
-                CreatedBy = authAccount.Email,
-                CreatedDate = DateTime.Now,
-                Participants = adults,
-                IsDeleted = false,
-                ActivityKey = activityKey,
-                ChildParticipants = children,
-                SessionKey = accountKey
-            };
-            ActivityBooking savedActivity = activityBookingRepository.Add(activityBooking);
+            ActivityBooking savedActivity = activityBookingRepository.Add(bookingDetails);
             return savedActivity;
         }
     }

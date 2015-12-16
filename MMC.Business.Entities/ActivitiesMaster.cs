@@ -32,6 +32,8 @@ namespace MMC.Business.Entities
         [DataMember]
         public decimal Cost { get; set; }
         [DataMember]
+        public decimal CostForChild { get; set; }
+        [DataMember]
         public string Currency { get; set; }
         [DataMember]
         public string Address { get; set; }

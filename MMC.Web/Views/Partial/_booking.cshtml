@@ -1,15 +1,4 @@
-﻿<div>
-    <div class="book-activity">
-        <!--ROW START-->
-        <div class="row">
-            <div class="column-12">
-                <div class="buttonContainer">
-                    <input type="button" ng-click="loadSelectedDetails()" class="search-button" value="BOOK NOW" />
-                </div>
-            </div>
-        </div>
-        <!--ROW END-->
-    </div>
+﻿<div ng-if="showBookingDetails()">
     <div>
         <div class="book-calender">
             <!--ROW START-->
@@ -20,5 +9,81 @@
             </div>
             <!--ROW END-->
         </div>
-    </div>    
+    </div>
+    <!--ROW START-->
+    <div class="booking-wrapper">
+        <div class="row">
+            <div class="column-6">
+                <div class="num-left">
+                    <a ng-click="removeGuests('A')">-</a>
+                </div>
+            </div>
+            <div class="column-0">
+                <div class="label-input"><span>{{NumAdults}}</span></div>
+            </div>
+            <div class="column-4">
+                <div class="num-right">
+                    <a ng-click="addGuests('A')">+</a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <div class="booking">
+                    <div>
+                        <span>{{AdultCost}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-show="ShowChildren()">
+            <div class="row">
+                <div class="column-6">
+                    <div class="num-left">
+                        <a ng-click="removeGuests('C')">-</a>
+                    </div>
+                </div>
+                <div class="column-0">
+                    <div class="label-input"><span>{{NumChildren}}</span></div>
+                </div>
+                <div class="column-4">
+                    <div class="num-right">
+                        <a ng-click="addGuests('C')">+</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-12">
+                    <div class="booking">
+                        <div>
+                            <span>{{ChildCost}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+        <div class="row">
+            <div class="column-12">
+                <div class="error">
+                    <span>{{ErrorMessage}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <div class="booking">
+                    <div>
+                        <span>Total</span>
+                    </div>
+                    <div>
+                        <span>{{Total}}</span>
+                    </div>
+                    <div>
+                        <a>BOOK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ROW END-->
 </div>

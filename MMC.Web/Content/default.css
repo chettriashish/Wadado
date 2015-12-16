@@ -19,8 +19,13 @@ body {
     color: #494948;
 }
 
-
-
+@font-face {
+    font-family: 'Dooodleista';
+    src: url('Fonts/Dooodleista.eot');
+    src: url('Fonts/Dooodleista.eot?#iefix') format('embedded-opentype'), url('Fonts/Dooodleista.woff') format('woff'), url('Fonts/Dooodleista.ttf') format('truetype'), url('Fonts/Dooodleista.svg#Dooodleista') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /*-----COLOR BAR -----*/
 #colorbar {
@@ -72,6 +77,7 @@ nav div {
     float: left;
     width: 25%;
 }
+
 
     nav div span {
         font-size: .8em;
@@ -150,12 +156,13 @@ nav ul li:last-child a {
     color: #000;
 }
 
-    .uppercontent .row img, .uppercontent-home .row img {
+    .uppercontent .row img, .uppercontent-home . img {
         transform: scale(.8,.8);
     }
 
     .uppercontent .row span, .uppercontent .quote span {
         font-size: .8em;
+        padding: .1em 0;
     }
 
 .home-search-content {
@@ -173,7 +180,7 @@ nav ul li:last-child a {
 }
 /*-----COLUMNS -----*/
 .column-12, .column-9, .column-6, .column-4, .column-3, .column-2, .column-0 {
-    padding: .5em 2%;
+    padding: .3em 2%;
     float: left;
 }
 
@@ -210,6 +217,22 @@ nav ul li:last-child a {
     width: 16.6%;
 }
 
+.buttonNoBorder {
+    margin-top: -1em;
+}
+
+    .buttonNoBorder a {
+        height: auto;
+        font-size: .9em;
+        font-weight: 500;
+        padding: 0 .2em;
+        outline: none;
+        cursor: pointer;
+        color: rgba(251,189,19,1);
+        margin: 0 auto;
+        transition: 0.5s all;
+        border-radius: 5px;
+    }
 
 .button a {
     height: 1em;
@@ -223,6 +246,21 @@ nav ul li:last-child a {
     margin: 0 auto;
     transition: 0.5s all;
     border-radius: 5px;
+}
+
+.label {
+    height: 2em;
+    float: right;
+    font-size: 1.1em;
+    padding: .4em .5em;
+    font-weight: 500;
+    background-color: rgb(251,189,19);
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    margin: 0 auto;
+    transition: 0.5s all;
+    display: table;
 }
 
 
@@ -403,26 +441,29 @@ nav ul li:last-child a {
 .bestMonthsToVisitWrapper {
     display: table;
     margin: 0 auto;
-    width: 100%;
-    width: 100%;
+    width: 80%;
     color: #000;
-    padding: 0 .2em;
+    font-size: 1em;
+    padding: .2em 0;
 }
+
+    .bestMonthsToVisitWrapper .monthsSeperator {
+        width: auto;
+        padding: 0em .5em 0 0.5em;
+        float: none;
+        width: 100%;
+        margin: 0 auto;
+        display: inline-table;
+    }
 
     .bestMonthsToVisitWrapper .item {
         float: left;
-        border: 2px solid #ccc;
-        border-radius: 50%;
-        padding: .8em 2% 0 2%;
-        height: 3em;
-        width: 3em;
         text-align: center;
-        font-size: 0.9em;
         -moz-transition: .5s all;
-        margin: .1em .4em;
         -webkit-transition: .5s all;
         -o-transition: .5s all;
         transition: .5s all;
+        padding: .3em;
     }
 
 .caption {
@@ -430,7 +471,7 @@ nav ul li:last-child a {
     letter-spacing: 0.1em;
     font-size: medium;
     font-weight: 400;
-    padding: 2em 0 1em 0;
+    padding: 2em 0 0em 0;
     text-align: center;
 }
 
@@ -482,18 +523,19 @@ nav ul li:last-child a {
     width: 100%;
     text-align: center;
     color: #000;
-    font-size: x-large;
+    font-size: 3em;
     text-transform: uppercase;
-    font-weight: 300;
+    letter-spacing: 1px;
+    font-family: Dooodleista;
+    font-weight: 500;
     -moz-transition: .5s all;
     -webkit-transition: .5s all;
     -o-transition: .5s all;
     background-color: rgba(244,244,244,.8);
     border-bottom: 1px solid #ccc;
     transition: .5s all;
-    padding: .5em;
+    padding: .1em;
 }
-
 
 /*----- FOOTER -----*/
 #footerWrapper {
@@ -576,6 +618,27 @@ footer {
 .search-wrapper {
     margin: 2em auto;
 }
+
+.booking-wrapper {
+    visibility: collapse;
+    opacity: 0;
+    transition: 1s all;
+    float: none;
+    margin: 1em auto;
+    height: auto;
+}
+
+    .booking-wrapper.open {
+        visibility: visible;
+        opacity: 1;
+        transition: 1s all;
+    }
+
+/*.booking-wrapper .buttonDiv {
+        
+        margin: 0 auto;
+    }*/
+
 /*.mobile-search-cover {
     position: fixed;
     top: 0;
@@ -651,16 +714,8 @@ footer {
 }
 
 .search-activity, .book-activity, .book-calender {
-    visibility: hidden;
-    opacity: 0;
-    height: 0px;
     transition: 1s all ease-out;
 }
-
-    .search-activity.open, .book-activity.open, .book-calender.open {
-        visibility: visible;
-        opacity: 1;
-    }
 
 .search-button {
     margin: 1.5em auto;
@@ -670,8 +725,8 @@ footer {
         margin: 0 auto;
         height: 1em;
         font-size: .8em;
-        padding: .9em 1em;
-        background-color: rgb(0,0,0);
+        padding: .8em 1em;
+        background-color: rgb(251,189,19);
         outline: none;
         cursor: pointer;
         color: rgb(255,255,255);
@@ -685,7 +740,6 @@ footer {
             transition: 0.5s all;
         }*/
         .search-button a.focus {
-            background-color: rgb(204,204,204);
             transition: 0.5s all;
         }
 
@@ -708,12 +762,228 @@ footer {
     width: 100%;
     text-align: center;
     color: #000;
-    font-size: large;
     text-transform: uppercase;
+    font-family: Dooodleista;
+    font-size: 2em;
     letter-spacing: 1px;
-    font-weight: 300;
+    font-weight: 500;
     background-color: rgba(244,244,244,.8);
     border-bottom: 1px solid #ccc;
     transition: .5s all;
-    padding: .9em 0 .5em 0;
+    padding: .3em 0 .2em 0;
+}
+/***************ACTIVITY DETAIL**************/
+.header-left {
+    font-family: Dooodleista;
+    color: #000;
+    font-size: 3.5em;
+    text-transform: uppercase;
+    width: auto;
+    text-align: left;
+    font-weight: 500;
+    -moz-transition: .2s all;
+    -webkit-transition: .2s all;
+    -o-transition: .2s all;
+    transition: .2s all;
+    padding: 0em .2em;
+}
+
+    .header-left span {
+        padding: .1em 0;
+    }
+
+        .header-left span:first-of-type {
+            border-bottom: 4px solid #fbbd13;
+        }
+
+.location-icon {
+    top: 0;
+}
+
+.location-details {
+    padding: .2em 0;
+    text-indent: -1%;
+    transition: .5s all;
+    font-size: 1em;
+}
+
+.location-detailsSpace {
+    padding: .2em 0;
+    text-indent: .5em;
+    transition: .5s all;
+    font-size: 1em;
+}
+
+.subHeader, .subHeaderRight, .subHeaderCenter {
+    padding: .1em 0;
+    font-size: 1.25em;
+    font-weight: 600;
+    text-align: left;
+}
+
+.subHeaderCenter {
+    text-align: center;
+}
+
+.subHeaderRight {
+    text-align: right;
+}
+
+.rating {
+    padding: 0 .2em;
+    width: 80%;
+    margin: -1em auto auto auto;
+    float: none;
+    text-align: center;
+    display: table;
+}
+
+    .rating div:first-of-type {
+        float: none;
+    }
+
+    .rating div {
+        float: left;
+        padding: .1em 0;
+    }
+
+.crop-height {
+    /* max-width: 1200px; /* native or declared width of img src (if known) */
+    max-height: 200px;
+    height: 200px; /* lt ie8 */
+    height: auto;
+    overflow: hidden;
+}
+
+    img.scale, object.scale, .crop-height img {
+        display: block; /* corrects small inline gap at bottom of containing div */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        width: auto\9; /* ie8+9 */
+        /* lt ie8 */
+        -ms-interpolation-mode: bicubic;
+        background-position: top center;
+        /* force a minimum size if img src size is known */
+        /* min-height: 320px; /* max-height of .crop-height */
+        /* min-width: 480px; /* consistent with image ratio */
+        /* optionally center if img src is not as wide as div */
+        /* margin: 0 auto; */
+    }
+
+.rating-outer {
+    display: table;
+    background-color: #ccc;
+    width: 100%;
+}
+
+.num-left {
+    float: right;
+    margin-right: 0.5em;
+}
+
+.num-right {
+    float: left;
+    margin-left: -1em;
+}
+
+    .num-left a, .num-right a {
+        background-color: rgb(204,204,204);
+        font-size: 1em;
+        padding: .5em 1em;
+        display: table;
+        width: 2em;
+        height: 1.5em;
+        outline: none;
+        font-weight: 700;
+        margin: 0 .5em;
+        cursor: pointer;
+        color: rgb(0,0,0);
+        transition: 0.5s all;
+    }
+
+
+        .num-left a:after, .num-right a:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+.label-input {
+    padding: .5em 0 0 0;
+    float: left;
+    font-weight: 600;
+    margin-left: -.6em;
+    text-align: left;
+    outline: none;
+    cursor: pointer;
+    color: #000;
+    transition: 0.5s all;
+}
+
+    .label-input:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+
+.booking {
+    margin: .2em auto .5em auto;
+    float: none;
+    display: table;
+}
+
+    .booking div:first-of-type {
+        transition: margin .2s linear;
+        margin: 0em auto;
+        text-align: center;
+    }
+
+    .booking div {
+        margin: 1em auto;
+        text-align: center;
+        position: relative;
+    }
+
+    .booking a {
+        margin: 0 auto;
+        height: 1em;
+        font-size: .8em;
+        padding: .8em 2em;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: rgb(255,255,255);
+        margin: 0 auto;
+        transition: 0.5s all;
+        text-transform: uppercase;
+    }
+
+.socialButtons {
+    margin: .2em auto .5em auto;
+    float: none;
+    display: table;
+}
+
+    .socialButtons a {
+        margin: 0 auto;
+        height: 1em;                
+        font-size: .8em;
+        padding: .8em 2em;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: rgb(255,255,255);
+        margin: 0 auto;
+        transition: 0.5s all;
+        text-transform: uppercase;
+    }
+
+.error {
+    font-size: .8em;
+    color: red;
+}
+
+[ng\:cloak], [ng-cloak], .ng-cloak {
+    display: none !important;
 }

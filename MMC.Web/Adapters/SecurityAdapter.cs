@@ -12,7 +12,7 @@ namespace MMC.Web.Adapters
         public void Initialize()
         {
             if (!WebSecurity.Initialized)
-                WebSecurity.InitializeDatabaseConnection("main", "Account", "AccountId", "LoginEmail", autoCreateTables: true);
+                WebSecurity.InitializeDatabaseConnection("monkeycapEntities", "Account", "AccountId", "LoginEmail", autoCreateTables: true);
         }
 
         public void Register(string loginEmail, string password, object propertyValues)

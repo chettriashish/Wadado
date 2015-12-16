@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "WADADO.IN";
+}
+<!--SLIDER REFERENCE-->
+<script src="~/Scripts/slider/jssor.js"></script>
+<script src="~/Scripts/slider/jssor.slider.js"></script>
+<script src="~/Scripts/slider/slider.js"></script>
+
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+<script src="~/Scripts/Activities/services/ActivityDataService.js"></script>
+<script src="~/Scripts/Activities/controllers/ActivityController.js"></script>
+<link href="~/Content/phone.css" rel="stylesheet" />
+
+<div id="colorbar">
+</div>
+<div class="cover"></div>
+<div id="contentWrapper" data-ng-controller="ActivityController">
+    <div>
+        @Html.Partial("../Partial/_search")
+    </div>
+    <div>
+        <div id="navWrapper">
+            <nav>
+                <div class="clearfix primary-nav">
+                    <div>
+                        <div class="menusearch-input">
+                            <div><img src="~/Images/Icons/search-icon.png" /></div>
+                            <div><span>{{selectedLocation}}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="clearfix menu-nav">
+                    <li class="active" id="portfolio"><a href="#">Sign Up</a></li>
+                    <li id="services"><a href="#">Login</a></li>
+                    <li id="careers"><a href="#">About Us</a></li>
+                    <li id="contact"><a href="#">FAQs</a></li>
+                </ul>
+                <button class="logo-button">Logo Button</button>
+                <button class="nav-button">Toggle Button</button>
+            </nav>
+        </div>
+    </div>
+</div>

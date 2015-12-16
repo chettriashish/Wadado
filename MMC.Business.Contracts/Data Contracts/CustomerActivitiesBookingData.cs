@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MMC.Business.Contracts.DataContracts
 {
-    [DataContract]
+    [DataContract(Namespace = "wadado.in")]
     public class CustomerActivitiesBookingData:DataContractBase
     {
         [DataMember]
@@ -21,6 +21,9 @@ namespace MMC.Business.Contracts.DataContracts
         public DateTime BookingDate { get; set; }
         [DataMember]
         public string BookingTime { get; set; }
+        [DataMember]
+        public string SessionKey { get; set; }
+
         [DataMember]
         public decimal BookingCost { get; set; }
         [DataMember]

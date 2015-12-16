@@ -12,6 +12,8 @@ namespace MMC.Business.Contracts.DataContracts
     public class ActivityDetailsDataContract:DataContractBase
     {
         [DataMember]
+        public string ActivityKey { get; set; }
+        [DataMember]
         public string Name { get; set; }
         [DataMember]
         public string Location { get; set; }
@@ -20,15 +22,23 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public string Description { get; set; }
         [DataMember]
+        public string Duration { get; set; }
+        [DataMember]
         public int NumAdults { get; set; }
         [DataMember]
         public int NumChildren { get; set; }
+        [DataMember]
+        public int MinPeople { get; set; }
+        [DataMember]
+        public int MaxPeople { get; set; }
         [DataMember]
         public string DefaultImageURL { get; set; }
         [DataMember]
         public string ImageURL { get; set; }
         [DataMember]
         public List<string> ActivityImages { get; set; }
+        [DataMember]
+        public List<string> ActivityImagesURL { get; set; }
         [DataMember]
         public bool PermitRequired { get; set; }
         [DataMember]
@@ -40,9 +50,13 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public decimal DifficultyRating { get; set; }
         [DataMember]
+        public string DifficultyLevel { get; set; }
+        [DataMember]
         public string CancellationPolicy { get; set; }
         [DataMember]
         public decimal Cost { get; set; }
+        [DataMember]
+        public decimal CostForChild { get; set; }
         [DataMember]
         public string Currency { get; set; }
         [DataMember]
@@ -54,6 +68,6 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public List<int> AllActivityDates { get; set; }
         [DataMember]
-        public List<string> Reviews { get; set; }
+        public IDictionary<string,string> Reviews { get; set; }
     }
 }

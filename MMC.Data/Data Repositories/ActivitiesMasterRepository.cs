@@ -59,7 +59,7 @@ namespace MMC.Data.DataRepositories
         {
             ActivityDetailsDataContract result = new ActivityDetailsDataContract();
             using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
-            {                
+            {
                 //fetching all details for selected activity
                 ActivitiesMaster activity = Get().Where(entity => entity.ActivitesKey == activityKey
                     && entity.LocationKey == locationKey)
@@ -91,15 +91,19 @@ namespace MMC.Data.DataRepositories
                 result.ActivityLocation = activity.ActivityLocation;
                 result.DistanceFromNearestCity = activity.DistanceFromNearestCity;
                 result.NumAdults = activity.NumAdults;
+                result.CostForChild = activity.CostForChild;
                 result.NumChildren = activity.NumChildren;
                 result.PermitRequired = activity.IsPermitRequired;
+                result.MinPeople = activity.MinAdults;
+                result.MaxPeople = activity.MaxAdults;
                 result.Name = activity.Name;
+                result.Duration = activity.Duration;
                 result.UserRating = activity.AverageUserRating;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
-
+                result.ActivityKey = activity.ActivitesKey;
                 foreach (var item in activityImages)
                 {
-                    if (userAgent == "smartphone")
+                    if (userAgent == RepositoryResource.SMARTPHONE)
                     {
                         if (!item.IsThumbnail)
                         {
@@ -111,7 +115,7 @@ namespace MMC.Data.DataRepositories
                         }
 
                     }
-                    else if(userAgent == "tablet")
+                    else if (userAgent == RepositoryResource.TABLET)
                     {
                         if (!item.IsThumbnail)
                         {
@@ -138,9 +142,11 @@ namespace MMC.Data.DataRepositories
                         result.DefaultImageURL = item.ImageURL;
                     }
                 }
-                
-                result.ActivityImages = activityImages.Select(entity => entity.ImageURL).ToList();
+
+                result.ActivityImages = activityImages.Where(entity => entity.IsThumbnail == false).Select(entity => entity.ImageURL).ToList();
+                result.ActivityImagesURL = activityImages.Where(entity => entity.IsThumbnail == false).Select(entity => entity.ImageURL).ToList();
                 result.ImageURL = result.DefaultImageURL;
+                result.DifficultyLevel = GetDifficultyLevel(result.DifficultyRating);
                 result.AllActivityDates = ConvertDays(activityDayScheduler);
                 return result;
             }
@@ -178,6 +184,19 @@ namespace MMC.Data.DataRepositories
                 result.Add(0);
             }
             return result;
+        }
+
+        private string GetDifficultyLevel(decimal difficultyRating)
+        {
+            switch (Convert.ToInt32(difficultyRating))
+            {
+                case 1:
+                case 2: return RepositoryResource.EASY;
+                case 3: return RepositoryResource.MEDIUM;
+                case 4: return RepositoryResource.HARD;
+                case 5: return RepositoryResource.EXTREME;
+                default: return RepositoryResource.MEDIUM;
+            }
         }
 
         public void AddActivityToUserItenerary(string activityKey, string activityDate, int numberOfPeople, string activityTime)

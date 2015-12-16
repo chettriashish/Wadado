@@ -2609,7 +2609,8 @@ new function () {
             });
 
             _ScaleRatio = dimension / (isHeight ? $Jssor$.$CssHeight : $Jssor$.$CssWidth)(_ScaleWrapper);
-            $Jssor$.$CssScale(_ScaleWrapper, _ScaleRatio);
+            /******************SETTING WIDTH IN jssor.js*********************/
+            $Jssor$.$CssScale(_ScaleWrapper,_ScaleRatio, dimension);
             if (WURFL.is_mobile) {
                 if (WURFL.form_factor == "Smartphone") {
                     scaleWidth = dimension;
@@ -2628,7 +2629,7 @@ new function () {
 
             $Jssor$.$Each(_Navigators, function (navigator) {
                 navigator.$Relocate(scaleWidth, scaleHeight);
-            });
+            });           
         }
 
         _SelfSlider.$ScaleHeight = _SelfSlider.$GetScaleHeight = function (height) {
@@ -2637,13 +2638,13 @@ new function () {
             ///		instance.$ScaleHeight( dimension );   //Scale the slider to new height and keep aspect ratio.
             ///	</summary>
 
-            if (height == undefined)
-                return $Jssor$.$CssHeight(elmt);
+            //if (height == undefined)
+            //    return $Jssor$.$CssHeight(elmt);
 
-            Scale(height, true);
+           // Scale(height, true);
         };
 
-        _SelfSlider.$ScaleWidth = _SelfSlider.$SetScaleWidth = _SelfSlider.$GetScaleWidth = Scale;
+        _SelfSlider.$ScaleWidth = _SelfSlider.$SetScaleWidth = _SelfSlider.$GetScaleWidth = Scale;        
 
         _SelfSlider.$GetVirtualIndex = function (index) {
             var parkingIndex = Math.ceil(GetRealIndex(_ParkingPosition / _StepLength));

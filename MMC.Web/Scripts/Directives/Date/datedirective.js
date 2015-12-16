@@ -8,11 +8,19 @@
                 $(function () {
                     element.datepicker({
                         dateFormat: 'dd/mm/yy',
-                        minDate:0,
+                        minDate: 0,
+                        maxDate: 180,
                         onSelect: function (date) {
-                            scope.$apply(function () {
-                                ngModelCtrl.$setViewValue(date);
-                            });
+                            scope.dateSelected(date);
+                        },
+                        beforeShowDay: function (day) {
+                            var setday = day.getDay();
+                            if ($.inArray(setday, scope.selectedActivityDetails.AllActivityDates) != -1) {
+                                return [true];
+                            }
+                            else {
+                                return [false];
+                            }
                         }
                     });
                 });

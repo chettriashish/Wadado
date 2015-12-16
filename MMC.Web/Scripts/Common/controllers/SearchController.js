@@ -4,13 +4,10 @@
         $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';
         /***************************LOADING SELECTED LOCATIONS ACTIVITY LIST *************************/
         $scope.loadSelectedLocationDetails = function (item, model) {
-            $scope.locationName = item.LocationName;            
-            $(".search-button").addClass("focus");                        
+            $scope.locationName = item.LocationName;                               
             SearchDataService.getAllActivitiesForLocation($scope.locationName).then(function (activities) {
                 $scope.activities = activities;
-                $scope.selectionInformation = "VIEW ALL\t\t" + $scope.activities.length + "\t\tACTIVITIES";                
-                $(".search-button").removeClass("focus");
-                
+                $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\tACTIVITIES";  
             });
         };
         /*END LOADING SELECTED LOCATIONS ACTIVITY LIST*/

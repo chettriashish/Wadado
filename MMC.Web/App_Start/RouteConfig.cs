@@ -13,6 +13,8 @@ namespace MMC.Web
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
             // /Getting details of selected location
             routes.MapRoute("GetSelectedLocation",
                 "location/GetSelectedLocation",

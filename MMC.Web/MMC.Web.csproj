@@ -89,6 +89,9 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="Facebook">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+    </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>..\packages\SharpZipLib.JetBrains.Stripped.0.86.20150204.1\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
@@ -115,6 +118,15 @@
     </Reference>
     <Reference Include="Microsoft.Deployment.WindowsInstaller">
       <HintPath>..\packages\JetBrains.Platform.Lib.Microsoft.Deployment.WindowsInstaller.2.0.20140821.0\lib\Microsoft.Deployment.WindowsInstaller.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -300,10 +312,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WurflConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Account\AccountController.cs" />
+    <Compile Include="Controllers\ActivitiesCart\ActivitiesCartController.cs" />
     <Compile Include="Controllers\Activities\ActivitiesController.cs" />
     <Compile Include="Controllers\ActivityDetails\ActivityDetailsController.cs" />
     <Compile Include="Controllers\BaseViewController.cs" />
+    <Compile Include="Controllers\Booking\BookingController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Location\LocationController.cs" />
     <Compile Include="Controllers\Search\SearchController.cs" />
@@ -328,6 +342,7 @@
     <Content Include="Content\desktop.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\default.css" />
+    <Content Include="Content\Fonts\Dooodleista.svg" />
     <Content Include="Content\jquery-ui-1.10.1.css" />
     <Content Include="Content\phone.css" />
     <Content Include="Content\reset.css" />
@@ -397,7 +412,9 @@
     <Content Include="Images\Icons\NightLife.png" />
     <Content Include="Images\Icons\offer_icon_mobile.png" />
     <Content Include="Images\Icons\offer_icon_web.png" />
+    <Content Include="Images\Icons\people_web.png" />
     <Content Include="Images\Icons\select2.png" />
+    <Content Include="Images\Icons\time_duration_web.png" />
     <Content Include="Images\Icons\twitter_icon_mobile.png" />
     <Content Include="Images\Icons\twitter_icon_web.png" />
     <Content Include="Images\Icons\wadado_m.png" />
@@ -444,8 +461,11 @@
     <Content Include="Scripts\angular.min.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\clickoutside.directive.js" />
+    <Content Include="Scripts\Common\controllers\BookingController.js" />
     <Content Include="Scripts\Common\controllers\SearchController.js" />
+    <Content Include="Scripts\Common\services\BookingDataService.js" />
     <Content Include="Scripts\Common\services\SearchDataService.js" />
+    <Content Include="Scripts\Directives\Booking\bookingdirective.js" />
     <Content Include="Scripts\Directives\Date\datedirective.js" />
     <Content Include="Scripts\Home\controllers\HomeController.js" />
     <Content Include="Scripts\Home\directives\HomeDirective.js" />
@@ -1203,6 +1223,9 @@
     <Content Include="Scripts\angular-ui\ui-select\uisRepeatParserService.js" />
     <Content Include="Scripts\Location\controllers\LocationController.js" />
     <Content Include="Scripts\Location\services\LocationDataService.js" />
+    <Content Include="Scripts\Login\controllers\LoginController.js" />
+    <Content Include="Scripts\Login\Model\AccountLoginModel.js" />
+    <Content Include="Scripts\Login\services\LoginDataService.js" />
     <Content Include="Scripts\slider\jssor.js" />
     <Content Include="Scripts\slider\jssor.slider.js" />
     <Content Include="Scripts\slider\slider.js" />
@@ -1220,6 +1243,11 @@
     <Content Include="App_Readme\WURFL-v.1.6.1.0.chm" />
     <Content Include="App_Readme\WURFL Quick Guide_v1_5.pdf" />
     <Content Include="App_Data\wurfl-latest.zip" />
+    <Content Include="Content\Fonts\Dooodleista.eot" />
+    <Content Include="Content\Fonts\Dooodleista.otf" />
+    <Content Include="Content\Fonts\Dooodleista.ttf" />
+    <Content Include="Content\Fonts\Dooodleista.woff" />
+    <Content Include="Content\Fonts\Dooodleista.woff2" />
     <None Include="Properties\PublishProfiles\wadado.pubxml" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
@@ -1251,7 +1279,7 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Home\Index.smartphone.cshtml" />
     <Content Include="Views\Home\Index.tablet.cshtml" />
     <Content Include="Views\Home\Index.legacy.cshtml" />
@@ -1285,13 +1313,19 @@
     <Content Include="Views\ActivityDetails\Index.tablet.cshtml" />
     <Content Include="Views\ActivityDetails\Index.legacy.cshtml" />
     <Content Include="Views\ActivityDetails\Index.smartphone.cshtml" />
+    <Content Include="Views\Account\Index.legacy.cshtml" />
+    <Content Include="Views\Account\Index.smartphone.cshtml" />
+    <Content Include="Views\Account\Index.tablet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\Activities\directives\" />
     <Folder Include="Scripts\ActivityDetails\directives\" />
     <Folder Include="Scripts\Location\directives\" />
+    <Folder Include="Scripts\Login\directives\" />
     <Folder Include="Templates\" />
+    <Folder Include="Views\ActivitiesCart\" />
     <Folder Include="Views\BaseView\" />
+    <Folder Include="Views\Booking\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>

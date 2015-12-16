@@ -92,7 +92,7 @@
                         }
                     }
                 });
-            }
+            }          
         };
 
         HomeDataService.getTopOffers().then(function (topOffer) {
@@ -112,7 +112,7 @@
             setCarasoulImages();
             $scope.$apply();
         });
-
+        
         $(window).load(function () {
             setTimeout(function () {
                 HomeDataService.setSlider();

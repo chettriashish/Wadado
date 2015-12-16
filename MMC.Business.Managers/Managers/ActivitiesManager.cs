@@ -29,9 +29,7 @@ namespace MMC.Business.Managers
             _BusinessEngineFactory = businessEngineFactory;
             ObjectBase.Container = Bootstrapper.Bootstrapper.Initialise();
         }
-
-        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]
+       
         public ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -43,8 +41,8 @@ namespace MMC.Business.Managers
                 return allActivitiesForLocation;
             });
         }
-        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
+        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
         public IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName)
         {            
             return ExecuteFaultHandledOperation(() =>
@@ -86,8 +84,8 @@ namespace MMC.Business.Managers
 
             return authAccount;
         }
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
+        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
+        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
         public bool CheckForActivityAvailablity(string activityKey, int adults,int children, DateTime bookingDate, string time)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -109,18 +107,37 @@ namespace MMC.Business.Managers
             });
         }
 
-        [OperationBehavior(TransactionScopeRequired = true)]
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]  
-        public ActivityBooking BookActivityForUser(string loginUser, string activityKey, DateTime bookingDate, string time, string accountKey, int adults, int children)
+        ///TBD ONCE LOGIN IS CREATED
+        //[OperationBehavior(TransactionScopeRequired = true)]
+        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
+        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]  
+        //public ActivityBooking BookActivityForUser(string loginUser, ActivityBooking bookingDetails)
+        //{
+        //    return ExecuteFaultHandledOperation(() =>
+        //    {
+        //        IActivitiesBookingEngine activitiesBookingEngine
+        //          = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
+
+        //        return activitiesBookingEngine.BookActivityForUser(loginUser, bookingDetails);
+        //    });
+        //}
+
+        [OperationBehavior(TransactionScopeRequired = true)]      
+        public ActivityBooking BookActivityForUser(ActivityBooking bookingDetails)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IActivitiesBookingEngine activitiesBookingEngine
                   = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
 
-                return activitiesBookingEngine.BookActivityForUser(loginUser, activityKey, bookingDate, time, accountKey, adults, children);
+                return activitiesBookingEngine.BookActivityForUser(bookingDetails);
             });
+        }
+
+
+        public IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey)
+        {
+            throw new NotImplementedException();
         }
     }
 }

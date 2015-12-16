@@ -49,10 +49,17 @@
         top: 7em;
     }
 
-    .bestMonthsToVisitWrapper .item {
-        padding: .8em 1.5% 0 1.5%;
-        margin: 0 .9em;
+    .bestMonthsToVisitWrapper, .bestMonthsToVisitLowerWrapper {
+        width: 70%;
     }
+
+        .bestMonthsToVisitWrapper .monthsSeperator {
+            margin: 0 auto;
+        }
+
+        .bestMonthsToVisitWrapper .item {
+            padding: .6em;
+        }        
 
     /*------RIGHT ARROW*/
     .hairline-down-arrow {
@@ -78,5 +85,23 @@
 
     .search-wrapper {
         margin: 2em auto;
+    }
+
+    .location-details {
+        padding: 0 .2em;
+        text-indent: -2%;
+        font-size: 1.2em;
+    }
+
+    .rating {
+        padding: 0 .2em;
+        width: 65%;
+        float: none;
+        text-align: center;
+        display: table;
+    }
+
+    .label-input {
+        margin-left: -.8em;
     }
 }

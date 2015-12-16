@@ -22,6 +22,14 @@ namespace MMC.Client.Entities
         private DateTime _CreatedDate;
         private string _CreatedBy;
         private bool _IsDeleted;
+        private bool _IsConfirmed;
+        private bool _IsPaymentComplete;
+        private DateTime _ConfirmationDate;
+        private string _ConfirmedBy;
+        private decimal _PaymentAmount;
+        private bool _IsCancelled;
+        private decimal _RefundAmount;
+        private string _BookingNumber;
         #endregion
 
         #region Properties
@@ -101,7 +109,7 @@ namespace MMC.Client.Entities
                 _ChildParticipants = value;
                 OnPropertyChanged(() => ChildParticipants);
             }
-        }       
+        }
 
         public bool IsDeleted
         {
@@ -131,7 +139,88 @@ namespace MMC.Client.Entities
                 _CreatedBy = value;
                 OnPropertyChanged(() => CreatedBy);
             }
+        }      
+
+        public bool IsConfirmed
+        {
+            get { return _IsConfirmed; }
+            set
+            {
+                _IsConfirmed = value;
+                OnPropertyChanged(() => IsConfirmed);
+            }
+        }        
+
+        public bool IsPaymentComplete
+        {
+            get { return _IsPaymentComplete; }
+            set
+            {
+                _IsPaymentComplete = value;
+                OnPropertyChanged(() => IsPaymentComplete);
+            }
         }
+        
+        public DateTime ConfirmationDate
+        {
+            get { return _ConfirmationDate; }
+            set
+            {
+                _ConfirmationDate = value;
+                OnPropertyChanged(() => ConfirmationDate);
+            }
+        }
+
+
+        public string ConfirmedBy
+        {
+            get { return _ConfirmedBy; }
+            set
+            {
+                _ConfirmedBy = value;
+                OnPropertyChanged(() => ConfirmedBy);
+            }
+        }
+        
+        public decimal PaymentAmount
+        {
+            get { return _PaymentAmount; }
+            set
+            {
+                _PaymentAmount = value;
+                OnPropertyChanged(() => PaymentAmount);
+            }
+        }        
+        public bool IsCancelled
+        {
+            get { return _IsCancelled; }
+            set
+            {
+                _IsCancelled = value;
+                OnPropertyChanged(() => IsCancelled);
+            }
+        }        
+        public decimal RefundAmount
+        {
+            get { return _RefundAmount; }
+            set
+            {
+                _RefundAmount = value;
+                OnPropertyChanged(() => RefundAmount);
+            }
+        }        
+
+        public string BookingNumber
+        {
+            get { return _BookingNumber; }
+            set
+            {
+                _BookingNumber = value;
+                OnPropertyChanged(() => BookingNumber);
+            }
+        }
+
+
         #endregion
         class ActivityBookingValidator : AbstractValidator<ActivityBooking>
         {

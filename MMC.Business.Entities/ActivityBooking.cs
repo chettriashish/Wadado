@@ -9,10 +9,9 @@ using System.Threading.Tasks;
 
 namespace MMC.Business.Entities
 {
-    [DataContract]
+    [DataContract(Namespace="wadado.in")]
     public class ActivityBooking : EntityBase, IIdentifiableEntity
-    {       
-
+    {
         #region Properties
         [DataMember]
         public string ActivityBookingKey { get; set; }
@@ -36,6 +35,22 @@ namespace MMC.Business.Entities
         public DateTime CreatedDate { get; set; }
         [DataMember]
         public string CreatedBy { get; set; }
+        [DataMember]
+        public bool IsConfirmed { get; set; }
+        [DataMember]
+        public bool IsPaymentComplete { get; set; }
+        [DataMember]
+        public DateTime ConfirmationDate { get; set; }
+        [DataMember]
+        public string ConfirmedBy { get; set; }
+        [DataMember]
+        public decimal PaymentAmount { get; set; }
+        [DataMember]
+        public bool IsCancelled { get; set; }
+        [DataMember]
+        public decimal RefundAmount { get; set; }
+        [DataMember]
+        public string BookingNumber { get; set; }
         #endregion
 
         [DataMember]

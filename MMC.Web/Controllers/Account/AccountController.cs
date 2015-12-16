@@ -17,7 +17,8 @@ namespace MMC.Web.Controllers
         }
 
         [HttpGet]        
-        public ActionResult Login(string returnUrl)
+        [Route("login")]
+        public ActionResult Index(string returnUrl)
         {
             _securityAdapter.Initialize();
             return View(new AccountLoginModel() {ReturnUrl = returnUrl });

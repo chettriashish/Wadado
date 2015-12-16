@@ -17,6 +17,7 @@ namespace MMC.Client.Entities
         private string _name;
         private string _description;
         private decimal _cost;
+        private decimal _costForChild;
         private string _address;
         private string _duration;
         private string _additionalFeatures;
@@ -112,6 +113,16 @@ namespace MMC.Client.Entities
                     _cost = value;
                     OnPropertyChanged(() => Cost);
                 }
+            }
+        }       
+
+        public decimal CostForChild
+        {
+            get { return _costForChild; }
+            set
+            {
+                _costForChild = value;
+                OnPropertyChanged(() => CostForChild);
             }
         }
 
@@ -375,7 +386,7 @@ namespace MMC.Client.Entities
                 _distanceFromNearestCity = value;
                 OnPropertyChanged(() => DistanceFromNearestCity);
             }
-        }        
+        }
 
         public decimal AverageUserRating
         {

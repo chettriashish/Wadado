@@ -34,7 +34,7 @@
                             <div><img src="~/Images/Icons/search-icon.png" /></div>
                             <div><span>{{location.SelectedLocation.LocationName}}</span></div>
                         </div>
-                    </div>                    
+                    </div>
                 </div>
                 <ul class="clearfix menu-nav">
                     <li class="active" id="portfolio"><a href="#">Sign Up</a></li>
@@ -67,17 +67,19 @@
                 <div class="row">
                     <div class="column-12">
                         <div class="bestMonthsToVisitWrapper">
-                            <div ng-repeat="item in location.BestMonthsToVisit">
-                                <div>
-                                    <div class="item">
-                                        <span>{{item}}</span>
+                            <div class="monthsSeperator">
+                                <div ng-repeat="item in location.BestMonthsToVisit">
+                                    <div>
+                                        <div class="item">
+                                            <span>{{item}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--Row end-->
                 </div>
-                <!--Row end-->
             </div>
         </section>
         <!--Row start-->

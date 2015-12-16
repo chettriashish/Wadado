@@ -7,6 +7,14 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     @*@Styles.Render("~/Content/themes/base/css")*@
+    <script>
+        window.Wadado = {};
+        (function (wdo) {
+            var rootPath;
+            wdo.rootPath = rootPath;
+        }(window.Wadado));
+        Wadado.rootPath = '@Url.Content("~")';
+    </script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
@@ -14,6 +22,7 @@
     @Scripts.Render("~/bundles/modernizr")
 
     <script type='text/javascript' src="//wurfl.io/wurfl.js"></script>
+
     <!-- *************** LOAD THE GOOGLE FONT ****************** -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-url-parser/2.3.1/purl.min.js" type="text/javascript"></script>
@@ -35,6 +44,15 @@
 </head>
 <body>
     <div id="body">
+        <div id="fb-root"></div>
+        <script>
+            (function (d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.5&appId=963933207007150";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
         <section>
             @RenderBody()
         </section>
@@ -50,13 +68,6 @@
 
     <!-- *************** SCRIPT TO MAKE THE MOBILE NAV EXPAND DOWN ****************** -->
     <script>
-        window.wadado = {};
-        (function (cr) {
-            var rootPath;
-            cr.rootPath = rootPath;
-        }(window.wadado));
-        wadado.rootPath = '@Url.Content("~")';
-
         $(document).ready(function () {
             $(".location-button").click(function () {
                 $(".location-button,.primary-nav").toggleClass("open");
@@ -74,7 +85,7 @@
             });
             $(".logo-button").click(function () {
                 window.location.href = "http://www.thefigtree.in";
-            });              
+            });
         });
     </script>
 </body>
