@@ -1,0 +1,72 @@
+﻿(function () {
+    var app = angular.module("appMain");
+
+    var loginController = function ($scope, $http, $timeout, $interval, $location, LoginDataService) {
+        $scope.accountModel = new Wadado.AccountLoginModel();
+        $scope.returnUrl = '';
+        $scope.UserName = null;
+        $scope.LoginStatus = "Login";
+        var statusChangeCallback = function (response) {
+            // The response object is returned with a status field that lets the
+            // app know the current login status of the person.
+            // Full docs on the response object can be found in the documentation
+            // for FB.getLoginStatus().
+            if (response.status === 'connected') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+
+        var logUserInformation = function (userName, userInfo, mail) {
+            LoginDataService.logUserSession().then(function (response) {
+                LoginDataService.saveUserDetails(userName, userInfo, mail).then(function (response) {
+                    $scope.LoginStatus = "Logout";
+                    $scope.UserName = "Welcome - " + response.Name;
+                });
+            });
+        }
+
+        var checkLoginState = function () {
+            FB.getLoginStatus(function (response) {
+                statusChangeCallback(response);
+                if (response.status != 'connected') {
+                    FB.login(function (response) {
+                        if (response.authResponse) {
+                            FB.api('/me', function (response) {
+                                console.log(response);
+                                logUserInformation(response.name, response.id, response.mail);
+                            });
+                        }
+                    });
+                }
+                else {
+                    FB.api('/me', function (response) {
+                        logUserInformation(response.name, response.id, response.mail);
+                    });
+                }
+            });
+        }
+
+        var checkUserApplicationLogin = function () {
+            LoginDataService.getGuestInformation().then(function (response) {
+                if (response.GuestKey != null) {
+                    $scope.LoginStatus = "Logout";
+                    $scope.UserName = "Welcome - " + response.Name;
+                }
+            });
+        }
+        checkUserApplicationLogin();
+        $scope.FBLogin = function () {
+            checkLoginState();
+        };
+
+        $scope.continueAsGuest = function () {
+            //TBD CALL SERVICE AND ACTIVITY TO CART 
+            //LET USER KNOW THAT ACTIVITY HAS BEEN ADDED TO CART
+            //NO NEED FOR USER TO BE AUTHENTICATED
+        };
+    }
+    app.controller("LoginController", loginController);
+}());

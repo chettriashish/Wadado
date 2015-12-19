@@ -32,12 +32,12 @@ namespace MMC.Business.BusinessEngines
         {
             bool available = true;
 
-            ActivityBooking bookings = bookedActivites.Where(item => item.ActivityKey == activityKey).FirstOrDefault();
-            if (bookings != null && (
-                (bookingDate == bookings.BookingDate && bookingTime == bookings.Time)))
-            {
-                available = false;
-            }
+            //ActivityBooking bookings = bookedActivites.Where(item => item.ActivityKey == activityKey && item.BookingDate == bookingDate);
+            //if (bookings != null && (
+            //    (bookingDate == bookings.BookingDate && bookingTime == bookings.Time)))
+            //{
+            //    available = false;
+            //}
             if (available)
             {
                 ///Getting total number of participants that have already 
@@ -188,6 +188,20 @@ namespace MMC.Business.BusinessEngines
 
             ActivityBooking savedActivity = activityBookingRepository.Add(bookingDetails);
             return savedActivity;
+        }
+
+
+        public void UpdateActivityForUser(string sessionKey, string userKey)
+        {
+            IActivityBookingRepository activityBookingRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();           
+            IEnumerable<ActivityBooking> result = activityBookingRepository.GetBookedActivitiesBySession(sessionKey: sessionKey);
+
+            foreach (ActivityBooking booking in result)
+            {
+                booking.GuestKey = userKey;
+                activityBookingRepository.Update(booking);
+            }            
         }
     }
 }

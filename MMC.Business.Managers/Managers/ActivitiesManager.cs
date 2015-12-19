@@ -122,15 +122,29 @@ namespace MMC.Business.Managers
         //    });
         //}
 
-        [OperationBehavior(TransactionScopeRequired = true)]      
-        public ActivityBooking BookActivityForUser(ActivityBooking bookingDetails)
+        [OperationBehavior(TransactionScopeRequired = true)]
+        public ActivityBooking BookActivityForUser(ActivityBookingDataContract bookingDetails)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IActivitiesBookingEngine activitiesBookingEngine
                   = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
-
-                return activitiesBookingEngine.BookActivityForUser(bookingDetails);
+                ActivityBooking activityBooking = new ActivityBooking();
+                activityBooking.ActivityBookingKey = bookingDetails.ActivityBookingKey;
+                activityBooking.ActivityKey = bookingDetails.ActivityKey;
+                activityBooking.BookingDate = bookingDetails.BookingDate;
+                activityBooking.ChildParticipants = bookingDetails.ChildParticipants;
+                activityBooking.Participants = bookingDetails.Participants;
+                activityBooking.SessionKey = bookingDetails.SessionKey;
+                activityBooking.Time = bookingDetails.Time;
+                activityBooking.IsConfirmed = bookingDetails.IsConfirmed;
+                activityBooking.IsDeleted = bookingDetails.IsDeleted;
+                activityBooking.IsCancelled = bookingDetails.IsCancelled;
+                activityBooking.PaymentAmount = bookingDetails.PaymentAmount;
+                activityBooking.RefundAmount = bookingDetails.RefundAmount;
+                activityBooking.IsPaymentComplete = bookingDetails.IsPaymentComplete;
+                activityBooking.CreatedDate = bookingDetails.CreatedDate;
+                return activitiesBookingEngine.BookActivityForUser(activityBooking);
             });
         }
 

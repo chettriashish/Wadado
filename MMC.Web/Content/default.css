@@ -960,23 +960,42 @@ footer {
     }
 
 .socialButtons {
-    margin: .2em auto .5em auto;
+    margin: 1em auto .5em auto;
     float: none;
     display: table;
 }
 
+    .socialButtons.right {
+        float: right;
+    }
+
+    .socialButtons.left {
+        float: left;
+    }
+
     .socialButtons a {
         margin: 0 auto;
-        height: 1em;                
-        font-size: .8em;
-        padding: .8em 2em;
-        background-color: rgb(251,189,19);
+        height: 3em;
+        font-size: .9em;
         outline: none;
         cursor: pointer;
         color: rgb(255,255,255);
+        padding: .8em 2em;
         margin: 0 auto;
         transition: 0.5s all;
-        text-transform: uppercase;
+        border-radius: 5px;
+        border:none;
+        background-color: rgb(251,189,19);
+    }
+
+    .socialButtons #facebook {
+        padding: .8em 2em;
+        background-color: rgb(59,89,152);
+    }
+
+    .socialButtons #google {
+        padding: .8em 2.8em;
+        background-color: rgb(211,72,54);
     }
 
 .error {

@@ -107,6 +107,7 @@
     <Compile Include="ManagerBase.cs" />
     <Compile Include="Managers\ActivitiesManager.cs" />
     <Compile Include="Managers\LocationManager.cs" />
+    <Compile Include="Managers\UsersManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="WcfServiceFactory.cs" />
   </ItemGroup>

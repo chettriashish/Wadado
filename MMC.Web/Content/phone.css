@@ -59,7 +59,7 @@
 
         .bestMonthsToVisitWrapper .item {
             padding: .6em;
-        }        
+        }
 
     /*------RIGHT ARROW*/
     .hairline-down-arrow {
@@ -103,5 +103,15 @@
 
     .label-input {
         margin-left: -.8em;
+    }
+
+    .socialButtons.right {
+        float: right;
+        margin: 1em;
+    }
+
+    .socialButtons.left {
+        float: left;
+        margin: 1em;
     }
 }

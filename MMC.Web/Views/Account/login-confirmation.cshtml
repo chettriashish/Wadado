@@ -1,0 +1,47 @@
+﻿@model MMC.Web.Model.RegisterExternalLoginModel
+@{
+    ViewBag.Title = "Register";
+}
+@using (Html.BeginForm("login-confirmation", "Account", new { ReturnUrl = ViewBag.ReturnUrl }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <!--row start-->
+    <div class="row">
+        <div class="column-12">
+            <div class="column-3">
+                <div>
+                    <span>email:</span>
+                </div>
+            </div>
+            <div class="column-6">
+                <div>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--row end-->
+    <!--row start-->
+    <div class="row">
+        <div class="column-12">
+            <div class="column-6">
+                @Html.ValidationMessageFor(m => m.UserName)
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="socialButtons">
+                    <button type="submit" ng-click="">Register</button>
+                </div>
+                
+            </div>
+        </div>
+    </div>    
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

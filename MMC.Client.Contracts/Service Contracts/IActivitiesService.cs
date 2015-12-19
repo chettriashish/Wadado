@@ -31,7 +31,7 @@ namespace MMC.Client.Contracts
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        ActivityBooking BookActivityForUser(ActivityBooking bookingDetails);
+        ActivityBooking BookActivityForUser(ActivityBookingDataContract bookingDetails);
 
         ///TBD ONCE LOGIN IS COMPLETE
         //[OperationContract]
@@ -39,7 +39,10 @@ namespace MMC.Client.Contracts
 
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
-        IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey); 
+        IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey);
+        [OperationContract]
+        ActivityBooking AddUserActivityToCart(string activityKey, int adults,
+            int children, DateTime bookingDate, string time, decimal total, string sessionKey);
         #endregion
 
         #region Async Operations
@@ -50,9 +53,9 @@ namespace MMC.Client.Contracts
         [OperationContract]
         Task<bool> CheckForActivityAvailablityAsync(string activityKey, int adults, int children, DateTime bookingDate, string time);
         [OperationContract]
-        Task<ActivityBooking> BookActivityForUserAsync(ActivityBooking bookingDetails);
-        Task<ActivityBooking> AddUserActivityToCart(ActivityDetailsDataContract activityDetails, int adults, 
-            int children, DateTime bookingDate, string time, decimal total);
+        Task<ActivityBooking> BookActivityForUserAsync(ActivityBookingDataContract bookingDetails);
+        Task<ActivityBooking> AddUserActivityToCartAsync(string activityKey, int adults,
+            int children, DateTime bookingDate, string time, decimal total, string sessionKey);
         #endregion
     }
 }

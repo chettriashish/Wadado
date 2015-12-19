@@ -127,6 +127,7 @@
     <Compile Include="Data Repositories\LocationMasterRepository.cs" />
     <Compile Include="Data Repositories\TopOffersRepository.cs" />
     <Compile Include="Data Repositories\TouristSeasonsRepository.cs" />
+    <Compile Include="Data Repositories\UserApplicationActivityRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
     <Compile Include="MyMonkeyCapContext.cs" />

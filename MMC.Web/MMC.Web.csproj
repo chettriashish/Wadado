@@ -393,7 +393,6 @@
     <Content Include="Images\Icons\a21.png" />
     <Content Include="Images\Icons\Adventure.png" />
     <Content Include="Images\Icons\b21.png" />
-    <Content Include="Images\Icons\close-icon-large.png" />
     <Content Include="Images\Icons\EcoTourism.png" />
     <Content Include="Images\Icons\Entertainment.png" />
     <Content Include="Images\Icons\events_icon_mobile.png" />
@@ -467,6 +466,7 @@
     <Content Include="Scripts\Common\services\SearchDataService.js" />
     <Content Include="Scripts\Directives\Booking\bookingdirective.js" />
     <Content Include="Scripts\Directives\Date\datedirective.js" />
+    <Content Include="Scripts\facebook.js" />
     <Content Include="Scripts\Home\controllers\HomeController.js" />
     <Content Include="Scripts\Home\directives\HomeDirective.js" />
     <Content Include="Scripts\Home\services\HomeDataService.js" />
@@ -1313,17 +1313,23 @@
     <Content Include="Views\ActivityDetails\Index.tablet.cshtml" />
     <Content Include="Views\ActivityDetails\Index.legacy.cshtml" />
     <Content Include="Views\ActivityDetails\Index.smartphone.cshtml" />
-    <Content Include="Views\Account\Index.legacy.cshtml" />
     <Content Include="Views\Account\Index.smartphone.cshtml" />
     <Content Include="Views\Account\Index.tablet.cshtml" />
+    <Content Include="Views\Account\Index.legacy.cshtml" />
+    <Content Include="Views\ActivitiesCart\Index.cshtml" />
+    <Content Include="Views\ActivitiesCart\Index.tablet.cshtml" />
+    <Content Include="Views\ActivitiesCart\Index.smartphone.cshtml" />
+    <Content Include="Views\ActivitiesCart\Index.legacy.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scripts\ActivitiesCart\controllers\" />
+    <Folder Include="Scripts\ActivitiesCart\directives\" />
+    <Folder Include="Scripts\ActivitiesCart\services\" />
     <Folder Include="Scripts\Activities\directives\" />
     <Folder Include="Scripts\ActivityDetails\directives\" />
     <Folder Include="Scripts\Location\directives\" />
     <Folder Include="Scripts\Login\directives\" />
     <Folder Include="Templates\" />
-    <Folder Include="Views\ActivitiesCart\" />
     <Folder Include="Views\BaseView\" />
     <Folder Include="Views\Booking\" />
     <Folder Include="Views\Search\" />
@@ -1367,6 +1373,14 @@
     <ProjectReference Include="..\MMC.Common\MMC.Common.csproj">
       <Project>{b5028bec-19e5-4289-b590-5af9b2275aae}</Project>
       <Name>MMC.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Login.Contracts\MMC.Login.Contracts.csproj">
+      <Project>{9f411590-5227-48db-9b32-e6916fdb8c2d}</Project>
+      <Name>MMC.Login.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Login\MMC.Login.csproj">
+      <Project>{ac981606-60bb-4c4d-bc58-c3d032383717}</Project>
+      <Name>MMC.Login</Name>
     </ProjectReference>
     <ProjectReference Include="..\MMC.Web.Contracts\MMC.Web.Contracts.csproj">
       <Project>{60743929-0d2e-408f-a283-a86841671ab1}</Project>

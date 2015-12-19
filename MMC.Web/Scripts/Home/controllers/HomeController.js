@@ -35,8 +35,7 @@
     var homeController = function ($scope, $http, $timeout, $interval, $location, HomeDataService) {
         $scope.selectedLocation = 'What to do?  Where to go? ';
         $scope.counter = 0;        
-        /*****************************TOP ACTIVITIES****************************************/
-
+        /*****************************TOP ACTIVITIES****************************************/        
         var setImages = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.topActivity, function (key, value) {
@@ -59,7 +58,7 @@
                     }
                 });
             }
-        };
+        };       
 
         $scope.topActivities = {};
 

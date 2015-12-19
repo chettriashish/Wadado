@@ -34,12 +34,12 @@
             if (obj == 'A') {
                 if (!$scope.Error) {
                     $scope.NumAdults = $scope.NumAdults + 1;
-                }                
+                }
             }
             else if (obj == 'C') {
                 if (!$scope.Error) {
                     $scope.NumChildren = $scope.NumChildren + 1;
-                }                
+                }
             }
             checkForAvailability();
         }
@@ -72,7 +72,7 @@
                         return true;
                     }
                     else {
-                        $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "person";                        
+                        $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "person";
                         return false;
                     }
                 }
@@ -81,6 +81,22 @@
             if ($scope.NumAdults > 1 || $scope.NumChildren > 1) {
                 checkForAvailability();
             }
+        }
+
+        $scope.addActivityToCart = function () {
+            var total = 0;
+            if ($scope.selectedActivityDetails.NumChildren == 0) {
+                total = $scope.NumAdults * $scope.selectedActivityDetails.Cost;
+            }
+            else {
+                total = ($scope.NumAdults * $scope.selectedActivityDetails.Cost +
+                    $scope.NumChildren * $scope.selectedActivityDetails.CostForChild);
+            }
+           
+            BookingDataService.addSelectedActivityToUsersCart($scope.selectedActivityDetails.ActivityKey,
+               $scope.NumAdults, $scope.NumChildren, $scope.date, $scope.time, total).then(function (response) {
+                   console.log("activity added to cart");
+               });
         }
     }
     app.controller("BookingController", bookingController);

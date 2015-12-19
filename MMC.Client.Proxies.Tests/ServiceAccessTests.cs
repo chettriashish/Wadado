@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MMC.Client.Proxies.Proxies;
+using MMC.Client.Proxies;
 using MMC.Client.Contracts.DataContracts;
 using MMC.Client.Bootstrapper;
 using Core.Common.Contracts;

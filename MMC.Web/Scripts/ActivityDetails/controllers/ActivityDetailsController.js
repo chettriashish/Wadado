@@ -35,6 +35,7 @@
         var sliderInit = false;
         var setActivityImages = function () {
             $scope.ImageURL = [];
+           
             if (WURFL.is_mobile) {
                 $scope.selectedActivityDetails.ActivityImagesURL = {};
                 $.each($scope.selectedActivityDetails.ActivityImages, function (key, value) {

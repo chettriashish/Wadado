@@ -40,6 +40,7 @@ namespace MMC.Data
         public DbSet<TopOffers> TopOffersSet { get; set; }
 
         public DbSet<ActivityImages> ActivityImagesSet { get; set; }
+        public DbSet<UserApplicationActivityDetails> UserApplicationActivityDetailsSet { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -65,6 +66,7 @@ namespace MMC.Data
             modelBuilder.Entity<Account>().HasKey<string>(e => e.AccountKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<TopOffers>().HasKey<string>(e => e.TopOffersKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<ActivityImages>().HasKey<string>(e => e.ActivityImageKey).Ignore<string>(e => e.EntityId);
+            modelBuilder.Entity<UserApplicationActivityDetails>().HasKey<string>(e => e.SessionKey).Ignore(e => e.EntityId);
             //base.OnModelCreating(modelBuilder);
         }
     }

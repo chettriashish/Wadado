@@ -15,10 +15,12 @@ namespace MMC.Business.Managers
         protected override void ConfigureContainer(IUnityContainer container)
         {
             container.RegisterType<IActivitiesService, ActivitiesManager>();
+            container.RegisterType<IUsersService, UsersManager>();
             container.RegisterType<IActivitiesMasterRepository, ActivitiesMasterRepository>();
             container.RegisterType<IDataRepositoryFactory, DataRepositoryFactory>();
             container.RegisterType<IBusinessEngineFactory, BusinessEngineFactory>();
-            container.RegisterType<IActivitiesBookingEngine, ActivitiesBookingEngine>();         
+            container.RegisterType<IActivitiesBookingEngine, ActivitiesBookingEngine>();
+            container.RegisterType<IUserDetailsBusinessEngine, UserDetailsBusinessEngine>(); 
         }
     }    
 }

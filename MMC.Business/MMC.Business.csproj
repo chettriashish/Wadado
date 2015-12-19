@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business Engines\ActivitiesBookingEngine.cs" />
+    <Compile Include="Business Engines\UserDetailsBusinessEngine.cs" />
     <Compile Include="BusinessEngineFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -29,5 +29,11 @@ namespace MMC.Web.Controllers
             }
             return device;
         }
+
+        public void KeepAlive()
+        {
+            //KEEP SESSION ALIVE AND CHECK IF ITEMS IN CART ARE STILL AVAILABLE
+            //IF NOT REMOVE THE ITEMS FROM CART
+        }
     }
 }

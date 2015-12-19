@@ -42,11 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data Contracts\ActivityBookingDataContract.cs" />
     <Compile Include="Data Contracts\ActivityDetailsDataContract.cs" />
     <Compile Include="Data Contracts\CustomerActivitiesBookingData.cs" />
+    <Compile Include="Data Contracts\UserSessionDataContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service Contracts\IActivitiesService.cs" />
     <Compile Include="Service Contracts\ILocationService.cs" />
+    <Compile Include="Service Contracts\IUsersService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

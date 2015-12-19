@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MMC.Client.Proxies.Proxies
+namespace MMC.Client.Proxies
 {
     public class LocationClient : UserClientBase<ILocationService>, ILocationService
     {        

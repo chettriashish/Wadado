@@ -30,7 +30,7 @@ namespace MMC.Business.Contracts
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        ActivityBooking BookActivityForUser(ActivityBooking bookingDetails);
+        ActivityBooking BookActivityForUser(ActivityBookingDataContract bookingDetails);
 
         ///TBD ONCE LOGIN IS COMPLETE
         //[OperationContract]

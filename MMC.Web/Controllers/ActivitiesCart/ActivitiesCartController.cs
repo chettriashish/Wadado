@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace MMC.Web.Controllers.ActivitiesCart
 {
-    public class ActivitiesCartController : Controller
+    public class ActivitiesCartController : BaseViewController
     {
         IActivitiesService _activitiesService;
         public ActivitiesCartController(IActivitiesService activitiesService)
@@ -25,9 +25,27 @@ namespace MMC.Web.Controllers.ActivitiesCart
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult GetUsersActivityCart(string sessionKey)
+        public JsonResult GetUsersActivityCart()
         {
-            return Json(_activitiesService.GetUsersCurrentActivityCart(sessionKey),JsonRequestBehavior.AllowGet);
+            ///WHEN THE USER IS LOGGED IN
+            if (Session["sessionKey"] != null && Session["guestKey"] != null)
+            {
+                string sessionKey = Convert.ToString(Session["sessionKey"]);
+                string guestKey = Convert.ToString(Session["guestKey"]);
+                return Json(_activitiesService.GetUsersCurrentActivityCart(sessionKey), JsonRequestBehavior.AllowGet);
+            }
+            ///WHEN USER IS NOT LOGGED IN
+            else if (Session["sessionKey"] != null)
+            {
+                string sessionKey = Convert.ToString(Session["sessionKey"]);
+                return Json(_activitiesService.GetUsersCurrentActivityCart(sessionKey), JsonRequestBehavior.AllowGet);
+            }
+            ///THIS CONDITION IS A FAIL SAFE. SHOULD NEVER HAPPEN AS SESSION SHOULD BE ALIVE AS LONG AS USER 
+            ///IS ADDING ITEMS TO CART
+            else
+            {
+                return Json(new ActivityBookingDataContract(), JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }

@@ -128,6 +128,14 @@
       <Project>{fb19c92e-eb35-4306-9c20-5036ad0e5fd3}</Project>
       <Name>MMC.Client.Proxies</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MMC.Login.Contracts\MMC.Login.Contracts.csproj">
+      <Project>{9f411590-5227-48db-9b32-e6916fdb8c2d}</Project>
+      <Name>MMC.Login.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Login\MMC.Login.csproj">
+      <Project>{ac981606-60bb-4c4d-bc58-c3d032383717}</Project>
+      <Name>MMC.Login</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Unity.Mvc4.README.txt" />

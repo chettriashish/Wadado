@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Core.Common.Core;
 using MMC.Client.Bootstrapper;
 using MMC.Client.Contracts;
-using MMC.Client.Proxies.Proxies;
+using MMC.Client.Proxies;
 using Microsoft.Practices.Unity;
 using Core.Common.Contracts;
 namespace MMC.Client.Proxies.Tests

@@ -9,31 +9,38 @@ using MMC.Common.Extensions;
 using MMC.Web.Contracts;
 using Core.Common.Core;
 using Microsoft.Practices.Unity;
+using MMC.Login.Contracts;
+using MMC.Client.Contracts;
+using MMC.Client.Contracts.DataContracts;
 
 namespace MMC.Web.Controllers.Home
 {
     public class HomeController : Controller
     {
         IHomeDataService _homeDataService;
+        ILoginService _loginService;
+        IUsersService _usersService;
 
-        public HomeController(IHomeDataService homeDataService)
+        public HomeController(IHomeDataService homeDataService, ILoginService loginService, IUsersService usersService)
         {
             _homeDataService = homeDataService;
+            _loginService = loginService;
+            _usersService = usersService;
         }
         public ActionResult Index()
-        {            
+        {
             return View();
-        }       
+        }
 
         public ActionResult GetTopOffers()
         {
-            IEnumerable<TopOffersModel> results = _homeDataService.GetTopOffers(Request.UserAgent);  
+            IEnumerable<TopOffersModel> results = _homeDataService.GetTopOffers(Request.UserAgent);
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetTopTrendingActivities()
-        {   
-            IEnumerable<ActivitiesModel> results =  _homeDataService.GetTrendingActivities(Request.UserAgent);
+        {
+            IEnumerable<ActivitiesModel> results = _homeDataService.GetTrendingActivities(Request.UserAgent);
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 
@@ -41,6 +48,16 @@ namespace MMC.Web.Controllers.Home
         {
             IEnumerable<NewsModel> results = _homeDataService.GetLastestNews();
             return Json(results, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult LogUserSession()
+        {
+            return Json(_loginService.LogUserSession(() =>
+            {
+                UserSessionDataContract result = _usersService.LogUserSession();
+                return result.SessionKey;
+
+            }), JsonRequestBehavior.AllowGet);
         }
     }
 }

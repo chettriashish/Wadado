@@ -20,6 +20,8 @@ namespace MMC.Business.Entities
         [DataMember]
         public string SessionKey { get; set; }
         [DataMember]
+        public string GuestKey { get; set; }
+        [DataMember]
         public string Email { get; set; }
         [DataMember]
         public DateTime BookingDate { get; set; }
@@ -32,7 +34,7 @@ namespace MMC.Business.Entities
         [DataMember]
         public bool IsDeleted { get; set; }
         [DataMember]
-        public DateTime CreatedDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
         [DataMember]
         public string CreatedBy { get; set; }
         [DataMember]
@@ -40,7 +42,7 @@ namespace MMC.Business.Entities
         [DataMember]
         public bool IsPaymentComplete { get; set; }
         [DataMember]
-        public DateTime ConfirmationDate { get; set; }
+        public DateTime? ConfirmationDate { get; set; }
         [DataMember]
         public string ConfirmedBy { get; set; }
         [DataMember]

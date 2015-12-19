@@ -1,0 +1,80 @@
+﻿@{
+    ViewBag.Title = "WADADO.IN";
+}
+<!--SLIDER REFERENCE-->
+<script src="~/Scripts/slider/jssor.js"></script>
+<script src="~/Scripts/slider/jssor.slider.js"></script>
+<script src="~/Scripts/slider/slider.js"></script>
+
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--BOOKING REFERENCE-->
+<script src="~/Scripts/Common/services/BookingDataService.js"></script>
+<script src="~/Scripts/Common/controllers/BookingController.js"></script>
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+<script src="~/Scripts/ActivityDetails/controllers/ActivityDetailsController.js"></script>
+<script src="~/Scripts/ActivityDetails/services/ActivityDetailsDataService.js"></script>
+<script src="~/Scripts/ActivityDetails/controllers/ActivityDetailsController.js"></script>
+
+<!--VIDEO REFERENCE-->
+<link href="~/Content/video/default-vid.css" rel="stylesheet" />
+<link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
+<link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
+<link href="~/Content/phone.css" rel="stylesheet" />
+
+<!--DATE REFERENCE-->
+<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
+<script src="~/Scripts/Directives/Date/datedirective.js"></script>
+<script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>
+
+<div id="colorbar">
+</div>
+<div class="cover"></div>
+<div class="contentWrapper" data-ng-controller="ActivityDetailsController">
+    <div>
+        @Html.Partial("../Partial/_search")
+    </div>
+    <div>
+        <!--The nav wrapper will have to become a seperate user control-->
+        <div id="navWrapper" data-ng-controller="LoginController">
+            <nav>
+                <div class="clearfix primary-nav">
+                    <div>
+                        <div class="menusearch-input">
+                            <div><img src="~/Images/Icons/search-icon.png" /></div>
+                            <div><span>{{selectedLocation}}</span></div>
+                        </div>
+                    </div>
+                </div>
+                <ul class="clearfix menu-nav">
+                    <li class="active" id="portfolio" ng-show=""><a>{{UserName}}</a></li>
+                    <li id="services"><a ng-click="FBLogin()">{{LoginStatus}}</a></li><!--This will change to login instead of facebook login-->
+                    <li id="checkout" ng-show=""><a ng-click="showCart()">View Cart</a></li>
+                    <li id="careers"><a href="#">About Us</a></li>
+                    <li id="contact"><a href="#">FAQs</a></li>
+                </ul>
+                <button class="logo-button">Logo Button</button>
+                <button class="nav-button">Toggle Button</button>
+            </nav>
+        </div>
+    </div>
+    <div class="uppercontent" ng-show="showActivityDetails()" ng-hide="hideActivityDetails()">
+        <div>
+            
+        </div>
+    </div>
+</div>

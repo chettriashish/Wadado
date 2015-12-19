@@ -1,0 +1,30 @@
+﻿@model ICollection<AuthenticationClientData>
+
+@if (Model.Count > 0)
+{
+    using (Html.BeginForm("ExternalLogin", "Account"))
+    {
+        @Html.AntiForgeryToken()
+        <fieldset id="socialLoginList">
+            @foreach (AuthenticationClientData p in Model)
+            {
+                <div class="column-6">
+                    @if (p.AuthenticationClient.ProviderName == "facebook")
+                    {
+                        <div class="socialButtons right">
+                            <button id="facebook" type="submit" name="provider" value="@p.AuthenticationClient.ProviderName" title="Log in using your @p.DisplayName account">@p.DisplayName</button>
+                            @*<a id="facebook" ng-click="">@p.AuthenticationClient.ProviderName</a>*@
+                        </div>
+                    }
+                    @if (p.AuthenticationClient.ProviderName == "google")
+                    {
+                        <div class="socialButtons left">
+                            <button id="google" type="submit" name="provider" value="@p.AuthenticationClient.ProviderName" title="Log in using your @p.DisplayName account">@p.DisplayName</button>
+                            @*<a id="google" ng-click="">@p.AuthenticationClient.ProviderName</a>*@
+                        </div>
+                    }
+                </div>
+            }
+        </fieldset>
+    }
+}

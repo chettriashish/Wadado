@@ -19,17 +19,18 @@ namespace MMC.Client.Entities
         private string _Email;
         private int _Participants;
         private int _ChildParticipants;
-        private DateTime _CreatedDate;
+        private DateTime? _CreatedDate;
         private string _CreatedBy;
         private bool _IsDeleted;
         private bool _IsConfirmed;
         private bool _IsPaymentComplete;
-        private DateTime _ConfirmationDate;
+        private DateTime? _ConfirmationDate;
         private string _ConfirmedBy;
         private decimal _PaymentAmount;
         private bool _IsCancelled;
         private decimal _RefundAmount;
         private string _BookingNumber;
+        private string _GuestKey;
         #endregion
 
         #region Properties
@@ -60,7 +61,18 @@ namespace MMC.Client.Entities
                 _AccountKey = value;
                 OnPropertyChanged(() => SessionKey);
             }
+        }       
+
+        public string GuestKey
+        {
+            get { return _GuestKey; }
+            set
+            {
+                _GuestKey = value;
+                OnPropertyChanged(() => GuestKey);
+            }
         }
+
         public string Email
         {
             get { return _Email; }
@@ -121,7 +133,7 @@ namespace MMC.Client.Entities
             }
         }
 
-        public DateTime CreatedDate
+        public DateTime? CreatedDate
         {
             get { return _CreatedDate; }
             set
@@ -139,7 +151,7 @@ namespace MMC.Client.Entities
                 _CreatedBy = value;
                 OnPropertyChanged(() => CreatedBy);
             }
-        }      
+        }
 
         public bool IsConfirmed
         {
@@ -149,7 +161,7 @@ namespace MMC.Client.Entities
                 _IsConfirmed = value;
                 OnPropertyChanged(() => IsConfirmed);
             }
-        }        
+        }
 
         public bool IsPaymentComplete
         {
@@ -160,8 +172,8 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => IsPaymentComplete);
             }
         }
-        
-        public DateTime ConfirmationDate
+
+        public DateTime? ConfirmationDate
         {
             get { return _ConfirmationDate; }
             set
@@ -181,7 +193,7 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => ConfirmedBy);
             }
         }
-        
+
         public decimal PaymentAmount
         {
             get { return _PaymentAmount; }
@@ -190,7 +202,7 @@ namespace MMC.Client.Entities
                 _PaymentAmount = value;
                 OnPropertyChanged(() => PaymentAmount);
             }
-        }        
+        }
         public bool IsCancelled
         {
             get { return _IsCancelled; }
@@ -199,7 +211,7 @@ namespace MMC.Client.Entities
                 _IsCancelled = value;
                 OnPropertyChanged(() => IsCancelled);
             }
-        }        
+        }
         public decimal RefundAmount
         {
             get { return _RefundAmount; }
@@ -208,7 +220,7 @@ namespace MMC.Client.Entities
                 _RefundAmount = value;
                 OnPropertyChanged(() => RefundAmount);
             }
-        }        
+        }
 
         public string BookingNumber
         {

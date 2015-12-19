@@ -61,6 +61,7 @@
     <Compile Include="Repository Interfaces\ILocationMasterRepository.cs" />
     <Compile Include="Repository Interfaces\ITopOffersRepository.cs" />
     <Compile Include="Repository Interfaces\ITouristSeasonsRepository.cs" />
+    <Compile Include="Repository Interfaces\IUserApplicationActivityRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.Common.Contracts\Core.Common.Contracts.csproj">

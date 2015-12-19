@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMC.Client.Proxies.Proxies
+namespace MMC.Client.Proxies
 {
     public class ActivityClient : UserClientBase<IActivitiesService>, IActivitiesService
     {
@@ -28,16 +28,18 @@ namespace MMC.Client.Proxies.Proxies
             return Channel.CheckForActivityAvailablity(activityKey, adults, children, bookingDate, time);
         }
 
-        public Task<ActivityBooking> AddUserActivityToCart(ActivityDetailsDataContract activityDetails, int adults, 
-            int children, DateTime bookingDate, string time, decimal total)
+        public ActivityBooking AddUserActivityToCart(string activityKey, int adults,
+            int children, DateTime bookingDate, string time, decimal total, string sessionKey)
         {
-            ActivityBooking bookingDetails = new ActivityBooking();
+            ActivityBookingDataContract bookingDetails = new ActivityBookingDataContract();
             bookingDetails.ActivityBookingKey = Guid.NewGuid().ToString();
-            bookingDetails.ActivityKey = activityDetails.ActivityKey;
+            bookingDetails.ActivityKey = activityKey;
             bookingDetails.BookingDate = bookingDate;
+            bookingDetails.CreatedDate = DateTime.Now;
             bookingDetails.ChildParticipants = children;
             bookingDetails.Participants = adults;
-            //bookingDetails.SessionKey = sessionKey == default(string) ? Guid.NewGuid().ToString() : sessionKey;
+            bookingDetails.SessionKey = sessionKey;
+            bookingDetails.ConfirmationDate = new DateTime(1753, 1, 1);
             bookingDetails.Time = time;
             bookingDetails.IsConfirmed = false;
             bookingDetails.IsDeleted = false;
@@ -46,33 +48,13 @@ namespace MMC.Client.Proxies.Proxies
             bookingDetails.RefundAmount = 0;
             bookingDetails.IsPaymentComplete = false;
             //Need to add user information as well. This after login is complete
-            return BookActivityForUserAsync(bookingDetails);
+            return BookActivityForUser(bookingDetails);            
         }
 
-        public ActivityBooking BookActivityForUser(ActivityBooking bookingDetails)
+        public ActivityBooking BookActivityForUser(ActivityBookingDataContract bookingDetails)
         {
             return Channel.BookActivityForUser(bookingDetails);
-        }
-
-        public Task<ActivityBooking> BookActivityForUserAsync(ActivityDetailsDataContract activityDetails, 
-            int adults, int children, DateTime bookingDate, string time, decimal total)
-        {
-            ActivityBooking bookingDetails = new ActivityBooking();
-            bookingDetails.ActivityBookingKey = Guid.NewGuid().ToString();
-            bookingDetails.ActivityKey = activityDetails.ActivityKey;
-            bookingDetails.BookingDate = bookingDate;
-            bookingDetails.ChildParticipants = children;
-            bookingDetails.Participants = adults;
-            bookingDetails.SessionKey = Guid.NewGuid().ToString();
-            bookingDetails.Time = time;
-            bookingDetails.IsConfirmed = false;
-            bookingDetails.IsDeleted = false;
-            bookingDetails.IsCancelled = false;
-            bookingDetails.PaymentAmount = total;
-            bookingDetails.RefundAmount = 0;
-            bookingDetails.IsPaymentComplete = false;
-            return Channel.BookActivityForUserAsync(bookingDetails);
-        }
+        }       
 
         public Task<ActivityDetailsDataContract> GetAllActivitiesAsync(string locationKey, 
             string activityKey, string userAgent)
@@ -96,9 +78,33 @@ namespace MMC.Client.Proxies.Proxies
             throw new NotImplementedException();
         }
 
-        public Task<ActivityBooking> BookActivityForUserAsync(ActivityBooking bookingDetails)
+        public Task<ActivityBooking> BookActivityForUserAsync(ActivityBookingDataContract bookingDetails)
         {
             return Channel.BookActivityForUserAsync(bookingDetails);
+        }
+
+
+        public Task<ActivityBooking> AddUserActivityToCartAsync(string activityKey, int adults, int children, DateTime bookingDate, 
+            string time, decimal total, string sessionKey)
+        {
+            ActivityBookingDataContract bookingDetails = new ActivityBookingDataContract();
+            bookingDetails.ActivityBookingKey = Guid.NewGuid().ToString();
+            bookingDetails.ActivityKey = activityKey;
+            bookingDetails.BookingDate = bookingDate;            
+            bookingDetails.CreatedDate = DateTime.Now;
+            bookingDetails.ChildParticipants = children;
+            bookingDetails.Participants = adults;
+            bookingDetails.SessionKey = sessionKey;
+            bookingDetails.ConfirmationDate = new DateTime(1753, 1, 1);
+            bookingDetails.Time = time;
+            bookingDetails.IsConfirmed = false;
+            bookingDetails.IsDeleted = false;
+            bookingDetails.IsCancelled = false;
+            bookingDetails.PaymentAmount = total;
+            bookingDetails.RefundAmount = 0;
+            bookingDetails.IsPaymentComplete = false;
+            //Need to add user information as well. This after login is complete
+            return BookActivityForUserAsync(bookingDetails);            
         }
     }
 }

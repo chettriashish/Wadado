@@ -4,7 +4,8 @@ using Unity.Mvc4;
 using Core.Common.Contracts;
 using MMC.Client.Proxies;
 using MMC.Client.Contracts;
-using MMC.Client.Proxies.Proxies;
+using MMC.Login.Contracts;
+using MMC.Login;
 
 namespace MMC.Client.Bootstrapper
 {
@@ -40,6 +41,8 @@ namespace MMC.Client.Bootstrapper
         container.RegisterType<IServiceFactory, ServiceFactory>();
         container.RegisterType<IActivitiesService, ActivityClient>();
         container.RegisterType<ILocationService, LocationClient>();
+        container.RegisterType<IUsersService, UserClient>();
+        container.RegisterType<ILoginService, LoginService>();
     }
   }
 }

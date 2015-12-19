@@ -28,7 +28,7 @@
 
         var searchForLocation = function (locationName) {
             $window.location.href = "/Location/" + locationName;
-        }
+        }       
 
         var setSlider = function () {
             var _CaptionTransitions = [];
@@ -112,7 +112,7 @@
             getTopTrendingActivities: getTopTrendingActivities,
             searchForLocation: searchForLocation,
             getLatestNews:getLatestNews,
-            setSlider: setSlider
+            setSlider: setSlider          
         }
     };
     app.factory("HomeDataService", homeDataService);

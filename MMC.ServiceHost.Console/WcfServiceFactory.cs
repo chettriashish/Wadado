@@ -24,6 +24,7 @@ namespace MMC.ServiceHost
         protected override void ConfigureContainer(IUnityContainer container)
         {
             container.RegisterType<IActivitiesService, ActivitiesManager>();
+            container.RegisterType<IUsersService, UsersManager>();
             container.RegisterType<IActivitiesMasterRepository, ActivitiesMasterRepository>();
             container.RegisterType<IDataRepositoryFactory, DataRepositoryFactory>();
             container.RegisterType<IBusinessEngineFactory, BusinessEngineFactory>();
