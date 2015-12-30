@@ -6,6 +6,7 @@
         $scope.returnUrl = '';
         $scope.UserName = null;
         $scope.LoginStatus = "Login";
+        $scope.AllowGuest = false;
         var statusChangeCallback = function (response) {
             // The response object is returned with a status field that lets the
             // app know the current login status of the person.
@@ -21,9 +22,15 @@
 
         var logUserInformation = function (userName, userInfo, mail) {
             LoginDataService.logUserSession().then(function (response) {
-                LoginDataService.saveUserDetails(userName, userInfo, mail).then(function (response) {
-                    $scope.LoginStatus = "Logout";
-                    $scope.UserName = "Welcome - " + response.Name;
+                LoginDataService.saveUserDetails(userName, userInfo, mail, "f_b").then(function (response) {
+                    if ($scope.Action == "a_f") {
+                        LoginDataService.addFavorites($scope.ActivityKey).then(function (response) {
+                            LoginDataService.returnUser($scope.returnUrl);
+                        });
+                    }
+                    else {
+                        LoginDataService.returnUser($scope.returnUrl);
+                    }
                 });
             });
         }
@@ -49,23 +56,39 @@
             });
         }
 
-        var checkUserApplicationLogin = function () {
-            LoginDataService.getGuestInformation().then(function (response) {
-                if (response.GuestKey != null) {
-                    $scope.LoginStatus = "Logout";
-                    $scope.UserName = "Welcome - " + response.Name;
-                }
-            });
-        }
-        checkUserApplicationLogin();
         $scope.FBLogin = function () {
             checkLoginState();
         };
 
+        $scope.FBLogout = function () {
+            function logout() {
+                FB.logout(function (response) {
+                    console.log(response);
+                    LoginDataService.logUserOut().then(function (response) {
+                        if (response == true) {
+                            LoginDataService.returnUser($scope.returnUrl);
+                        }
+                    });
+                });
+            }
+        }
+
+        var getAllActions = function () {
+            LoginDataService.checkForAction().then(function (response) {
+                if (response.Action == "a_f") {
+                    $scope.AllowGuest = false;
+                    $scope.returnUrl = response.ReturnURL;
+                    $scope.Action = response.Action;
+                    $scope.ActivityKey = response.ActivityKey;
+                }
+                else {
+                    $scope.AllowGuest
+                }
+            });
+        }
+        getAllActions();
         $scope.continueAsGuest = function () {
-            //TBD CALL SERVICE AND ACTIVITY TO CART 
-            //LET USER KNOW THAT ACTIVITY HAS BEEN ADDED TO CART
-            //NO NEED FOR USER TO BE AUTHENTICATED
+            LoginDataService.returnUser($scope.returnUrl);
         };
     }
     app.controller("LoginController", loginController);

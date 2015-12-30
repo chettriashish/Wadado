@@ -14,8 +14,25 @@
 <!--WADADO REFERENCE-->
 <script src="~/Scripts/Video/video.js"></script>
 <script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Common/controllers/FavoritesController.js"></script>
+
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
+
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+
 <script src="~/Scripts/Activities/services/ActivityDataService.js"></script>
 <script src="~/Scripts/Activities/controllers/ActivityController.js"></script>
 <link href="~/Content/phone.css" rel="stylesheet" />
@@ -28,38 +45,22 @@
         @Html.Partial("../Partial/_search")
     </div>
     <div>
-        <div id="navWrapper">
-            <nav>       
-                <div class="clearfix primary-nav">
-                    <div>
-                        <div class="menusearch-input">
-                            <div><img src="~/Images/Icons/search-icon.png" /></div>
-                            <div><span>{{selectedLocation}}</span></div>
-                        </div>
-                    </div>
-                </div>        
-                <ul class="clearfix menu-nav">
-                    <li class="active" id="portfolio"><a href="#">Sign Up</a></li>
-                    <li id="services"><a href="#">Login</a></li>
-                    <li id="careers"><a href="#">About Us</a></li>
-                    <li id="contact"><a href="#">FAQs</a></li>
-                </ul>
-                <button class="logo-button">Logo Button</button>                
-                <button class="nav-button">Toggle Button</button>
-            </nav>
-        </div>
+        @Html.Partial("../Partial/_mobilemenu")
     </div>
-    <div class="uppercontent">
-        <div>            
+    <div class="uppercontent" ng-cloak>
+        <div>
             <!--Row start-->
             <div class="row">
                 <div class="activity">
                     <span>{{ActivityType}}</span>
-                </div>                
+                </div>
             </div>
             <!--Row start-->
             <div class="row">
-                <div ng-repeat="item in allSelectedActivity">                    
+                <div ng-repeat="item in allSelectedActivity">
+                    <div class="like-container">
+                        @Html.Partial("../Partial/_favourites");
+                    </div>
                     <div ng-click="loadActivityDetails(item)">
                         <div class="list-activity-wrapper">
                             <div>

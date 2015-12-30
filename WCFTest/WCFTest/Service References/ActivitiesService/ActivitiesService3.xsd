@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://www.wadado.in" elementFormDefault="qualified" targetNamespace="http://www.wadado.in" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Core.Common.Core" />
+  <xs:complexType name="ArrayOfActivitiesMaster">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ActivitiesMaster" nillable="true" type="tns:ActivitiesMaster" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfActivitiesMaster" nillable="true" type="tns:ArrayOfActivitiesMaster" />
+  <xs:complexType name="ActivitiesMaster">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Core.Common.Core" base="q1:EntityBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ActivitesKey" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ActivityTypeKey" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="AdditionalFeatures" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Advice" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CancellationPolicy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Cost" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CostForChild" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="CreatedDate" nillable="true" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DifficultyRating" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Duration" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="EntityId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Included" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="IsPermitRequired" type="xs:boolean" />
+          <xs:element minOccurs="0" name="IsValidated" type="xs:boolean" />
+          <xs:element minOccurs="0" name="MaxAdults" type="xs:int" />
+          <xs:element minOccurs="0" name="MaxChildren" type="xs:int" />
+          <xs:element minOccurs="0" name="MinAdults" type="xs:int" />
+          <xs:element minOccurs="0" name="MinChildren" type="xs:int" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="OurReview" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Pickup" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ThingsToCarry" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivitiesMaster" nillable="true" type="tns:ActivitiesMaster" />
+</xs:schema>

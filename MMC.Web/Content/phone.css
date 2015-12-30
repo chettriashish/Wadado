@@ -2,11 +2,56 @@
     display: none;
 }
 
+.editButton {
+    display: block;
+    float: right;
+    width: 26px;
+    margin-right: 50px;
+    height: auto;
+    transform: scale(.5);
+    background: url('../Images/Icons/edit.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/edit.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/edit.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/edit.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 1.8em, 0%;
+    cursor: pointer;
+    text-indent: 2em;
+    border: 0 none;
+    border-radius: 5px;
+    outline: none;
+}
+
+.removeButton {
+    display: block;
+    width: 26px;
+    height: auto;
+    transform: scale(.5);
+    background: url('../Images/Icons/bin.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/bin.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/bin.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/bin.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 1.8em, 0%;
+    cursor: pointer;
+    border: 0 none;
+    border-radius: 5px;
+    text-indent: 2em;
+    outline: none;
+}
+
+    .editButton div, .removeButton div {
+        font-size: 2em;
+        padding: 0 .5em;
+    }
+
 /*-----------LANDSCAPE MODE FOR PHONES-------------*/
 
 @media only screen and (min-width: 480px) {
     .column-0 {
-        width: 1.5em;
+        width: 1em;
         float: left;
     }
 
@@ -40,26 +85,26 @@
     }
 
     /*---------------LOCATION-----------------*/
+    .monthseperator-top {
+        width: 50%;
+    }
 
     .location-image {
         width: 100%;
     }
 
-    .location {
-        top: 7em;
+    .location-activity-wrapper .activityDetails {
+        padding: 0 5em;
     }
 
-    .bestMonthsToVisitWrapper, .bestMonthsToVisitLowerWrapper {
-        width: 70%;
-    }
-
-        .bestMonthsToVisitWrapper .monthsSeperator {
-            margin: 0 auto;
+        .location-activity-wrapper .activityDetails > div {
+            font-size: 1em;
         }
 
-        .bestMonthsToVisitWrapper .item {
-            padding: .6em;
-        }
+            .location-activity-wrapper .activityDetails > div:first-of-type {
+                font-size: 1.4em;
+            }
+
 
     /*------RIGHT ARROW*/
     .hairline-down-arrow {
@@ -95,7 +140,6 @@
 
     .rating {
         padding: 0 .2em;
-        width: 65%;
         float: none;
         text-align: center;
         display: table;
@@ -113,5 +157,53 @@
     .socialButtons.left {
         float: left;
         margin: 1em;
+    }
+
+    .list-activity-wrapper .activityDetails {
+        padding: 0em 4em;
+        width: 65%;
+    }
+
+    .list-activity-wrapper > div:first-of-type {
+        float: left;
+        width: 20%;
+        padding: 0;
+    }
+
+    .list-activity-wrapper .activitybookingDetails {
+        float: right;
+        width: 70%;
+        padding: .2em 1em;
+    }
+
+    .location-details {
+        padding: .2em 0em;
+        text-indent: .4em;
+        transition: .5s all;
+        margin: 0 .1em;
+        font-size: 1em;
+        text-align: left;
+    }
+
+    .location-detailsSpace {
+        padding: .2em 0;
+        text-indent: 1em;
+        transition: .5s all;
+        font-size: 1em;
+    }
+
+    .label {
+        height: 2em;
+        float: right;
+        font-size: 1.1em;
+        padding: .4em .5em;
+        font-weight: 500;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: #fff;
+        margin: -1em auto;
+        transition: 0.5s all;
+        display: table;
     }
 }

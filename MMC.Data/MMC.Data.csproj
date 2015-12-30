@@ -114,6 +114,7 @@
     <Compile Include="Data Repositories\ActivityBookingRepository.cs" />
     <Compile Include="Data Repositories\ActivityCategoryMasterRepository.cs" />
     <Compile Include="Data Repositories\ActivityCompanyRepository.cs" />
+    <Compile Include="Data Repositories\ActivityDatesRepository.cs" />
     <Compile Include="Data Repositories\ActivityDaySchedulerRepository.cs" />
     <Compile Include="Data Repositories\ActivityDiscountRepository.cs" />
     <Compile Include="Data Repositories\ActivityHolidaysRepository.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="Data Repositories\UserApplicationActivityRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
+    <Compile Include="Data Repositories\GuestFavoritesRepository.cs" />
     <Compile Include="MyMonkeyCapContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RepositoryResource.Designer.cs">

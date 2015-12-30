@@ -13,7 +13,7 @@ using Unity.Wcf;
 
 namespace MMC.ServiceHost
 {
-	public class WcfServiceFactory : UnityServiceHostFactory
+    public class WcfServiceFactory : UnityServiceHostFactory
     {
         private static IUnityContainer mContainter;
 
@@ -28,7 +28,7 @@ namespace MMC.ServiceHost
             container.RegisterType<IActivitiesMasterRepository, ActivitiesMasterRepository>();
             container.RegisterType<IDataRepositoryFactory, DataRepositoryFactory>();
             container.RegisterType<IBusinessEngineFactory, BusinessEngineFactory>();
-            container.RegisterType<IActivitiesBookingEngine, ActivitiesBookingEngine>();   
+            container.RegisterType<IActivitiesBookingEngine, ActivitiesBookingEngine>();
         }
 
         protected override System.ServiceModel.ServiceHost CreateServiceHost(System.Type serviceType, System.Uri[] baseAddresses)
@@ -39,7 +39,7 @@ namespace MMC.ServiceHost
         public System.ServiceModel.ServiceHost CreateServiceHostWithType(Type serviceType)
         {
             ConfigureContainer(mContainter);
-            return new UnityServiceHost(mContainter,serviceType);            
+            return new UnityServiceHost(mContainter, serviceType);
         }
-    }    
+    }
 }

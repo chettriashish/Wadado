@@ -10,6 +10,7 @@ using Microsoft.Practices.Unity;
 using System.ServiceModel;
 using System.Net.Http;
 using System.Runtime.Serialization;
+using System.Collections.Generic;
 
 
 namespace MMC.Client.Proxies.Tests
@@ -26,14 +27,16 @@ namespace MMC.Client.Proxies.Tests
         [TestMethod]
         public void TestLocationClientConnection()
         {
-            ChannelFactory<IActivitiesService> channelFactory =
-               new ChannelFactory<IActivitiesService>("");
+            ChannelFactory<IUsersService> channelFactory =
+               new ChannelFactory<IUsersService>("");
 
-            IActivitiesService proxy = channelFactory.CreateChannel();
+            IUsersService proxy = channelFactory.CreateChannel();
             (proxy as ICommunicationObject).Open();
 
-            ActivityDetailsDataContract contract = new ActivityDetailsDataContract();
-            contract = proxy.GetAllActivities("GANGTOK", "HIGHFLY", "smartphone");
+            //ActivityDetailsDataContract contract = new ActivityDetailsDataContract();
+
+            IEnumerable<ActivitySummaryDataContract> contract = new List<ActivitySummaryDataContract>();
+            contract = proxy.RemoveFromFavorites("133660173670779", "MEDIUMFLY", "smartphone");
             
             (proxy as ICommunicationObject).Close();
         }

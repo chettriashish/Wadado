@@ -15,21 +15,27 @@ using System.Security.Permissions;
 using MMC.Common;
 using Core.Common.Exceptions;
 using MMC.Business.Contracts.DataContracts;
+using System.ServiceModel.Activation;
 
 namespace MMC.Business.Managers
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
         ConcurrencyMode = ConcurrencyMode.Multiple,
         ReleaseServiceInstanceOnTransactionComplete = false)]
+    [AspNetCompatibilityRequirements(
+        RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class ActivitiesManager : ManagerBase, IActivitiesService
-    {        
+    {
+        const string MOBILE = "_mob";
+        const string TABLET = "_tab";
+        const string THUMBNAIL = "_thumb";
         public ActivitiesManager(IDataRepositoryFactory dataRepositoryFactory, IBusinessEngineFactory businessEngineFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
             _BusinessEngineFactory = businessEngineFactory;
             ObjectBase.Container = Bootstrapper.Bootstrapper.Initialise();
         }
-       
+
         public ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -42,9 +48,9 @@ namespace MMC.Business.Managers
             });
         }
         [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
+        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]
         public IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName)
-        {            
+        {
             return ExecuteFaultHandledOperation(() =>
             {
                 IActivitiesMasterRepository activitiesMasterRepository
@@ -56,7 +62,7 @@ namespace MMC.Business.Managers
                 Account authAccount = accountRepository.ValidateUserByLogin(loginName);
                 if (authAccount == null)
                 {
-                    NotFoundException ex = 
+                    NotFoundException ex =
                     new NotFoundException(string.Format("cannot find account for login name {0} to use for security trimming", loginName));
 
                     throw new FaultException<NotFoundException>(ex, ex.Message);
@@ -72,21 +78,19 @@ namespace MMC.Business.Managers
         }
         protected override Account LoadAuthorizationValidationAccount(string loginName)
         {
-            IAccountRepository accountRepository 
+            IAccountRepository accountRepository
                 = _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
             Account authAccount = accountRepository.ValidateUserByLogin(loginName);
 
-            if(authAccount == null)
+            if (authAccount == null)
             {
-                throw new NotFoundException(string.Format("cannot find account for login name {0} to use for security trimming",loginName));
-            }           
+                throw new NotFoundException(string.Format("cannot find account for login name {0} to use for security trimming", loginName));
+            }
 
             return authAccount;
         }
-        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
-        public bool CheckForActivityAvailablity(string activityKey, int adults,int children, DateTime bookingDate, string time)
+        public bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -103,27 +107,12 @@ namespace MMC.Business.Managers
 
                 IEnumerable<ActivityBooking> allBookedActivites = activityBookingRepository.Get();
 
-                return activitiesBookingEngine.IsActivityAvailable(activityKey, bookingDate, time, allBookedActivites, adults,children, allActivities);
+                return activitiesBookingEngine.IsActivityAvailable(activityKey, bookingDate, time, allBookedActivites, adults, children, allActivities);
             });
         }
 
-        ///TBD ONCE LOGIN IS CREATED
-        //[OperationBehavior(TransactionScopeRequired = true)]
-        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]  
-        //public ActivityBooking BookActivityForUser(string loginUser, ActivityBooking bookingDetails)
-        //{
-        //    return ExecuteFaultHandledOperation(() =>
-        //    {
-        //        IActivitiesBookingEngine activitiesBookingEngine
-        //          = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
-
-        //        return activitiesBookingEngine.BookActivityForUser(loginUser, bookingDetails);
-        //    });
-        //}
-
         [OperationBehavior(TransactionScopeRequired = true)]
-        public ActivityBooking BookActivityForUser(ActivityBookingDataContract bookingDetails)
+        public ActivityBookingDataContract BookActivityForUser(ActivityBookingDataContract bookingDetails)
         {
             return ExecuteFaultHandledOperation(() =>
             {
@@ -132,7 +121,7 @@ namespace MMC.Business.Managers
                 ActivityBooking activityBooking = new ActivityBooking();
                 activityBooking.ActivityBookingKey = bookingDetails.ActivityBookingKey;
                 activityBooking.ActivityKey = bookingDetails.ActivityKey;
-                activityBooking.BookingDate = bookingDetails.BookingDate;
+                activityBooking.BookingDate = Convert.ToDateTime(bookingDetails.BookingDate);
                 activityBooking.ChildParticipants = bookingDetails.ChildParticipants;
                 activityBooking.Participants = bookingDetails.Participants;
                 activityBooking.SessionKey = bookingDetails.SessionKey;
@@ -144,14 +133,66 @@ namespace MMC.Business.Managers
                 activityBooking.RefundAmount = bookingDetails.RefundAmount;
                 activityBooking.IsPaymentComplete = bookingDetails.IsPaymentComplete;
                 activityBooking.CreatedDate = bookingDetails.CreatedDate;
-                return activitiesBookingEngine.BookActivityForUser(activityBooking);
+                activitiesBookingEngine.BookActivityForUser(activityBooking);
+                return bookingDetails;
             });
         }
 
 
-        public IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey)
+        public IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent)
         {
-            throw new NotImplementedException();
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivitiesBookingEngine activitiesBookingEngine
+                    = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
+
+                IActivitiesMasterRepository activitiesRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+                IActivityLocationRepository activityLocationRepository = _DataRepositoryFactory.GetDataRepository<IActivityLocationRepository>();
+                IEnumerable<ActivityBooking> allBookedActivites = activitiesBookingEngine.GetBookedActivitiesForUser(sessionKey, default(string));
+                IActivityImagesRepository imageRepository = _DataRepositoryFactory.GetDataRepository<IActivityImagesRepository>();
+                ILocationsMasterRepository locationRepository = _DataRepositoryFactory.GetDataRepository<ILocationsMasterRepository>();
+                List<ActivityBookingDataContract> result = new List<ActivityBookingDataContract>();
+                foreach (var item in allBookedActivites)
+                {
+                    ActivityBookingDataContract bookedActivities = new ActivityBookingDataContract();
+                    bookedActivities.ActivityBookingKey = item.ActivityBookingKey;
+                    bookedActivities.ActivityKey = item.ActivityKey;
+                    bookedActivities.Currency = activitiesRepository.Get(item.ActivityKey).Currency;
+                    bookedActivities.Cost = activitiesRepository.Get(item.ActivityKey).Cost;
+                    bookedActivities.ActivityName = activitiesRepository.Get(item.ActivityKey).Name;
+                    bookedActivities.Location = locationRepository.Get(activityLocationRepository.Get().
+                        Where(entity => entity.ActivityKey == item.ActivityKey).FirstOrDefault().LocationKey).LocationName.ToLower();
+                    bookedActivities.BookingDate = item.BookingDate;
+                    bookedActivities.ChildParticipants = item.ChildParticipants;
+                    bookedActivities.Participants = item.Participants;
+                    bookedActivities.SessionKey = item.SessionKey;
+                    bookedActivities.Time = item.Time;
+                    bookedActivities.IsConfirmed = item.IsConfirmed;
+                    bookedActivities.IsDeleted = item.IsDeleted;
+                    bookedActivities.IsCancelled = item.IsCancelled;
+                    bookedActivities.PaymentAmount = item.PaymentAmount;
+                    bookedActivities.RefundAmount = item.RefundAmount;
+                    bookedActivities.IsPaymentComplete = item.IsPaymentComplete;
+                    bookedActivities.CreatedDate = Convert.ToDateTime(item.CreatedDate);
+                    bookedActivities.ConfirmationDate = Convert.ToDateTime(item.ConfirmationDate);
+                    string thumbnailImageURL = imageRepository.Get().Where(entity => entity.ActivityKey == item.ActivityKey
+                        && entity.IsThumbnail == true).FirstOrDefault().ImageURL;
+                    if (userAgent == BusinessResource.SMARTPHONE)
+                    {
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}",thumbnailImageURL, THUMBNAIL, MOBILE);
+                    }
+                    else if (userAgent == BusinessResource.TABLET)
+                    {
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}",thumbnailImageURL, THUMBNAIL, TABLET);
+                    }
+                    else
+                    {
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}",thumbnailImageURL, THUMBNAIL);
+                    }
+                    result.Add(bookedActivities);
+                }
+                return result;
+            });
         }
     }
 }

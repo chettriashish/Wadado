@@ -15,7 +15,7 @@ using MMC.Client.Contracts.DataContracts;
 
 namespace MMC.Web.Controllers.Home
 {
-    public class HomeController : Controller
+    public class HomeController : BaseViewController
     {
         IHomeDataService _homeDataService;
         ILoginService _loginService;
@@ -25,10 +25,11 @@ namespace MMC.Web.Controllers.Home
         {
             _homeDataService = homeDataService;
             _loginService = loginService;
-            _usersService = usersService;
+            _usersService = usersService;           
         }
         public ActionResult Index()
         {
+            SessionHandler("Home");
             return View();
         }
 

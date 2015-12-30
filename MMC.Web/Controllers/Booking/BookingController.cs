@@ -4,6 +4,7 @@ using MMC.Login.Contracts;
 using MMC.Web.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -23,31 +24,47 @@ namespace MMC.Web.Controllers.Booking
         }
         public JsonResult CheckForActivityAvailability(string selectedActivityKey, int numAdults, int numChildren, string date, string time)
         {
-            DateTime convertedDate = Convert.ToDateTime(date);
-            bool availabilityStatus = _activitiesService.CheckForActivityAvailablity(selectedActivityKey, numAdults, numChildren, convertedDate, time);
-            ActivityAvailabilityDetails result = new ActivityAvailabilityDetails() { Status = availabilityStatus };
-            if (!availabilityStatus)
+            if (time == string.Empty || time == default(string))
             {
-                result.Message = string.Format("Sorry.The selected date cannot accomodate the tickets you have specified. Please select a new date or reduce the number of tickets");
+                ActivityAvailabilityDetails result = new ActivityAvailabilityDetails() { Status = false };
+                result.Message = string.Format("Please select an activity time");
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
-            return Json(result, JsonRequestBehavior.AllowGet);
+            else
+            {
+                DateTime convertedDate = DateTime.ParseExact(date, "d/MM/yyyy", CultureInfo.InvariantCulture);
+                bool availabilityStatus = _activitiesService.CheckForActivityAvailablity(selectedActivityKey, numAdults, numChildren, convertedDate, time);
+                ActivityAvailabilityDetails result = new ActivityAvailabilityDetails() { Status = availabilityStatus };
+                if (!availabilityStatus)
+                {
+                    result.Message = string.Format("Sorry.The selected date cannot accomodate the tickets you have specified. Please select a new date or reduce the number of tickets");
+                }
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }                       
         }
-        
+
         public JsonResult AddSelectedActivityToUsersCart(string selectedActivityKey, int numAdults,
            int numChildren, string bookingDate, string bookingTime, decimal total)
-        {            
-            if (Session["sessionKey"] != null)
+        {
+            if (Session["sessionKey"] != null && Session["guestKey"] != null)
+            {
+                string sessionKey = Convert.ToString(Session["sessionKey"]);
+                string guestKey = Convert.ToString(Session["guestKey"]);
+                return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey, numAdults,
+                numChildren, DateTime.ParseExact(bookingDate, "d/MM/yyyy", CultureInfo.InvariantCulture), bookingTime, total, sessionKey, guestKey), JsonRequestBehavior.AllowGet);
+            }
+            else if (Session["sessionKey"] != null)
             {
                 string sessionKey = Convert.ToString(Session["sessionKey"]);
                 return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey, numAdults,
-                numChildren, Convert.ToDateTime(bookingDate), bookingTime, total, sessionKey), JsonRequestBehavior.AllowGet);
+                numChildren, DateTime.ParseExact(bookingDate, "d/MM/yyyy", CultureInfo.InvariantCulture), bookingTime, total, sessionKey), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 LogUserSession();
                 string sessionKey = Convert.ToString(Session["sessionKey"]);
                 return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey, numAdults,
-                numChildren, Convert.ToDateTime(bookingDate), bookingTime, total, sessionKey), JsonRequestBehavior.AllowGet);
+                numChildren, DateTime.ParseExact(bookingDate, "d/MM/yyyy", CultureInfo.InvariantCulture), bookingTime, total, sessionKey), JsonRequestBehavior.AllowGet);
             }
         }
 

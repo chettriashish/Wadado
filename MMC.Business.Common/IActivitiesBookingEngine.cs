@@ -15,5 +15,7 @@ namespace MMC.Business.Common
         ActivityBooking BookActivityForUser(ActivityBooking bookedActivity);
 
         void UpdateActivityForUser(string sessionKey, string userKey);
+
+        IEnumerable<ActivityBooking> GetBookedActivitiesForUser(string sessionKey, string guestKey);
     }
 }

@@ -47,18 +47,18 @@ namespace MMC.Data.DataRepositories
                              where e.SessionKey == sessionKey
                              && e.IsDeleted == false
                              select e);
-                return query;
+                return query.ToList();
             }
         }
-        public IEnumerable<ActivityBooking> GetBookedActivitiesByUserEmail(string email)
+        public IEnumerable<ActivityBooking> GetBookedActivitiesByUserKey(string userKey)
         {
             using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
             {
                 var query = (from e in entityContext.ActivityBookingSet
-                             where e.Email == email
+                             where e.GuestKey == userKey
                              && e.IsDeleted == false
                              select e);
-                return query;
+                return query.ToList();
             }
         }
     }

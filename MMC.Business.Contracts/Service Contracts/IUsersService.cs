@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MMC.Business.Contracts
 {
-    [ServiceContract]    
+    [ServiceContract]
     public interface IUsersService
     {
         [OperationContract]
@@ -22,7 +22,15 @@ namespace MMC.Business.Contracts
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
         bool UpdateGuestInformation(UserSessionDataContract userInformation);
-         [OperationContract]
+        [OperationContract]
         UserSessionDataContract GetGuestInformation(string guestKey);
+        [OperationContract]
+        bool AddToFavorites(string guestKey, string activityKey);
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> RemoveFromFavorites(string guestKey, string activityKey, string userAgent);
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> GetFavorites(string guestKey, string userAgent);
+        [OperationContract]
+        bool CheckForActivityInFavorites(string guestKey, string activityKey);
     }
 }

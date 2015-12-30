@@ -15,18 +15,19 @@ namespace MMC.Web.Controllers.ActivityDetails
         private IActivitiesService _activitiesService;
         public ActivityDetailsController(IActivitiesService activitiesService)
         {
-            _activitiesService = activitiesService;
+            _activitiesService = activitiesService;           
         }
 
         public JsonResult GetSelectedActivityDetails(string selectedLocation, string activityKey)
         {
             string device = GetDeviceInformation();
-            ActivityDetailsDataContract selectedActivityDetails = _activitiesService.GetAllActivities(locationKey: selectedLocation, activityKey: activityKey, userAgent: device);                                    
+            ActivityDetailsDataContract selectedActivityDetails = _activitiesService.GetAllActivities(locationKey: selectedLocation.ToUpper(), activityKey: activityKey, userAgent: device);
             return Json(selectedActivityDetails, JsonRequestBehavior.AllowGet);
-        }        
+        }
         // GET: ActivityDetails
         public ActionResult Index()
         {
+            SessionHandler("ActivityDetails");
             return View();
         }
     }

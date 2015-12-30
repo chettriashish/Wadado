@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="ActivitiesManager" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd2" namespace="wadado.in" />
+      <xsd:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Core.Common.ServiceModel" />
+      <xsd:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd5" namespace="http://www.wadado.in" />
+      <xsd:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd6" namespace="http://schemas.datacontract.org/2004/07/Core.Common.Core" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IActivitiesService_GetAllActivities_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllActivities" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_GetAllActivities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllActivitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_GetAllBookedActivities_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBookedActivities" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_GetAllBookedActivities_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllBookedActivitiesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_CheckForActivityAvailablity_InputMessage">
+    <wsdl:part name="parameters" element="tns:CheckForActivityAvailablity" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_CheckForActivityAvailablity_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CheckForActivityAvailablityResponse" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_BookActivityForUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:BookActivityForUser" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_BookActivityForUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BookActivityForUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_GetUsersCurrentActivityCart_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersCurrentActivityCart" />
+  </wsdl:message>
+  <wsdl:message name="IActivitiesService_GetUsersCurrentActivityCart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUsersCurrentActivityCartResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IActivitiesService">
+    <wsdl:operation name="GetAllActivities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IActivitiesService/GetAllActivities" message="tns:IActivitiesService_GetAllActivities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IActivitiesService/GetAllActivitiesResponse" message="tns:IActivitiesService_GetAllActivities_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBookedActivities">
+      <wsdl:input wsaw:Action="http://tempuri.org/IActivitiesService/GetAllBookedActivities" message="tns:IActivitiesService_GetAllBookedActivities_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IActivitiesService/GetAllBookedActivitiesResponse" message="tns:IActivitiesService_GetAllBookedActivities_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CheckForActivityAvailablity">
+      <wsdl:input wsaw:Action="http://tempuri.org/IActivitiesService/CheckForActivityAvailablity" message="tns:IActivitiesService_CheckForActivityAvailablity_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IActivitiesService/CheckForActivityAvailablityResponse" message="tns:IActivitiesService_CheckForActivityAvailablity_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="BookActivityForUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IActivitiesService/BookActivityForUser" message="tns:IActivitiesService_BookActivityForUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IActivitiesService/BookActivityForUserResponse" message="tns:IActivitiesService_BookActivityForUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersCurrentActivityCart">
+      <wsdl:input wsaw:Action="http://tempuri.org/IActivitiesService/GetUsersCurrentActivityCart" message="tns:IActivitiesService_GetUsersCurrentActivityCart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IActivitiesService/GetUsersCurrentActivityCartResponse" message="tns:IActivitiesService_GetUsersCurrentActivityCart_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IActivitiesService" type="tns:IActivitiesService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllActivities">
+      <soap:operation soapAction="http://tempuri.org/IActivitiesService/GetAllActivities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllBookedActivities">
+      <soap:operation soapAction="http://tempuri.org/IActivitiesService/GetAllBookedActivities" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CheckForActivityAvailablity">
+      <soap:operation soapAction="http://tempuri.org/IActivitiesService/CheckForActivityAvailablity" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BookActivityForUser">
+      <soap:operation soapAction="http://tempuri.org/IActivitiesService/BookActivityForUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUsersCurrentActivityCart">
+      <soap:operation soapAction="http://tempuri.org/IActivitiesService/GetUsersCurrentActivityCart" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ActivitiesManager">
+    <wsdl:port name="BasicHttpBinding_IActivitiesService" binding="tns:BasicHttpBinding_IActivitiesService">
+      <soap:address location="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc/ActivitiesService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

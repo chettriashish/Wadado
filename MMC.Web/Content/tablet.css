@@ -1,30 +1,90 @@
-﻿@media only screen and (min-width: 768px) {
+﻿@media only screen and (min-width: 600px) {
     /*-----NAVIGATION -----*/
     nav ul li a br {
         display: none;
     }
 
 
-
+    #colorbar {
+        height: 48px;
+    }
     /*-----CONTENT -----*/
 
-    .home-search-content { 
+    .uppercontent, .lowercontent {
+        padding: .4em 0;
+        height: auto;
+        z-index: 1;
+    }
+
+    .home-search-content {
         width: 60%;
-        top:20%;
-        position:relative;
+        top: 20%;
+        position: relative;
+        display: table;
     }
 
     /*-----COLUMNS -----*/
-    .column-6, .column-4, .column-3 {
+
+    .column-12, .column-9, .column-8, .column-6, .column-7, .column-5, .column-4, .column-3, .column-2, .column-0 {
+        padding: .4em 1%;
         float: left;
+    }
+
+    .column-auto {
+        float: left;
+        padding: .4em 1%;
+        width: auto;
+        position: relative;
+        display: table;
+    }
+
+    .columnRight-auto, .columnRight-0 {
+        float: right;
+        padding: .4em 5%;
+    }
+
+    .column-top {
+        padding: .4em 0;
+    }
+
+    .columnRight-0 {
+        width: 1.5em;
+    }
+
+    .column-7 {
+        width: 58.33%;
+    }
+
+    .column-8 {
+        width: 66.6%;
+    }
+
+    .column-5 {
+        width: 41.2%;
+    }
+
+    .column-4 {
+        width: 33.3%;
     }
 
     .column-6 {
         width: 50%;
     }
 
-    .column-4 {
-        width: 33.3%;
+        .column-8.right, .column-4.right, .column-6.right {
+            padding: .4em 1% 0 0em;
+        }
+
+        .column-8.left, .column-4.left, .column-6.left {
+            padding: .4em 0 .2em 1%;
+        }
+
+        .column-8.top, .column-4.top, .column-6.top {
+            padding: .4em 0;
+        }
+
+    .uppercontent .row img, .uppercontent-home img {
+        transform: scale(1);
     }
 
     .column-3 {
@@ -33,5 +93,483 @@
 
     .column-2 {
         width: 33.33%;
+    }
+
+
+    .imageDiv {
+        background-color: rgba(0,0,0,.6);
+        padding: .2em .3em;
+        width: 100%;
+        margin-top: -3.2em;
+        color: white;
+        position: relative;
+        display: table;
+    }
+
+    .imageDiv95 {
+        background-color: rgba(0,0,0,.6);
+        padding: .2em .3em;
+        margin-top: -3.4em;
+        color: white;
+        position: relative;
+        display: table;
+    }
+
+        .imageDiv div, .imageDiv95 div {
+            padding: .6em 0;
+        }
+
+        .imageDiv .leftDiv, .imageDiv95 .leftDiv {
+            float: left;
+            font-size: 0.8em;
+        }
+
+            .imageDiv .leftDiv p:first-child, .imageDiv95 .leftDiv p:first-child {
+                text-align: left;
+                padding: 0 0 .2em 0;
+                font-size: 1.2em;
+            }
+
+        .imageDiv .rightDiv, .imageDiv95 .rightDiv {
+            float: right;
+            font-size: 1.2em;
+            padding: 0 .5em;
+        }
+
+    .lowercontent {
+        background-color: #febe00;
+        height: auto;
+        text-align: center;
+    }
+
+        .lowercontent .header {
+            padding: 1em;
+            font-weight: 600;
+        }
+
+        .lowercontent div p:first-child {
+            padding: .4em 0 .2em 0;
+            font-size: .8em;
+            font-weight: 400;
+            text-align: justify;
+            float: left;
+        }
+
+        .lowercontent div p {
+            padding: .4em 0 .2em 0;
+            font-size: .8em;
+            font-weight: 400;
+            text-align: left;
+        }
+
+    /****************USED IN ACTIVITY DETAILS*******************************/
+    .contentRight {
+        float: right;
+        width: 12em;
+        display: table;
+    }
+    /*******************LOCATION IMAGE*******************/
+    .location-activity-wrapper {
+        border: 1px solid #ccc;
+        height: 100px;
+        border-radius: 5px;
+        padding: 8% 0 0 0;
+    }
+
+        .location-activity-wrapper > div:first-of-type {
+            float: left;
+            padding: .8em 1em;
+        }
+
+            .location-activity-wrapper > div:first-of-type img {
+                transform: scale(1);
+            }
+
+        .location-activity-wrapper .activityDetails {
+            padding: 0 4em;
+        }
+
+            .location-activity-wrapper .activityDetails > div {
+                font-size: 1em;
+            }
+
+                .location-activity-wrapper .activityDetails > div:first-of-type {
+                    font-size: 1.8em;
+                }
+
+    .caption {
+        color: #000;
+        letter-spacing: 0.1em;
+        font-size: 1.5em;
+        font-weight: 400;
+        padding: .5em 0 0 0;
+        text-align: center;
+    }
+
+    .location {
+        padding: .2em .3em;
+        margin-top: -1.4em;
+        text-transform: uppercase;
+        top: -3.4em;
+        color: white;
+        font-size: 4em;
+        position: relative;
+        display: table;
+        text-shadow: 5px 5px 5px rgba(0,0,0, 1);
+    }
+
+    .location-details {
+        padding: .2em 0em;
+        text-indent: 0em;
+        transition: .5s all;
+        margin: 0 .1em;
+        font-size: 1em;     
+        text-align:left;   
+    }
+
+    .location-detailsSpace {
+        padding: .2em 0;
+        text-indent: 1em;
+        transition: .5s all;
+        font-size: 1em;
+    }
+    /*.bestMonthsToVisitWrapper {        
+        margin:0 auto;  
+        display:block;
+    }*/
+
+    .monthseperator-top {
+        width: 45%;
+    }
+    /*****************MENU TEXT***********************/
+    .menu-nav.open li a {
+        border-bottom: 1px solid #ccc;
+        display: block;
+        width: 90%;
+        padding: 1em;
+        margin: 0 auto;
+        font-size: 1.5em;
+        font-weight: normal;
+        /*text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.15);*/
+        color: black;
+        text-decoration: none;
+        /*border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1); */
+    }
+
+    /*----------------ACTIVITY LIST STYLES----------------------*/
+
+    .list-activity-wrapper {
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        display: inline-table;
+        height: auto;
+    }
+
+        .list-activity-wrapper > div:first-of-type img {
+            transform: scale(1);
+        }
+
+        .list-activity-wrapper > div:first-of-type {
+            float: left;
+            width: 30%;
+            padding: 0;
+        }
+
+        .list-activity-wrapper div {
+            float: left;
+            padding: 4%;
+        }
+
+        .list-activity-wrapper .activityDetails {
+            float: left;
+            width: 65%;
+            padding: 2em 3em;
+        }
+
+        .list-activity-wrapper .activitybookingDetails {
+            float: right;
+            width: 70%;
+            text-align: left;
+        }
+
+        .list-activity-wrapper .activityDetails div:first-of-type {
+            font-size: 1.2em;
+            letter-spacing: 1px;
+            padding: .3em 0 0 0;
+            float: none;
+            font-weight: 600;
+        }
+
+        .list-activity-wrapper .activityDetails > div {
+            font-size: 1.1em;
+            letter-spacing: 1px;
+            padding: .3em 0 0 0;
+            float: none;
+        }
+
+        .list-activity-wrapper .activitybookingDetails {
+            padding: .2em 1.2em;
+            text-transform: capitalize;
+        }
+
+            .list-activity-wrapper .activitybookingDetails div:first-of-type {
+                font-size: 1em;
+                padding: .1em 0 0 0;
+                float: left;
+                font-weight: 600;
+            }
+
+            .list-activity-wrapper .activitybookingDetails > div {
+                font-size: .9em;
+                padding: .1em 0 0 0;
+                float: left;
+            }
+
+            .list-activity-wrapper .activitybookingDetails .inline {
+                margin-left: 2em;
+            }
+
+    .activity {
+        font-weight: 600;
+    }
+
+    /*------RIGHT ARROW*/
+    .hairline-down-arrow {
+        width: 15px;
+        height: 25px;
+    }
+
+        .hairline-down-arrow:after {
+            width: 10px;
+            height: 25px;
+            border-width: 0px 15px 15px 0px;
+            transform: rotate(-50deg) translate(-50%, 100%) skew(5deg, 5deg);
+        }
+
+    .primary-nav {
+        height: 55px;
+    }
+
+    /****************IMAGE SLIDER****************/
+    .sliderContainer, .sliderContainer > div img {
+        cursor: move;
+        left: 0px;
+        width: 100%;
+        height: 300px;
+        overflow: hidden;
+    }
+
+    .label {
+        height: 2em;
+        float: right;
+        font-size: 1em;
+        padding: .5em .8em;
+        font-weight: 500;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: #fff;
+        margin: .5em auto;
+        transition: 0.5s all;
+        display: table;
+    }
+
+    .buttonNoBorder {
+        margin-top: 0em;
+    }
+
+    /***************SETTING DATEPICKER WIDTH***************************/
+    .ll-skin-cangas {
+        font-size: 80%;
+        width: auto;
+    }
+
+    /***********************RATING*******************************/
+    .subHeader, .subHeaderRight, .subHeaderCenter {
+        padding: .1em 0;
+        font-size: 1em;
+        font-weight: 600;
+        text-align: left;
+    }
+
+    .subHeaderCenter {
+        text-align: center;
+    }
+
+    .subHeaderRight {
+        text-align: right;
+    }
+
+    .rating {
+        padding: .2em .2em;
+        width: 6.5em;
+        margin: -1em auto auto auto;
+        float: none;
+        text-align: center;
+        display: table;
+        padding: 0 .5em;
+    }
+
+        .rating div:first-of-type {
+            float: none;
+        }
+
+        .rating div {
+            float: left;
+            padding: .1em 0;
+        }
+
+    /**************BOOKING STYLES***************/
+    .booking-outer {
+        display: table;
+        width: 50%;
+        position: relative;
+        float: right;
+    }
+
+    .booking-wrapper {
+        visibility: collapse;
+        position: relative;
+        display: table;
+        margin: 0 auto;
+        opacity: 0;
+        transition: 1s all;
+        float: none;
+        height: auto;
+    }
+
+        .booking-wrapper.open {
+            visibility: visible;
+            opacity: 1;
+            transition: 1s all;
+        }
+
+    .num-left {
+        float: right;
+        margin-right: 1em;
+    }
+
+    .num-right {
+        float: left;
+        margin-left: -1em;
+    }
+
+        .num-left a, .num-right a {
+            background-color: rgb(204,204,204);
+            font-size: 1em;
+            padding: .5em 1em;
+            display: table;
+            width: 2em;
+            height: 1.5em;
+            outline: none;
+            font-weight: 700;
+            margin: 0 .5em;
+            cursor: pointer;
+            color: rgb(0,0,0);
+            transition: 0.5s all;
+        }
+
+
+            .num-left a:after, .num-right a:after {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
+    .label-input {
+        padding: .5em 0 0 0;
+        float: left;
+        font-weight: 600;
+        margin-left: -.6em;
+        text-align: left;
+        outline: none;
+        cursor: pointer;
+        color: #000;
+        transition: 0.5s all;
+    }
+
+        .label-input:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+    .booking {
+        margin: .2em auto .5em auto;
+        float: none;
+        display: table;
+    }
+
+        .booking div:first-of-type {
+            transition: margin .2s linear;
+            margin: 0em auto;
+            text-align: center;
+        }
+
+        .booking div {
+            margin: 1em auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .booking a {
+            margin: 0 auto;
+            height: 1em;
+            font-size: .8em;
+            padding: .8em 2em;
+            background-color: rgb(251,189,19);
+            outline: none;
+            cursor: pointer;
+            color: rgb(255,255,255);
+            margin: 0 auto;
+            transition: 0.5s all;
+            text-transform: uppercase;
+        }
+}
+
+@media only screen and (min-width: 800px) {
+    /*.bestMonthsToVisitWrapper {       
+        font-size: 1.2em;
+    }*/
+
+    .location {
+        top: -4.4em;
+    }
+
+    .monthseperator-top {
+        width: 35%;
+    }
+
+    .location-activity-wrapper .activityDetails {
+        padding: 0 5em;
+    }
+
+        .location-activity-wrapper .activityDetails > div {
+            font-size: 1.2em;
+        }
+
+            .location-activity-wrapper .activityDetails > div:first-of-type {
+                font-size: 1.8em;
+            }
+
+    .list-activity-wrapper .activityDetails div:first-of-type {
+        font-size: 1.4em;
+        letter-spacing: 1px;
+        padding: .3em 0 0 0;
+        float: none;
+        font-weight: 600;
+    }
+
+    .list-activity-wrapper .activityDetails > div {
+        font-size: 1.3em;
+        letter-spacing: 1px;
+        padding: .2em 0 0 0;
+        float: none;
+    }
+
+    .list-activity-wrapper .activityDetails {
+        float: left;
+        width: 70%;
     }
 }

@@ -1,4 +1,141 @@
 ﻿@{
     ViewBag.Title = "WADADO.IN";
 }
-<h2>Cart</h2>
+<!--SLIDER REFERENCE-->
+<script src="~/Scripts/slider/jssor.js"></script>
+<script src="~/Scripts/slider/jssor.slider.js"></script>
+<script src="~/Scripts/slider/slider.js"></script>
+
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+
+<!--SEARCH REFERENCE-->
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
+
+<script src="~/Scripts/ActivitiesCart/services/ActivitiesCartDataService.js"></script>
+<script src="~/Scripts/ActivitiesCart/controllers/ActivitiesCartController.js"></script>
+
+
+<!--VIDEO REFERENCE-->
+<link href="~/Content/video/default-vid.css" rel="stylesheet" />
+<link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
+<link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
+<link href="~/Content/phone.css" rel="stylesheet" />
+
+<div id="colorbar">
+</div>
+<div class="cover"></div>
+<div class="contentWrapper" data-ng-controller="ActivitiesCartController">
+    <div>
+        @Html.Partial("../Partial/_search")
+    </div>
+    <div>
+        @Html.Partial("../Partial/_mobilemenu")
+    </div>
+    <div class="uppercontent" ng-cloak>
+        <!--ROW START-->
+        <div class="row">
+            <div class="header-upper-noborder">
+                <div>
+                    <span>Cart</span>
+                </div>
+            </div>
+        </div>
+        <!--ROW END-->
+        <!--ROW START-->
+        <div class="column-12">
+            <div class="column-7">
+                <div class="labelHeader">
+                    <span>Cart total ({{Count}} item)</span>
+                </div>
+            </div>
+            @*<div class="column-4">
+                    <div>
+                        <div ng-if="isINR()" style="float:left;">
+                            <img src="~/Images/Icons/rupeered_mob.png" />
+                        </div>
+                        <div style="float:left;">
+                            <span>{{Total}}</span>
+                        </div>
+                    </div>
+                </div>*@
+        </div>
+        <!--ROW END-->
+        <div ng-repeat="item in activities">
+            <div class="list-activity-wrapper">
+                <div>
+                    <img ng-src="{{item.ImageURL}}" />
+                </div>
+                <div class="activitybookingDetails">
+                    <div>
+                        <span>{{item.ActivityWithLocation}}</span>
+                    </div>
+                </div>
+                <div class="activitybookingDetails">
+                    <div>
+                        <img src="~/Images/Icons/events_icon_mobile.png" />
+                    </div>
+                    <div class="labelPlain">
+                        <span>{{item.f_BookingDate}}</span>
+                    </div>
+                </div>
+                <div class="activitybookingDetails">
+                    <div>
+                        <img src="~/Images/Icons/people_web.png" />
+                    </div>
+                    <div class="labelPlain">
+                        <span>{{item.Participants}}</span>
+                    </div>
+                    <div class="inline" ng-if="isINR()">
+                        <img src="~/Images/Icons/rupee_mob.png" />
+                    </div>
+                    <div class="labelPlain">
+                        <span>{{item.Cost}}</span>
+                    </div>
+                </div>
+                <div class="activitybookingDetails" ng-show="showChildInfo()">
+                    <div>
+                        <img src="~/Images/Icons/kids.png" />
+                    </div>
+                    <div class="labelPlain">
+                        <span>{{item.ChildParticipants}}</span>
+                    </div>
+                    <div class="inline" ng-if="isINR()">
+                        <img src="~/Images/Icons/rupee_mob.png" />
+                    </div>
+                    <div class="labelPlain">
+                        <span>{{item.CostForChild}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-6">
+                    <button class="editButton"><div>Edit</div></button>
+                </div>
+                <div class="column-6">
+                    <button class="removeButton"><div>Remove</div></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

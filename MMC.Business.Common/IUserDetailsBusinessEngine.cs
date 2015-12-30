@@ -14,5 +14,9 @@ namespace MMC.Business.Common
         bool UpdateGuestInformation(GuestInformationMaster guestInformation, string sessionKey);
 
         GuestInformationMaster GetUserInformation(string sessionKey);
+        bool AddToFavorites(string guestKey, string activityKey);
+        bool RemoveFromFavorites(string guestKey, string activityKey);
+        IEnumerable<ActivitiesMaster> GetFavorites(string guestKey);
+        bool CheckForActivityInFavorites(string guestKey, string activityKey);
     }
 }

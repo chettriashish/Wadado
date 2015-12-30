@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd2" namespace="wadado.in" />
+  <xs:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd5" namespace="http://www.wadado.in" />
+  <xs:element name="GetAllActivities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="locationKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="activityKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userAgent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllActivitiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="wadado.in" minOccurs="0" name="GetAllActivitiesResult" nillable="true" type="q1:ActivityDetailsDataContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllBookedActivities">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="loginName" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetAllBookedActivitiesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://www.wadado.in" minOccurs="0" name="GetAllBookedActivitiesResult" nillable="true" type="q2:ArrayOfActivitiesMaster" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckForActivityAvailablity">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="activityKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="adults" type="xs:int" />
+        <xs:element minOccurs="0" name="children" type="xs:int" />
+        <xs:element minOccurs="0" name="bookingDate" type="xs:dateTime" />
+        <xs:element minOccurs="0" name="time" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CheckForActivityAvailablityResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="CheckForActivityAvailablityResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BookActivityForUser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="wadado.in" minOccurs="0" name="bookingDetails" nillable="true" type="q3:ActivityBookingDataContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BookActivityForUserResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="wadado.in" minOccurs="0" name="BookActivityForUserResult" nillable="true" type="q4:ActivityBookingDataContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsersCurrentActivityCart">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sessionKey" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="userAgent" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetUsersCurrentActivityCartResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="wadado.in" minOccurs="0" name="GetUsersCurrentActivityCartResult" nillable="true" type="q5:ArrayOfActivityBookingDataContract" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

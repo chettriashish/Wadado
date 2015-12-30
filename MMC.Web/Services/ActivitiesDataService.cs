@@ -23,14 +23,14 @@ namespace MMC.Web.Services
                 {
                     foreach (var item in results)
                     {
-                        item.DefaultActivityImage.ImageURL = string.Format("../../Images/{0}{1}{2}", item.DefaultActivityImage.ImageURL, THUMBNAIL, MOBILE);
+                        item.DefaultActivityImage.ImageURL = string.Format("Images/{0}{1}{2}", item.DefaultActivityImage.ImageURL, THUMBNAIL, MOBILE);
                     }
                 }
                 else
                 {
                     foreach (var item in results)
                     {
-                        item.DefaultActivityImage.ImageURL = string.Format("../../Images/{0}{1}{2}", item.DefaultActivityImage.ImageURL, THUMBNAIL, TABLET);
+                        item.DefaultActivityImage.ImageURL = string.Format("Images/{0}{1}{2}", item.DefaultActivityImage.ImageURL, THUMBNAIL, TABLET);
                     }
                 }
             }
@@ -49,7 +49,7 @@ namespace MMC.Web.Services
             activityOne.Activity = new ActivitiesMaster();
             activityOne.DefaultActivityImage = new ActivityImages();
             activityOne.ActivityType = activityType;
-            ((ActivitiesMaster)activityOne.Activity).ActivitesKey = "HIGHFLY";
+            ((ActivitiesMaster)activityOne.Activity).ActivitesKey = "MEDIUMFLY";
             ((ActivitiesMaster)activityOne.Activity).Name = "Rope Course Activity at Ranka";
             ((ActivitiesMaster)activityOne.Activity).DifficultyRating = 1;
             ((ActivitiesMaster)activityOne.Activity).Included = "A LOT OF THINGS";
@@ -80,7 +80,7 @@ namespace MMC.Web.Services
             activityThree.Activity = new ActivitiesMaster();
             activityThree.DefaultActivityImage = new ActivityImages();
             activityThree.ActivityType = activityType;
-            ((ActivitiesMaster)activityThree.Activity).ActivitesKey = "HIGHFLY";
+            ((ActivitiesMaster)activityThree.Activity).ActivitesKey = "HIGHFLY2";
             ((ActivitiesMaster)activityThree.Activity).Name = "Rock Climbing at Mt. Simvo ";
             ((ActivitiesMaster)activityThree.Activity).DifficultyRating = 3;
             ((ActivitiesMaster)activityThree.Activity).Included = "A LOT OF THINGS";

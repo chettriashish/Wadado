@@ -13,6 +13,19 @@
     <!--ROW START-->
     <div class="booking-wrapper">
         <div class="row">
+            <div class="column-12">
+                <div class="table-10">
+                    <div ng-repeat="item in selectedActivityDetails.AllActivityTimes">
+                        <div class="column-6">
+                            <label class="radio">
+                                <input type="radio" ng-model="time.val" name="act-time" value="{{item}}" ng-click="selectTime()">{{item}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
             <div class="column-6">
                 <div class="num-left">
                     <a ng-click="removeGuests('A')">-</a>
@@ -61,11 +74,13 @@
                     </div>
                 </div>
             </div>
-        </div>        
+        </div>
         <div class="row">
             <div class="column-12">
-                <div class="error">
-                    <span>{{ErrorMessage}}</span>
+                <div class="center-element">
+                    <div class="error">
+                        <span>{{ErrorMessage}}</span>
+                    </div>
                 </div>
             </div>
         </div>

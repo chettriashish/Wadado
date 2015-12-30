@@ -35,5 +35,19 @@ namespace MMC.Web.Controllers
             //KEEP SESSION ALIVE AND CHECK IF ITEMS IN CART ARE STILL AVAILABLE
             //IF NOT REMOVE THE ITEMS FROM CART
         }
+        //HANDLES SESSION CLEARANCE BASED ON THE RULES DEFINED FOR EACH CONTROLLER
+        public void SessionHandler(string controller)
+        {
+            if (Session != null)
+            {
+                switch (controller)
+                {
+                    case "Home": Session.Remove("action"); break;
+                    case "ActivityDetails": Session.Remove("action"); break;
+                    case "Location": Session.Remove("action"); break;
+                    case "Activities": Session.Remove("action"); break;
+                } 
+            }            
+        }
     }
 }

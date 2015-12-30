@@ -48,6 +48,7 @@
     <Compile Include="Repository Interfaces\IActivityBookingRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityCategoryMasterRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityCompanyRepository.cs" />
+    <Compile Include="Repository Interfaces\IActivityDatesRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityDaySchedulerRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityDiscountRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityHolidaysRepository.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="Repository Interfaces\IActivityTimeSchedulerRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTypeMasterRepository.cs" />
     <Compile Include="Repository Interfaces\ICompanyMasterRepository.cs" />
+    <Compile Include="Repository Interfaces\IGuestFavoritesRepository.cs" />
     <Compile Include="Repository Interfaces\IGuestInformationMasterRepository.cs" />
     <Compile Include="Repository Interfaces\ILocationMasterRepository.cs" />
     <Compile Include="Repository Interfaces\ITopOffersRepository.cs" />

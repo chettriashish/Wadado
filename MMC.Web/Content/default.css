@@ -65,7 +65,12 @@ header {
     }
 
 
-
+/********CENTERING***********/
+.center-element {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
 
 
 /*-----NAVIGATION -----*/
@@ -156,8 +161,8 @@ nav ul li:last-child a {
     color: #000;
 }
 
-    .uppercontent .row img, .uppercontent-home . img {
-        transform: scale(.8,.8);
+    .uppercontent .row img, .uppercontent-home img {
+        transform: scale(1);
     }
 
     .uppercontent .row span, .uppercontent .quote span {
@@ -179,14 +184,20 @@ nav ul li:last-child a {
     transition: 1s all;
 }
 /*-----COLUMNS -----*/
-.column-12, .column-9, .column-6, .column-4, .column-3, .column-2, .column-0 {
+.column-12, .column-9, .column-6, .column-4, .column-3, .column-5, .column-2, .column-0 {
     padding: .3em 2%;
     float: left;
 }
 
+
+
 .column-12 {
     width: 100%;
 }
+
+    .column-12.top {
+        padding: .3em 0;
+    }
 
 .column-0 {
     width: 1.5em;
@@ -194,7 +205,7 @@ nav ul li:last-child a {
 
 .column-1 {
     float: right;
-    padding: .5em 2%;
+    padding: .4em 2%;
 }
 
 .column-9 {
@@ -203,6 +214,14 @@ nav ul li:last-child a {
 
 .column-6 {
     width: 50%;
+}
+
+    .column-6.border {
+        border-right: 1px solid;
+    }
+
+.column-5 {
+    width: 41.2%;
 }
 
 .column-4 {
@@ -216,6 +235,27 @@ nav ul li:last-child a {
 .column-2 {
     width: 16.6%;
 }
+
+
+
+.border-top {
+    padding: .5em 0 0 0;
+    border-top: 1px solid #ccc;
+    width: 100%;
+}
+
+    .border-top span {
+        font-size: .8em;
+        text-transform: capitalize;
+    }
+
+.inner-container {
+    margin: 0 0 0 2em;
+}
+
+    .inner-container div {
+        padding: 0 0 .2em 0;
+    }
 
 .buttonNoBorder {
     margin-top: -1em;
@@ -263,6 +303,30 @@ nav ul li:last-child a {
     display: table;
 }
 
+.labelPlain {
+    float: left;
+    font-size: .8em;
+    margin: .2em .2em;
+    font-weight: 400;
+    outline: none;
+    color: #000;
+    transition: 0.5s all;
+}
+
+.labelHeader {
+    float: left;
+    font-size: 1.2em;
+    padding: .4em .2em;
+    font-weight: 400;
+    outline: none;
+    color: #000;
+    transition: 0.5s all;
+}
+
+.listSubTotal {
+    text-indent: -1em;
+    margin-top: -.2em;
+}
 
 .color-1, .color-2 {
     padding: .4em 1em .5em 1em;
@@ -358,10 +422,10 @@ nav ul li:last-child a {
 
 .imageDiv {
     background-color: rgba(0,0,0,.6);
-    padding: 0 .5em;
+    padding: .2em .5em;
     width: 100%;
     position: absolute;
-    margin-top: -2.4em;
+    margin-top: -3em;
     color: white;
 }
 
@@ -371,18 +435,21 @@ nav ul li:last-child a {
 
     .imageDiv .leftDiv {
         float: left;
-        font-size: 1em;
-    }
-
-    .imageDiv .rightDiv {
-        float: right;
         font-size: 0.7em;
     }
 
-        .imageDiv .rightDiv p:first-child {
-            text-align: right;
+        .imageDiv .leftDiv p:first-child {
+            text-align: left;
             padding: 0 0 .2em 0;
+            font-size: 1.2em;
         }
+
+    .imageDiv .rightDiv {
+        float: right;
+        font-size: 1em;
+    }
+
+
 /*----------------LOCATION STYLES----------------------*/
 
 .location-activity-wrapper {
@@ -418,19 +485,16 @@ nav ul li:last-child a {
 }
 
 .location {
-    position: absolute;
-    top: 7em;
-    left: 0;
-    width: 100%;
-    text-align: center;
+    padding: .2em .3em;
+    text-transform: uppercase;
+    top: -3.4em;
     color: white;
-    font-size: x-large;
-    letter-spacing: .1em;
-    font-weight: 400;
-    -moz-transition: .5s all;
-    -webkit-transition: .5s all;
-    -o-transition: .5s all;
-    transition: .5s all;
+    font-size: 2em;
+    position: relative;
+    display: table;
+    margin: 0 auto;
+    margin-top: -1.4em;
+    text-shadow: 5px 5px 5px rgba(0,0,0, 1);
 }
 
 .location-options {
@@ -438,40 +502,43 @@ nav ul li:last-child a {
     border-width: 1px 0 1px 0;
 }
 
-.bestMonthsToVisitWrapper {
+.location-holder {
+    background-color: #ccc;
     display: table;
-    margin: 0 auto;
-    width: 80%;
-    color: #000;
-    font-size: 1em;
+    width: 100%;
+    height: auto;
+    margin: 0 0 1em 0;
     padding: .2em 0;
 }
 
-    .bestMonthsToVisitWrapper .monthsSeperator {
-        width: auto;
-        padding: 0em .5em 0 0.5em;
-        float: none;
-        width: 100%;
-        margin: 0 auto;
-        display: inline-table;
+.bestMonthsToVisitWrapper {
+    display: table;
+    margin: 0 auto;
+}
+
+    .bestMonthsToVisitWrapper.item {
+        float: left;
+        padding: 0em 0.2em .2em .5em;
     }
 
-    .bestMonthsToVisitWrapper .item {
+    .bestMonthsToVisitWrapper.litem {
         float: left;
-        text-align: center;
-        -moz-transition: .5s all;
-        -webkit-transition: .5s all;
-        -o-transition: .5s all;
-        transition: .5s all;
-        padding: .3em;
+        padding: 0em 0.2em 0 .5em;
     }
+
+.monthseperator-top {
+    border-top: 1px solid #747678;
+    display: table;
+    margin: 0 auto;
+    width: 90%;
+}
 
 .caption {
     color: #000;
     letter-spacing: 0.1em;
     font-size: medium;
     font-weight: 400;
-    padding: 2em 0 0em 0;
+    padding: 1em 0 0em 0;
     text-align: center;
 }
 
@@ -512,11 +579,39 @@ nav ul li:last-child a {
         width: 55%;
     }
 
-        .list-activity-wrapper .activityDetails > div {
+    .list-activity-wrapper .activitybookingDetails {
+        float: right;
+        width: 70%;
+        text-align: left;
+    }
+
+    .list-activity-wrapper .activityDetails > div {
+        font-size: 1em;
+        letter-spacing: 1px;
+        padding: .3em 0 0 0;
+        float: none;
+    }
+
+    .list-activity-wrapper .activitybookingDetails {
+        padding: .2em 1.2em;
+        text-transform: capitalize;
+    }
+
+        .list-activity-wrapper .activitybookingDetails div:first-of-type {
             font-size: 1em;
-            letter-spacing: 1px;
-            padding: .3em 0 0 0;
-            float: none;
+            padding: .1em 0 0 0;
+            float: left;
+            font-weight: 600;
+        }
+
+        .list-activity-wrapper .activitybookingDetails > div {
+            font-size: .9em;
+            padding: .1em 0 0 0;
+            float: left;
+        }
+
+        .list-activity-wrapper .activitybookingDetails .inline {
+            margin-left: 2em;
         }
 
 .activity {
@@ -766,9 +861,23 @@ footer {
     font-family: Dooodleista;
     font-size: 2em;
     letter-spacing: 1px;
-    font-weight: 500;
+    font-weight: bold;
     background-color: rgba(244,244,244,.8);
     border-bottom: 1px solid #ccc;
+    transition: .5s all;
+    padding: .3em 0 .2em 0;
+}
+
+.header-upper-noborder {
+    width: 100%;
+    text-align: center;
+    color: #000;
+    text-transform: uppercase;
+    font-family: Dooodleista;
+    font-size: 2em;
+    letter-spacing: 1px;
+    font-weight: bold;
+    background-color: rgba(244,244,244,.8);
     transition: .5s all;
     padding: .3em 0 .2em 0;
 }
@@ -819,6 +928,7 @@ footer {
     font-size: 1.25em;
     font-weight: 600;
     text-align: left;
+    display: block;
 }
 
 .subHeaderCenter {
@@ -831,11 +941,11 @@ footer {
 
 .rating {
     padding: 0 .2em;
-    width: 80%;
     margin: -1em auto auto auto;
     float: none;
     text-align: center;
     display: table;
+    padding: 0 .5em;
 }
 
     .rating div:first-of-type {
@@ -849,8 +959,8 @@ footer {
 
 .crop-height {
     /* max-width: 1200px; /* native or declared width of img src (if known) */
-    max-height: 200px;
-    height: 200px; /* lt ie8 */
+    max-height: 225px;
+    height: 250px; /* lt ie8 */
     height: auto;
     overflow: hidden;
 }
@@ -875,6 +985,7 @@ footer {
     display: table;
     background-color: #ccc;
     width: 100%;
+    position: relative;
 }
 
 .num-left {
@@ -926,6 +1037,29 @@ footer {
         display: table;
         clear: both;
     }
+
+input[type=radio] {
+    margin: .2em .4em 0 0;
+    vertical-align: top;
+}
+
+label {
+    font-size: .7em;
+}
+
+.table-10 {
+    margin: 0 auto;
+    position: relative;
+    width: 10em;
+    display: table;
+}
+
+.booking-outer {
+    display: table;
+    width: 50%;
+    position: relative;
+    float: right;
+}
 
 .booking {
     margin: .2em auto .5em auto;
@@ -984,7 +1118,7 @@ footer {
         margin: 0 auto;
         transition: 0.5s all;
         border-radius: 5px;
-        border:none;
+        border: none;
         background-color: rgb(251,189,19);
     }
 
@@ -1001,6 +1135,9 @@ footer {
 .error {
     font-size: .8em;
     color: red;
+    text-align: center;
+    display: table;
+    margin: 0 auto;
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {

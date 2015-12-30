@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountLoginModel.cs" />
+    <Compile Include="ActionModel.cs" />
     <Compile Include="ActivityAvailabilityDetails.cs" />
     <Compile Include="ActivityCategoryModel.cs" />
     <Compile Include="LocationModel.cs" />

@@ -17,7 +17,7 @@
         top: 7px;
         right: 7px;
         float: right;
-        width: 50px;
+        width: 40px;
         height: 35px;
         background: url('../Images/Icons/menu-icon-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
         background: url('../Images/Icons/menu-icon-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
@@ -89,6 +89,51 @@
         background-size: 1.8em, 0%;
     }
 
+    .nav-button.info div {
+        text-indent: 0px;
+        width: 20px;
+        height: 20px;
+        margin: -10px -10px 0 20px;
+        float: right;
+        color: rgb(255,255,255);
+        padding: .25em 0;
+        font-size: .9em;
+        font-weight:bold;
+        outline: none;
+        background-color: rgb(229,0,0);
+        border-radius: 10px;
+        -webkit-animation-name: highlight; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+        animation-name: highlight;
+        animation-duration: 1s;
+    }
+
+    /* Chrome, Safari, Opera */
+    @-webkit-keyframes highlight {
+        from {
+            background-color: rgb(255,255,255);
+            color: rgb(0,0,0);
+        }
+
+        to {
+            background-color: rgb(229,0,0);
+            color: rgb(255,255,255);
+        }
+    }
+
+    /* Standard syntax */
+    @keyframes highlight {
+        from {
+            background-color: rgb(255,255,255);
+            color: rgb(0,0,0);
+        }
+
+        to {
+            background-color: rgb(251,189,19);
+            color: rgb(255,255,255);
+        }
+    }
+
     /* Navigation Bar
 	-------------------------------------------------------- */
 
@@ -121,7 +166,7 @@
             width: 75%;
             float: none;
             margin: 0 auto;
-            margin-top:.45em;
+            margin-top: .45em;
         }
     /*end overriding default styles from mobile menu*/
 
@@ -133,7 +178,7 @@
         padding: .3em;
         display: table;
         text-transform: uppercase;
-        border-radius:2px;        
+        border-radius: 2px;
     }
 
         .menusearch-input div:first-of-type {

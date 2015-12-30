@@ -2,6 +2,7 @@
 	font-size: 90%;
     width:275px;
     margin:0 auto;        
+    position:relative;
 }
 
 .ll-skin-cangas .ui-widget {

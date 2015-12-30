@@ -1,5 +1,5 @@
 ﻿using MMC.Business.Entities;
-using MMC.Data.Contracts.Repository_Interfaces;
+using MMC.Data.Contracts.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

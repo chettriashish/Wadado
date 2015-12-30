@@ -24,13 +24,18 @@ namespace MMC.Web.Services
                     result = GetLocationDetailsForMobile(locationName);
                     foreach (var item in result.AllActivities)
                     {
-                        item.ImageURL = string.Format("../Images/icons/{0}.png", item.ImageURL);
+                        item.ImageURL = string.Format("Images/icons/{0}.png", item.ImageURL);
                     }                    
-                    result.DefaultLocationImageURL = string.Format("../Images/mobile/{0}", result.SelectedLocation.LocationImage);
+                    result.DefaultLocationImageURL = string.Format("Images/mobile/{0}", result.SelectedLocation.LocationImage);
                 }
                 else
                 {
-                    
+                    result = GetLocationDetailsForTab(locationName);
+                    foreach (var item in result.AllActivities)
+                    {
+                        item.ImageURL = string.Format("Images/icons/{0}.png", item.ImageURL);
+                    }
+                    result.DefaultLocationImageURL = string.Format("Images/tablet/{0}", result.SelectedLocation.LocationImage);
                 }
             }
             else
@@ -39,7 +44,6 @@ namespace MMC.Web.Services
             }
             return result;            
         }
-
         public IEnumerable<LocationsMaster> GetAllLocations()
         {
             List<LocationsMaster> results = new List<LocationsMaster>();
@@ -80,23 +84,22 @@ namespace MMC.Web.Services
             LocationModel result = CreateDummyLocationModel().Where(entity => entity.SelectedLocation.LocationName.ToUpper() == locationName.ToUpper()).ToList().FirstOrDefault();
             return result;
         }
-        private IEnumerable<LocationModel> GetLocationDetailsForTab(string locationName)
+        private LocationModel GetLocationDetailsForTab(string locationName)
         {
-            List<LocationModel> results = new List<LocationModel>();
-            return results;
+            LocationModel result = CreateDummyLocationModel().Where(entity => entity.SelectedLocation.LocationName.ToUpper() == locationName.ToUpper()).ToList().FirstOrDefault();
+            return result;
         }
         private IEnumerable<LocationModel> GetLocationDetails(string locationName)
         {
             List<LocationModel> results = new List<LocationModel>();
             return results;
         }
-
         private List<LocationModel> CreateDummyLocationModel()
         {
             List<LocationModel> results = new List<LocationModel>();
             LocationModel model1 = new LocationModel();            
             model1.AllActivities = new List<ActivityCategoryModel>();
-            model1.SelectedLocation = new LocationsMaster() { LocationKey = "Darjeeling", LocationImage = "darjeeling", LocationName = "Darjeeling", Country = "INDIA" };            
+            model1.SelectedLocation = new LocationsMaster() { LocationKey = "Gangtok", LocationImage = "gangtok", LocationName = "Gangtok", Country = "INDIA" };            
             model1.SelectedLocation.Season1Start = "Mar";
             model1.SelectedLocation.Season1End = "Jun";
             model1.SelectedLocation.Season2Start = "Sept";

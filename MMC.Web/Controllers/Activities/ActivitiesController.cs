@@ -9,18 +9,19 @@ using System.Web.Mvc;
 
 namespace MMC.Web.Controllers.Activities
 {
-    public class ActivitiesController : Controller
+    public class ActivitiesController : BaseViewController
     {
         private IActivitiesDataService _activitiesDataService;
 
         public ActivitiesController(IActivitiesDataService activitiesDataService)
         {
-            _activitiesDataService = activitiesDataService;
+            _activitiesDataService = activitiesDataService;            
         }
 
         // GET: Activities
         public ActionResult Index()
-        {            
+        {
+            SessionHandler("Activities");
             return View();
         }
 

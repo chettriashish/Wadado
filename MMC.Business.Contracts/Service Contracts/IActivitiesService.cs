@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.ServiceModel;
+using System.ServiceModel.Activation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,7 +18,7 @@ namespace MMC.Business.Contracts
         ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent);
 
         [OperationContract]
-        [FaultContract(typeof(AuthorizationValidationException))]
+        //[FaultContract(typeof(AuthorizationValidationException))]
         IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName);
         [OperationContract]
         bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time);
@@ -30,7 +31,7 @@ namespace MMC.Business.Contracts
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        ActivityBooking BookActivityForUser(ActivityBookingDataContract bookingDetails);
+        ActivityBookingDataContract BookActivityForUser(ActivityBookingDataContract bookingDetails);
 
         ///TBD ONCE LOGIN IS COMPLETE
         //[OperationContract]
@@ -38,6 +39,6 @@ namespace MMC.Business.Contracts
 
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
-        IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey); 
+        IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent); 
     }
 }

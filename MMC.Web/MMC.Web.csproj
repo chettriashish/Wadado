@@ -201,6 +201,7 @@
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
     <Reference Include="System.Spatial, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\System.Spatial.5.6.4\lib\net40\System.Spatial.dll</HintPath>
@@ -276,6 +277,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Unity.Mvc4.1.4.0.0\lib\net45\Unity.Mvc4.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Wcf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Unity.Wcf.1.0.0\lib\Unity.Wcf.dll</HintPath>
+    </Reference>
     <Reference Include="Vestris.ResourceLib">
       <HintPath>..\packages\Vestris.ResourceLib.JetBrains.1.4.20150303.0\lib\Net\Vestris.ResourceLib.dll</HintPath>
     </Reference>
@@ -320,6 +325,7 @@
     <Compile Include="Controllers\Booking\BookingController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Location\LocationController.cs" />
+    <Compile Include="Controllers\Menu\MenuController.cs" />
     <Compile Include="Controllers\Search\SearchController.cs" />
     <Compile Include="Core\ISecurityAdapter.cs" />
     <Compile Include="Core\ViewControllerBase.cs" />
@@ -344,10 +350,12 @@
     <Content Include="Content\default.css" />
     <Content Include="Content\Fonts\Dooodleista.svg" />
     <Content Include="Content\jquery-ui-1.10.1.css" />
+    <Content Include="Content\owl.theme.css" />
     <Content Include="Content\phone.css" />
     <Content Include="Content\reset.css" />
     <Content Include="Content\tablet.css" />
     <Content Include="Content\mobilemenu.css" />
+    <Content Include="Content\tabmenu.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -422,6 +430,8 @@
     <Content Include="Images\Mobile\darjeeling_landscape.jpg" />
     <Content Include="Images\Mobile\darjeeling_portrait.jpg" />
     <Content Include="Images\Mobile\default.jpg" />
+    <Content Include="Scripts\ActivitiesCart\controllers\ActivitiesCartController.js" />
+    <Content Include="Scripts\ActivitiesCart\services\ActivitiesCartDataService.js" />
     <Content Include="Scripts\Activities\controllers\ActivityController.js" />
     <Content Include="Scripts\Activities\services\ActivityDataService.js" />
     <Content Include="Scripts\ActivityDetails\controllers\ActivityDetailsController.js" />
@@ -461,8 +471,12 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\clickoutside.directive.js" />
     <Content Include="Scripts\Common\controllers\BookingController.js" />
+    <Content Include="Scripts\Common\controllers\FavoritesController.js" />
+    <Content Include="Scripts\Common\controllers\MenuController.js" />
     <Content Include="Scripts\Common\controllers\SearchController.js" />
     <Content Include="Scripts\Common\services\BookingDataService.js" />
+    <Content Include="Scripts\Common\services\FavoritesDataService.js" />
+    <Content Include="Scripts\Common\services\MenuDataService.js" />
     <Content Include="Scripts\Common\services\SearchDataService.js" />
     <Content Include="Scripts\Directives\Booking\bookingdirective.js" />
     <Content Include="Scripts\Directives\Date\datedirective.js" />
@@ -1228,9 +1242,13 @@
     <Content Include="Scripts\Login\services\LoginDataService.js" />
     <Content Include="Scripts\slider\jssor.js" />
     <Content Include="Scripts\slider\jssor.slider.js" />
+    <Content Include="Scripts\slider\jssor.slider.mini.js" />
+    <Content Include="Content\owl.carousel.css" />
+    <Content Include="Scripts\slider\owl.carousel.min.js" />
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
     <Content Include="Unity.Mvc4.README.txt" />
+    <Content Include="Unity.Wcf.README.txt" />
     <Content Include="Video\video.mp4" />
     <Content Include="Views\Templates\choices.tpl.html" />
     <Content Include="Views\Templates\match-multiple.tpl.html" />
@@ -1320,11 +1338,12 @@
     <Content Include="Views\ActivitiesCart\Index.tablet.cshtml" />
     <Content Include="Views\ActivitiesCart\Index.smartphone.cshtml" />
     <Content Include="Views\ActivitiesCart\Index.legacy.cshtml" />
+    <Content Include="Views\Partial\_mobilemenu.cshtml" />
+    <Content Include="Views\Partial\_homemobilemenu.cshtml" />
+    <Content Include="Views\Partial\_favourites.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Scripts\ActivitiesCart\controllers\" />
     <Folder Include="Scripts\ActivitiesCart\directives\" />
-    <Folder Include="Scripts\ActivitiesCart\services\" />
     <Folder Include="Scripts\Activities\directives\" />
     <Folder Include="Scripts\ActivityDetails\directives\" />
     <Folder Include="Scripts\Location\directives\" />
@@ -1332,6 +1351,7 @@
     <Folder Include="Templates\" />
     <Folder Include="Views\BaseView\" />
     <Folder Include="Views\Booking\" />
+    <Folder Include="Views\Menu\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>
   <ItemGroup>
@@ -1349,6 +1369,30 @@
     <ProjectReference Include="..\..\Core\Core.Common\Core.Common.csproj">
       <Project>{b5c01de3-2b10-4787-992a-8c6368227b58}</Project>
       <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Business.Bootstrapper\MMC.Business.Bootstrapper.csproj">
+      <Project>{bb4934a5-c90b-4990-a5d6-bdecd9d5ba32}</Project>
+      <Name>MMC.Business.Bootstrapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Business.Common\MMC.Business.Common.csproj">
+      <Project>{5734f4fb-ae72-4984-b412-6c17c94201b7}</Project>
+      <Name>MMC.Business.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Business.Contracts\MMC.Business.Contracts.csproj">
+      <Project>{eedb0279-f944-41d3-96f9-c0e350a6e933}</Project>
+      <Name>MMC.Business.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Business.Entities\MMC.Business.Entities.csproj">
+      <Project>{081d1274-eb56-42fe-9ed2-6c949639336f}</Project>
+      <Name>MMC.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Business.Managers\MMC.Business.Managers.csproj">
+      <Project>{fe3ed0cf-28b9-4c4c-b7ab-bda86f105485}</Project>
+      <Name>MMC.Business.Managers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Business\MMC.Business.csproj">
+      <Project>{8c701f5f-522f-4956-a1a9-b61d2a8dd0c4}</Project>
+      <Name>MMC.Business</Name>
     </ProjectReference>
     <ProjectReference Include="..\MMC.Client.Bootstrapper\MMC.Client.Bootstrapper.csproj">
       <Project>{8cbb4e86-2b01-404b-8aa1-d476bdef78d2}</Project>
@@ -1373,6 +1417,14 @@
     <ProjectReference Include="..\MMC.Common\MMC.Common.csproj">
       <Project>{b5028bec-19e5-4289-b590-5af9b2275aae}</Project>
       <Name>MMC.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Data.Contracts\MMC.Data.Contracts.csproj">
+      <Project>{94b49c13-2a6f-4d32-91ad-22d8583369db}</Project>
+      <Name>MMC.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Data\MMC.Data.csproj">
+      <Project>{d15464df-facc-4136-b26f-612a97c7c00f}</Project>
+      <Name>MMC.Data</Name>
     </ProjectReference>
     <ProjectReference Include="..\MMC.Login.Contracts\MMC.Login.Contracts.csproj">
       <Project>{9f411590-5227-48db-9b32-e6916fdb8c2d}</Project>

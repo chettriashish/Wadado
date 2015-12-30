@@ -49,6 +49,7 @@
     <Compile Include="ActivityBooking.cs" />
     <Compile Include="ActivityCategoryMaster.cs" />
     <Compile Include="ActivityCompany.cs" />
+    <Compile Include="ActivityDates.cs" />
     <Compile Include="ActivityDayScheduler.cs" />
     <Compile Include="ActivityDiscount.cs" />
     <Compile Include="ActivityHolidays.cs" />
@@ -57,6 +58,7 @@
     <Compile Include="ActivityTimeScheduler.cs" />
     <Compile Include="ActivityTypeMaster.cs" />
     <Compile Include="CompanyMaster.cs" />
+    <Compile Include="GuestFavorites.cs" />
     <Compile Include="GuestInformationMaster.cs" />
     <Compile Include="LocationsMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

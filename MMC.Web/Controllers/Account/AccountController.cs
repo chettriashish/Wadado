@@ -11,23 +11,21 @@ using System.Web.Mvc;
 
 namespace MMC.Web.Controllers
 {
-    public class AccountController : ViewControllerBase
+    public class AccountController : BaseViewController
     {
-        ISecurityAdapter _securityAdapter;
         ILoginService _loginService;
         IUsersService _usersService;
-        public AccountController(ISecurityAdapter securityAdapter, ILoginService loginService, IUsersService usersService)
+        public AccountController(ILoginService loginService, IUsersService usersService)
         {
-            _securityAdapter = securityAdapter;
             _loginService = loginService;
             _usersService = usersService;
+            SessionHandler("Account");
         }
 
         [HttpGet]
         [Route("login")]
         public ActionResult Index(string returnUrl)
         {
-            _securityAdapter.Initialize();
             return View(new AccountLoginModel() { ReturnUrl = returnUrl });
         }
 
@@ -35,20 +33,31 @@ namespace MMC.Web.Controllers
         {
             return Json(_loginService.LogUserSession(() =>
             {
-                UserSessionDataContract result = _usersService.LogUserSession();
-                Session.Add("sessionKey", result.SessionKey);
-                return result;
-
+                if (Session["sessionKey"] != null)
+                {
+                    return new UserSessionDataContract() { SessionKey = Convert.ToString(Session["sessionKey"]) };
+                }
+                else
+                {
+                    UserSessionDataContract result = _usersService.LogUserSession();
+                    Session.Add("sessionKey", result.SessionKey);
+                    return result;
+                }
             }), JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult SaveUserDetails(string userName, string userKey, string userMail)
+        public ActionResult LogUserOut()
+        {
+            Session.Remove("guestKey");
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult SaveUserDetails(string userName, string userKey, string userMail, string loginMethod)
         {
             return Json(_loginService.AddUserInformation(() =>
             {
-                UserSessionDataContract userInformation = new UserSessionDataContract() { SessionKey = Convert.ToString(Session["sessionKey"]), Name = userName, GuestKey = userKey, Email = userMail };
+                UserSessionDataContract userInformation = new UserSessionDataContract() { SessionKey = Convert.ToString(Session["sessionKey"]), Name = userName, GuestKey = userKey, Email = userMail, LoginMethod = loginMethod };
                 Session.Add("guestKey", userKey);
-                return _usersService.AddGuestInformation(userInformation); 
+                return _usersService.AddGuestInformation(userInformation);
             }), JsonRequestBehavior.AllowGet);
         }
 
@@ -61,7 +70,89 @@ namespace MMC.Web.Controllers
             }
             else
             {
-                return Json(new UserSessionDataContract() {Name = default(string), SessionKey = default(string) }, JsonRequestBehavior.AllowGet);
+                return Json(new UserSessionDataContract() { Name = default(string), SessionKey = default(string) }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult AddToFavorites(string activityKey)
+        {
+            if (Session["guestKey"] != null)
+            {
+                string guestKey = Convert.ToString(Session["guestKey"]);
+                return Json(_usersService.AddToFavorites(guestKey, activityKey), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {                
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult StoreAction(string userAction, string returnURL, string activityKey)
+        {
+            ActionModel actionModel = new ActionModel();
+            actionModel.Action = userAction;
+            actionModel.ReturnURL = returnURL;
+            actionModel.ActivityKey = activityKey;
+            Session.Add("action", actionModel);           
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult RemoveFromFavorites(string activityKey)
+        {
+            if (Session["guestKey"] != null)
+            {
+                string guestKey = Convert.ToString(Session["guestKey"]);
+                return Json(_usersService.RemoveFromFavorites(guestKey, activityKey, GetDeviceInformation()), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new ActivitySummaryDataContract(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult GetFavorites()
+        {
+            if (Session["guestKey"] != null)
+            {
+                string guestKey = Convert.ToString(Session["guestKey"]);
+                return Json(_usersService.GetFavorites(guestKey, GetDeviceInformation()), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new ActivitySummaryDataContract(), JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult CheckIfActivityInGuestFavorites(string activityKey)
+        {
+            if (Session["guestKey"] != null)
+            {
+                string guestKey = Convert.ToString(Session["guestKey"]);
+                return Json(_usersService.CheckForActivityInFavorites(guestKey, activityKey), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        public ActionResult CheckForAction()
+        {
+            if (Session["action"] != null)
+            {
+                ActionModel result = new ActionModel();
+                result.Action = (Session["action"] as ActionModel).Action;
+                result.ActivityDate = (Session["action"] as ActionModel).ActivityDate;
+                result.ActivityKey = (Session["action"] as ActionModel).ActivityKey;
+                result.NumberOfAdults = (Session["action"] as ActionModel).NumberOfAdults;
+                result.NumberOfChildren = (Session["action"] as ActionModel).NumberOfChildren;
+                result.ReturnURL = (Session["action"] as ActionModel).ReturnURL;
+                result.Time = (Session["action"] as ActionModel).Time;                
+                return Json(result,JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(new ActionModel(), JsonRequestBehavior.AllowGet);
             }
         }
     }

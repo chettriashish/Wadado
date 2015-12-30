@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace MMC.Web.Controllers.Location
 {
-    public class LocationController : Controller
+    public class LocationController : BaseViewController
     {
 
         private ILocationDataService _locationDataService;
@@ -19,7 +19,8 @@ namespace MMC.Web.Controllers.Location
         }
         
         public ActionResult Index(string locationName)
-        {            
+        {
+            SessionHandler("Location");
             return View();
         }
                 

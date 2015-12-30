@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="wadado.in" elementFormDefault="qualified" targetNamespace="wadado.in" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd4" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://www.mymonkeycap.com/mymonkeycap/ActivitiesService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/Core.Common.ServiceModel" />
+  <xs:complexType name="ActivityDetailsDataContract">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="http://schemas.datacontract.org/2004/07/Core.Common.ServiceModel" base="q1:DataContractBase">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ActivityCategory" nillable="true" type="xs:string" />
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ActivityImages" nillable="true" type="q2:ArrayOfstring" />
+          <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ActivityImagesURL" nillable="true" type="q3:ArrayOfstring" />
+          <xs:element minOccurs="0" name="ActivityKey" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ActivityLocation" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ActivitySubCategory" nillable="true" type="xs:string" />
+          <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AllActivityDates" nillable="true" type="q4:ArrayOfint" />
+          <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="AllActivityTimes" nillable="true" type="q5:ArrayOfstring" />
+          <xs:element minOccurs="0" name="CancellationPolicy" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Cost" type="xs:decimal" />
+          <xs:element minOccurs="0" name="CostForChild" type="xs:decimal" />
+          <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DefaultImageURL" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DifficultyLevel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="DifficultyRating" type="xs:decimal" />
+          <xs:element minOccurs="0" name="DistanceFromNearestCity" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Duration" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="ImageURL" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="LocationCode" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="MaxPeople" type="xs:int" />
+          <xs:element minOccurs="0" name="MinPeople" type="xs:int" />
+          <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="NumAdults" type="xs:int" />
+          <xs:element minOccurs="0" name="NumChildren" type="xs:int" />
+          <xs:element minOccurs="0" name="PermitRequired" type="xs:boolean" />
+          <xs:element xmlns:q6="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="Reviews" nillable="true" type="q6:ArrayOfKeyValueOfstringstring" />
+          <xs:element minOccurs="0" name="UserRating" type="xs:decimal" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ActivityDetailsDataContract" nillable="true" type="tns:ActivityDetailsDataContract" />
+  <xs:complexType name="ActivityBookingDataContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ActivityBookingKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ActivityKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ActivityName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BookingDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BookingNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChildParticipants" type="xs:int" />
+      <xs:element minOccurs="0" name="ConfirmationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ConfirmedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Cost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="CreatedBy" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreatedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Currency" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GuestKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsCancelled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsConfirmed" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsDeleted" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsPaymentComplete" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Location" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Participants" type="xs:int" />
+      <xs:element minOccurs="0" name="PaymentAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="RefundAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="SessionKey" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ThumbnailImage" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Time" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ActivityBookingDataContract" nillable="true" type="tns:ActivityBookingDataContract" />
+  <xs:complexType name="ArrayOfActivityBookingDataContract">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ActivityBookingDataContract" nillable="true" type="tns:ActivityBookingDataContract" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfActivityBookingDataContract" nillable="true" type="tns:ArrayOfActivityBookingDataContract" />
+</xs:schema>

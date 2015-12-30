@@ -44,7 +44,7 @@ namespace MMC.Web.Services
         public IEnumerable<ActivitiesModel> GetTrendingActivities(string userAgent)
         {
             var deviceInfo = WURFL.WURFLManagerBuilder.Instance.GetDeviceForRequest(userAgent);
-            IEnumerable<ActivitiesModel> results = GetDummyData();
+            IEnumerable<ActivitiesModel> results = GetDummyData(userAgent);
 
             if (deviceInfo.GetVirtualCapability("is_mobile") == "true")
             {
@@ -56,10 +56,10 @@ namespace MMC.Web.Services
                     }
                 }
                 else
-                {
+                {                    
                     foreach (var item in results)
                     {
-                        item.DefaultActivityImage.ImageURL = string.Format("{0}{1}", item.DefaultActivityImage.ImageURL, TABLET);
+                        item.DefaultActivityImage.ImageURL = string.Format("{0}{1}", item.DefaultActivityImage.ImageURL, TABLET);                    
                     }
                 }
             }
@@ -69,9 +69,10 @@ namespace MMC.Web.Services
             }
             return results;
         }
-        private IEnumerable<ActivitiesModel> GetDummyData()
+        private IEnumerable<ActivitiesModel> GetDummyData(string userAgent)
         {
             List<ActivitiesModel> results = new List<ActivitiesModel>();
+            var deviceInfo = WURFL.WURFLManagerBuilder.Instance.GetDeviceForRequest(userAgent);
 
             ActivitiesModel activityOne = new ActivitiesModel();
             activityOne.Activity = new ActivitiesMaster();
@@ -85,8 +86,9 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityOne.Activity).Cost = 1000;
             ((ActivityImages)activityOne.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
             ((ActivityImages)activityOne.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-            ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/bakery";
-            results.Add(activityOne);
+           
+            
+        
 
             ActivitiesModel activityTwo = new ActivitiesModel();
             activityTwo.Activity = new ActivitiesMaster();
@@ -100,8 +102,8 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityTwo.Activity).Cost = 2000;
             ((ActivityImages)activityTwo.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
             ((ActivityImages)activityTwo.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-            ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/herbalbath";
-            results.Add(activityTwo);
+            
+            
 
             ActivitiesModel activityThree = new ActivitiesModel();
             activityThree.Activity = new ActivitiesMaster();
@@ -115,9 +117,6 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)activityThree.Activity).Cost = 3000;
             ((ActivityImages)activityThree.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
             ((ActivityImages)activityThree.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-            ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/beerfactorytour";
-            results.Add(activityThree);
-
 
             ActivitiesModel activityFour = new ActivitiesModel();
             activityFour.Activity = new ActivitiesMaster();
@@ -125,14 +124,15 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activityFour.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activityFour.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityFour.Activity).DifficultyRating = 4;
+            ((ActivitiesMaster)activityFour.Activity).DifficultyRating = 1;
             ((ActivitiesMaster)activityFour.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityFour.Activity).Address = "Gangtok,Sikkim";
-            ((ActivitiesMaster)activityFour.Activity).Cost = 4000;
+            ((ActivitiesMaster)activityFour.Activity).Cost = 1000;
             ((ActivityImages)activityFour.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
             ((ActivityImages)activityFour.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-            ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/family";
-            results.Add(activityFour);
+
+
+
 
             ActivitiesModel activityFive = new ActivitiesModel();
             activityFive.Activity = new ActivitiesMaster();
@@ -140,15 +140,56 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activityFive.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activityFive.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityFive.Activity).DifficultyRating = 5;
+            ((ActivitiesMaster)activityFive.Activity).DifficultyRating = 2;
             ((ActivitiesMaster)activityFive.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityFive.Activity).Address = "Kundau Residency,Sikkim";
-            ((ActivitiesMaster)activityFive.Activity).Cost = 5000;
+            ((ActivitiesMaster)activityFive.Activity).Address = "Rumtek,Sikkim";
+            ((ActivitiesMaster)activityFive.Activity).Cost = 2000;
             ((ActivityImages)activityFive.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
             ((ActivityImages)activityFive.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-            ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/riverside";
-            results.Add(activityFive);
 
+
+
+            ActivitiesModel activitySix = new ActivitiesModel();
+            activitySix.Activity = new ActivitiesMaster();
+            activitySix.DefaultActivityImage = new ActivityImages();
+
+            ((ActivitiesMaster)activitySix.Activity).ActivitesKey = "ACTIVITY ONE";
+            ((ActivitiesMaster)activitySix.Activity).Name = "LOREM IPSUM";
+            ((ActivitiesMaster)activitySix.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)activitySix.Activity).Included = "A LOT OF THINGS";
+            ((ActivitiesMaster)activitySix.Activity).Address = "Melli,Sikkim";
+            ((ActivitiesMaster)activitySix.Activity).Cost = 3000;
+            ((ActivityImages)activitySix.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
+            ((ActivityImages)activitySix.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
+
+            if (deviceInfo.GetVirtualCapability("is_mobile") == "true")
+            {
+                if (deviceInfo.GetVirtualCapability("is_smartphone") == "true")
+                {
+                    ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_tt";
+                    ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/TopTrending/family_tt";
+                    ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_tt";
+                    ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_tt";
+                    ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/TopTrending/family_tt";
+                    ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_tt";
+                }
+                else
+                {
+                    ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_tt";
+                    ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/TopTrending/family_small_tt";
+                    ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_small_tt";
+                    ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_small_tt";
+                    ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/TopTrending/family_small_tt";
+                    ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_small_tt";
+                }
+            }
+           
+            results.Add(activityOne);
+            results.Add(activityTwo);
+            results.Add(activityThree);
+            results.Add(activityFour);
+            results.Add(activityFive);
+            results.Add(activitySix);
             return results;
         }
         private IEnumerable<TopOffersModel> GetDummyTopOffers()
@@ -158,7 +199,7 @@ namespace MMC.Web.Services
             TopOffers topOffer1 = new TopOffers();
             topOffer1.TopOffersKey = "TOPOFFER1";
             topOffer1.Discount = 10;
-            topOffer1.ImageUrl = "Images/beerfactorytour";
+            topOffer1.ImageUrl = "Images/TopOffers/beerfactorytour_offer";
             offers1.Offer = topOffer1;
             offers1.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers1.Activity).ActivitesKey = "ACTIVITY ONE";
@@ -174,7 +215,7 @@ namespace MMC.Web.Services
             TopOffers topOffer2 = new TopOffers();
             topOffer2.TopOffersKey = "TOPOFFER1";
             topOffer2.Discount = 10;
-            topOffer2.ImageUrl = "Images/ropeactivity";
+            topOffer2.ImageUrl = "Images/TopOffers/herbalbath_offer";
             offers2.Offer = topOffer2;
             offers2.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers2.Activity).ActivitesKey = "ACTIVITY ONE";
@@ -185,6 +226,54 @@ namespace MMC.Web.Services
             ((ActivitiesMaster)offers2.Activity).Cost = 1000;
             offers2.DiscountedPrice = 800;
             result.Add(offers2);
+
+            TopOffersModel offers3 = new TopOffersModel();
+            TopOffers topOffer3 = new TopOffers();
+            topOffer3.TopOffersKey = "TOPOFFER1";
+            topOffer3.Discount = 10;
+            topOffer3.ImageUrl = "Images/TopOffers/beer_offer";
+            offers3.Offer = topOffer3;
+            offers3.Activity = new ActivitiesMaster();
+            ((ActivitiesMaster)offers3.Activity).ActivitesKey = "ACTIVITY ONE";
+            ((ActivitiesMaster)offers3.Activity).Name = "LOREM IPSUM";
+            ((ActivitiesMaster)offers3.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)offers3.Activity).Included = "A LOT OF THINGS";
+            ((ActivitiesMaster)offers3.Activity).Address = "LOREM IPSUM";
+            ((ActivitiesMaster)offers3.Activity).Cost = 1000;
+            offers3.DiscountedPrice = 800;
+            result.Add(offers3);
+
+            TopOffersModel offers5 = new TopOffersModel();
+            TopOffers topOffer5 = new TopOffers();
+            topOffer5.TopOffersKey = "TOPOFFER1";
+            topOffer5.Discount = 10;
+            topOffer5.ImageUrl = "Images/TopOffers/bakery_offer";
+            offers5.Offer = topOffer5;
+            offers5.Activity = new ActivitiesMaster();
+            ((ActivitiesMaster)offers5.Activity).ActivitesKey = "ACTIVITY ONE";
+            ((ActivitiesMaster)offers5.Activity).Name = "LOREM IPSUM";
+            ((ActivitiesMaster)offers5.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)offers5.Activity).Included = "A LOT OF THINGS";
+            ((ActivitiesMaster)offers5.Activity).Address = "LOREM IPSUM";
+            ((ActivitiesMaster)offers5.Activity).Cost = 1000;
+            offers5.DiscountedPrice = 800;
+            result.Add(offers5);
+
+            TopOffersModel offers4 = new TopOffersModel();
+            TopOffers topOffer4 = new TopOffers();
+            topOffer4.TopOffersKey = "TOPOFFER1";
+            topOffer4.Discount = 10;
+            topOffer4.ImageUrl = "Images/TopOffers/couple_offer";
+            offers4.Offer = topOffer4;
+            offers4.Activity = new ActivitiesMaster();
+            ((ActivitiesMaster)offers4.Activity).ActivitesKey = "ACTIVITY ONE";
+            ((ActivitiesMaster)offers4.Activity).Name = "LOREM IPSUM";
+            ((ActivitiesMaster)offers4.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)offers4.Activity).Included = "A LOT OF THINGS";
+            ((ActivitiesMaster)offers4.Activity).Address = "LOREM IPSUM";
+            ((ActivitiesMaster)offers4.Activity).Cost = 1000;
+            offers4.DiscountedPrice = 800;
+            result.Add(offers4);
 
             return result;
         }

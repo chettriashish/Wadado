@@ -38,9 +38,11 @@ namespace MMC.Data
         public DbSet<GuestInformationMaster> GuestInformationMasterSet { get; set; }
         public DbSet<Account> AccountSet { get; set; }
         public DbSet<TopOffers> TopOffersSet { get; set; }
-
         public DbSet<ActivityImages> ActivityImagesSet { get; set; }
         public DbSet<UserApplicationActivityDetails> UserApplicationActivityDetailsSet { get; set; }
+        public DbSet<ActivityDates> ActivityDatesSet { get; set; }
+        public DbSet<GuestFavorites> GuestFavoritesSet { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -67,6 +69,8 @@ namespace MMC.Data
             modelBuilder.Entity<TopOffers>().HasKey<string>(e => e.TopOffersKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<ActivityImages>().HasKey<string>(e => e.ActivityImageKey).Ignore<string>(e => e.EntityId);
             modelBuilder.Entity<UserApplicationActivityDetails>().HasKey<string>(e => e.SessionKey).Ignore(e => e.EntityId);
+            modelBuilder.Entity<ActivityDates>().HasKey<string>(e => e.ActivityDatesKey).Ignore(e => e.EntityId);
+            modelBuilder.Entity<GuestFavorites>().HasKey<string>(e => e.GuestFavouritesKey).Ignore(e => e.EntityId);
             //base.OnModelCreating(modelBuilder);
         }
     }

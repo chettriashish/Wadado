@@ -63,6 +63,7 @@
   <ItemGroup>
     <Compile Include="Data Contracts\ActivityBookingDataContract.cs" />
     <Compile Include="Data Contracts\ActivityDetailsDataContract.cs" />
+    <Compile Include="Data Contracts\ActivitySummaryDataContract.cs" />
     <Compile Include="Data Contracts\CustomerActivitiesBookingData.cs" />
     <Compile Include="Data Contracts\UserSessionDataContract.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -71,7 +72,6 @@
     <Compile Include="Service Contracts\IUsersService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

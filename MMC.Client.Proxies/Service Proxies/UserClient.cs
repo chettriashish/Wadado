@@ -52,5 +52,25 @@ namespace MMC.Client.Proxies
         {
             throw new NotImplementedException();
         }
+
+
+        public bool AddToFavorites(string guestKey, string activityKey)
+        {
+            return Channel.AddToFavorites(guestKey, activityKey);
+        }
+
+        public IEnumerable<ActivitySummaryDataContract> RemoveFromFavorites(string guestKey, string activityKey, string userAgent)
+        {
+            return Channel.RemoveFromFavorites(guestKey, activityKey, userAgent);
+        }
+
+        public IEnumerable<ActivitySummaryDataContract> GetFavorites(string guestKey, string userAgent)
+        {
+            return Channel.GetFavorites(guestKey, userAgent);
+        }
+        public bool CheckForActivityInFavorites(string guestKey, string activityKey)
+        {
+            return Channel.CheckForActivityInFavorites(guestKey, activityKey);
+        }
     }
 }

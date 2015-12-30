@@ -11,6 +11,6 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
     public interface IActivityBookingRepository : IDataRepository<ActivityBooking>
     {
         IEnumerable<ActivityBooking> GetBookedActivitiesBySession(string sessionKey);
-        IEnumerable<ActivityBooking> GetBookedActivitiesByUserEmail(string email);
+        IEnumerable<ActivityBooking> GetBookedActivitiesByUserKey(string userKey);
     }
 }

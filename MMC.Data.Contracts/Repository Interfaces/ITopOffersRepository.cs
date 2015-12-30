@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MMC.Data.Contracts.Repository_Interfaces
+namespace MMC.Data.Contracts.RepositoryInterfaces
 {
     public interface ITopOffersRepository : IDataRepository<TopOffers>
     {

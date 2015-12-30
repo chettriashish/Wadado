@@ -70,6 +70,7 @@ namespace MMC.Data.DataRepositories
 
                 IEnumerable<ActivityTimeScheduler> activityTimeScheduler = entityContext.ActivityTimeSchedulerSet.
                     Where(entity => entity.ActivityKey == activityKey);
+            
 
                 ActivityCategoryMaster activityCategory = (from entity in entityContext.ActivityTypeMasterSet
                                                            join entity1 in entityContext.ActivityCategoryMasterSet
@@ -107,11 +108,11 @@ namespace MMC.Data.DataRepositories
                     {
                         if (!item.IsThumbnail)
                         {
-                            item.ImageURL = string.Format("../../Images/{0}{1}", item.ImageURL, MOBILE);
+                            item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, MOBILE);
                         }
                         else
                         {
-                            item.ImageURL = string.Format("../../Images/{0}{1}{2}", item.ImageURL, MOBILE, THUMBNAIL);
+                            item.ImageURL = string.Format("Images/{0}{1}{2}", item.ImageURL, MOBILE, THUMBNAIL);
                         }
 
                     }
@@ -119,22 +120,22 @@ namespace MMC.Data.DataRepositories
                     {
                         if (!item.IsThumbnail)
                         {
-                            item.ImageURL = string.Format("../../Images/{0}{1}", item.ImageURL, TABLET);
+                            item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, TABLET);
                         }
                         else
                         {
-                            item.ImageURL = string.Format("../../Images/{0}{1}{2}", item.ImageURL, TABLET, THUMBNAIL);
+                            item.ImageURL = string.Format("Images/{0}{1}{2}", item.ImageURL, TABLET, THUMBNAIL);
                         }
                     }
                     else
                     {
                         if (!item.IsThumbnail)
                         {
-                            item.ImageURL = string.Format("../../Images/{0}", item.ImageURL);
+                            item.ImageURL = string.Format("Images/{0}", item.ImageURL);
                         }
                         else
                         {
-                            item.ImageURL = string.Format("../../Images/{0}{1}", item.ImageURL, THUMBNAIL);
+                            item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, THUMBNAIL);
                         }
                     }
                     if (item.IsDefault)

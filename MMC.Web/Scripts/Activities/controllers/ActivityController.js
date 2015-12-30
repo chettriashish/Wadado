@@ -38,18 +38,18 @@
 
                     if (WURFL.form_factor == "Smartphone") {
                         if (window.styleMedia.matchMedium("screen and (max-width:500px)")) {
-                            $scope.allSelectedActivity[key].ImageURL = $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_portrait.jpg";
+                            $scope.allSelectedActivity[key].ImageURL = Wadado.rootPath +"/"+ $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_portrait.jpg";
                         }
                         else if (window.styleMedia.matchMedium("screen and (min-width:550px)")) {
-                            $scope.allSelectedActivity[key].ImageURL = $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_landscape.jpg";
+                            $scope.allSelectedActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_landscape.jpg";
                         }
                     }
                     else {
                         if (window.styleMedia.matchMedium("screen and (max-width:800px)")) {
-                            $scope.allSelectedActivity[key].ImageURL = $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_portrait.jpg";
+                            $scope.allSelectedActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_portrait.jpg";
                         }
                         else if (window.styleMedia.matchMedium("screen and (min-width:900px)")) {
-                            $scope.allSelectedActivity[key].ImageURL = $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_landscape.jpg";
+                            $scope.allSelectedActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.allSelectedActivity[key].DefaultActivityImage.ImageURL + "_landscape.jpg";
                         }
                     }
                 });
@@ -74,7 +74,7 @@
             $scope.ActivityKey = item.Activity.ActivitesKey;
             ActivityDataService.getSelectedActivity($scope.ActivityKey);
         };
-
+     
         $(window).resize(function () {
             setImages();
             $scope.$apply();

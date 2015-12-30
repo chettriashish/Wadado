@@ -5,6 +5,7 @@ using MMC.Business.Contracts;
 using Core.Common.Core;
 using MMC.Business.Bootstrapper;
 using System.ServiceModel.Web;
+using MMC.Business.Contracts.DataContracts;
 
 namespace MMC.ServiceHost.Tests
 {
@@ -19,7 +20,7 @@ namespace MMC.ServiceHost.Tests
 
             IActivitiesService proxy = channelFactory.CreateChannel();
             (proxy as ICommunicationObject).Open();
-            proxy.GetAllActivities("GANGTOK", "HIGHFLY", null);            
+            ActivityDetailsDataContract result =  proxy.GetAllActivities("GANGTOK", "HIGHFLY", null);            
             channelFactory.Close();
         }       
     }

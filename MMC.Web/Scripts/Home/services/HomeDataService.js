@@ -6,7 +6,7 @@
             var deferred = $q.defer();
             $http.get('/Home').success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
-        }     
+        }
 
         var getTopOffers = function () {
             var deferred = $q.defer();
@@ -28,7 +28,7 @@
 
         var searchForLocation = function (locationName) {
             $window.location.href = "/Location/" + locationName;
-        }       
+        }
 
         var setSlider = function () {
             var _CaptionTransitions = [];
@@ -100,19 +100,44 @@
                     jssor_slider1.$ScaleWidth(Math.min(bodyWidth, 1920));
                 else
                     window.setTimeout(ScaleSlider, 150);
-            }            
-            $(window).bind("resize", ScaleSlider);          
+            }
+            $(window).bind("resize", ScaleSlider);
             //responsive code end
+        }
+
+        var setOtherDeviceSlider = function () {
+            $('.owl-carousel').owlCarousel({
+                items: 4,
+                itemsDesktop: [1199, 3],
+                itemsDesktopSmall: [900, 3],
+                itemsTablet: [960, 3],
+                itemsTabletSmall:[800,2.5],
+                // Navigation
+                navigation: false,                
+                rewindNav: true,
+                scrollPerPage: false,
+
+                //Autoplay
+                autoPlay: true,
+                stopOnHover: true,
+
+                //Basic Speeds
+                slideSpeed: 200,
+                paginationSpeed: 800,
+                rewindSpeed: 1000,
+            }
+          );
         }
 
         /*USING THE REVEALING MODULE PATTERN TO EXPOSE ONLY THE METHODS THAT WE CHOOSE TO*/
         return {
-            getHomeScreendetails: getHomeScreenDetails,            
+            getHomeScreendetails: getHomeScreenDetails,
             getTopOffers: getTopOffers,
             getTopTrendingActivities: getTopTrendingActivities,
             searchForLocation: searchForLocation,
-            getLatestNews:getLatestNews,
-            setSlider: setSlider          
+            getLatestNews: getLatestNews,
+            setSlider: setSlider,
+            setOtherDeviceSlider: setOtherDeviceSlider,
         }
     };
     app.factory("HomeDataService", homeDataService);

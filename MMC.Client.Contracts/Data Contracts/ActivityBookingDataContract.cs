@@ -16,6 +16,14 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public string ActivityKey { get; set; }
         [DataMember]
+        public string ActivityName { get; set; }
+        [DataMember]
+        public string Currency { get; set; }
+        [DataMember]
+        public decimal Cost { get; set; }
+        [DataMember]
+        public string Location { get; set; }
+        [DataMember]
         public string SessionKey { get; set; }
         [DataMember]
         public string GuestKey { get; set; }
@@ -51,6 +59,8 @@ namespace MMC.Client.Contracts.DataContracts
         public decimal RefundAmount { get; set; }
         [DataMember]
         public string BookingNumber { get; set; }
+        [DataMember]
+        public string ThumbnailImage { get; set; }
         #endregion
     }
 }

@@ -32,13 +32,13 @@ namespace MMC.Web.Controllers.ActivitiesCart
             {
                 string sessionKey = Convert.ToString(Session["sessionKey"]);
                 string guestKey = Convert.ToString(Session["guestKey"]);
-                return Json(_activitiesService.GetUsersCurrentActivityCart(sessionKey), JsonRequestBehavior.AllowGet);
+                return Json(_activitiesService.GetUsersCurrentActivityCart(sessionKey,GetDeviceInformation()), JsonRequestBehavior.AllowGet);
             }
             ///WHEN USER IS NOT LOGGED IN
             else if (Session["sessionKey"] != null)
             {
                 string sessionKey = Convert.ToString(Session["sessionKey"]);
-                return Json(_activitiesService.GetUsersCurrentActivityCart(sessionKey), JsonRequestBehavior.AllowGet);
+                return Json(_activitiesService.GetUsersCurrentActivityCart(sessionKey,GetDeviceInformation()), JsonRequestBehavior.AllowGet);
             }
             ///THIS CONDITION IS A FAIL SAFE. SHOULD NEVER HAPPEN AS SESSION SHOULD BE ALIVE AS LONG AS USER 
             ///IS ADDING ITEMS TO CART

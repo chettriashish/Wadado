@@ -13,7 +13,12 @@
             var rootPath;
             wdo.rootPath = rootPath;
         }(window.Wadado));
-        Wadado.rootPath = '@Url.Content("~")';
+        //For development
+        Wadado.rootPath = 'http://localhost:4197/';
+        //For Testing
+        //Wadado.rootPath = 'http://www.thefigtree.in/';
+        //For Production
+        //Wadado.rootPath = 'http://www.wadado.in/';
     </script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")

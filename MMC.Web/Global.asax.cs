@@ -1,13 +1,16 @@
-﻿using MMC.Client.Bootstrapper;
+﻿using MMC.Business.Managers;
+using MMC.Client.Bootstrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Activation;
 using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.WebPages;
+
 
 namespace MMC.Web
 {
@@ -24,11 +27,11 @@ namespace MMC.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);            
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-            AuthConfig.RegisterAuth();
+            AuthConfig.RegisterAuth();           
             // Initialize WURFL
             WurflConfig.Initialize();
             // Added to make the site device-aware. (Disable this to get back to default behavior.)
-            DisplayConfig.RegisterDisplayModes(DisplayModeProvider.Instance.Modes);
+            DisplayConfig.RegisterDisplayModes(DisplayModeProvider.Instance.Modes);            
         }
     }
 }

@@ -18,7 +18,7 @@ namespace MMC.Client.Contracts
         [OperationContract]
         ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent);
         [OperationContract]
-        [FaultContract(typeof(AuthorizationValidationException))]
+        //[FaultContract(typeof(AuthorizationValidationException))]
         IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName);
         [OperationContract]
         bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time);        
@@ -31,7 +31,7 @@ namespace MMC.Client.Contracts
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        ActivityBooking BookActivityForUser(ActivityBookingDataContract bookingDetails);
+        ActivityBookingDataContract BookActivityForUser(ActivityBookingDataContract bookingDetails);
 
         ///TBD ONCE LOGIN IS COMPLETE
         //[OperationContract]
@@ -39,10 +39,13 @@ namespace MMC.Client.Contracts
 
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
-        IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string sessionKey);
+        IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent);
         [OperationContract]
-        ActivityBooking AddUserActivityToCart(string activityKey, int adults,
+        ActivityBookingDataContract AddUserActivityToCart(string activityKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey);
+
+        ActivityBookingDataContract AddUserActivityToCart(string activityKey, int adults,
+            int children, DateTime bookingDate, string time, decimal total, string sessionKey, string guestKey);
         #endregion
 
         #region Async Operations
@@ -53,8 +56,8 @@ namespace MMC.Client.Contracts
         [OperationContract]
         Task<bool> CheckForActivityAvailablityAsync(string activityKey, int adults, int children, DateTime bookingDate, string time);
         [OperationContract]
-        Task<ActivityBooking> BookActivityForUserAsync(ActivityBookingDataContract bookingDetails);
-        Task<ActivityBooking> AddUserActivityToCartAsync(string activityKey, int adults,
+        Task<ActivityBookingDataContract> BookActivityForUserAsync(ActivityBookingDataContract bookingDetails);
+        Task<ActivityBookingDataContract> AddUserActivityToCartAsync(string activityKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey);
         #endregion
     }

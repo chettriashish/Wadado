@@ -65,7 +65,6 @@ namespace MMC.Business.BusinessEngines
             }
             return available;
         }
-
         public bool CheckIsActivityBookedForGuest(string activityKey, string sessionKey)
         {
             IActivityBookingRepository activityBookingRepository
@@ -81,12 +80,12 @@ namespace MMC.Business.BusinessEngines
 
             return booked;
         }
-        public bool CheckIsActivityBookedForLoggedInUser(string activityKey, string email)
+        public bool CheckIsActivityBookedForLoggedInUser(string activityKey, string userKey)
         {
             IActivityBookingRepository activityBookingRepository
                 = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
             bool booked = false;
-            IEnumerable<ActivityBooking> result = activityBookingRepository.GetBookedActivitiesByUserEmail(email: email);
+            IEnumerable<ActivityBooking> result = activityBookingRepository.GetBookedActivitiesByUserKey(userKey);
 
             if (result.Count() > 0 &&
                 result.Where(item => item.ActivityKey == activityKey).Count() > 0)
@@ -189,8 +188,6 @@ namespace MMC.Business.BusinessEngines
             ActivityBooking savedActivity = activityBookingRepository.Add(bookingDetails);
             return savedActivity;
         }
-
-
         public void UpdateActivityForUser(string sessionKey, string userKey)
         {
             IActivityBookingRepository activityBookingRepository
@@ -202,6 +199,24 @@ namespace MMC.Business.BusinessEngines
                 booking.GuestKey = userKey;
                 activityBookingRepository.Update(booking);
             }            
+        }
+
+        public IEnumerable<ActivityBooking> GetBookedActivitiesForUser(string sessionKey, string guestKey)
+        {
+            IActivityBookingRepository activityBookingRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+
+            IEnumerable<ActivityBooking> result = new List<ActivityBooking>();
+
+            if (sessionKey != default(string))
+            {
+                result = activityBookingRepository.GetBookedActivitiesBySession(sessionKey: sessionKey);                
+            }
+            else if(guestKey != default(string))
+            {
+                result = activityBookingRepository.GetBookedActivitiesByUserKey(guestKey);                
+            }
+            return result;
         }
     }
 }

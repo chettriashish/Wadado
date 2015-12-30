@@ -13,8 +13,18 @@
 
 <script src="~/Scripts/Video/video.js"></script>
 <script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<!--SEARCH REFERENCE-->
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
 <script src="~/Scripts/Location/services/LocationDataService.js"></script>
 <script src="~/Scripts/Location/controllers/LocationController.js"></script>
 <link href="~/Content/phone.css" rel="stylesheet" />
@@ -26,26 +36,7 @@
         @Html.Partial("../Partial/_search")
     </div>
     <div>
-        <div id="navWrapper">
-            <nav>
-                <div class="clearfix primary-nav">
-                    <div>
-                        <div class="menusearch-input">
-                            <div><img src="~/Images/Icons/search-icon.png" /></div>
-                            <div><span>{{location.SelectedLocation.LocationName}}</span></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="clearfix menu-nav">
-                    <li class="active" id="portfolio"><a href="#">Sign Up</a></li>
-                    <li id="services"><a href="#">Login</a></li>
-                    <li id="careers"><a href="#">About Us</a></li>
-                    <li id="contact"><a href="#">FAQs</a></li>
-                </ul>
-                <button class="logo-button">Logo Button</button>
-                <button class="nav-button">Toggle Button</button>
-            </nav>
-        </div>
+        @Html.Partial("../Partial/_mobilemenu")
     </div>
     <div class="uppercontent">
         <section>
@@ -56,6 +47,8 @@
                         <span>{{location.SelectedLocation.LocationName}}</span>
                     </div>
                 </div>
+            </div>
+            <div class="location-holder">
                 <!--Row start-->
                 <div class="row">
                     <div class="caption">
@@ -66,27 +59,54 @@
                 <!--Row start-->
                 <div class="row">
                     <div class="column-12">
-                        <div class="bestMonthsToVisitWrapper">
-                            <div ng-repeat="item in location.BestMonthsToVisit">
-                                <div>
-                                    <div class="item">
-                                        <span>{{item}}</span>
+                        <div class="center-element">
+                            <div class="bestMonthsToVisitWrapper" ng-cloak>
+                                <div ng-repeat="item in location.BestMonthsToVisit" class="bestMonthsToVisitWrapper item">
+                                    <div ng-if="$index < 5">
+                                        <div>
+                                            <span>{{item}}</span>
+                                        </div>
+                                        <div style="border-right:1px solid #747678;padding:0 1em;float:right;height:.5em;margin-top:-.5em;"></div>
+                                    </div>
+                                    <div ng-if="$index == 5">
+                                        <div>
+                                            <span>{{item}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="monthseperator-top"></div>
+                        <div class="center-element">
+                            <div class="bestMonthsToVisitWrapper" ng-cloak>
+                                <div ng-repeat="item in location.BestMonthsToVisit" class="bestMonthsToVisitWrapper litem">
+                                    <div ng-if="$index > 5 && $index < 11">
+                                        <div>
+                                            <span>{{item}}</span>
+                                        </div>
+                                        <div style="border-right:1px solid #747678;padding:0 1em;float:right;height:.5em;margin-top:-1em;"></div>
+                                    </div>
+                                    <div ng-if="$index == 11">
+                                        <div class="item">
+                                            <span>{{item}}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--Row end-->
                 </div>
                 <!--Row end-->
             </div>
         </section>
         <!--Row start-->
-        <div class="row">
+        <div class="row" ng-cloak>
             <div ng-repeat="item in location.AllActivities">
                 <div class="column-6">
                     <div class="location-activity-wrapper" ng-click="getAllSelectedActivities(item)">
                         <div>
-                            <img ng-src="{{item.ImageURL}}" />
+                            <img ng-src="{{Root}}/{{item.ImageURL}}" />
                         </div>
                         <div class="activityDetails">
                             <div>

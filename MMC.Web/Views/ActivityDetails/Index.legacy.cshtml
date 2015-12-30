@@ -23,9 +23,15 @@
 <!--BOOKING REFERENCE-->
 <script src="~/Scripts/Common/services/BookingDataService.js"></script>
 <script src="~/Scripts/Common/controllers/BookingController.js"></script>
+<!--ACCOUNT REFERENCE-->
 <script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
 <script src="~/Scripts/Login/services/LoginDataService.js"></script>
 <script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
 <script src="~/Scripts/ActivityDetails/controllers/ActivityDetailsController.js"></script>
 <script src="~/Scripts/ActivityDetails/services/ActivityDetailsDataService.js"></script>
 <script src="~/Scripts/ActivityDetails/controllers/ActivityDetailsController.js"></script>
@@ -34,13 +40,13 @@
 <link href="~/Content/video/default-vid.css" rel="stylesheet" />
 <link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
 <link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
-<link href="~/Content/phone.css" rel="stylesheet" />
+
 
 <!--DATE REFERENCE-->
 <link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
 <script src="~/Scripts/Directives/Date/datedirective.js"></script>
 <script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>
-
+<link href="~/Content/phone.css" rel="stylesheet" />
 <div id="colorbar">
 </div>
 <div class="cover"></div>
@@ -48,33 +54,12 @@
     <div>
         @Html.Partial("../Partial/_search")
     </div>
-    <div>
-        <!--The nav wrapper will have to become a seperate user control-->
-        <div id="navWrapper" data-ng-controller="LoginController">
-            <nav>
-                <div class="clearfix primary-nav">
-                    <div>
-                        <div class="menusearch-input">
-                            <div><img src="~/Images/Icons/search-icon.png" /></div>
-                            <div><span>{{selectedLocation}}</span></div>
-                        </div>
-                    </div>
-                </div>
-                <ul class="clearfix menu-nav">
-                    <li class="active" id="portfolio" ng-show=""><a>{{UserName}}</a></li>
-                    <li id="services"><a ng-click="FBLogin()">{{LoginStatus}}</a></li><!--This will change to login instead of facebook login-->
-                    <li id="checkout" ng-show=""><a ng-click="showCart()">View Cart</a></li>
-                    <li id="careers"><a href="#">About Us</a></li>
-                    <li id="contact"><a href="#">FAQs</a></li>
-                </ul>
-                <button class="logo-button">Logo Button</button>
-                <button class="nav-button">Toggle Button</button>
-            </nav>
-        </div>
+    <div>        
+        @Html.Partial("../Partial/_mobilemenu")
     </div>
     <div class="uppercontent" ng-show="showActivityDetails()" ng-hide="hideActivityDetails()">
         <div>
-            <div id="slider_container" class="slider">
+            <div id="slider_container" class="slider" ng-cloak>
                 <!-- Slides Container -->
                 <div u="slides" class="sliderContainer">
                     <div ng-repeat="item in selectedActivityDetails.ActivityImagesURL">
@@ -105,7 +90,7 @@
             </div>
             <!--Row end-->
             <!--Row start-->
-            <div class="row">
+            <div class="row" ng-cloak>
                 <div class="column-12">
                     <div class="column-0">
                         <img src="~/Images/Icons/location_nav.png" />
@@ -119,12 +104,12 @@
             </div>
             <!--Row end-->
             <!--Row start-->
-            <div class="row">
+            <div class="row" ng-cloak>
                 <div class="column-12">
                     <div class="column-0">
                         <img src="~/Images/Icons/time_duration_web.png" />
                     </div>
-                    <div class="column-4">
+                    <div class="column-3">
                         <div class="location-details">
                             <span>{{selectedActivityDetails.Duration}}</span>
                         </div>
@@ -141,7 +126,7 @@
             </div>
             <!--Row end-->
             <!--Row start-->
-            <div class="row">
+            <div class="row" ng-cloak>
                 <div class="column-12">
                     <div class="column-6">
                         <div class="subHeader">
@@ -159,7 +144,7 @@
             </div>
             <!--Row end-->
             <!--Row start-->
-            <div class="row">
+            <div class="row" ng-cloak>
                 <div class="column-12">
                     <div>
                         <span>
@@ -177,34 +162,37 @@
             </div>
             <!--Row end-->
             <!--Row start-->
-            <div class="row">
+            <div class="row" ng-cloak>
                 <div class="rating-outer">
                     <div class="column-12">
-                        <div class="column-4">
-                            <div class="subHeaderCenter">
-                                <span>User Rating</span>
-                            </div>
-                        </div>
-                        <div class="column-2">
-                            <div class="subHeaderRight">
-                                <span>|</span>
+                        <div class="column-6 border">
+                            <div class="center-element">
+                                <div class="subHeaderCenter">
+                                    <span>User Rating</span>
+                                </div>
                             </div>
                         </div>
                         <div class="column-6">
-                            <div class="subHeaderCenter">
-                                <span>Difficulty level</span>
+                            <div class="center-element">
+                                <div class="subHeaderCenter">
+                                    <span>Difficulty level</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div class="column-12">
                         <div class="column-6">
-                            <div class="rating" id="userRating">
-                                <div></div>
+                            <div class="center-element">
+                                <div class="rating" id="userRating">
+                                    <div></div>
+                                </div>
                             </div>
                         </div>
                         <div class="column-6">
-                            <div class="rating" id="diffRating">
-                                <div><span>Difficulty level</span></div>
+                            <div class="center-element">
+                                <div class="rating" id="diffRating">
+                                    <div><span>Professional</span></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -212,7 +200,7 @@
             </div>
             <!--Row end-->
             <!--Row start-->
-            <div class="row">
+            <div class="row" ng-cloak>
                 <div class="column-12">
                     <div class="column-12">
                         <div class="subHeader">

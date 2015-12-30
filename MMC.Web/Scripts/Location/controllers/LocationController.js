@@ -37,18 +37,18 @@
             if (WURFL.is_mobile) {
                 if (WURFL.form_factor == "Smartphone") {
                     if (window.styleMedia.matchMedium("screen and (max-width:479px)")) {
-                        $scope.location.SelectedLocation.LocationImage = $scope.location.DefaultLocationImageURL + "_portrait.jpg";
+                        $scope.location.SelectedLocation.LocationImage = Wadado.rootPath + "/" + $scope.location.DefaultLocationImageURL + "_portrait.jpg";
                     }
                     else if (window.styleMedia.matchMedium("screen and (min-width:480px)")) {
-                        $scope.location.SelectedLocation.LocationImage = $scope.location.DefaultLocationImageURL + "_landscape.jpg";
+                        $scope.location.SelectedLocation.LocationImage = Wadado.rootPath + "/" + $scope.location.DefaultLocationImageURL + "_landscape.jpg";
                     }
                 }
                 else {
                     if (window.styleMedia.matchMedium("screen and (max-width:800px)")) {
-                        $scope.location.SelectedLocation.LocationImage = $scope.location.DefaultLocationImageURL + "_portrait.jpg";
+                        $scope.location.SelectedLocation.LocationImage = Wadado.rootPath + "/" + $scope.location.DefaultLocationImageURL + "_portrait.jpg";
                     }
                     else if (window.styleMedia.matchMedium("screen and (min-width:900px)")) {
-                        $scope.location.SelectedLocation.LocationImage = $scope.location.DefaultLocationImageURL + "_landscape.jpg";
+                        $scope.location.SelectedLocation.LocationImage = Wadado.rootPath + "/" + $scope.location.DefaultLocationImageURL + "_landscape.jpg";
                     }
                 }
             }
@@ -57,6 +57,13 @@
         $scope.locations = {};
         LocationDataService.getSelectedLocationDetails().then(function (selectedLocation) {
             $scope.location = selectedLocation;
+             /*SET LOCATION FOR ACTIVITY ONLY IF THE THE ACTIVITY EXISTS AND DATA IS RETURNED FROM THE SERVER CORRECTLY*/
+            if ($.url().segment().length >= 2) {
+                if ($.url().segment(2).trim().length > 0 ) {
+                    $scope.selectedLocation = $.url().segment(2);
+                }
+            }
+            $scope.Root = Wadado.rootPath;
             setImages();
         });        
 

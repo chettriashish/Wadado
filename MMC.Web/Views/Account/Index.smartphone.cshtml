@@ -1,4 +1,5 @@
-﻿@{
+﻿@model MMC.Web.Model.AccountLoginModel
+@{
     ViewBag.Title = "WADADO.IN";
 }
 <!--SLIDER REFERENCE-->
@@ -16,37 +17,93 @@
 <script src="~/Scripts/angular-ui/ui-select/select.js"></script>
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
-<script src="~/Scripts/Activities/services/ActivityDataService.js"></script>
-<script src="~/Scripts/Activities/controllers/ActivityController.js"></script>
+
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
 <link href="~/Content/phone.css" rel="stylesheet" />
 
 <div id="colorbar">
 </div>
 <div class="cover"></div>
-<div id="contentWrapper" data-ng-controller="ActivityController">
+<div id="contentWrapper" data-ng-controller="LoginController" ng-init="returnUrl ='@Model.ReturnUrl'">
     <div>
         @Html.Partial("../Partial/_search")
     </div>
     <div>
-        <div id="navWrapper">
-            <nav>
-                <div class="clearfix primary-nav">
-                    <div>
-                        <div class="menusearch-input">
-                            <div><img src="~/Images/Icons/search-icon.png" /></div>
-                            <div><span>{{selectedLocation}}</span></div>
+        @Html.Partial("../Partial/_mobilemenu")
+    </div>
+    <div class="uppercontent">
+        <div>
+            <!--Row start-->
+            <div class="row">
+                <div class="column-12">
+                    <div class="subHeaderCenter">
+                        <span>Login</span>
+                    </div>
+                </div>
+            </div>
+            <!--Row end-->
+            <!--Row start-->
+            <div class="row">
+                <div class="column-12">
+                </div>
+            </div>
+            <!--Row end-->
+            <!--Row start-->
+            <div class="row">
+                <div class="column-12">
+                    <div class="column-6">
+                        <div class="socialButtons right">
+                            <a id="facebook" ng-click="FBLogin()">Facebook</a>
+                        </div>
+                    </div>
+                    <div class="column-6">
+                        <div class="socialButtons left">
+                            <a id="google" ng-click="">Google</a>
                         </div>
                     </div>
                 </div>
-                <ul class="clearfix menu-nav">
-                    <li class="active" id="portfolio"><a href="#">Sign Up</a></li>
-                    <li id="services"><a href="#">Login</a></li>
-                    <li id="careers"><a href="#">About Us</a></li>
-                    <li id="contact"><a href="#">FAQs</a></li>
-                </ul>
-                <button class="logo-button">Logo Button</button>
-                <button class="nav-button">Toggle Button</button>
-            </nav>
+            </div>
+            <!--Row end-->
+            <!--Row start-->
+            <div class="row">
+                <div class="column-12">
+
+                </div>
+            </div>
+            <!--Row end-->
+            <!--Row start-->
+            <div class="row" ng-if="AllowGuest == true" ng-cloak>
+                <div class="column-12">
+                    <div class="subHeaderCenter">
+                        <span>or</span>
+                    </div>
+                </div>
+            </div>
+            <!--Row end-->
+            <!--Row start-->
+            <div class="row">
+                <div class="column-12">
+
+                </div>
+            </div>
+            <!--Row end-->
+            <!--Row start-->
+            <div class="row" ng-if="AllowGuest == true" ng-cloak>
+                <div class="column-12">
+                    <div class="socialButtons">
+                        <a ng-click="continueAsGuest()">Continue as Guest</a>
+                    </div>
+                </div>
+            </div>
+            <!--Row end-->
         </div>
     </div>
 </div>
