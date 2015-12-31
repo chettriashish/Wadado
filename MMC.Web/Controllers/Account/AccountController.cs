@@ -155,5 +155,17 @@ namespace MMC.Web.Controllers
                 return Json(new ActionModel(), JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult CheckIfUserLoggedIn()
+        {
+            if (Session["guestKey"] != null)
+            {
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 }

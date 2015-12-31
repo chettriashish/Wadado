@@ -38,6 +38,12 @@
             return deferred.promise;
         }
 
+        var checkIfUserLoggedIn = function () {
+            var deferred = $q.defer();
+            $http.get('/Account/CheckIfUserLoggedIn').success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;            
+        }
+
         var storeAction = function (activityKey) {
             var deferred = $q.defer();
             var userAction = "a_f";
@@ -61,6 +67,7 @@
             checkIfActivityInGuestFavorites: checkIfActivityInGuestFavorites,
             storeAction: storeAction,
             loginUser: loginUser,
+            checkIfUserLoggedIn: checkIfUserLoggedIn,
         };
     };
     app.factory("FavoritesDataService", favoritesDataService);

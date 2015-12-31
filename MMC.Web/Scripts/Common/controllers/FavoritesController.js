@@ -6,14 +6,14 @@
         $scope.checkUserLoginAndAddToFavorites = function (item) {
             var ActivityKey = item.Activity.ActivitesKey;
             if ($scope.isFavoritesAdded == true) {
-                FavoritesDataService.removeFavorites(ActivityKey).then(function (response) {
-                    $scope.isFavoritesAdded = false;                    
-                });
+                $scope.isFavoritesAdded = false;
+                FavoritesDataService.removeFavorites(ActivityKey);
             }
             else {
-                FavoritesDataService.addFavorites(ActivityKey).then(function (result) {
-                    if (result == true) {
+                FavoritesDataService.checkIfUserLoggedIn().then(function (response) {
+                    if (response == true) {
                         $scope.isFavoritesAdded = true;
+                        FavoritesDataService.addFavorites(ActivityKey);
                     }
                     else {
                         FavoritesDataService.storeAction(ActivityKey).then(function (result) {
@@ -21,8 +21,9 @@
                         });
                     }
                 });
-            }
+            };
         }
+
         ///*ONCE APPLICATION PASSES THE ACTIVITY KEY TO BE ADDED TO FAVORITES*/
         //$scope.$on("FAVORITESADDED", function (event, args) {
 
@@ -35,6 +36,12 @@
         }
 
         var setFavorites = function () {
+            setTimeout(function () {
+                var width = $(".list-activity-wrapper img").width();
+                var height = $(".list-activity-wrapper img").height();
+                $(".like-container").css("width", width);
+                $(".like-container div").css("top", (height - 25))
+            }, 120);
 
         }
 
@@ -42,8 +49,12 @@
             var ActivityKey = item.Activity.ActivitesKey;
             FavoritesDataService.checkIfActivityInGuestFavorites(ActivityKey).then(function (result) {
                 $scope.isFavoritesAdded = result;
+                setFavorites();
             });
         }
+        $(window).resize(function () {
+            setFavorites();
+        });
     }
     app.controller("FavoritesController", favoritesController);
 }());

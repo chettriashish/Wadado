@@ -223,8 +223,8 @@
         text-indent: 0em;
         transition: .5s all;
         margin: 0 .1em;
-        font-size: 1em;     
-        text-align:left;   
+        font-size: 1em;
+        text-align: left;
     }
 
     .location-detailsSpace {
@@ -257,78 +257,72 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1); */
     }
 
-    /*----------------ACTIVITY LIST STYLES----------------------*/
+    /*----------------ACTIVITY LIST STYLES----------------------*/    
 
-    .list-activity-wrapper {
-        border-bottom: 1px solid #ccc;
-        width: 100%;
-        display: inline-table;
-        height: auto;
+    .list-activity-wrapper > div:first-of-type img {
+        transform: scale(1);
     }
 
-        .list-activity-wrapper > div:first-of-type img {
-            transform: scale(1);
-        }
+    .list-activity-wrapper > div:first-of-type, .list-booking-wrapper > div:first-of-type {
+        float: left;
+        width: 20%;
+        padding: 0;
+        border:1px solid;
+    }
 
-        .list-activity-wrapper > div:first-of-type {
+    .list-activity-wrapper div, .list-booking-wrapper div {
+        float: left;
+        padding: 4%;
+    }
+
+    .list-activity-wrapper .activityDetails {
+        float: left;
+        width: 65%;
+        padding: 2em 3em;
+    }
+
+    .list-booking-wrapper .activitybookingDetails {
+        float: right;
+        width: 75%;
+        text-align: left;
+    }
+
+    .list-booking-wrapper .activityDetails div:first-of-type {
+        font-size: 1.2em;
+        letter-spacing: 1px;
+        padding: .3em 0 0 0;
+        float: none;
+        font-weight: 600;
+    }
+
+    .list-activity-wrapper .activityDetails > div {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        padding: .3em 0 0 0;
+        float: none;
+    }
+
+    .list-booking-wrapper .activitybookingDetails {
+        padding: .2em 1.2em;
+        text-transform: capitalize;
+    }
+
+        .list-booking-wrapper .activitybookingDetails div:first-of-type {
+            font-size: 1em;
+            padding: .1em 0 0 0;
             float: left;
-            width: 30%;
-            padding: 0;
-        }
-
-        .list-activity-wrapper div {
-            float: left;
-            padding: 4%;
-        }
-
-        .list-activity-wrapper .activityDetails {
-            float: left;
-            width: 65%;
-            padding: 2em 3em;
-        }
-
-        .list-activity-wrapper .activitybookingDetails {
-            float: right;
-            width: 70%;
-            text-align: left;
-        }
-
-        .list-activity-wrapper .activityDetails div:first-of-type {
-            font-size: 1.2em;
-            letter-spacing: 1px;
-            padding: .3em 0 0 0;
-            float: none;
             font-weight: 600;
         }
 
-        .list-activity-wrapper .activityDetails > div {
-            font-size: 1.1em;
-            letter-spacing: 1px;
-            padding: .3em 0 0 0;
-            float: none;
+        .list-booking-wrapper .activitybookingDetails > div {
+            font-size: .9em;
+            padding: .1em 0 0 0;
+            float: left;
         }
 
-        .list-activity-wrapper .activitybookingDetails {
-            padding: .2em 1.2em;
-            text-transform: capitalize;
+        .list-booking-wrapper .activitybookingDetails .inline {
+            margin-left: 2em;
         }
-
-            .list-activity-wrapper .activitybookingDetails div:first-of-type {
-                font-size: 1em;
-                padding: .1em 0 0 0;
-                float: left;
-                font-weight: 600;
-            }
-
-            .list-activity-wrapper .activitybookingDetails > div {
-                font-size: .9em;
-                padding: .1em 0 0 0;
-                float: left;
-            }
-
-            .list-activity-wrapper .activitybookingDetails .inline {
-                margin-left: 2em;
-            }
 
     .activity {
         font-weight: 600;

@@ -26,8 +26,9 @@
     window.fbAsyncInit = function () {
         FB.init({
             appId: '963933207007150',
+            cookie: true,
             xfbml: true,
-            version: 'v2.5'
+            version: 'v2.2'
         });        
     };
 
