@@ -26,6 +26,11 @@ namespace MMC.Web
                 new { controller = "Location", action = "Index", selectedLocation = UrlParameter.Optional });            
 
             // /Getting all locations for activitiesListing
+            routes.MapRoute("GetSelectedActivityTypeByDate",
+                "activities/GetSelectedActivityTypeByDate",
+                new { controller = "Activities", action = "GetSelectedActivityTypeByDate", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional, startDate = UrlParameter.Optional, endDate = UrlParameter.Optional });
+
+            // /Getting all locations for activitiesListing
             routes.MapRoute("GetSelectedActivity",
                 "activities/GetSelectedActivityType",
                 new { controller = "Activities", action = "GetSelectedActivityType", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });

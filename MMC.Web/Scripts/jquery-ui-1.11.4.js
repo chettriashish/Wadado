@@ -5357,7 +5357,7 @@ $.extend(Datepicker.prototype, {
 				today: function () {
 					$.datepicker._gotoToday(id);
 				},
-				selectDay: function () {
+				selectDay: function () {				   
 					$.datepicker._selectDay(id, +this.getAttribute("data-month"), +this.getAttribute("data-year"), this);
 					return false;
 				},
@@ -5742,6 +5742,9 @@ $.extend(Datepicker.prototype, {
 		var date = (day ? (typeof day === "object" ? day :
 			this._daylightSavingAdjust(new Date(year, month, day))) :
 			this._daylightSavingAdjust(new Date(inst.currentYear, inst.currentMonth, inst.currentDay)));
+		//if (this.formatDate(this._get(inst, "dateFormat"), date, this._getFormatConfig(inst)) == $.datepicker.formatDate(this._get(inst, "dateFormat"), new Date())) {
+		//    $(" .ui-datepicker-today a.ui-state-default.ui-state-active").addClass("open");
+		//}
 		return this.formatDate(this._get(inst, "dateFormat"), date, this._getFormatConfig(inst));
 	}
 });

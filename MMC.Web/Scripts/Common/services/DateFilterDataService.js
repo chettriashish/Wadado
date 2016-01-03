@@ -10,14 +10,14 @@
                     $http({
                         url: '/Activities/GetSelectedActivityTypeByDate',
                         method: 'GET',
-                        params: { selectedLocation: selectedLocation, selectedActivityCategory: selectedActivityType, startDate: startDate,endDate:endDate }
+                        params: { selectedLocation: selectedLocation, selectedActivityCategory: selectedActivityType, startDate: startDate, endDate: endDate }
                     }).success(deferred.resolve).error(deferred.reject);
                 }
             }
             return deferred.promise;
         }
         return {
-            filterDataByDateRangeSelected: filterDataByDateRangeSelected,            
+            filterDataByDateRangeSelected: filterDataByDateRangeSelected,
         };
     };
     app.factory("DateFilterDataService", dateFilterDataService);

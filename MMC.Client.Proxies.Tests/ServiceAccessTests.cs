@@ -40,7 +40,7 @@ namespace MMC.Client.Proxies.Tests
             IActivitiesService proxy = channelFactory.CreateChannel();
             (proxy as ICommunicationObject).Open();
             IEnumerable<ActivitySummaryDataContract> contract = new List<ActivitySummaryDataContract>();
-            contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,12),new DateTime(2016,1,16), "smartphone");            
+            contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,9),new DateTime(2016,1,11), "smartphone");            
             (proxy as ICommunicationObject).Close();
         }
     }

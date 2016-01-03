@@ -184,7 +184,7 @@ nav ul li:last-child a {
     transition: 1s all;
 }
 /*-----COLUMNS -----*/
-.column-12, .column-9, .column-6, .column-4, .column-3, .column-5, .column-2, .column-0 {
+.column-12, .column-9, .column-7, .column-6, .column-4, .column-3, .column-5, .column-2, .column-0 {
     padding: .3em 2%;
     float: left;
 }
@@ -210,6 +210,10 @@ nav ul li:last-child a {
 
 .column-9 {
     width: 75%;
+}
+
+.column-7 {
+    width: 58.33%;
 }
 
 .column-6 {
@@ -788,16 +792,15 @@ footer {
     left: 0;
     right: 0;
     width: 100%;
-    visibility: visible;
-    opacity: 1;
-    z-index: 1001;
-    background: rgba(255,255,255,1);
+    visibility: hidden;
+    opacity: 0;
     transition: visibility .2s linear, opacity .5s linear;
 }
 
     .mobile-date.open {
         height: 100%;
         z-index: 1001;
+        background: rgba(255,255,255,1);
         visibility: visible;
         opacity: 1;
         text-align: center;
@@ -806,7 +809,7 @@ footer {
 /*FILTER BUTTON*/
 .filter-button {
     display: table;
-    margin: 1em auto;    
+    margin: 1em auto;
 }
 
     .filter-button a {
@@ -916,6 +919,30 @@ footer {
     outline: none;
 }
 
+
+.date-close-button {
+    display: block;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    float: right;
+    width: 50px;
+    height: 35px;
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 1.8em, 0%;
+    cursor: pointer;
+    border: 0 none;
+    border-radius: 5px;
+    z-index: 999;
+    text-indent: -9999px;
+    outline: none;
+}
+
 .search-activity, .book-activity, .book-calender {
     transition: 1s all ease-out;
 }
@@ -968,8 +995,21 @@ footer {
     text-transform: uppercase;
     font-family: Dooodleista;
     font-size: 2em;
-    letter-spacing: 1px;
-    font-weight: bold;
+    letter-spacing: 1px;    
+    background-color: rgba(244,244,244,.8);
+    border-bottom: 1px solid #ccc;
+    transition: .5s all;
+    padding: .3em 0 .2em 0;
+}
+
+.header-sentence {
+    width: 100%;
+    text-align: center;
+    color: #000;
+    text-transform:capitalize;
+    font-family: Dooodleista;
+    font-size: 2em;
+    letter-spacing: 1px;    
     background-color: rgba(244,244,244,.8);
     border-bottom: 1px solid #ccc;
     transition: .5s all;

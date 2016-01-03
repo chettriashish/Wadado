@@ -69,11 +69,18 @@
                     <span>{{ActivityType}}</span>
                 </div>
             </div>          
-            <div>
-                <div class="column-12">
-                    <div>
-                        <img src="~/Images/Icons/events_icon_mobile.png" ng-click="showDateFilters()">
+            <div class="row"> 
+                <div class="column-12" ng-cloak>
+                    <div class="column-0">
+                        <img src="~/Images/Icons/events_icon_mobile.png" id="dateFilter">
                     </div>
+                    <div class="column-7">
+                        <div style="font-size:0.9em;padding:0.2em 0;">
+                            <span>{{dateRange}}</span>
+                        </div>
+                    </div>
+                    <div class="column-2"></div>
+                    <div class="column-3"></div>
                 </div>
             </div>
             <!--Row start-->

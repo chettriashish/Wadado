@@ -55,7 +55,7 @@
                 });
             }
         };
-        
+
         var setRating = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.allSelectedActivity, function (key, value) {
@@ -67,14 +67,14 @@
                         result = result - 1;
                         half = true;
                     }
-                    for (i = 0; i <  result; i++) {
+                    for (i = 0; i < result; i++) {
                         $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star.png";
                         count++;
                     }
-                    if (half) {                        
+                    if (half) {
                         $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star.png";
                         count++;
-                    }                  
+                    }
                     for (i = count; i < 5 ; i++) {
                         $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star.png";
                         count++;
@@ -108,6 +108,16 @@
         $(window).resize(function () {
             setImages();
             $scope.$apply();
+        });
+
+        $scope.$on("LISTFILTERED", function (event, args) {
+            $scope.allSelectedActivity = args.message;
+            setRating();
+            setImages();
+        });
+
+        $scope.$on("FILTERDATES", function (event, args) {
+            $scope.dateRange = args.message;           
         });
     }
     app.controller("ActivityController", activityController);

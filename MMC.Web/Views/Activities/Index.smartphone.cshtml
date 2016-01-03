@@ -11,6 +11,9 @@
 <link href="~/Content/ui-select/select2.css" rel="stylesheet" />
 <link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
 
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
 <!--WADADO REFERENCE-->
 <script src="~/Scripts/Video/video.js"></script>
 <script src="~/Scripts/angular-ui/ui-select/select.js"></script>
@@ -33,9 +36,17 @@
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
 
 
+<!--DATE FILTER REFERENCE-->
+<script src="~/Scripts/Directives/Date/datedirective.js"></script>
+<script src="~/Scripts/Common/services/DateFilterDataService.js"></script>
+<script src="~/Scripts/Common/controllers/DateFilterController.js"></script>
+
+
 <script src="~/Scripts/Activities/services/ActivityDataService.js"></script>
 <script src="~/Scripts/Activities/controllers/ActivityController.js"></script>
 <link href="~/Content/phone.css" rel="stylesheet" />
+
+<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
 
 <div id="colorbar">
 </div>
@@ -47,12 +58,29 @@
     <div>
         @Html.Partial("../Partial/_mobilemenu")
     </div>
+    <div>
+        @Html.Partial("../Partial/_dateFilter")
+    </div>
     <div class="uppercontent" ng-cloak>
         <div>
             <!--Row start-->
             <div class="row">
                 <div class="activity">
                     <span>{{ActivityType}}</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="column-12" ng-cloak>
+                    <div class="column-0">
+                        <img src="~/Images/Icons/events_icon_mobile.png" id="dateFilter">
+                    </div>
+                    <div class="column-7">
+                        <div style="font-size:0.9em;padding:0.2em 0;">
+                            <span>{{dateRange}}</span>
+                        </div>
+                    </div>
+                    <div class="column-2"></div>
+                    <div class="column-3"></div>
                 </div>
             </div>
             <!--Row start-->

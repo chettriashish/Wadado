@@ -4,7 +4,7 @@
         var datepicker = [];
         datepicker = $('.datepicker');
         if (datepicker.length > 1) {
-            var newDate = $(obj).datepicker('getDate');
+            var newDate = $(obj).datepicker('getDate');                
             var id = $(obj).attr("date-val");
             for (i = 0; i < datepicker.length; i++) {
                 if (id == 'init') {
@@ -12,12 +12,12 @@
                     i++;
                     $(datepicker[i]).datepicker('option', 'minDate', newDate);
                     scope.setStartDate(date);
-                    scope.setEndDate(newDate);
+                    scope.setEndDate($.datepicker.formatDate("dd/mm/yy", newDate));
                     break;
                 }
-                else if (id == 'end') {
+                else if (id == 'end') {                    
                     $(datepicker[i]).datepicker('option', 'setDate', date);
-                    scope.setEndDate(date);
+                    scope.setEndDate($.datepicker.formatDate("dd/mm/yy", newDate));
                     break;
                 }
             }
@@ -36,6 +36,7 @@
                         dateFormat: 'dd/mm/yy',
                         minDate: 0,
                         maxDate: 180,
+                        defaultDate:+2,
                         onSelect: function (date) {
                             setDates(date, this, scope);
                         },

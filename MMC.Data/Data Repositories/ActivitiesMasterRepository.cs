@@ -342,12 +342,13 @@ namespace MMC.Data.DataRepositories
                                     case 5: if (activitySchedule.IsFriday == true) { datePresent = true; }; break;
                                     case 6: if (activitySchedule.IsSaturday == true) { datePresent = true; }; break;
                                 }
+                                if (datePresent)
+                                {
+                                    finalResult.Add(item);
+                                    break;
+                                }
                             }
-                        }
-                        if (datePresent)
-                        {
-                            finalResult.Add(item);
-                        }                       
+                        }                                        
                     }
                 }
             }
