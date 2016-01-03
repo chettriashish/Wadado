@@ -7,7 +7,7 @@
             $scope.locationName = item.LocationName;                               
             SearchDataService.getAllActivitiesForLocation($scope.locationName).then(function (activities) {
                 $scope.activities = activities;
-                $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\tACTIVITIES";  
+                $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\tACTIVITIES";
             });
         };
         /*END LOADING SELECTED LOCATIONS ACTIVITY LIST*/

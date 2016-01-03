@@ -185,15 +185,15 @@
                 transform: scale(1);
             }
 
-        .location-activity-wrapper .activityDetails {
+        .location-activity-wrapper .activityCategoryDetails {
             padding: 0 4em;
         }
 
-            .location-activity-wrapper .activityDetails > div {
+            .location-activity-wrapper .activityCategoryDetails > div {
                 font-size: 1em;
             }
 
-                .location-activity-wrapper .activityDetails > div:first-of-type {
+                .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
                     font-size: 1.8em;
                 }
 
@@ -257,20 +257,15 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1); */
     }
 
-    /*----------------ACTIVITY LIST STYLES----------------------*/    
-
-    .list-activity-wrapper > div:first-of-type img {
-        transform: scale(1);
-    }
-
-    .list-activity-wrapper > div:first-of-type, .list-booking-wrapper > div:first-of-type {
+    /*----------------ACTIVITY LIST STYLES----------------------*/
+    .list-booking-wrapper > div:first-of-type {
         float: left;
         width: 20%;
         padding: 0;
-        border:1px solid;
+        border: 1px solid;
     }
 
-    .list-activity-wrapper div, .list-booking-wrapper div {
+     .list-booking-wrapper div {
         float: left;
         padding: 4%;
     }
@@ -535,35 +530,15 @@
         width: 35%;
     }
 
-    .location-activity-wrapper .activityDetails {
+    .location-activity-wrapper .activityCategoryDetails {
         padding: 0 5em;
     }
 
-        .location-activity-wrapper .activityDetails > div {
+        .location-activity-wrapper .activityCategoryDetails > div {
             font-size: 1.2em;
         }
 
-            .location-activity-wrapper .activityDetails > div:first-of-type {
+            .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
                 font-size: 1.8em;
             }
-
-    .list-activity-wrapper .activityDetails div:first-of-type {
-        font-size: 1.4em;
-        letter-spacing: 1px;
-        padding: .3em 0 0 0;
-        float: none;
-        font-weight: 600;
-    }
-
-    .list-activity-wrapper .activityDetails > div {
-        font-size: 1.3em;
-        letter-spacing: 1px;
-        padding: .2em 0 0 0;
-        float: none;
-    }
-
-    .list-activity-wrapper .activityDetails {
-        float: left;
-        width: 70%;
-    }
 }

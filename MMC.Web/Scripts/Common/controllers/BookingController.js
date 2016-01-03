@@ -65,7 +65,7 @@
             checkForAvailability();
         }
 
-        $scope.dateSelected = function (date) {
+        $scope.dateSelected = function (date, obj) {
             $scope.date = date;
             if (!$(".booking-wrapper").hasClass("open")) {
                 $(".booking-wrapper").addClass("open");

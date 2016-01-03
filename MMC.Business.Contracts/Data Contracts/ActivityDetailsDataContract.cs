@@ -68,6 +68,8 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public List<int> AllActivityDates { get; set; }
         [DataMember]
+        public DateTime NextAvaiableDate { get; set; }
+        [DataMember]
         public IDictionary<string,string> Reviews { get; set; }
     }
 }

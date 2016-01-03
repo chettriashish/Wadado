@@ -39,6 +39,10 @@ namespace MMC.Business.Contracts
 
         ///TO BE REMOVED ONCE LOGIN IS COMPLETE
         [OperationContract]
-        IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent); 
+        IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent);
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationAndType(string locationKey, string activityCategoryKey, string userAgent);
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);
     }
 }

@@ -34,11 +34,7 @@ namespace MMC.Web
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 "~/Content/reset.css",                                                 
-                "~/Content/default.css",
-                 "~/Content/tablet.css",
-                 "~/Content/desktop.css",
-                 "~/Content/phone.css",
-                "~/Content/mobilemenu.css",
+                "~/Content/default.css",                                                 
                 "~/Content/font-awesome.css"
                 ));
 

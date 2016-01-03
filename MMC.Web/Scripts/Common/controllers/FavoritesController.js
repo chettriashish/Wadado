@@ -4,7 +4,7 @@
         $scope.isFavoritesAdded = false;
         $scope.activity;
         $scope.checkUserLoginAndAddToFavorites = function (item) {
-            var ActivityKey = item.Activity.ActivitesKey;
+            var ActivityKey = item.ActivityKey;
             if ($scope.isFavoritesAdded == true) {
                 $scope.isFavoritesAdded = false;
                 FavoritesDataService.removeFavorites(ActivityKey);
@@ -36,17 +36,17 @@
         }
 
         var setFavorites = function () {
-            setTimeout(function () {
-                var width = $(".list-activity-wrapper img").width();
-                var height = $(".list-activity-wrapper img").height();
-                $(".like-container").css("width", width);
-                $(".like-container div").css("top", (height - 25))
-            }, 120);
+            //setTimeout(function () {
+            //    var width = $(".list-activity-wrapper img").width();
+            //    var height = $(".list-activity-wrapper img").height();
+            //    $(".like-container").css("width", width);
+            //    $(".like-container div").css("top", (height - 50))
+            //}, 120);
 
         }
 
         $scope.init = function (item) {
-            var ActivityKey = item.Activity.ActivitesKey;
+            var ActivityKey = item.ActivityKey;
             FavoritesDataService.checkIfActivityInGuestFavorites(ActivityKey).then(function (result) {
                 $scope.isFavoritesAdded = result;
                 setFavorites();

@@ -12,8 +12,7 @@ namespace MMC.Client.Entities
     public class ActivityTypeMaster : ObjectBase
     {
         #region Private variables
-        private string _ActivityTypeKey;
-        private string _activityCategoryKey;
+        private string _ActivityTypeKey;        
         private string _ActivityType;
         private DateTime _CreatedDate;
         private string _CreatedBy;
@@ -29,17 +28,6 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => ActivityTypeKey);
             }
         }
-        [ForeignKey("ActivityCategoryMaster")]
-        public string ActivityCategoryKey
-        {
-            get { return _activityCategoryKey; }
-            set
-            {
-                _activityCategoryKey = value;
-                OnPropertyChanged(() => ActivityCategoryKey);
-            }
-        }
-
         public string ActivityType
         {
             get { return _ActivityType; }

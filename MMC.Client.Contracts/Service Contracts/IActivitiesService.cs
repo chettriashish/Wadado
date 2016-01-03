@@ -46,6 +46,10 @@ namespace MMC.Client.Contracts
 
         ActivityBookingDataContract AddUserActivityToCart(string activityKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey, string guestKey);
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationAndType(string locationKey, string activityCategoryKey, string userAgent);
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);
         #endregion
 
         #region Async Operations

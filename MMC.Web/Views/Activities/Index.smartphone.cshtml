@@ -27,7 +27,7 @@
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
 <script src="~/Scripts/Common/controllers/MenuController.js"></script>
-
+<link href="~/Content/mobilemenu.css" rel="stylesheet" />
 
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
@@ -58,23 +58,31 @@
             <!--Row start-->
             <div class="row">
                 <div ng-repeat="item in allSelectedActivity">
-                    <div class="like-container">
-                        @Html.Partial("../Partial/_favourites");
-                    </div>
                     <div ng-click="loadActivityDetails(item)">
                         <div class="list-activity-wrapper">
                             <div>
-                                <img ng-src="{{item.ImageURL}}" />
+                                <img ng-src="{{item.DefaultImageURL}}" />
                             </div>
-                            <div class="activityDetails">
-                                <div>
-                                    <span>{{item.Activity.Name}}</span>
-                                </div>
-                                <div>
-                                    <span>INR {{item.Activity.Cost}}</span>
+                        </div>
+                    </div>
+                    <div class="activityDetails">
+                        <div class="column-9">
+                            <div>
+                                <span>{{item.ActivityName}}</span>
+                            </div>
+                            <div>
+                                @*<span>INR {{item.Cost}}</span>*@
+                                <span>INR 1000</span>
+                            </div>
+                            <div class="ratingList" id="userRating">
+                                <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                    <img ng-src="{{imageItem}}" />
                                 </div>
                             </div>
-                            <div class="hairline-down-arrow">
+                        </div>
+                        <div class="column-3">
+                            <div class="like-container">
+                                @Html.Partial("../Partial/_favourites")
                             </div>
                         </div>
                     </div>

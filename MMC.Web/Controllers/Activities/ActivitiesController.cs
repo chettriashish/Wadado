@@ -1,21 +1,24 @@
-﻿using MMC.Client.Entities;
+﻿using MMC.Client.Contracts;
+using MMC.Client.Entities;
 using MMC.Web.Contracts;
 using MMC.Web.Model;
 using System;
+using MMC.Client.Contracts.DataContracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace MMC.Web.Controllers.Activities
 {
     public class ActivitiesController : BaseViewController
     {
-        private IActivitiesDataService _activitiesDataService;
+        private IActivitiesService _activitiesService;
 
-        public ActivitiesController(IActivitiesDataService activitiesDataService)
+        public ActivitiesController(IActivitiesService activitiesService)
         {
-            _activitiesDataService = activitiesDataService;            
+            _activitiesService = activitiesService;            
         }
 
         // GET: Activities
@@ -25,17 +28,24 @@ namespace MMC.Web.Controllers.Activities
             return View();
         }
 
-        public ActionResult GetSelectedActivityType(string selectedLocation, string selectedActivityType)
+        public ActionResult GetSelectedActivityType(string selectedLocation, string selectedActivityCategory)
         {
-            IEnumerable<ActivitiesModel> result = _activitiesDataService.GetSelectedActivityType(Request.UserAgent, selectedActivityType);
+            IEnumerable<ActivitySummaryDataContract> result = _activitiesService.GetAllActivitiesByLocationAndType(selectedLocation,selectedActivityCategory,GetDeviceInformation());
             return Json(result,JsonRequestBehavior.AllowGet);
         }
 
         [HttpGet]
         public ActionResult GetAllOtherLocations()
         {
-            IEnumerable<LocationsMaster> results = _activitiesDataService.GetAllLocations();
+            IEnumerable<LocationsMaster> results = new List<LocationsMaster>();
             return Json(results, JsonRequestBehavior.AllowGet);
         }
+        public ActionResult GetSelectedActivityTypeByDate(string selectedLocation, string selectedActivityCategory, string startDate, string endDate)
+        {
+            IEnumerable<ActivitySummaryDataContract> result = _activitiesService.GetAllActivitiesByLocationFilteredCategory(selectedLocation, selectedActivityCategory
+                , DateTime.ParseExact(startDate, "d/MM/yyyy", CultureInfo.InvariantCulture)
+                , DateTime.ParseExact(endDate, "d/MM/yyyy", CultureInfo.InvariantCulture), GetDeviceInformation());
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }      
     }
 }

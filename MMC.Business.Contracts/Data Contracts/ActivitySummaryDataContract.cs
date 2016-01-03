@@ -22,8 +22,19 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public string ThumbNailURL { get; set; }
         [DataMember]
+        public string ImageURL { get; set; }
+        [DataMember]
+        public decimal Rating { get; set; }
+        [DataMember]
         public string ActivityCategory { get; set; }
         [DataMember]
-        public string Location { get; set; }
+        public string Location { get; set; }        
+        [DataMember]
+        public decimal Cost { get; set; }
+        [DataMember]
+        public decimal Discount { get; set; }
+        [DataMember]
+        public string ActivityType { get; set; }
+
     }
 }

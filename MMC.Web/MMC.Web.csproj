@@ -471,10 +471,12 @@
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\clickoutside.directive.js" />
     <Content Include="Scripts\Common\controllers\BookingController.js" />
+    <Content Include="Scripts\Common\controllers\DateFilterController.js" />
     <Content Include="Scripts\Common\controllers\FavoritesController.js" />
     <Content Include="Scripts\Common\controllers\MenuController.js" />
     <Content Include="Scripts\Common\controllers\SearchController.js" />
     <Content Include="Scripts\Common\services\BookingDataService.js" />
+    <Content Include="Scripts\Common\services\DateFilterDataService.js" />
     <Content Include="Scripts\Common\services\FavoritesDataService.js" />
     <Content Include="Scripts\Common\services\MenuDataService.js" />
     <Content Include="Scripts\Common\services\SearchDataService.js" />
@@ -1341,6 +1343,7 @@
     <Content Include="Views\Partial\_mobilemenu.cshtml" />
     <Content Include="Views\Partial\_homemobilemenu.cshtml" />
     <Content Include="Views\Partial\_favourites.cshtml" />
+    <Content Include="Views\Partial\_dateFilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\ActivitiesCart\directives\" />

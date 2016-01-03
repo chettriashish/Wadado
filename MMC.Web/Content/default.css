@@ -468,15 +468,15 @@ nav ul li:last-child a {
             transform: scale(.8);
         }
 
-    .location-activity-wrapper .activityDetails {
+    .location-activity-wrapper .activityCategoryDetails {
         padding: 1%;
     }
 
-        .location-activity-wrapper .activityDetails > div {
+        .location-activity-wrapper .activityCategoryDetails > div {
             font-size: .9em;
         }
 
-            .location-activity-wrapper .activityDetails > div:first-of-type {
+            .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
                 font-size: 1.5em;
             }
 
@@ -508,12 +508,13 @@ nav ul li:last-child a {
     width: 100%;
     height: auto;
     margin: 0 0 1em 0;
-    padding: .2em 0;
+    padding: 1em 0;
 }
 
 .bestMonthsToVisitWrapper {
     display: table;
     margin: 0 auto;
+    padding: 0em 0 .2em 0;
 }
 
     .bestMonthsToVisitWrapper.item {
@@ -535,11 +536,11 @@ nav ul li:last-child a {
 
 .caption {
     color: #000;
-    letter-spacing: 0.1em;
     font-size: medium;
-    font-weight: 400;
-    padding: 1em 0 0em 0;
+    font-weight: 600;
+    padding: .5em 0 .5em 0;
     text-align: center;
+    font-size: 1.2em;
 }
 
 .location-search-content {
@@ -553,12 +554,17 @@ nav ul li:last-child a {
 /*----------------ACTIVITY LIST STYLES----------------------*/
 
 .list-activity-wrapper {
-    border-bottom: 1px solid #ccc;
     width: 100%;
-    display: inline-table;
-    height: auto;
-    margin-top: -1.5em;
 }
+
+    .list-activity-wrapper div {
+        width: 100%;
+        display: table;
+    }
+
+    .list-activity-wrapper img {
+        width: 100%;
+    }
 
 .list-booking-wrapper {
     border-bottom: 1px solid #ccc;
@@ -567,25 +573,44 @@ nav ul li:last-child a {
     height: auto;
 }
 
-    .list-activity-wrapper > div:first-of-type img, .list-booking-wrapper > div:first-of-type img {
+    .list-booking-wrapper > div:first-of-type img {
         transform: scale(1);
     }
 
-    .list-activity-wrapper > div:first-of-type, .list-booking-wrapper > div:first-of-type {
+    .list-booking-wrapper > div:first-of-type {
         float: left;
         width: 30%;
         padding: 0;
     }
 
-    .list-activity-wrapper div, .list-booking-wrapper div {
+    .list-booking-wrapper div {
         float: left;
         padding: 4%;
     }
 
-.list-activity-wrapper .activityDetails {
+.activityDetails {
+    padding: .3em 1%;
+    margin-top: -4.75em;
+    color: black;
+    position: relative;
+    display: table;
     float: left;
-    width: 55%;
+    width: 100%;
+    position: relative;
+    background: rgba(255,255,255, 0.5);
+    z-index: 2;
+    height: 4em;
 }
+
+    .activityDetails div:first-of-type > div:first-of-type span:first-of-type {
+        font-weight: bolder;
+        font-size: .6em;
+    }
+
+    .activityDetails div span {
+        font-weight: normal;
+        font-size: .6em;
+    }
 
 .list-booking-wrapper .activitybookingDetails {
     float: right;
@@ -626,13 +651,13 @@ nav ul li:last-child a {
     position: relative;
     display: table;
     z-index: 5;
+    float: right;
 }
 
     .like-container div {
         position: relative;
         display: table;
-        width: 100%;
-        background-color: rgba(255,255,255,.3);
+        float: right;
     }
 
     .like-container img {
@@ -641,6 +666,14 @@ nav ul li:last-child a {
         display: table;
         float: right;
         width: 1.5em;
+    }
+
+.ratingList {
+    padding: .5em 0;
+}
+
+    .ratingList div {
+        float: left;
     }
 
 .activity {
@@ -724,6 +757,9 @@ footer {
 .mobile-search {
     position: fixed;
     top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
     visibility: hidden;
     opacity: 0;
@@ -742,6 +778,49 @@ footer {
 .search-wrapper {
     margin: 2em auto;
 }
+
+/*DATE FILTER START*/
+/*---------SEARCH START---------*/
+.mobile-date {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    visibility: visible;
+    opacity: 1;
+    z-index: 1001;
+    background: rgba(255,255,255,1);
+    transition: visibility .2s linear, opacity .5s linear;
+}
+
+    .mobile-date.open {
+        height: 100%;
+        z-index: 1001;
+        visibility: visible;
+        opacity: 1;
+        text-align: center;
+    }
+
+/*FILTER BUTTON*/
+.filter-button {
+    display: table;
+    margin: 1em auto;    
+}
+
+    .filter-button a {
+        height: 1em;
+        font-size: .8em;
+        padding: .8em 5em;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: rgb(255,255,255);
+        margin: 0 auto;
+        transition: 0.5s all;
+        text-transform: uppercase;
+    }
 
 .booking-wrapper {
     visibility: collapse;

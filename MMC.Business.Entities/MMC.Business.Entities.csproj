@@ -73,6 +73,7 @@
     <Compile Include="ActivityLocation.cs" />
     <Compile Include="ActivityRates.cs" />
     <Compile Include="ActivityTimeScheduler.cs" />
+    <Compile Include="ActivityTypeCategory.cs" />
     <Compile Include="ActivityTypeMaster.cs" />
     <Compile Include="CompanyMaster.cs" />
     <Compile Include="GuestFavorites.cs" />

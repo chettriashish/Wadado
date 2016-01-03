@@ -27,17 +27,20 @@ namespace MMC.Client.Proxies.Tests
         [TestMethod]
         public void TestLocationClientConnection()
         {
-            ChannelFactory<IUsersService> channelFactory =
-               new ChannelFactory<IUsersService>("");
+            //ChannelFactory<IUsersService> channelFactory =
+            //   new ChannelFactory<IUsersService>("");
 
-            IUsersService proxy = channelFactory.CreateChannel();
-            (proxy as ICommunicationObject).Open();
+            //IUsersService proxy = channelFactory.CreateChannel();
+            //(proxy as ICommunicationObject).Open();
 
             //ActivityDetailsDataContract contract = new ActivityDetailsDataContract();
 
+            ChannelFactory<IActivitiesService> channelFactory =
+                   new ChannelFactory<IActivitiesService>("");
+            IActivitiesService proxy = channelFactory.CreateChannel();
+            (proxy as ICommunicationObject).Open();
             IEnumerable<ActivitySummaryDataContract> contract = new List<ActivitySummaryDataContract>();
-            contract = proxy.RemoveFromFavorites("133660173670779", "MEDIUMFLY", "smartphone");
-            
+            contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,12),new DateTime(2016,1,16), "smartphone");            
             (proxy as ICommunicationObject).Close();
         }
     }

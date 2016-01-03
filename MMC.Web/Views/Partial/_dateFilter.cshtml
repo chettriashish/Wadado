@@ -1,0 +1,47 @@
+﻿<div class="mobile-date" ng-controller="DateFilterController">   
+    <!--ROW START-->
+    <div class="row">
+        <div class="header-upper">
+            <div>
+                <span>Date Range Filter</span>
+            </div>
+            <div>
+                <button class="close-button">Close Button</button>
+            </div>
+        </div>
+    </div>
+    <!--ROW END-->
+    <!--ROW START-->
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="filter-button">
+                    <a ng-click="filterActivitiesByDates()">APPLY FILTER</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ROW END-->
+    <div>
+        <div class="book-calender">
+            <!--ROW START-->
+            <div class="row">
+                <div class="column-12">
+                    <div date-val="init" ng-model="date" datepicker class="datepicker ll-skin-cangas" />
+                </div>
+            </div>
+            <!--ROW END-->
+        </div>
+        <div>
+            <div class="book-calender">
+                <!--ROW START-->
+                <div class="row">
+                    <div class="column-12">
+                        <div date-val="end" ng-model="date" datepicker class="datepicker ll-skin-cangas" />
+                    </div>
+                </div>
+                <!--ROW END-->
+            </div>
+        </div>
+    </div>
+</div>

@@ -70,16 +70,17 @@ namespace MMC.Data.DataRepositories
 
                 IEnumerable<ActivityTimeScheduler> activityTimeScheduler = entityContext.ActivityTimeSchedulerSet.
                     Where(entity => entity.ActivityKey == activityKey);
-            
 
-                ActivityCategoryMaster activityCategory = (from entity in entityContext.ActivityTypeMasterSet
+
+                ActivityCategoryMaster activityCategory = (from entity in entityContext.ActivityTypeCategorySet
                                                            join entity1 in entityContext.ActivityCategoryMasterSet
                                                            on entity.ActivityCategoryKey equals entity1.ActivityCategoryKey
                                                            where entity.ActivityTypeKey == activity.ActivityTypeKey
+                                                           && entity.IsPrimary == true
                                                            select entity1).FirstOrDefault();
 
-                IEnumerable<ActivityImages> activityImages = entityContext.ActivityImagesSet.
-                    Where(entity => entity.ActivityKey == activityKey)
+                IEnumerable<ActivityImages> activityImages = entityContext.ActivityImagesSet
+                    .Where(entity => entity.ActivityKey == activityKey)
                                                               .ToList();
 
                 result.ActivityCategory = activityCategory.ActivityCategory;
@@ -101,6 +102,13 @@ namespace MMC.Data.DataRepositories
                 result.Duration = activity.Duration;
                 result.UserRating = activity.AverageUserRating;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
+                if (result.AllActivityDates.Count() == 0)
+                {
+                    result.NextAvaiableDate = (from entity in entityContext.ActivityDatesSet
+                                               where entity.Date > DateTime.Now
+                                               && entity.IsDeleted == false
+                                               select entity).ToList().FirstOrDefault().Date;
+                }
                 result.ActivityKey = activity.ActivitesKey;
                 foreach (var item in activityImages)
                 {
@@ -213,6 +221,137 @@ namespace MMC.Data.DataRepositories
         public IEnumerable<ActivitiesMaster> GetAllActivitiesBooked(string userAccountKey)
         {
             throw new NotImplementedException();
+        }
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationCategory(string locationKey, string activityCategoryKey, string userAgent)
+        {
+            IEnumerable<ActivitySummaryDataContract> result = new List<ActivitySummaryDataContract>();
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                result = (from entity in entityContext.ActivitiesMasterSet
+                          join entity1 in entityContext.ActivityTypeCategorySet
+                          on entity.ActivityTypeKey equals entity1.ActivityTypeKey
+                          where entity.LocationKey == locationKey
+                          && entity1.ActivityCategoryKey == activityCategoryKey
+                          select new ActivitySummaryDataContract()
+                          {
+                              ActivityKey = entity.ActivitesKey,
+                              ActivityName = entity.Name,
+                              ActivityType = entityContext.ActivityTypeMasterSet.Where(e => e.ActivityTypeKey == entity.ActivityTypeKey).FirstOrDefault().ActivityType,
+                              ActivityCategory = entityContext.ActivityCategoryMasterSet.Where(e => e.ActivityCategoryKey == activityCategoryKey).FirstOrDefault().ActivityCategory,
+                              ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
+                              Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationName,
+                              Rating = entity.AverageUserRating,
+                              ThumbNailURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
+                              IsSpecialOffer = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ? true : false,
+                              Cost = entity.Cost,
+                              Discount = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ?
+                              entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).FirstOrDefault().Discount : 0
+                          }).ToList();
+
+                foreach (var item in result)
+                {
+                    if (userAgent == RepositoryResource.SMARTPHONE)
+                    {
+                        item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, MOBILE);
+                    }
+                    else if (userAgent == RepositoryResource.TABLET)
+                    {
+                        item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, TABLET);
+                    }
+                    else
+                    {
+                        item.ImageURL = string.Format("Images/{0}", item.ImageURL);
+                    }
+                }
+            }
+            return result;
+        }
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent)
+        {
+            IEnumerable<ActivitySummaryDataContract> initResult = GetAllActivitiesByLocationCategory(locationKey, activityCategoryKey, userAgent);
+            List<ActivitySummaryDataContract> finalResult = new List<ActivitySummaryDataContract>();
+            DayOfWeek startDay = startDate.DayOfWeek;
+            DayOfWeek endDay = endDate.DayOfWeek;
+            if ((endDate.Day - startDate.Day) > 7)
+            {
+                using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+                {
+                    foreach (var item in initResult)
+                    {
+                        ActivityDayScheduler activitySchedule = (from entity in entityContext.ActivityDaySchedulerSet
+                                                                 where entity.ActivityKey == item.ActivityKey
+                                                                 select entity).ToList().FirstOrDefault();
+
+                        if (activitySchedule != null && activitySchedule.ActivityKey != default(string))
+                        {
+                            finalResult.Add(item);
+                        }
+                        else
+                        {
+                            ActivityDates activityDates = (from entity in entityContext.ActivityDatesSet
+                                                           where entity.Date > DateTime.Now
+                                                           && entity.IsDeleted == false
+                                                           select entity).ToList().FirstOrDefault();
+
+                            if (activityDates != null && 
+                                (activityDates.Date >= startDate && activityDates.Date < endDate ))
+                            {
+                                finalResult.Add(item);
+                            }
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Dictionary<int, bool> dates = new Dictionary<int, bool>();
+                int daysInBetween = (endDate.Day - startDate.Day);
+                for (int i = 0; i < daysInBetween; i++)
+                {
+                    switch(startDate.DayOfWeek)
+                    {
+                        case DayOfWeek.Sunday: dates[0] = true; break;
+                        case DayOfWeek.Monday: dates[1] = true; break;
+                        case DayOfWeek.Tuesday: dates[2] = true; break;
+                        case DayOfWeek.Wednesday: dates[3] = true; break;
+                        case DayOfWeek.Thursday: dates[4] = true; break;
+                        case DayOfWeek.Friday: dates[5] = true; break;
+                        case DayOfWeek.Saturday: dates[6] = true; break;
+                    }
+                    startDate = startDate.AddDays(1);
+                }
+                using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+                {                    
+                    foreach (var item in initResult)
+                    {
+                        ActivityDayScheduler activitySchedule = (from entity in entityContext.ActivityDaySchedulerSet
+                                                                 where entity.ActivityKey == item.ActivityKey
+                                                                 select entity).ToList().FirstOrDefault();
+                        bool datePresent = false;
+                        for (int i = 0; i < 7; i++)
+                        {
+                            if (dates.ContainsKey(i))
+                            {
+                                switch (i)
+                                {
+                                    case 0: if (activitySchedule.IsSunday == true) { datePresent = true; }; break;
+                                    case 1: if (activitySchedule.IsMonday == true) { datePresent = true; }; break;
+                                    case 2: if (activitySchedule.IsTuesday == true) { datePresent = true; }; break;
+                                    case 3: if (activitySchedule.IsWednesday == true) { datePresent = true; }; break;
+                                    case 4: if (activitySchedule.IsThursday == true) { datePresent = true; }; break;
+                                    case 5: if (activitySchedule.IsFriday == true) { datePresent = true; }; break;
+                                    case 6: if (activitySchedule.IsSaturday == true) { datePresent = true; }; break;
+                                }
+                            }
+                        }
+                        if (datePresent)
+                        {
+                            finalResult.Add(item);
+                        }                       
+                    }
+                }
+            }
+            return finalResult;
         }
     }
 }

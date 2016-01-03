@@ -141,7 +141,7 @@ namespace MMC.Business.Managers
                 IUserDetailsBusinessEngine userDetailsBusinessEngine = _BusinessEngineFactory.GetBusinessEngine<IUserDetailsBusinessEngine>();
                 IEnumerable<ActivitiesMaster> activitiesResult = userDetailsBusinessEngine.GetFavorites(guestKey);
                 IActivityCategoryMasterRepository activitiesCategoryMasterRepository = _DataRepositoryFactory.GetDataRepository<IActivityCategoryMasterRepository>();
-                IActivityTypeMasterRepository activityTypeRepository = _DataRepositoryFactory.GetDataRepository<IActivityTypeMasterRepository>();
+                IActivityTypeCategoryRepository activityTypeRepository = _DataRepositoryFactory.GetDataRepository<IActivityTypeCategoryRepository>();
                 IActivityLocationRepository activityLocationRepository = _DataRepositoryFactory.GetDataRepository<IActivityLocationRepository>();
                 ILocationsMasterRepository locationMasterRepository = _DataRepositoryFactory.GetDataRepository<ILocationsMasterRepository>();
                 IActivityImagesRepository imageRepository = _DataRepositoryFactory.GetDataRepository<IActivityImagesRepository>();
@@ -151,7 +151,7 @@ namespace MMC.Business.Managers
                     ActivitySummaryDataContract summary = new ActivitySummaryDataContract();
                     summary.ActivityName = item.Name;
                     summary.ActivityKey = item.ActivitesKey;
-                    string activityCategoryKey = activityTypeRepository.Get().Where(entity => entity.ActivityTypeKey == item.ActivityTypeKey).FirstOrDefault().ActivityCategoryKey;
+                    string activityCategoryKey = activityTypeRepository.Get().Where(entity => entity.ActivityTypeKey == item.ActivityTypeKey && entity.IsPrimary == true).FirstOrDefault().ActivityCategoryKey;
                     summary.ActivityCategory = activitiesCategoryMasterRepository.Get().Where(entity => entity.ActivityCategoryKey == activityCategoryKey).FirstOrDefault().ActivityCategory;
                     string locationKey = activityLocationRepository.Get().Where(entity => entity.LocationKey == item.LocationKey).FirstOrDefault().LocationKey;
                     summary.Location = locationMasterRepository.Get().Where(entity => entity.LocationKey == locationKey).FirstOrDefault().LocationName;

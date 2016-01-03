@@ -42,7 +42,7 @@ namespace MMC.Data
         public DbSet<UserApplicationActivityDetails> UserApplicationActivityDetailsSet { get; set; }
         public DbSet<ActivityDates> ActivityDatesSet { get; set; }
         public DbSet<GuestFavorites> GuestFavoritesSet { get; set; }
-
+        public DbSet<ActivityTypeCategory> ActivityTypeCategorySet { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -71,6 +71,7 @@ namespace MMC.Data
             modelBuilder.Entity<UserApplicationActivityDetails>().HasKey<string>(e => e.SessionKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<ActivityDates>().HasKey<string>(e => e.ActivityDatesKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<GuestFavorites>().HasKey<string>(e => e.GuestFavouritesKey).Ignore(e => e.EntityId);
+            modelBuilder.Entity<ActivityTypeCategory>().HasKey<string>(e => e.ActivityTypeCategoryKey).Ignore(e => e.EntityId);
             //base.OnModelCreating(modelBuilder);
         }
     }

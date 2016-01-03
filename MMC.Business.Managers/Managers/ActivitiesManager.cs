@@ -138,7 +138,6 @@ namespace MMC.Business.Managers
             });
         }
 
-
         public IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent)
         {
             return ExecuteFaultHandledOperation(() =>
@@ -179,19 +178,43 @@ namespace MMC.Business.Managers
                         && entity.IsThumbnail == true).FirstOrDefault().ImageURL;
                     if (userAgent == BusinessResource.SMARTPHONE)
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}",thumbnailImageURL, THUMBNAIL, MOBILE);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, THUMBNAIL, MOBILE);
                     }
                     else if (userAgent == BusinessResource.TABLET)
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}",thumbnailImageURL, THUMBNAIL, TABLET);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, THUMBNAIL, TABLET);
                     }
                     else
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}",thumbnailImageURL, THUMBNAIL);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}", thumbnailImageURL, THUMBNAIL);
                     }
                     result.Add(bookedActivities);
                 }
                 return result;
+            });
+        }
+
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationAndType(string locationKey, string activityCategoryKey, string userAgent)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivitiesMasterRepository activitiesMasterRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+
+                IEnumerable<ActivitySummaryDataContract> allActivitiesForLocationCategory = activitiesMasterRepository.GetAllActivitiesByLocationCategory(locationKey: locationKey, activityCategoryKey: activityCategoryKey, userAgent: userAgent);
+                return allActivitiesForLocationCategory;
+            });
+        }
+
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivitiesMasterRepository activitiesMasterRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+
+                IEnumerable<ActivitySummaryDataContract> allActivitiesForLocationCategory = activitiesMasterRepository.GetAllActivitiesByLocationFilteredCategory(locationKey: locationKey, activityCategoryKey: activityCategoryKey, startDate: startDate, endDate: endDate, userAgent: userAgent);
+                return allActivitiesForLocationCategory;
             });
         }
     }

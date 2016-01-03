@@ -8,20 +8,20 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace MMC.Business.Entities
 {
     [DataContract]
-    public class ActivityTypeMaster:EntityBase,IIdentifiableEntity
+    public class ActivityTypeCategory : EntityBase, IIdentifiableEntity
     {
         #region Properties
         [DataMember]
+        public string ActivityTypeCategoryKey { get; set; }
+        [DataMember]
         public string ActivityTypeKey { get; set; }
         [DataMember]
-        public string ActivityType { get; set; }
-        [DataMember]
-        public string CreatedBy { get; set; }
-        [DataMember]
-        public string CreatedDate { get; set; } 
+        public string ActivityCategoryKey { get; set; }
+        public bool IsPrimary { get; set; }
         #endregion
 
         [DataMember]
@@ -29,11 +29,11 @@ namespace MMC.Business.Entities
         {
             get
             {
-                return ActivityTypeKey;
+                return ActivityTypeCategoryKey;
             }
             set
             {
-                ActivityTypeKey = value;
+                ActivityTypeCategoryKey = value;
             }
         }
     }

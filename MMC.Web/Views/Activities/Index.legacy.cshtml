@@ -11,6 +11,9 @@
 <link href="~/Content/ui-select/select2.css" rel="stylesheet" />
 <link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
 
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
 <!--WADADO REFERENCE-->
 <script src="~/Scripts/Video/video.js"></script>
 <script src="~/Scripts/angular-ui/ui-select/select.js"></script>
@@ -27,15 +30,23 @@
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
 <script src="~/Scripts/Common/controllers/MenuController.js"></script>
-
+<link href="~/Content/mobilemenu.css" rel="stylesheet" />
 
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
 
 
+<!--DATE FILTER REFERENCE-->
+<script src="~/Scripts/Directives/Date/datedirective.js"></script>
+<script src="~/Scripts/Common/services/DateFilterDataService.js"></script>
+<script src="~/Scripts/Common/controllers/DateFilterController.js"></script>
+
+
 <script src="~/Scripts/Activities/services/ActivityDataService.js"></script>
 <script src="~/Scripts/Activities/controllers/ActivityController.js"></script>
 <link href="~/Content/phone.css" rel="stylesheet" />
+
+<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
 
 <div id="colorbar">
 </div>
@@ -47,6 +58,9 @@
     <div>
         @Html.Partial("../Partial/_mobilemenu")
     </div>
+    <div>
+        @Html.Partial("../Partial/_dateFilter")
+    </div>
     <div class="uppercontent" ng-cloak>
         <div>
             <!--Row start-->
@@ -54,27 +68,42 @@
                 <div class="activity">
                     <span>{{ActivityType}}</span>
                 </div>
+            </div>          
+            <div>
+                <div class="column-12">
+                    <div>
+                        <img src="~/Images/Icons/events_icon_mobile.png" ng-click="showDateFilters()">
+                    </div>
+                </div>
             </div>
             <!--Row start-->
             <div class="row">
                 <div ng-repeat="item in allSelectedActivity">
-                    <div class="like-container">
-                        @Html.Partial("../Partial/_favourites")
-                    </div>
                     <div ng-click="loadActivityDetails(item)">
                         <div class="list-activity-wrapper">
                             <div>
-                                <img ng-src="{{item.ImageURL}}" />
+                                <img ng-src="{{item.DefaultImageURL}}" />
                             </div>
-                            <div class="activityDetails">
-                                <div>
-                                    <span>{{item.Activity.Name}}</span>
-                                </div>
-                                <div>
-                                    <span>INR {{item.Activity.Cost}}</span>
+                        </div>
+                    </div>
+                    <div class="activityDetails">
+                        <div class="column-9">
+                            <div>
+                                <span>{{item.ActivityName}}</span>
+                            </div>
+                            <div>
+                                @*<span>INR {{item.Cost}}</span>*@
+                                <span>INR 1000</span>
+                            </div>
+                            <div class="ratingList" id="userRating">
+                                <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                    <img ng-src="{{imageItem}}" />
                                 </div>
                             </div>
-                            <div class="hairline-down-arrow">
+                        </div>                        
+                        <div class="column-3">
+                            <div class="like-container">
+                                @Html.Partial("../Partial/_favourites")
                             </div>
                         </div>
                     </div>

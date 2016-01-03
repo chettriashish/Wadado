@@ -11,7 +11,7 @@
                     $http({
                         url: '/Activities/GetSelectedActivityType',
                         method: 'GET',
-                        params: { selectedLocation: selectedLocation, selectedActivityType: selectedActivityType }
+                        params: { selectedLocation: selectedLocation, selectedActivityCategory: selectedActivityType }
                     }).success(deferred.resolve).error(deferred.reject);
                 }
             }            

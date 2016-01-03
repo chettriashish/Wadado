@@ -56,6 +56,7 @@
     <Compile Include="Repository Interfaces\IActivityLocationRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityRatesRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTimeSchedulerRepository.cs" />
+    <Compile Include="Repository Interfaces\IActivityTypeCategoryRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTypeMasterRepository.cs" />
     <Compile Include="Repository Interfaces\ICompanyMasterRepository.cs" />
     <Compile Include="Repository Interfaces\IGuestFavoritesRepository.cs" />

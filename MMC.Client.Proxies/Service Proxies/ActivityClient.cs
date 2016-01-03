@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Client.Proxies
-{    
+{
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "3.0.0.0")]
     public class ActivityClient : UserClientBase<IActivitiesService>, IActivitiesService
@@ -108,8 +108,7 @@ namespace MMC.Client.Proxies
         {
             return Channel.BookActivityForUserAsync(bookingDetails);
         }
-
-
+        
         public Task<ActivityBookingDataContract> AddUserActivityToCartAsync(string activityKey, int adults, int children, DateTime bookingDate,
             string time, decimal total, string sessionKey)
         {
@@ -131,6 +130,16 @@ namespace MMC.Client.Proxies
             bookingDetails.IsPaymentComplete = false;
             //Need to add user information as well. This after login is complete
             return BookActivityForUserAsync(bookingDetails);
+        }
+
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationAndType(string locationKey, string activityCategoryKey, string userAgent)
+        {
+            return Channel.GetAllActivitiesByLocationAndType(locationKey, activityCategoryKey, userAgent);
+        }
+
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent)
+        {
+            return Channel.GetAllActivitiesByLocationFilteredCategory(locationKey, activityCategoryKey, startDate, endDate, userAgent);
         }
     }
 }
