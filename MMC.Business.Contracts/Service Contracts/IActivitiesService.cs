@@ -21,23 +21,11 @@ namespace MMC.Business.Contracts
         //[FaultContract(typeof(AuthorizationValidationException))]
         IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName);
         [OperationContract]
-        bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time);
-
-        ///TBD ONCE LOGIN IS COMPLETE
-        //[OperationContract]
-        //[TransactionFlow(TransactionFlowOption.Allowed)]
-        //ActivityBooking BookActivityForUser(string loginUser, ActivityBooking bookingDetails);
-
-        ///TO BE REMOVED ONCE LOGIN IS COMPLETE
+        bool CheckForActivityAvailablity(string activityKey, int adults, int children, DateTime bookingDate, string time);        
+       
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]
-        ActivityBookingDataContract BookActivityForUser(ActivityBookingDataContract bookingDetails);
-
-        ///TBD ONCE LOGIN IS COMPLETE
-        //[OperationContract]
-        //IEnumerable<ActivityDetailsDataContract> GetUsersCurrentActivityCart(string loginUser, string sessionKey); 
-
-        ///TO BE REMOVED ONCE LOGIN IS COMPLETE
+        ActivityBookingDataContract BookActivityForUser(ActivityBookingDataContract bookingDetails);                
         [OperationContract]
         IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent);
         [OperationContract]

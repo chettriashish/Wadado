@@ -1,0 +1,49 @@
+﻿@*<div class="mobile-search-cover"></div>*@
+<div class="mobile-activityFilter">
+    <!--ROW START-->
+    <div class="row">
+        <div class="header-upper">
+            <div>
+                <span>Select Activity Types</span>
+            </div>
+            <div>
+                <button class="list-close-button" ng-click="closeFilter()">close activity filter</button>
+            </div>
+        </div>
+    </div>
+    <!--ROW END-->
+    <div class="row">
+        <div style="background-color:#ccc;width:100%;display:table;padding:.5em 0;">
+            <div class="column-12">
+                <div class="column-3">
+                    <label style="float:left;top:.5em;">
+                        <input type="checkbox" ng-click="toggleCheck()" ng-model="all.selected" />
+                        ALL
+                    </label>
+                </div>
+                <div class="column-9">
+                    <div class="filter-nopaddingbutton">
+                        <a ng-click="applyActivityFilter()">APPLY FILTER</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--ROW START-->
+    <div class="row">
+        <div class="column-12">
+            <div class="column-9">
+                <div ng-repeat="item in activityTypes">
+                    <div>
+                        <label style="float:left;top:.5em;">
+                            <input type="checkbox" ng-model="item.selected" ng-click="toggleItem()" />
+                            {{item.type}}
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="column-3"><span>&nbsp;</span></div>
+        </div>
+    </div>
+    <!--ROW END-->
+</div>

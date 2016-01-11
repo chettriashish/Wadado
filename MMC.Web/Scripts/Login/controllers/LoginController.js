@@ -82,7 +82,7 @@
                     $scope.ActivityKey = response.ActivityKey;
                 }
                 else {
-                    $scope.AllowGuest
+                    $scope.AllowGuest = true;
                 }
             });
         }

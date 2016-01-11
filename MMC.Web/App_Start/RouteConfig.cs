@@ -23,7 +23,7 @@ namespace MMC.Web
             // /Location/locationkey
             routes.MapRoute("Location",
                 "location/{locationName}",
-                new { controller = "Location", action = "Index", selectedLocation = UrlParameter.Optional });            
+                new { controller = "Location", action = "Index", selectedLocation = UrlParameter.Optional });
 
             // /Getting all locations for activitiesListing
             routes.MapRoute("GetSelectedActivityTypeByDate",
@@ -35,10 +35,29 @@ namespace MMC.Web
                 "activities/GetSelectedActivityType",
                 new { controller = "Activities", action = "GetSelectedActivityType", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
 
-            // /Activity/locationName/ActivityCategory
+            // /Activity/GetAllFilters
+            routes.MapRoute("GetAllFilters",
+              "activities/GetAllFilters",
+              new { controller = "Activities", action = "GetAllFilters" });
+
+            // /Activity/ClearDateFilters
+            routes.MapRoute("ClearDateFilters",
+              "activities/ClearDateFilters",
+              new { controller = "Activities", action = "ClearDateFilters" });
+
+            // /Activity/SetActivityTypeFilter
+            routes.MapRoute("SetActivityTypeFilter",
+              "activities/SetActivityTypeFilter",
+              new { controller = "Activities", action = "SetActivityTypeFilter", activityTypes = UrlParameter.Optional });
+
+            // /Activity/ClearActivityTypeFilter
+            routes.MapRoute("ClearActivityTypeFilter",
+              "activities/ClearActivityTypeFilter",
+              new { controller = "Activities", action = "ClearActivityTypeFilter" });
+
             routes.MapRoute("Activity",
-              "activities/{locationName}/{activityType}",
-              new { controller = "Activities", action = "Index", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
+             "activities/{locationName}/{activityType}",
+             new { controller = "Activities", action = "Index", locationName = UrlParameter.Optional, activityType = UrlParameter.Optional });
 
             // /Getting all details for selected activity
             routes.MapRoute("GetSelectedActivityDetails",
@@ -48,7 +67,7 @@ namespace MMC.Web
             // /ActivityDetails/LocationName/ActivityCode
             routes.MapRoute("ActivityDetails",
               "ActivityDetails/{selectedLocation}/{activityKey}",
-              new { controller = "ActivityDetails", action = "Index", locationName = UrlParameter.Optional, activityCode = UrlParameter.Optional });           
+              new { controller = "ActivityDetails", action = "Index", locationName = UrlParameter.Optional, activityCode = UrlParameter.Optional });
 
             routes.MapRoute(
                 name: "Default",

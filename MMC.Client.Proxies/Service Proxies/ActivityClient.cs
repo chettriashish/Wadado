@@ -15,7 +15,7 @@ namespace MMC.Client.Proxies
     public class ActivityClient : UserClientBase<IActivitiesService>, IActivitiesService
     {
         public ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent)
-        {
+        {          
             return Channel.GetAllActivities(locationKey, activityKey, userAgent);
         }
 
@@ -95,7 +95,7 @@ namespace MMC.Client.Proxies
 
         public Task<bool> CheckForActivityAvailablityAsync(string activityKey, int adults,
             int children, DateTime bookingDate, string time)
-        {
+        {            
             return Channel.CheckForActivityAvailablityAsync(activityKey, adults, children, bookingDate, time);
         }
 

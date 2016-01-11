@@ -21,9 +21,7 @@ namespace MMC.Business.Managers
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
         ConcurrencyMode = ConcurrencyMode.Multiple,
-        ReleaseServiceInstanceOnTransactionComplete = false)]
-    [AspNetCompatibilityRequirements(
-        RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+        ReleaseServiceInstanceOnTransactionComplete = false)]    
     public class ActivitiesManager : ManagerBase, IActivitiesService
     {
         const string MOBILE = "_mob";
@@ -47,8 +45,8 @@ namespace MMC.Business.Managers
                 return allActivitiesForLocation;
             });
         }
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]
+        //[PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
+        //[PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]
         public IEnumerable<ActivitiesMaster> GetAllBookedActivities(string loginName)
         {
             return ExecuteFaultHandledOperation(() =>

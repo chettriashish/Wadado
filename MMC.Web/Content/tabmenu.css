@@ -60,25 +60,25 @@
     .logo-button {
         display: block;
         position: fixed;
-        top: -4px;
-        left: 0px;
         float: left;
-        width: 54px;
-        height: 54px;
-        background: url('../Images/Icons/wadado_m.png');
-        background: url('../Images/Icons/wadado_m.png');
-        background: url('../Images/Icons/wadado_m.png');
-        background: url('../Images/Icons/wadado_m.png');
+        width: 55px;
+        height: 55px;
+        top: 0em;
+        left: .2em;
+        background-color: rgb(251,189,19);
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
         background-repeat: no-repeat;
-        transform: scale(0.6);
-        -webkit-transform: scale(0.6);
-        -moz-transform: scale(0.6);
         cursor: pointer;
         border: 0 none;
         z-index: 999;
         text-indent: -9999px;
         outline: none;
+        background-size: contain;
     }
+
 
     .nav-button:hover {
     }
@@ -91,14 +91,14 @@
 
     .nav-button.info div {
         text-indent: 0px;
-        width:20px;
-        height:20px;
-        margin:-10px -10px 0 20px;
-        float:right;
+        width: 20px;
+        height: 20px;
+        margin: -10px -10px 0 20px;
+        float: right;
         color: rgb(255,255,255);
-        padding:.25em 0;
+        padding: .25em 0;
         font-size: .9em;
-        font-weight:bold;
+        font-weight: bold;
         outline: none;
         background-color: rgb(229,0,0);
         border-radius: 10px;

@@ -33,6 +33,7 @@
     });
     var activityDetailsController = function ($scope, $http, $timeout, $interval, $location, $routeParams, ActivityDetailsDataService) {
         var sliderInit = false;
+        var similarActivitiesInit = false;        
         var setActivityImages = function () {
             $scope.ImageURL = [];
 
@@ -66,6 +67,29 @@
                 }, 100);
             }
         };
+
+        var setSimilarActivityImages = function () {                        
+            if (WURFL.is_mobile) {
+                $.each($scope.selectedActivityDetails.SimilarActivities, function (key, value) {
+                    if (WURFL.form_factor == "Smartphone") {
+                        $scope.selectedActivityDetails.SimilarActivities[key].DefaultImageURL = Wadado.rootPath + "/" + $scope.selectedActivityDetails.SimilarActivities[key].ImageURL + "_landscape.jpg";
+                    }
+                    else {
+                        $scope.selectedActivityDetails.SimilarActivities[key].DefaultImageURL = Wadado.rootPath + "/" + $scope.selectedActivityDetails.SimilarActivities[key].ImageURL + "_landscape.jpg";
+                    }
+                });
+            }
+            if (similarActivitiesInit == true) {
+                $scope.$apply();
+            }
+            else if (similarActivitiesInit == false) {
+                setTimeout(function () {
+                    if ($scope.greaterThan) {
+                        ActivityDetailsDataService.setSimilarActivityImageSlider();
+                    }                    
+                }, 100);
+            }
+        };
         /*START SELECTED ACTIVITY TYPE*/
         $scope.selectedActivities = {};
         $scope.bookingViews = [];
@@ -85,6 +109,14 @@
             if ($.url().segment().length > 2) {
                 if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {
                     setActivityImages();
+                    if ($scope.selectedActivityDetails.SimilarActivities.length > 1) {
+                        $scope.greaterThan = true;
+                    }
+                    else {
+                        $scope.greaterThan = false;
+                    }
+                    setSimilarActivityImages();
+                    setRating();
                     $scope.NumberOfPeople = $scope.selectedActivityDetails.MinPeople + "-" + $scope.selectedActivityDetails.MaxPeople;
                     $scope.selectedLocation = $.url().segment(2);
                 }
@@ -140,39 +172,43 @@
                             $("#userRating").append('<div style="float:left;"><img src="../../Images/Icons/line_star.png"></div>')
                         }
                     }
-                    //result = Math.round($scope.selectedActivityDetails.DifficultyRating);
-                    //half = false;
-                    //if (result > $scope.selectedActivityDetails.DifficultyRating) {
-                    //    result = result - 1;
-                    //    half = true;
-                    //}
-                    //for (i = 0; i < result; i++) {
-                    //    $("#diffRating").append('<div><img src="../../Images/Icons/full_star.png"></div>')
-                    //}
-                    //if (half) {
-                    //    $("#diffRating").append('<div><img src="../../Images/Icons/half_star.png"></div>')
-                    //}
-                    //if (half == true) {
-                    //    for (i = 0; i < (5 - (result + 1)) ; i++) {
-                    //        $("#diffRating").append('<div><img src="../../Images/Icons/line_star.png"></div>')
-                    //    }
-                    //}
-                    //else {
-                    //    for (i = 0; i < (5 - result) ; i++) {
-                    //        $("#diffRating").append('<div><img src="../../Images/Icons/line_star.png"></div>')
-                    //    }
-                    //}
                 }
             };
             /*********SHOW BOOKING DETAILS ONLY AFTER DATA HAS BEEN FETCHED FROM SERVER*************/
             $scope.showActivityDetails = function () {
                 rating();
                 sliderInit = true;
+                similarActivitiesInit = true;
                 return sliderInit;
             }
             /*************SHOW BOOKING DETAILS ONLY AFTER DATA HAS BEEN FETCHED FROM SERVER********/
         });
-
+        var setRating = function () {
+            if (WURFL.is_mobile) {
+                $.each($scope.selectedActivityDetails.SimilarActivities, function (key, value) {
+                    var count = 0;
+                    $scope.selectedActivityDetails.SimilarActivities[key].ratingURL = [];
+                    var result = Math.round($scope.selectedActivityDetails.SimilarActivities[key].Rating);
+                    var half = false;
+                    if (result > $scope.selectedActivityDetails.SimilarActivities[key].Rating) {
+                        result = result - 1;
+                        half = true;
+                    }
+                    for (i = 0; i < result; i++) {
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star.png";
+                        count++;
+                    }
+                    if (half) {
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star.png";
+                        count++;
+                    }
+                    for (i = count; i < 5 ; i++) {
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star.png";
+                        count++;
+                    }
+                });
+            }
+        };
         $scope.showMore = function () {
             if ($scope.descriptionAction.indexOf("more") != -1) {
                 $scope.descriptionAction = "less";
@@ -190,7 +226,8 @@
         }
         /*END SELECTED ACTIVITY TYPE*/
         $(window).resize(function () {
-            setActivityImages();
+            //setActivityImages();
+            //setSimilarActivityImages();
         });
     }
     app.controller("ActivityDetailsController", activityDetailsController);

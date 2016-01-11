@@ -39,8 +39,9 @@ namespace MMC.Client.Proxies.Tests
                    new ChannelFactory<IActivitiesService>("");
             IActivitiesService proxy = channelFactory.CreateChannel();
             (proxy as ICommunicationObject).Open();
-            IEnumerable<ActivitySummaryDataContract> contract = new List<ActivitySummaryDataContract>();
-            contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,9),new DateTime(2016,1,11), "smartphone");            
+            ActivityDetailsDataContract contract = new ActivityDetailsDataContract();
+            //contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,9),new DateTime(2016,1,11), "smartphone");            
+            contract = proxy.GetAllActivities("GANGTOK", "HIGHFLY", "smartphone");            
             (proxy as ICommunicationObject).Close();
         }
     }

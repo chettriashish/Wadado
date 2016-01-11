@@ -17,9 +17,7 @@ namespace MMC.Business.Managers
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
         ConcurrencyMode = ConcurrencyMode.Multiple,
-        ReleaseServiceInstanceOnTransactionComplete = false)]
-    [AspNetCompatibilityRequirements(
-        RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
+        ReleaseServiceInstanceOnTransactionComplete = false)]   
     public class UsersManager : ManagerBase, IUsersService
     {
         const string MOBILE = "_mob";

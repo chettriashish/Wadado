@@ -349,6 +349,8 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\Fonts\Dooodleista.svg" />
+    <Content Include="Content\homemobilemenu.css" />
+    <Content Include="Content\hometabmenu.css" />
     <Content Include="Content\jquery-ui-1.10.1.css" />
     <Content Include="Content\owl.theme.css" />
     <Content Include="Content\phone.css" />
@@ -1247,6 +1249,7 @@
     <Content Include="Scripts\slider\jssor.slider.mini.js" />
     <Content Include="Content\owl.carousel.css" />
     <Content Include="Scripts\slider\owl.carousel.min.js" />
+    <Content Include="Scripts\slider\owl.navigation.js" />
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
     <Content Include="Unity.Mvc4.README.txt" />
@@ -1288,7 +1291,9 @@
     <Content Include="Scripts\moment-with-locales.min.js" />
     <Content Include="Scripts\moment.js" />
     <Content Include="Scripts\moment.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -1344,6 +1349,7 @@
     <Content Include="Views\Partial\_homemobilemenu.cshtml" />
     <Content Include="Views\Partial\_favourites.cshtml" />
     <Content Include="Views\Partial\_dateFilter.cshtml" />
+    <Content Include="Views\Partial\_activityList.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\ActivitiesCart\directives\" />

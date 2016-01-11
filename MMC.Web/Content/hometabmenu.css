@@ -1,0 +1,319 @@
+﻿/*             file downloaded from https://www.astuteo.com/mobilemenu/             */
+
+
+.nav-button {
+    display: none;
+}
+/* hide the navigation button by default */
+
+@media only screen and (min-width: 0px) and (max-width: 1141px) {
+
+    /* Navigation Button
+	-------------------------------------------------------- */
+
+    .nav-button {
+        display: block;
+        position: fixed;
+        top: 7px;
+        right: 7px;
+        float: right;
+        width: 40px;
+        height: 35px;
+         background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 1.8em, 0%;
+        cursor: pointer;
+        border: 0 none;
+        border-radius: 5px;
+        z-index: 999;
+        text-indent: -9999px;
+        outline: none;
+    }
+
+    .location-button {
+        display: block;
+        position: fixed;
+        top: 8px;
+        right: 4.6em;
+        float: right;
+        width: 50px;
+        height: 35px;
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: .9em, 0;
+        cursor: pointer;
+        border: 0 none;
+        border-radius: 5px;
+        z-index: 999;
+        text-indent: -9999px;
+        outline: none;
+    }
+
+    .logo-button {
+        display: block;
+        position: fixed;        
+        float: left;
+        width: 55px;
+        height: 55px;
+        top:0em;               
+        left:.2em;   
+        background-color: rgb(251,189,19);
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-repeat: no-repeat;        
+        cursor: pointer;
+        border: 0 none;
+        z-index: 999;
+        text-indent: -9999px;
+        outline: none;        
+        background-size:contain;
+    }    
+
+
+    .nav-button:hover {
+    }
+
+    .nav-button.open {
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 1.8em, 0%;
+    }
+
+    .nav-button.info div {
+        text-indent: 0px;
+        width:20px;
+        height:20px;
+        margin:-10px -10px 0 20px;
+        float:right;
+        color: rgb(255,255,255);
+        padding:.25em 0;
+        font-size: .9em;
+        font-weight:bold;
+        outline: none;
+        background-color: rgb(229,0,0);
+        border-radius: 10px;
+        -webkit-animation-name: highlight; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+        animation-name: highlight;
+        animation-duration: 1s;
+    }
+
+    /* Chrome, Safari, Opera */
+    @-webkit-keyframes highlight {
+        from {
+            background-color: rgb(255,255,255);
+            color: rgb(0,0,0);
+        }
+
+        to {
+            background-color: rgb(229,0,0);
+            color: rgb(255,255,255);
+        }
+    }
+
+    /* Standard syntax */
+    @keyframes highlight {
+        from {
+            background-color: rgb(255,255,255);
+            color: rgb(0,0,0);
+        }
+
+        to {
+            background-color: rgb(251,189,19);
+            color: rgb(255,255,255);
+        }
+    }
+
+    /* Navigation Bar
+	-------------------------------------------------------- */
+
+    body {
+        padding-top: 0;
+    }
+
+    .primary-nav {
+        width: 100%;
+        float: none;
+        background-color: rgba(255,255,255,.8); /* change the menu color */
+        display: block;
+        height: 48px;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        left: 0px;
+        z-index: 999;
+        /*-webkit-transition: .6s ease-out all;
+        -moz-transition: .6s ease-out all;
+        -ms-transition: .6s ease-out all;
+        transition: .6s ease-out all;*/
+        clear: both;
+    }
+
+        /*overriding default styles from mobile menu*/
+        .primary-nav div:first-of-type {
+            width: 75%;
+            float: none;
+            margin: 0 auto;
+            margin-top: .48em;
+        }
+    /*end overriding default styles from mobile menu*/
+
+    /*search in menu bar style begin*/
+    .menusearch-input {
+        margin: 0 auto;
+        border: 1px solid #CCC;
+        color: #333333;
+        padding: .4em;
+        display: table;
+        text-transform: uppercase;
+        border-radius: 2px;
+    }
+
+        .menusearch-input div:first-of-type {
+            width: 1.2em;
+            margin: 0;
+            float: left;
+        }
+
+        .menusearch-input div {
+            float: left;
+            margin: 0;
+        }
+
+        .menusearch-input img {
+            width: 1.2em;
+            height: auto;
+        }
+    /*search in menu bar style end*/
+    /* Toggle the navigation bar open  */
+    .primary-nav.open {
+        height: auto;
+        padding-top: 48px;
+    }
+
+        .primary-nav.open > div:first-of-type {
+            border-top: 2px solid #febe00;
+        }
+
+        .primary-nav.open div {
+            display: block;
+        }
+
+    /*start style for menu*/
+    .menu-nav {
+        height: 100%;
+        float: right;
+        width: 0%;
+        margin: 0;
+        overflow: hidden;
+        position: fixed;
+        right: 0px;
+        z-index: 1000;
+        clear: both; /* change the menu color */
+        -webkit-transition: width .6s ease-out;
+        -moz-transition: width .6s ease-out;
+        -ms-transition: width .6s ease-out;
+        transition: width .6s ease-out;
+        background-color: rgba(255,255,255,1); /* change the menu color */
+    }
+
+        .menu-nav li {
+            display: none;
+            width: 100%;
+        }
+
+            .menu-nav li a {
+                /*text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.15);*/
+                text-decoration: none;
+                /*border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1); */
+            }
+
+        /*.primary-nav li a:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-top-color: transparent; }*/
+
+        .menu-nav > li:first-child {
+            margin-top: 48px;
+        }
+
+        /* Toggle the navigation bar open  */
+        .menu-nav.open {
+            width: 75%;
+            height: 100%;
+            top: 0;
+        }
+
+            .menu-nav.open > li:first-of-type {
+                top: 48px;
+            }
+
+            .menu-nav.open li {
+                display: block;
+            }
+
+
+                .menu-nav.open li a {
+                    border-bottom: 1px solid #ccc;
+                    display: block;
+                    width: 90%;
+                    padding: 1em;
+                    margin: 0 auto;
+                    font-size: small;
+                    font-weight: normal;
+                    /*text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.15);*/
+                    color: black;
+                    text-decoration: none;
+                    /*border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    border-top: 1px solid rgba(255, 255, 255, 0.1); */
+                }
+
+        /* Submenus ΓÇô optional .parent class indicates dropdowns */
+        .menu-nav > li:hover > a {
+            /*background: rgba(0, 0, 0, 0.5);*/
+        }
+
+        .menu-nav li.parent > a:after {
+            content: "Γû╝";
+            color: rgba(255, 255, 255, 0.5);
+            float: right;
+        }
+
+        .menu-nav li.parent > a:hover {
+            /*background: rgba(0, 0, 0, 0.75);*/
+        }
+
+        .menu-nav li ul {
+            display: none;
+            background: rgba(0,0,0,.5);
+            border-top: 0 none;
+            padding: 0;
+        }
+
+            .menu-nav li ul a {
+                border: 0 none;
+                font-size: 12px;
+                padding: 10px 5%;
+                font-weight: normal;
+            }
+
+        .menu-nav li:hover ul {
+            display: block;
+            border-top: 0 none;
+        }
+
+    /*end style for menu*/
+}
+/* End Mobile Styles */

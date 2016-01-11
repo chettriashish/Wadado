@@ -1,16 +1,35 @@
 ﻿(function () {
     var app = angular.module("appMain");
-    var searchController = function ($scope, $http, $timeout, $interval, $location, SearchDataService) {        
+    var searchController = function ($scope, $http, $timeout, $interval, $location, SearchDataService) {
         $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';
         /***************************LOADING SELECTED LOCATIONS ACTIVITY LIST *************************/
         $scope.loadSelectedLocationDetails = function (item, model) {
-            $scope.locationName = item.LocationName;                               
+            $scope.locationName = item.LocationName;
             SearchDataService.getAllActivitiesForLocation($scope.locationName).then(function (activities) {
                 $scope.activities = activities;
-                $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\tACTIVITIES";
+                $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\t ACTIVITIES";
+                makeBold();
             });
         };
         /*END LOADING SELECTED LOCATIONS ACTIVITY LIST*/
+
+        /********************MAKING THE SECOND WORD BOLD************** */
+        var makeBold = function () {
+            $('.search-button a').each(function () {
+                var words = $scope.selectionInformation.split('\t\t');
+                $(this).empty().html(function () {
+                    $scope.selectionInformation = "";
+                    for (i = 0; i < words.length; i++) {
+                        if (i == 1) {
+                            $(this).append(' <span class="bold">' + words[i] + '\t\t</span>');
+                        }
+                        else {
+                            $(this).append('<span>' + words[i] + '\t\t</span>');
+                        }
+                    }
+                });
+            });
+        }
 
         /*LOADING THE SELECTED ACTIVITY OR SELECTED LOCATION DETAILS*/
         $scope.loadSelectedDetails = function () {
@@ -35,7 +54,7 @@
         /*END LOADING ALL LOCATIONS*/
 
         /*****************MAKE CODE COMMON******************/
-        
+
         /*SHOWING AND HIDING SEARCH DIV*/
 
         $(".search-input").click(function () {
@@ -44,26 +63,29 @@
             $scope.$broadcast("BUTTONCLICK", 'OPEN');
             $scope.alllocations = {};
             $scope.locationName = null;
-            $scope.activityName = null;            
-        });        
-        
+            $scope.activityName = null;
+        });
+
         $(".menusearch-input").click(function () {
             $(".mobile-search").toggleClass("open");
             $(".mobile-search-cover").toggleClass("open");
             $scope.$broadcast("BUTTONCLICK", 'OPEN');
             $scope.alllocations = {};
             $scope.locationName = null;
-            $scope.activityName = null;            
+            $scope.activityName = null;
         });
         /*END SHOWING AND HIDING SEARCH DIV*/
-       
+
         /*****************END MAKE CODE COMMON******************/
         $(".close-button").click(function () {
             $(".mobile-search").toggleClass("open");
-            $(".mobile-search-cover").toggleClass("open");            
+            $(".mobile-search-cover").toggleClass("open");
+            $('.search-button a').empty();
             $scope.activities = [];
+            $('.search-button a').append('<span>SELECT LOCATION TO SEARCH</span>')
             $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';
-        });      
+            $scope.$apply();
+        });
     }
     app.controller("SearchController", searchController);
 }());

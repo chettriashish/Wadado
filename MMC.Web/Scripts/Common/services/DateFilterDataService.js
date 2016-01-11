@@ -15,9 +15,10 @@
                 }
             }
             return deferred.promise;
-        }
+        }        
         return {
             filterDataByDateRangeSelected: filterDataByDateRangeSelected,
+            
         };
     };
     app.factory("DateFilterDataService", dateFilterDataService);

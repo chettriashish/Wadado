@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Globalization;
+using System.Web.Script.Serialization;
 
 namespace MMC.Web.Controllers.Activities
 {
@@ -18,7 +19,7 @@ namespace MMC.Web.Controllers.Activities
 
         public ActivitiesController(IActivitiesService activitiesService)
         {
-            _activitiesService = activitiesService;            
+            _activitiesService = activitiesService;
         }
 
         // GET: Activities
@@ -30,8 +31,15 @@ namespace MMC.Web.Controllers.Activities
 
         public ActionResult GetSelectedActivityType(string selectedLocation, string selectedActivityCategory)
         {
-            IEnumerable<ActivitySummaryDataContract> result = _activitiesService.GetAllActivitiesByLocationAndType(selectedLocation,selectedActivityCategory,GetDeviceInformation());
-            return Json(result,JsonRequestBehavior.AllowGet);
+            if (Session["StartDate"] != null && Session["EndDate"] != null)
+            {
+                return GetSelectedActivityTypeByDate(selectedLocation, selectedActivityCategory, Session["StartDate"].ToString(), Session["EndDate"].ToString());
+            }
+            else
+            {
+                IEnumerable<ActivitySummaryDataContract> result = _activitiesService.GetAllActivitiesByLocationAndType(selectedLocation, selectedActivityCategory, GetDeviceInformation());
+                return Json(result, JsonRequestBehavior.AllowGet);
+            }
         }
 
         [HttpGet]
@@ -40,12 +48,83 @@ namespace MMC.Web.Controllers.Activities
             IEnumerable<LocationsMaster> results = new List<LocationsMaster>();
             return Json(results, JsonRequestBehavior.AllowGet);
         }
+        [HttpGet]
         public ActionResult GetSelectedActivityTypeByDate(string selectedLocation, string selectedActivityCategory, string startDate, string endDate)
         {
             IEnumerable<ActivitySummaryDataContract> result = _activitiesService.GetAllActivitiesByLocationFilteredCategory(selectedLocation, selectedActivityCategory
                 , DateTime.ParseExact(startDate, "d/MM/yyyy", CultureInfo.InvariantCulture)
                 , DateTime.ParseExact(endDate, "d/MM/yyyy", CultureInfo.InvariantCulture), GetDeviceInformation());
+            ActivityFilterModel filterModel = new ActivityFilterModel();
+            if (Session["ActivityFilter"] != null)
+            {
+                (Session["ActivityFilter"] as ActivityFilterModel).StartDate = startDate;
+                (Session["ActivityFilter"] as ActivityFilterModel).EndDate = endDate;
+            }
+            else
+            {
+                filterModel.StartDate = startDate;
+                filterModel.EndDate = endDate;
+                Session["ActivityFilter"] = filterModel;
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
-        }      
+        }
+
+        public ActionResult SetActivityTypeFilter(string activityTypes)
+        {
+            ActivityFilterModel filterModel = new ActivityFilterModel();
+            JavaScriptSerializer serializer = new JavaScriptSerializer();
+                
+            if (Session["ActivityFilter"] != null)
+            {
+                filterModel = Session["ActivityFilter"] as ActivityFilterModel;
+                filterModel.ActivityTypes = serializer.Deserialize<List<ActivityTypeFilter>>(activityTypes);
+            }
+            else
+            {
+                filterModel.ActivityTypes = serializer.Deserialize<List<ActivityTypeFilter>>(activityTypes);
+                Session["ActivityFilter"] = filterModel;
+            }
+            return Json(filterModel, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult ClearDateFilters()
+        {
+            if (Session["ActivityFilter"] != null)
+            {
+                (Session["ActivityFilter"] as ActivityFilterModel).StartDate = default(string);
+                (Session["ActivityFilter"] as ActivityFilterModel).EndDate = default(string);
+                if ((Session["ActivityFilter"] as ActivityFilterModel).ActivityTypes != null &&
+                    (Session["ActivityFilter"] as ActivityFilterModel).ActivityTypes.Count() == 0)
+                {
+                    Session.Remove("ActivityFilter");
+                }
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult ClearActivityTypeFilter()
+        {
+            if (Session["ActivityFilter"] != null)
+            {
+                (Session["ActivityFilter"] as ActivityFilterModel).ActivityTypes = new List<ActivityTypeFilter>();
+                if ((Session["ActivityFilter"] as ActivityFilterModel).StartDate == default(string) ||
+                    (Session["ActivityFilter"] as ActivityFilterModel).StartDate == string.Empty)
+                {
+                    Session.Remove("ActivityFilter");
+                }
+            }
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+        [HttpGet]
+        public ActionResult GetAllFilters()
+        {
+            ActivityFilterModel filterModel = new ActivityFilterModel();
+            if (Session["ActivityFilter"] != null)
+            {
+                filterModel = Session["ActivityFilter"] as ActivityFilterModel;
+            }
+            return Json(filterModel, JsonRequestBehavior.AllowGet);
+        }
     }
 }

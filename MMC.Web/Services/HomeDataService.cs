@@ -164,24 +164,12 @@ namespace MMC.Web.Services
 
             if (deviceInfo.GetVirtualCapability("is_mobile") == "true")
             {
-                if (deviceInfo.GetVirtualCapability("is_smartphone") == "true")
-                {
-                    ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_tt";
-                    ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/TopTrending/family_tt";
-                    ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_tt";
-                    ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_tt";
-                    ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/TopTrending/family_tt";
-                    ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_tt";
-                }
-                else
-                {
-                    ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_tt";
-                    ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/TopTrending/family_small_tt";
-                    ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_small_tt";
-                    ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/TopTrending/beer_small_tt";
-                    ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/TopTrending/family_small_tt";
-                    ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/TopTrending/nightresort_small_tt";
-                }
+                ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/khukuri1";
+                ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/maruni1";
+                ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/buttermilk2";
+                ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/village2";
+                ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/village1";
+                ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/village3";
             }
            
             results.Add(activityOne);
@@ -199,7 +187,7 @@ namespace MMC.Web.Services
             TopOffers topOffer1 = new TopOffers();
             topOffer1.TopOffersKey = "TOPOFFER1";
             topOffer1.Discount = 10;
-            topOffer1.ImageUrl = "Images/TopOffers/beerfactorytour_offer";
+            topOffer1.ImageUrl = "Images/khukuri2";
             offers1.Offer = topOffer1;
             offers1.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers1.Activity).ActivitesKey = "ACTIVITY ONE";
@@ -215,7 +203,7 @@ namespace MMC.Web.Services
             TopOffers topOffer2 = new TopOffers();
             topOffer2.TopOffersKey = "TOPOFFER1";
             topOffer2.Discount = 10;
-            topOffer2.ImageUrl = "Images/TopOffers/herbalbath_offer";
+            topOffer2.ImageUrl = "Images/khukuri1";
             offers2.Offer = topOffer2;
             offers2.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers2.Activity).ActivitesKey = "ACTIVITY ONE";
@@ -231,7 +219,7 @@ namespace MMC.Web.Services
             TopOffers topOffer3 = new TopOffers();
             topOffer3.TopOffersKey = "TOPOFFER1";
             topOffer3.Discount = 10;
-            topOffer3.ImageUrl = "Images/TopOffers/beer_offer";
+            topOffer3.ImageUrl = "Images/maruni1";
             offers3.Offer = topOffer3;
             offers3.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers3.Activity).ActivitesKey = "ACTIVITY ONE";
@@ -247,7 +235,7 @@ namespace MMC.Web.Services
             TopOffers topOffer5 = new TopOffers();
             topOffer5.TopOffersKey = "TOPOFFER1";
             topOffer5.Discount = 10;
-            topOffer5.ImageUrl = "Images/TopOffers/bakery_offer";
+            topOffer5.ImageUrl = "Images/maruni2";
             offers5.Offer = topOffer5;
             offers5.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers5.Activity).ActivitesKey = "ACTIVITY ONE";
@@ -263,7 +251,7 @@ namespace MMC.Web.Services
             TopOffers topOffer4 = new TopOffers();
             topOffer4.TopOffersKey = "TOPOFFER1";
             topOffer4.Discount = 10;
-            topOffer4.ImageUrl = "Images/TopOffers/couple_offer";
+            topOffer4.ImageUrl = "Images/village2";
             offers4.Offer = topOffer4;
             offers4.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers4.Activity).ActivitesKey = "ACTIVITY ONE";

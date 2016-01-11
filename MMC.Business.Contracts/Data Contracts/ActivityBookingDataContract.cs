@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Common.ServiceModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 namespace MMC.Business.Contracts.DataContracts
 {
     [DataContract(Namespace = "wadado.in")]
-    public class ActivityBookingDataContract
+    public class ActivityBookingDataContract : DataContractBase
     {
         #region Properties
         [DataMember]

@@ -2,9 +2,13 @@
     ViewBag.Title = "WADADO.IN";
 }
 <!--SLIDER REFERENCE-->
-<script src="~/Scripts/slider/jssor.js"></script>
-<script src="~/Scripts/slider/jssor.slider.js"></script>
-<script src="~/Scripts/slider/slider.js"></script>
+@*<script src="~/Scripts/slider/jssor.js"></script>
+    <script src="~/Scripts/slider/jssor.slider.js"></script>
+    <script src="~/Scripts/slider/slider.js"></script>*@
+
+<script src="~/Scripts/slider/owl.carousel.min.js"></script>
+<link href="~/Content/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/owl.theme.css" rel="stylesheet" />
 
 <!--UI SELECT REFERENCE-->
 <link href="~/Content/ui-select/select.css" rel="stylesheet" />
@@ -19,6 +23,10 @@
 <script src="~/Scripts/angular-ui/ui-select/select.js"></script>
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Common/controllers/FavoritesController.js"></script>
 
 <!--BOOKING REFERENCE-->
 <script src="~/Scripts/Common/services/BookingDataService.js"></script>
@@ -60,24 +68,10 @@
     </div>
     <div class="uppercontent" ng-show="showActivityDetails()" ng-hide="hideActivityDetails()">
         <div>
-            <div id="slider_container" class="slider" ng-cloak>
-                <!-- Slides Container -->
-                <div u="slides" class="sliderContainer">
-                    <div ng-repeat="item in selectedActivityDetails.ActivityImagesURL">
-                        <img u="image" ng-src="{{item}}">
-                    </div>
+            <div class="owl-carousel" id="activityImages">
+                <div ng-repeat="item in selectedActivityDetails.ActivityImagesURL" class="crop-height" ng-cloak>
+                    <img u="image" ng-src="{{item}}">
                 </div>
-                <!-- bullet navigator container -->
-                <div u="navigator" class="jssorb21" style="position: absolute; bottom: 26px; left: 6px;">
-                    <!-- bullet navigator item prototype -->
-                    <div u="prototype" style="position: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
-                </div>
-                <!-- Arrow Left -->
-                <span u="arrowleft" class="jssora21l" style="width: 55px; height: 55px; top: 123px; left: 8px;">
-                </span>
-                <!-- Arrow Right -->
-                <span u="arrowright" class="jssora21r" style="width: 55px; height: 55px; top: 123px; right: 8px">
-                </span>
             </div>
             <!--Row end-->
             <!--Row start-->
@@ -228,5 +222,82 @@
             </div>
             <!--Row end-->
         </div>
+        <!--Row start-->
+        <div class="row">
+            <div class="column-12">
+                <div class="column-12">
+                    <div class="subHeader">
+                        <span>
+                            Similar Activities
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end row-->
+        <!--start row-->
+        <div class="row">
+            <div class="column-12 top">
+                <div class="owl-carousel" id="similarActivityImages" ng-if="greaterThan">
+                    <div ng-repeat="item in selectedActivityDetails.SimilarActivities" class="crop-height" ng-cloak>
+                        <div class="imageDiscountLabel">
+                            <div><span>{{item.Offer.Discount}}%</span></div>
+                            <div><span>Off</span></div>
+                        </div>
+                        <img ng-src="{{item.DefaultImageURL}}" ng-click="" />
+                        <div class="crop-height" ng-cloak>
+                            <img ng-src="{{item.ImageURL}}" />
+                        </div>
+                        <div class="image-noPaddingDiv">
+                            <div class="leftDiv">
+                                <div>
+                                    <p><span>{{item.ActivityName}}</span></p>
+                                </div>
+                                <span>$ {{item.Cost}}</span>
+                                <div class="ratingList" id="userRating">
+                                    <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                        <img ng-src="{{imageItem}}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rightDiv">
+                                <div class="like-container">
+                                    @Html.Partial("../Partial/_favourites")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-repeat="item in selectedActivityDetails.SimilarActivities"
+                     ng-cloak ng-if="greaterThan == false">
+                    <div class="imageDiscountLabel" ng-if="item.Discount > 0">
+                        <div><span>{{item.Discount}}%</span></div>
+                        <div><span>Off</span></div>
+                    </div>
+                    <div class="crop-height">
+                        <img ng-src="{{item.DefaultImageURL}}" ng-click="" style="width:100%;" />
+                    </div>
+                    <div class="image-noPaddingDiv">
+                        <div class="leftDiv">
+                            <div>
+                                <p><span>{{item.ActivityName}}</span></p>
+                            </div>
+                            <span>$ {{item.Cost}}</span>
+                            <div class="ratingList" id="userRating">
+                                <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                    <img ng-src="{{imageItem}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightDiv">
+                            <div class="like-container">
+                                @Html.Partial("../Partial/_favourites")
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--end row-->
     </div>
 </div>

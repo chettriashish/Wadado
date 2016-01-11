@@ -12,7 +12,7 @@
                     i++;
                     $(datepicker[i]).datepicker('option', 'minDate', newDate);
                     scope.setStartDate(date);
-                    scope.setEndDate($.datepicker.formatDate("dd/mm/yy", newDate));
+                    //scope.setEndDate($.datepicker.formatDate("dd/mm/yy", newDate));
                     break;
                 }
                 else if (id == 'end') {                    

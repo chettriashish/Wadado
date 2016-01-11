@@ -59,26 +59,25 @@
 
     .logo-button {
         display: block;
-        position: fixed;
-        top: -4px;
-        left: 0px;
+        position: fixed;        
         float: left;
-        width: 54px;
-        height: 54px;
-        background: url('../Images/Icons/wadado_m.png');
-        background: url('../Images/Icons/wadado_m.png');
-        background: url('../Images/Icons/wadado_m.png');
-        background: url('../Images/Icons/wadado_m.png');
-        background-repeat: no-repeat;
-        transform: scale(0.6);
-        -webkit-transform: scale(0.6);
-        -moz-transform: scale(0.6);
+        width: 55px;
+        height: 55px;
+        top:0em;               
+        left:.2em;   
+        background-color: rgb(251,189,19);
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-repeat: no-repeat;        
         cursor: pointer;
         border: 0 none;
         z-index: 999;
         text-indent: -9999px;
-        outline: none;
-    }
+        outline: none;        
+        background-size:contain;
+    }    
 
     .nav-button:hover {
     }

@@ -16,22 +16,24 @@
         <div class="column-12">
             <div>
                 <div class="filter-button">
-                    <a ng-click="filterActivitiesByDates()">APPLY FILTER</a>
+                    <a ng-click="filterActivitiesByDates()">{{message}}</a>
                 </div>
             </div>
         </div>
     </div>
     <!--ROW END-->
-    <div class="row">
-        <div class="column-12">
-            <div date-val="init" ng-model="date" datepicker class="datepicker ll-skin-cangas" ></div>
+    <div style="position:relative;">
+        <div class="row">
+            <div class="column-12">
+                <div date-val="init" ng-model="date" datepicker class="datepicker ll-skin-cangas"></div>
+            </div>
         </div>
-    </div>
-    <!--ROW START-->
-    <div class="row">
-        <div class="column-12">
-            <div date-val="end" ng-model="date" datepicker class="datepicker ll-skin-cangas" ></div>
+        <!--ROW START-->
+        <div class="row">
+            <div class="column-12">
+                <div date-val="end" ng-model="date" datepicker class="datepicker ll-skin-cangas"></div>
+            </div>
         </div>
-    </div>
-    <!--ROW END-->
+        <!--ROW END-->
+    </div>    
 </div>

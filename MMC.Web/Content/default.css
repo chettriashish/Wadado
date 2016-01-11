@@ -103,9 +103,6 @@ nav ul li:last-child a {
 }
 
 
-
-
-
 /*-----CONTENT -----*/
 .contentWrapper {
     background-color: #fff;
@@ -184,19 +181,23 @@ nav ul li:last-child a {
     transition: 1s all;
 }
 /*-----COLUMNS -----*/
-.column-12, .column-9, .column-7, .column-6, .column-4, .column-3, .column-5, .column-2, .column-0 {
+.column-12, .column-9, .column-7, .column-6, .column-5, .column-4, .column-3, .column-2, .column-0 {
     padding: .3em 2%;
     float: left;
 }
 
-
+.column--true-12, .column--true-9, .column--true-7, .column--true-6, .column--true-5, .column--true-4, .column--true-3, .column--true-2 {
+    padding: 1px 0;
+    float: left;
+    width: 100%;
+}
 
 .column-12 {
     width: 100%;
 }
 
     .column-12.top {
-        padding: .3em 0;
+        padding: .1em 0;
     }
 
 .column-0 {
@@ -424,34 +425,81 @@ nav ul li:last-child a {
     background-position: -303px -33px;
 }
 
+.imageDiscountLabel {
+    background-color: rgba(142,199,66,1);
+    padding: .5em 1em;
+    width: 2em;
+    height: 2.5em;
+    top: 5em;
+    margin-top: -4em;
+    float: right;
+    color: white;
+    position: relative;
+    display: table;
+    z-index: 1;
+}
+
+    .imageDiscountLabel div:first-of-type {
+        font-size: 0.8em;
+        padding: 0;
+    }
+
+    .imageDiscountLabel div {
+        padding: 0em 1px;
+        font-weight: 500;
+        font-size: .7em;
+    }
+
 .imageDiv {
+    background-color: rgba(0,0,0,.6);
+    padding: .5em .5em;
+    width: 100%;
+    height: 4em;
+    position: relative;
+    display: table;
+    color: white;
+    top: 0em;
+    margin-top: -4em;
+}
+
+.image-noPaddingDiv {
     background-color: rgba(0,0,0,.6);
     padding: .2em .5em;
     width: 100%;
-    position: absolute;
-    margin-top: -3em;
+    height: 4em;
+    position: relative;
+    display: table;
     color: white;
+    top: 0em;
+    margin-top: -4.5em;
 }
 
-    .imageDiv div {
-        padding: .6em 0;
+.imageDiv div {
+    padding: .6em 0;
+}
+
+.image-noPaddingDiv .leftDiv {
+    float: left;
+    font-size: 1em;
+}
+
+.imageDiv .leftDiv {
+    float: left;
+    font-size: 0.8em;
+}
+
+    .imageDiv .leftDiv p:first-child, .image-noPaddingDiv .leftDiv p:first-child {
+        text-align: left;
+        padding: 0 0 .2em 0;
+        font-size: 1.2em;
+        font-weight: bold;
     }
 
-    .imageDiv .leftDiv {
-        float: left;
-        font-size: 0.7em;
-    }
-
-        .imageDiv .leftDiv p:first-child {
-            text-align: left;
-            padding: 0 0 .2em 0;
-            font-size: 1.2em;
-        }
-
-    .imageDiv .rightDiv {
-        float: right;
-        font-size: 1em;
-    }
+.imageDiv .rightDiv, .image-noPaddingDiv .rightDiv {
+    float: right;
+    font-size: 1em;
+    font-weight: bold;
+}
 
 
 /*----------------LOCATION STYLES----------------------*/
@@ -592,28 +640,49 @@ nav ul li:last-child a {
         padding: 4%;
     }
 
+.date-range {
+    font-size: 0.9em;
+    padding: 0.2em 0;
+    float: left;
+    transform: scale(1);
+}
+
+.bin {
+    float: left;
+    display: table;
+    height: 14px;
+    width: 14px;
+    margin: 0 .5em;
+}
+
+    .bin > img {
+        position: relative;
+        max-width: 60%;
+        background-position: center;
+    }
+
 .activityDetails {
     padding: .3em 1%;
-    margin-top: -4.75em;
-    color: black;
+    margin-top: -5em;
     position: relative;
     display: table;
     float: left;
     width: 100%;
     position: relative;
-    background: rgba(255,255,255, 0.5);
+    background: rgba(0,0,0, 0.2);
     z-index: 2;
     height: 4em;
+    color: white;
 }
 
     .activityDetails div:first-of-type > div:first-of-type span:first-of-type {
         font-weight: bolder;
-        font-size: .6em;
+        font-size: 1em;
     }
 
     .activityDetails div span {
         font-weight: normal;
-        font-size: .6em;
+        font-size: .8em;
     }
 
 .list-booking-wrapper .activitybookingDetails {
@@ -730,6 +799,9 @@ footer {
 
     .cover.open {
         height: 100%;
+        top: 0;
+        bottom: 0;
+        display: table;
         width: 100%;
         z-index: 1000;
         background: rgba(0,0,0,.8);
@@ -786,7 +858,7 @@ footer {
 /*DATE FILTER START*/
 /*---------SEARCH START---------*/
 .mobile-date {
-    position: fixed;
+    position: absolute;
     top: 0;
     bottom: 0;
     left: 0;
@@ -815,6 +887,24 @@ footer {
     .filter-button a {
         height: 1em;
         font-size: .8em;
+        font-size: .8em;
+        padding: .8em 5em;
+        outline: none;
+        cursor: pointer;
+        color: rgb(0,0,0);
+        margin: 0 auto;
+        transition: 0.5s all;
+        text-transform: capitalize;
+        transition: 1s all;
+        -webkit-animation-name: info-highlight; /* Chrome, Safari, Opera */
+        -webkit-animation-duration: 1s; /* Chrome, Safari, Opera */
+        animation-name: info-highlight;
+        animation-duration: 1s;
+    }
+
+    .filter-button.ready a {
+        height: 1em;
+        font-size: .8em;
         padding: .8em 5em;
         background-color: rgb(251,189,19);
         outline: none;
@@ -823,19 +913,85 @@ footer {
         margin: 0 auto;
         transition: 0.5s all;
         text-transform: uppercase;
+        transition: 1s all;
+    }
+
+.filter-nopaddingbutton {
+    display: table;
+    float: right;
+}
+
+    .filter-nopaddingbutton a {
+        height: 1em;
+        font-size: .8em;
+        padding: .5em 1em;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: rgb(255,255,255);
+        transition: 0.5s all;
+        text-transform: uppercase;
+        transition: 1s all;
+    }
+/* Chrome, Safari, Opera */
+@-webkit-keyframes info-highlight {
+    from {
+        background-color: rgb(204,204,204);
+        color: rgb(0,0,0);
+    }
+
+    to {
+        background-color: rgb(255,255,255);
+        color: rgb(255,255,255);
+    }
+}
+
+/* Standard syntax */
+@keyframes info-highlight {
+    from {
+        background-color: rgb(204,204,204);
+        color: rgb(0,0,0);
+    }
+
+    to {
+        background-color: rgb(255,255,255);
+        color: rgb(255,255,255);
+    }
+}
+
+/*MOBILE ACTIVITY FILTER*/
+.mobile-activityFilter {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility .2s linear, opacity .5s linear;
+}
+
+    .mobile-activityFilter.open {
+        height: 100%;
+        z-index: 1001;
+        background: rgba(255,255,255,1);
+        visibility: visible;
+        opacity: 1;
+        text-align: center;
     }
 
 .booking-wrapper {
-    visibility: collapse;
+    display: none;
     opacity: 0;
     transition: 1s all;
     float: none;
     margin: 1em auto;
-    height: auto;
+    height: 0px;
 }
 
     .booking-wrapper.open {
-        visibility: visible;
+        display: block;
         opacity: 1;
         transition: 1s all;
     }
@@ -919,6 +1075,28 @@ footer {
     outline: none;
 }
 
+.list-close-button {
+    display: block;
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    float: right;
+    width: 50px;
+    height: 35px;
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background: url('../Images/Icons/close-icon.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 1.8em, 0%;
+    cursor: pointer;
+    border: 0 none;
+    border-radius: 5px;
+    z-index: 999;
+    text-indent: -9999px;
+    outline: none;
+}
 
 .date-close-button {
     display: block;
@@ -955,7 +1133,7 @@ footer {
         margin: 0 auto;
         height: 1em;
         font-size: .8em;
-        padding: .8em 1em;
+        padding: .8em 2em;
         background-color: rgb(251,189,19);
         outline: none;
         cursor: pointer;
@@ -963,6 +1141,7 @@ footer {
         margin: 0 auto;
         transition: 0.5s all;
         text-transform: uppercase;
+        display: table;
     }
 
         /*.search-button a:hover {
@@ -995,7 +1174,7 @@ footer {
     text-transform: uppercase;
     font-family: Dooodleista;
     font-size: 2em;
-    letter-spacing: 1px;    
+    letter-spacing: 1px;
     background-color: rgba(244,244,244,.8);
     border-bottom: 1px solid #ccc;
     transition: .5s all;
@@ -1006,10 +1185,10 @@ footer {
     width: 100%;
     text-align: center;
     color: #000;
-    text-transform:capitalize;
+    text-transform: capitalize;
     font-family: Dooodleista;
     font-size: 2em;
-    letter-spacing: 1px;    
+    letter-spacing: 1px;
     background-color: rgba(244,244,244,.8);
     border-bottom: 1px solid #ccc;
     transition: .5s all;
@@ -1107,13 +1286,37 @@ footer {
 
 .crop-height {
     /* max-width: 1200px; /* native or declared width of img src (if known) */
-    max-height: 225px;
+    max-height: 250px;
     height: 250px; /* lt ie8 */
     height: auto;
     overflow: hidden;
 }
 
     img.scale, object.scale, .crop-height img {
+        display: block; /* corrects small inline gap at bottom of containing div */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        width: auto\9; /* ie8+9 */
+        /* lt ie8 */
+        -ms-interpolation-mode: bicubic;
+        background-position: top center;
+        /* force a minimum size if img src size is known */
+        /* min-height: 320px; /* max-height of .crop-height */
+        /* min-width: 480px; /* consistent with image ratio */
+        /* optionally center if img src is not as wide as div */
+        /* margin: 0 auto; */
+    }
+
+.cover-height {
+    /* max-width: 1200px; /* native or declared width of img src (if known) */
+    max-height: 275px;
+    height: 300px; /* lt ie8 */
+    height: auto;
+    overflow: hidden;
+}
+
+    img.scale, object.scale, .cover-height img {
         display: block; /* corrects small inline gap at bottom of containing div */
         max-width: 100%;
         /* just in case, to force correct aspect ratio */
@@ -1186,10 +1389,22 @@ footer {
         clear: both;
     }
 
-input[type=radio] {
-    margin: .2em .4em 0 0;
+input[type=radio], input[type=checkbox] {
+    margin: 0.2em .4em 0 0;
     vertical-align: top;
 }
+
+input[type=checkbox] {
+    width: 1.3em;
+    height: 1.3em;
+    margin: 0 .4em .2em 0;
+    vertical-align: middle;
+}
+
+    input[type=checkbox] label {
+        color: green;
+    }
+
 
 label {
     font-size: .7em;
@@ -1290,4 +1505,11 @@ label {
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
     display: none !important;
+}
+
+/********MAKING A TEXT BOLD AND FLOAT LEFT*********/
+.bold {
+    font-weight: 600;
+    font-size: 1.3em;
+    padding: 0 .2em;
 }

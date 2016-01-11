@@ -61,6 +61,9 @@
     <div>
         @Html.Partial("../Partial/_dateFilter")
     </div>
+    <div>
+        @Html.Partial("../Partial/_activityList")
+    </div>
     <div class="uppercontent" ng-cloak>
         <div>
             <!--Row start-->
@@ -69,23 +72,35 @@
                     <span>{{ActivityType}}</span>
                 </div>
             </div>
-            <div class="row">
-                <div class="column-12" ng-cloak>
-                    <div class="column-0">
-                        <img src="~/Images/Icons/events_icon_mobile.png" id="dateFilter">
-                    </div>
-                    <div class="column-7">
-                        <div style="font-size:0.9em;padding:0.2em 0;">
-                            <span>{{dateRange}}</span>
-                        </div>
-                    </div>
-                    <div class="column-2"></div>
-                    <div class="column-3"></div>
+            <div class="row" ng-cloak>
+                <div class="column-0">
+                    <img src="~/Images/Icons/events_icon_mobile.png" id="dateFilter">
                 </div>
+                <div class="column-7">
+                    <div style="" id="dateRange" class="date-range">
+                        <span>{{dateRange}}</span>
+                    </div>
+                    <div class="bin" ng-click="clearFilter()">
+                        <img src="~/Images/Icons/bin_cross.png" ng-if="datesSelected" />
+                    </div>
+                </div>
+                <div class="column-3">
+                    <div class="date-range" ng-click="showActivityType()">
+                        <span>By Category</span>
+                    </div>
+                </div>
+                <div class="column-0">
+                    <div class="bin" ng-click="clearActivityTypeFilter()">
+                        <img src="~/Images/Icons/bin_cross.png" ng-if="categoryFilterSelected" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div>&nbsp;</div>
             </div>
             <!--Row start-->
             <div class="row">
-                <div ng-repeat="item in allSelectedActivity">
+                <div ng-repeat="item in allSelectedActivity | activityFilter">
                     <div ng-click="loadActivityDetails(item)">
                         <div class="list-activity-wrapper">
                             <div>
@@ -99,8 +114,8 @@
                                 <span>{{item.ActivityName}}</span>
                             </div>
                             <div>
-                                @*<span>INR {{item.Cost}}</span>*@
-                                <span>INR 1000</span>
+                                <span>INR {{item.Cost}}</span>
+                                @*<span>INR 1000</span>*@
                             </div>
                             <div class="ratingList" id="userRating">
                                 <div ng-repeat="imageItem in item.ratingURL track by $index">

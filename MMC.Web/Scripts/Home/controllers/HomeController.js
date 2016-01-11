@@ -52,11 +52,11 @@
                     else {
                         if (window.styleMedia.matchMedium("screen and (max-width:800px)")) {
                             $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + "_portrait.jpg";
-                           
+
                         }
                         else if (window.styleMedia.matchMedium("screen and (min-width:900px)")) {
                             $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + "_landscape.jpg";
-                           
+
                         }
                     }
                 });
@@ -74,61 +74,41 @@
         /*END TOP ACTIVITIES*/
 
         /*****************************TOP OFFERS****************************************/
+        /*******************ALWAYS USE SINGLE SIZE IMAGE FOR THE SLIDER*****************/
         $scope.topOffers = {};
         var setCarasoulImages = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.topOffer, function (key, value) {
 
                     if (WURFL.form_factor == "Smartphone") {
-                        if (window.styleMedia.matchMedium("screen and (max-width:479px)")) {
-                            $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_portrait.jpg";
-                        }
-                        else if (window.styleMedia.matchMedium("screen and (min-width:480px)")) {
-                            $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
-                        }
+                        //if (window.styleMedia.matchMedium("screen and (max-width:479px)")) {
+                        $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
+                        //}
+                        //else if (window.styleMedia.matchMedium("screen and (min-width:480px)")) {
+                        //   $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
+                        //}
                     }
                     else {
-                        if (window.styleMedia.matchMedium("screen and (max-width:800px)")) {
-                            $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_portrait.jpg";
-                           
-                        }
-                        else if (window.styleMedia.matchMedium("screen and (min-width:900px)")) {
-                            $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
-                           
-                        }
+                        //if (window.styleMedia.matchMedium("screen and (max-width:800px)")) {
+                        //    $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_portrait.jpg";
+
+                        //}
+                        //else if (window.styleMedia.matchMedium("screen and (min-width:900px)")) {
+                        $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
+
+                        //}
                     }
                 });
             }
             if (sliderInit == true) {
                 $scope.$apply();
-                var width = $(".item img").width();
-                if (window.styleMedia.matchMedium("screen and (max-width:700px)")) {
-                    width = width * .85;
-                    $(".imageDiv95").css("width", width);
-                }
-                else {
-                    $(".imageDiv95").css("width", width);
-                }
             }
             else if (sliderInit == false) {
                 setTimeout(function () {
                     sliderInit = true;
-                    if (WURFL.form_factor == "Smartphone") {
-                        HomeDataService.setSlider();
-                    }
-                    else {
-                        HomeDataService.setOtherDeviceSlider();
-                        var width = $(".item img").width();
-                        if (window.styleMedia.matchMedium("screen and (max-width:700px)")) {
-                            width = width * .96;
-                            $(".imageDiv95").css("width", width);
-                        }
-                        else {
-                            $(".imageDiv95").css("width", width);
-                        }
-                    }
+                    HomeDataService.setSlider();                   
                 }, 100);
-            }            
+            }
         };
 
         HomeDataService.getTopOffers().then(function (topOffer) {

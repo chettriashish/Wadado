@@ -4,6 +4,55 @@
         display: none;
     }
 
+    /******************************MAIN COVER HEIGHT*********************************************/
+    .cover-height {
+        /* max-width: 1200px; /* native or declared width of img src (if known) */
+        max-height: 375px;
+        height: 375px; /* lt ie8 */
+        height: auto;
+        overflow: hidden;
+    }
+
+        img.scale, object.scale, .cover-height img {
+            display: block; /* corrects small inline gap at bottom of containing div */
+            max-width: 100%;
+            /* just in case, to force correct aspect ratio */
+            height: auto !important;
+            width: auto\9; /* ie8+9 */
+            /* lt ie8 */
+            -ms-interpolation-mode: bicubic;
+            background-position: top center;
+            /* force a minimum size if img src size is known */
+            /* min-height: 320px; /* max-height of .crop-height */
+            /* min-width: 480px; /* consistent with image ratio */
+            /* optionally center if img src is not as wide as div */
+            /* margin: 0 auto; */
+        }
+
+    /***********************IMAGE CROP******************************************/
+    .crop-height {
+        /* max-width: 1200px; /* native or declared width of img src (if known) */
+        max-height: 300px;
+        height: 300px; /* lt ie8 */
+        height: auto;
+        overflow: hidden;
+    }
+
+        img.scale, object.scale, .crop-height img {
+            display: block; /* corrects small inline gap at bottom of containing div */
+            max-width: 100%;
+            /* just in case, to force correct aspect ratio */
+            height: auto !important;
+            width: auto\9; /* ie8+9 */
+            /* lt ie8 */
+            -ms-interpolation-mode: bicubic;
+            background-position: top center;
+            /* force a minimum size if img src size is known */
+            /* min-height: 320px; /* max-height of .crop-height */
+            /* min-width: 480px; /* consistent with image ratio */
+            /* optionally center if img src is not as wide as div */
+            /* margin: 0 auto; */
+        }
 
     #colorbar {
         height: 48px;
@@ -83,6 +132,10 @@
             padding: .4em 0;
         }
 
+        .column-6.min, .column-6.min, .column-4.min {
+            padding: .05em;
+        }
+
     .uppercontent .row img, .uppercontent-home img {
         transform: scale(1);
     }
@@ -95,42 +148,48 @@
         width: 33.33%;
     }
 
+    .imageDiscountLabel {        
+        padding: .2em 1em;
+    }
+
+        .imageDiscountLabel div:first-of-type {
+            font-size: 1em;
+            padding: 0;
+        }
+
+        .imageDiscountLabel div {
+            padding: 0em 1px;
+            font-weight: 500;
+            font-size: .9em;
+        }
 
     .imageDiv {
         background-color: rgba(0,0,0,.6);
         padding: .2em .3em;
         width: 100%;
-        margin-top: -3.2em;
+        top: 0em;
+        margin-top: -4em;
         color: white;
         position: relative;
         display: table;
     }
 
-    .imageDiv95 {
-        background-color: rgba(0,0,0,.6);
-        padding: .2em .3em;
-        margin-top: -3.4em;
-        color: white;
-        position: relative;
-        display: table;
-    }
-
-        .imageDiv div, .imageDiv95 div {
+        .imageDiv div {
             padding: .6em 0;
         }
 
-        .imageDiv .leftDiv, .imageDiv95 .leftDiv {
+        .imageDiv .leftDiv {
             float: left;
             font-size: 0.8em;
         }
 
-            .imageDiv .leftDiv p:first-child, .imageDiv95 .leftDiv p:first-child {
+            .imageDiv .leftDiv p:first-child {
                 text-align: left;
                 padding: 0 0 .2em 0;
                 font-size: 1.2em;
             }
 
-        .imageDiv .rightDiv, .imageDiv95 .rightDiv {
+        .imageDiv .rightDiv {
             float: right;
             font-size: 1.2em;
             padding: 0 .5em;
@@ -161,7 +220,16 @@
             font-weight: 400;
             text-align: left;
         }
-
+    /*****************************SEARCH BUTTON********************************/
+    .search-button a {
+        font-size: .9em;
+    }
+    /********MAKING A TEXT BOLD AND FLOAT LEFT*********/
+    .bold {
+        font-weight: 600;
+        font-size: 1.5em;
+        padding: .2em;
+    }
     /****************USED IN ACTIVITY DETAILS*******************************/
     .contentRight {
         float: right;
@@ -207,10 +275,9 @@
     }
 
     .location {
-        padding: .2em .3em;
-        margin-top: -1.4em;
+        padding: 0em .3em;
         text-transform: uppercase;
-        top: -3.4em;
+        top: -3.75em;
         color: white;
         font-size: 4em;
         position: relative;
@@ -238,9 +305,6 @@
         display:block;
     }*/
 
-    .monthseperator-top {
-        width: 45%;
-    }
     /*****************MENU TEXT***********************/
     .menu-nav.open li a {
         border-bottom: 1px solid #ccc;
@@ -265,7 +329,7 @@
         border: 1px solid;
     }
 
-     .list-booking-wrapper div {
+    .list-booking-wrapper div {
         float: left;
         padding: 4%;
     }
@@ -283,7 +347,7 @@
     }
 
     .list-booking-wrapper .activityDetails div:first-of-type {
-        font-size: 1.2em;
+        font-size: 2em;
         letter-spacing: 1px;
         padding: .3em 0 0 0;
         float: none;
@@ -291,7 +355,7 @@
     }
 
     .list-activity-wrapper .activityDetails > div {
-        font-size: 1.1em;
+        font-size: 1.5em;
         letter-spacing: 1px;
         padding: .3em 0 0 0;
         float: none;
@@ -515,19 +579,77 @@
             transition: 0.5s all;
             text-transform: uppercase;
         }
+
+    .bestMonthsToVisitWrapper {
+        display: table;
+        margin: 0 auto;
+        padding: 0em 0 .2em 0;
+    }
+
+        .bestMonthsToVisitWrapper.item {
+            float: left;
+            padding: 0em 0.5em .2em;
+            font-size: 1.2em;
+        }
+
+        .bestMonthsToVisitWrapper.litem {
+            float: left;
+            padding: 0em 0.5em;
+            font-size: 1.2em;
+        }
+
+    .monthseperator-top {
+        width: 65%;
+    }
+
+    .caption {
+        color: #000;
+        font-size: medium;
+        font-weight: 600;
+        padding: .5em 0 .5em 0;
+        text-align: center;
+        font-size: 1.8em;
+    }
+}
+/*******************IPAD AND OTHER LARGER TABS IS PORTRAIT MODE***********************/
+@media only screen and (min-width: 750px) {
+    .location {
+        top: -5em;
+    }
 }
 
 @media only screen and (min-width: 800px) {
     /*.bestMonthsToVisitWrapper {       
         font-size: 1.2em;
     }*/
+    .caption {
+        color: #000;
+        font-size: medium;
+        font-weight: 600;
+        padding: .5em 0 .5em 0;
+        text-align: center;
+        font-size: 2em;
+    }
 
     .location {
-        top: -4.4em;
+        top: -3em;
+    }
+
+    .bestMonthsToVisitWrapper.item {
+        float: left;
+        padding: 0em 0.8em .2em;
+        font-size: 1.5em;
+        text-align: left;
+    }
+
+    .bestMonthsToVisitWrapper.litem {
+        float: left;
+        padding: 0em 0.8em;
+        font-size: 1.5em;
     }
 
     .monthseperator-top {
-        width: 35%;
+        width: 55%;
     }
 
     .location-activity-wrapper .activityCategoryDetails {

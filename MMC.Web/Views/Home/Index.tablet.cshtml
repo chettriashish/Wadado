@@ -29,7 +29,7 @@
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
 <script src="~/Scripts/Common/controllers/MenuController.js"></script>
-<link href="~/Content/tabmenu.css" rel="stylesheet" />
+<link href="~/Content/hometabmenu.css" rel="stylesheet" />
 
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
@@ -105,13 +105,17 @@
         <!--Row start-->
         <!-- Slider Begin -->
         <div class="row">
-            <div class="column-12">
+            <div class="column-12 top">
                 <div class="owl-carousel">
                     <div ng-repeat="item in topOffer">
-                        <div class="item" ng-cloak>
-                            <img data-u="image" ng-src="{{item.ImageURL}}">
+                        <div class="imageDiscountLabel">
+                            <div><span>{{item.Offer.Discount}}%</span></div>
+                            <div><span>Off</span></div>
                         </div>
-                        <div class="imageDiv95">
+                        <div class="item" ng-cloak>
+                            <img ng-src="{{item.ImageURL}}" />
+                        </div>
+                        <div class="imageDiv">
                             <div class="leftDiv">
                                 <p>
                                     <span>{{item.Activity.Name}}</span>
@@ -150,7 +154,7 @@
         <div class="row" ng-cloak>
             <div ng-repeat="item in topActivity">
                 <div ng-if="$index == 0">
-                    <div class="column-8">
+                    <div class="column-6 min">
                         <div class="crop-height">
                             <img ng-src="{{item.ImageURL}}">
                         </div>
@@ -170,7 +174,7 @@
                     </div>
                 </div>
                 <div ng-if="$index == 1">
-                    <div class="column-4">
+                    <div class="column-6 min">
                         <div class="crop-height">
                             <img ng-src="{{item.ImageURL}}">
                         </div>
@@ -197,7 +201,7 @@
             <!--Row start-->
             <div ng-repeat="item in topActivity">
                 <div ng-if="$index > 1">
-                    <div class="column-4">
+                    <div class="column-6 min">
                         <div class="crop-height">
                             <img ng-src="{{item.ImageURL}}">
                         </div>

@@ -3,9 +3,12 @@
 }
 
 <!--SLIDER REFERENCE-->
-<script src="~/Scripts/slider/jssor.js"></script>
-<script src="~/Scripts/slider/jssor.slider.js"></script>
-<script src="~/Scripts/slider/slider.js"></script>
+@*<script src="~/Scripts/slider/jssor.js"></script>
+    <script src="~/Scripts/slider/jssor.slider.js"></script>
+    <script src="~/Scripts/slider/slider.js"></script>*@
+<script src="~/Scripts/slider/owl.carousel.min.js"></script>
+<link href="~/Content/owl.carousel.css" rel="stylesheet" />
+@*<link href="~/Content/owl.theme.css" rel="stylesheet" />*@
 
 <!--UI SELECT REFERENCE-->
 <link href="~/Content/ui-select/select.css" rel="stylesheet" />
@@ -26,6 +29,7 @@
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
 <script src="~/Scripts/Common/controllers/MenuController.js"></script>
+<link href="~/Content/homemobilemenu.css" rel="stylesheet" />
 
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
@@ -101,25 +105,50 @@
         <!--Row start-->
         <!-- Slider Begin -->
         <div class="column-12 top">
-            <div id="slider_container" class="slider">
-                <!-- Slides Container -->
-                <div u="slides" class="sliderContainer" ng-cloak>
-                    <div ng-repeat="item in topOffer">
-                        <img u="image" ng-src="{{item.ImageURL}}">
+            <div class="owl-carousel">
+                <div class="item" ng-repeat="item in topOffer">
+                    <div class="imageDiscountLabel">
+                        <div><span>{{item.Offer.Discount}}%</span></div>
+                        <div><span>Off</span></div>
                     </div>
+                    <div class="crop-height" ng-cloak>
+                        <img  ng-src="{{item.ImageURL}}" />
+                    </div>
+                    <div class="imageDiv">
+                        <div class="leftDiv">
+                            <p>
+                                <span>{{item.Activity.Name}}</span>
+                            </p>
+                            <p>
+                                <span>{{item.Activity.Address}}</span>
+                            </p>
+                        </div>
+                        <div class="rightDiv">
+                            <span>$ {{item.Activity.Cost}}</span>
+                        </div>
+                    </div>                   
                 </div>
-                <!-- bullet navigator container -->
-                <div u="navigator" class="jssorb21" style="position: absolute; bottom: 26px; left: 6px;">
-                    <!-- bullet navigator item prototype -->
-                    <div u="prototype" style="position: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
-                </div>
-                <!-- Arrow Left -->
-                <span u="arrowleft" class="jssora21l" style="width: 55px; height: 55px; top: 123px; left: 8px;">
-                </span>
-                <!-- Arrow Right -->
-                <span u="arrowright" class="jssora21r" style="width: 55px; height: 55px; top: 123px; right: 8px">
-                </span>
             </div>
+
+            @*<div id="slider_container" class="slider">
+                    <!-- Slides Container -->
+                    <div u="slides" class="sliderContainer" ng-cloak>
+                        <div ng-repeat="item in topOffer">
+                            <img u="image" ng-src="{{item.ImageURL}}">
+                        </div>
+                    </div>
+                    <!-- bullet navigator container -->
+                    <div u="navigator" class="jssorb21" style="position: absolute; bottom: 26px; left: 6px;">
+                        <!-- bullet navigator item prototype -->
+                        <div u="prototype" style="position: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
+                    </div>
+                    <!-- Arrow Left -->
+                    <span u="arrowleft" class="jssora21l" style="width: 55px; height: 55px; top: 123px; left: 8px;">
+                    </span>
+                    <!-- Arrow Right -->
+                    <span u="arrowright" class="jssora21r" style="width: 55px; height: 55px; top: 123px; right: 8px">
+                    </span>
+                </div>*@
         </div>
 
         <!-- Slider End -->
@@ -141,9 +170,16 @@
         <!--Row end-->
         <!--Row start-->
         <div ng-repeat="item in topActivity" ng-cloak>
-            <div class="column-12 top">
-                <div>
-                    <img ng-src="{{item.ImageURL}}" style="width:100%;">
+            <div class="column--true-6 border">
+                <div ng-if="$index % 2 == 1">
+                    <div class="crop-height">
+                        <img ng-src="{{item.ImageURL}}" style="width:100%;">
+                    </div>
+                </div>
+                <div ng-if="$index % 2 == 0">
+                    <div class="crop-height" style="border-right:1px solid #fff;">
+                        <img ng-src="{{item.ImageURL}}" style="width:100%;">
+                    </div>
                 </div>
                 <div class="imageDiv">
                     <div class="leftDiv">

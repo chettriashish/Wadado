@@ -38,7 +38,7 @@ namespace MMC.Web.Controllers
                     return new UserSessionDataContract() { SessionKey = Convert.ToString(Session["sessionKey"]) };
                 }
                 else
-                {
+                {                    
                     UserSessionDataContract result = _usersService.LogUserSession();
                     Session.Add("sessionKey", result.SessionKey);
                     return result;

@@ -71,5 +71,7 @@ namespace MMC.Business.Contracts.DataContracts
         public DateTime NextAvaiableDate { get; set; }
         [DataMember]
         public IDictionary<string,string> Reviews { get; set; }
+        [DataMember]
+        public List<ActivitySummaryDataContract> SimilarActivities { get; set; }
     }
 }

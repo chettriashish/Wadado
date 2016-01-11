@@ -102,13 +102,6 @@ namespace MMC.Data.DataRepositories
                 result.Duration = activity.Duration;
                 result.UserRating = activity.AverageUserRating;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
-                if (result.AllActivityDates.Count() == 0)
-                {
-                    result.NextAvaiableDate = (from entity in entityContext.ActivityDatesSet
-                                               where entity.Date > DateTime.Now
-                                               && entity.IsDeleted == false
-                                               select entity).ToList().FirstOrDefault().Date;
-                }
                 result.ActivityKey = activity.ActivitesKey;
                 foreach (var item in activityImages)
                 {
@@ -152,11 +145,86 @@ namespace MMC.Data.DataRepositories
                     }
                 }
 
-                result.ActivityImages = activityImages.Where(entity => entity.IsThumbnail == false).Select(entity => entity.ImageURL).ToList();
-                result.ActivityImagesURL = activityImages.Where(entity => entity.IsThumbnail == false).Select(entity => entity.ImageURL).ToList();
+                ///Getting list of similar activities
+
+                result.SimilarActivities = (from entity in entityContext.ActivitiesMasterSet
+                                            join entity1 in entityContext.ActivityTypeCategorySet
+                                            on entity.ActivityTypeKey equals entity1.ActivityTypeKey
+                                            where entity1.ActivityTypeKey == activity.ActivityTypeKey
+                                            && entity.ActivitesKey != activity.ActivitesKey
+                                            && entity.LocationKey == locationKey                                            
+                                            select new ActivitySummaryDataContract()
+                                            {
+                                                ActivityKey = entity.ActivitesKey,
+                                                ActivityName = entity.Name,                                                                                                
+                                                ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
+                                                Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationKey,
+                                                Rating = entity.AverageUserRating,                                                
+                                                IsSpecialOffer = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ? true : false,
+                                                Cost = entity.Cost,
+                                                Discount = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ?
+                                                entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).FirstOrDefault().Discount : 0
+                                            }).Take(6).ToList();
+
+                if (result.SimilarActivities.Count() < 6)
+                {
+                    int activitiesToBeRetrieved = 6 - result.SimilarActivities.Count();
+                    result.SimilarActivities = (from entity in entityContext.ActivitiesMasterSet
+                                                join entity1 in entityContext.ActivityTypeCategorySet
+                                                on entity.ActivityTypeKey equals entity1.ActivityTypeKey
+                                                where entity1.ActivityCategoryKey == activityCategory.ActivityCategoryKey
+                                                && entity.ActivitesKey != activity.ActivitesKey
+                                                && entity.LocationKey == locationKey
+                                                select new ActivitySummaryDataContract()
+                                                {
+                                                    ActivityKey = entity.ActivitesKey,
+                                                    ActivityName = entity.Name,
+                                                    ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
+                                                    Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationKey,
+                                                    Rating = entity.AverageUserRating,
+                                                    IsSpecialOffer = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ? true : false,
+                                                    Cost = entity.Cost,
+                                                    Discount = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ?
+                                                    entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).FirstOrDefault().Discount : 0                                                    
+                                                }).Take(activitiesToBeRetrieved).ToList();
+                }
+
+
+                result.ActivityImages = activityImages.
+                    Where(entity => entity.IsThumbnail == false).Select(entity => entity.ImageURL).ToList();
+                result.ActivityImagesURL = activityImages.
+                    Where(entity => entity.IsThumbnail == false).Select(entity => entity.ImageURL).ToList();
                 result.ImageURL = result.DefaultImageURL;
                 result.DifficultyLevel = GetDifficultyLevel(result.DifficultyRating);
                 result.AllActivityDates = ConvertDays(activityDayScheduler);
+
+
+                if (result.AllActivityDates.Count() == 0)
+                {
+                    result.NextAvaiableDate = (from entity in entityContext.ActivityDatesSet
+                                               where entity.Date > DateTime.Now
+                                               && entity.IsDeleted == false
+                                               select entity).ToList().FirstOrDefault().Date;
+                }
+                else if(result.SimilarActivities != null)
+                {
+                    foreach (var item in result.SimilarActivities)
+                    {
+                        if (userAgent == RepositoryResource.SMARTPHONE)
+                        {
+                            item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, MOBILE);
+
+                        }
+                        else if (userAgent == RepositoryResource.TABLET)
+                        {
+                            item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, TABLET);
+                        }
+                        else
+                        {
+                            item.ImageURL = string.Format("Images/{0}", item.ImageURL);
+                        }
+                    }
+                }
                 return result;
             }
         }
@@ -293,8 +361,8 @@ namespace MMC.Data.DataRepositories
                                                            && entity.IsDeleted == false
                                                            select entity).ToList().FirstOrDefault();
 
-                            if (activityDates != null && 
-                                (activityDates.Date >= startDate && activityDates.Date < endDate ))
+                            if (activityDates != null &&
+                                (activityDates.Date >= startDate && activityDates.Date < endDate))
                             {
                                 finalResult.Add(item);
                             }
@@ -308,7 +376,7 @@ namespace MMC.Data.DataRepositories
                 int daysInBetween = (endDate.Day - startDate.Day);
                 for (int i = 0; i < daysInBetween; i++)
                 {
-                    switch(startDate.DayOfWeek)
+                    switch (startDate.DayOfWeek)
                     {
                         case DayOfWeek.Sunday: dates[0] = true; break;
                         case DayOfWeek.Monday: dates[1] = true; break;
@@ -321,7 +389,7 @@ namespace MMC.Data.DataRepositories
                     startDate = startDate.AddDays(1);
                 }
                 using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
-                {                    
+                {
                     foreach (var item in initResult)
                     {
                         ActivityDayScheduler activitySchedule = (from entity in entityContext.ActivityDaySchedulerSet
@@ -348,7 +416,7 @@ namespace MMC.Data.DataRepositories
                                     break;
                                 }
                             }
-                        }                                        
+                        }
                     }
                 }
             }
