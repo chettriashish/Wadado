@@ -52,10 +52,10 @@
 
 
 <!--DATE REFERENCE-->
-<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
-<script src="~/Scripts/Directives/Date/datedirective.js"></script>
-<script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>
+<script src="~/Scripts/Directives/Date/DateDirective.js"></script>
+@*<script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>*@
 <link href="~/Content/phone.css" rel="stylesheet" />
+<link href="~/Content/_date.css" rel="stylesheet" />
 <div id="colorbar">
 </div>
 <div class="cover"></div>
@@ -241,8 +241,14 @@
                 <div class="owl-carousel" id="similarActivityImages" ng-if="greaterThan">
                     <div ng-repeat="item in selectedActivityDetails.SimilarActivities" class="crop-height" ng-cloak>
                         <div class="imageDiscountLabel">
-                            <div><span>{{item.Offer.Discount}}%</span></div>
-                            <div><span>Off</span></div>
+                            <div>
+                                <p ng-if="item.Discount > 0">
+                                    <span>{{item.Discount}}% Off</span>
+                                </p>
+                                <p>
+                                    <span>INR {{item.Cost}}</span>
+                                </p>
+                            </div>
                         </div>
                         <img ng-src="{{item.DefaultImageURL}}" ng-click="" />
                         <div class="crop-height" ng-cloak>
@@ -252,8 +258,7 @@
                             <div class="leftDiv">
                                 <div>
                                     <p><span>{{item.ActivityName}}</span></p>
-                                </div>
-                                <span>$ {{item.Cost}}</span>
+                                </div>                                
                                 <div class="ratingList" id="userRating">
                                     <div ng-repeat="imageItem in item.ratingURL track by $index">
                                         <img ng-src="{{imageItem}}" />
@@ -270,9 +275,15 @@
                 </div>
                 <div ng-repeat="item in selectedActivityDetails.SimilarActivities"
                     ng-cloak ng-if="greaterThan == false">
-                    <div class="imageDiscountLabel" ng-if="item.Discount > 0">
-                        <div><span>{{item.Discount}}%</span></div>
-                        <div><span>Off</span></div>
+                    <div class="imageDiscountLabel">
+                        <div>
+                            <p ng-if="item.Discount > 0">
+                                <span>{{item.Discount}}% Off</span>
+                            </p>
+                            <p>
+                                <span>INR {{item.Cost}}</span>
+                            </p>
+                        </div>
                     </div>
                     <div class="crop-height">
                         <img ng-src="{{item.DefaultImageURL}}" ng-click="" style="width:100%;" />
@@ -281,8 +292,7 @@
                         <div class="leftDiv">
                             <div>
                                 <p><span>{{item.ActivityName}}</span></p>
-                            </div>
-                            <span>$ {{item.Cost}}</span>
+                            </div>                            
                             <div class="ratingList" id="userRating">
                                 <div ng-repeat="imageItem in item.ratingURL track by $index">
                                     <img ng-src="{{imageItem}}" />
@@ -301,3 +311,5 @@
         <!--end row-->
     </div>
 </div>
+
+

@@ -61,6 +61,11 @@
                     }
                 });
             }
+            else {
+                $.each($scope.topActivity, function (key, value) {
+                    $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + ".jpg";
+                });
+            }
         };
 
         $scope.topActivities = {};
@@ -81,23 +86,16 @@
                 $.each($scope.topOffer, function (key, value) {
 
                     if (WURFL.form_factor == "Smartphone") {
-                        //if (window.styleMedia.matchMedium("screen and (max-width:479px)")) {
                         $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
-                        //}
-                        //else if (window.styleMedia.matchMedium("screen and (min-width:480px)")) {
-                        //   $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
-                        //}
                     }
                     else {
-                        //if (window.styleMedia.matchMedium("screen and (max-width:800px)")) {
-                        //    $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_portrait.jpg";
-
-                        //}
-                        //else if (window.styleMedia.matchMedium("screen and (min-width:900px)")) {
                         $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
-
-                        //}
                     }
+                });
+            }
+            else {
+                $.each($scope.topOffer, function (key, value) {
+                    $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + ".jpg";
                 });
             }
             if (sliderInit == true) {
@@ -106,7 +104,7 @@
             else if (sliderInit == false) {
                 setTimeout(function () {
                     sliderInit = true;
-                    HomeDataService.setSlider();                   
+                    HomeDataService.setSlider();
                 }, 100);
             }
         };
@@ -126,6 +124,9 @@
         $(window).resize(function () {
             setImages();
             setCarasoulImages();
+            if (!WURFL.is_mobile) {
+                setBackground();
+            }
             $scope.$apply();
         });
 
@@ -155,6 +156,29 @@
                 delete item.isTag;
                 $scope.locations.push(item);
             }
+        }
+
+        /***********************SETTING TOP LEVEL CONTROLS********************************/
+        var setBackground = function () {
+            var windowHeight = $(window).height() * (0.95);
+            //parseInt removes the 'px'
+            var minHeight = parseInt($('.cover-image').css("min-height"), 10);
+            var navHeight = $('.home-nav').height();
+            if (windowHeight > minHeight) {
+                $('.cover-image').height(windowHeight);
+                $('.home-nav').css("top", (windowHeight - navHeight));
+            }
+            else {
+                $('.home-nav').css("top", (minHeight - navHeight));
+            }          
+        }
+        if (!WURFL.is_mobile) {
+            setBackground();
+            $scope.goTo = function (loc) {
+                $('html,body').animate({
+                    scrollTop: $("." + loc).offset().top
+                },1000,"linear");
+            };
         }
     }
     app.controller("HomeController", homeController);

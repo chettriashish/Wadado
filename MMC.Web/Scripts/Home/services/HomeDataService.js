@@ -108,7 +108,7 @@
         var setSlider = function () {
             $('.owl-carousel').owlCarousel({
                 loop: true,
-                margin: 1,
+                margin: 2,
                 responsiveClass: true,
                 autoplay: true,
                 autoplayHoverPause: true,
@@ -119,30 +119,34 @@
                     0: {
                         items: 1,
                         nav: false,
-                        loop: true,
+                        loop: false,
                         margin: 0,
                         touchDrag: true
                     },
                     600: {
                         items: 2,
                         nav: false,
-                        loop: true,
-                        touchDrag: true,                        
+                        loop: false,
+                        touchDrag: true,
+                        margin: 4,
                        
                     },
                     960: {
                         items: 3,
                         nav: false,
-                        loop: true,
-                        touchDrag: true                        
+                        loop: false,
+                        touchDrag: true,
+                        margin: 5,
                         
                     },
                     1200: {
-                        items: 5,
+                        items: 4,
                         nav: false,
                         loop: false,
                         touchDrag: false,
-                        mouseDrag:true
+                        mouseDrag: true,
+                        dotsEach: false,
+                        margin: 15,
                     }
                 }
             })

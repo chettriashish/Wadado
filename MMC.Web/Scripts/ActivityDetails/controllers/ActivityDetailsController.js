@@ -195,15 +195,21 @@
                         half = true;
                     }
                     for (i = 0; i < result; i++) {
-                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star.png";
+                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                            $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
+                        }
                         count++;
                     }
                     if (half) {
-                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star.png";
+                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                            $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
+                        }
                         count++;
                     }
                     for (i = count; i < 5 ; i++) {
-                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star.png";
+                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                            $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
+                        }
                         count++;
                     }
                 });

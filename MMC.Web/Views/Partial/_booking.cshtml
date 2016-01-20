@@ -4,7 +4,9 @@
             <!--ROW START-->
             <div class="row">
                 <div class="column-12">
-                    <div ng-model="date" datepicker class="datepicker ll-skin-cangas" />
+                    <nds-date date-format="dd/MM/yy" months-to-display="6" disable-days="selectedActivityDetails.AllActivityDates" nds-on-date-set="onDateSet(selectedDate)"
+                              allow-multi-date="false" allow-current-date="false" date-selected="selectedDate" disable-dates="">
+                    </nds-date>                    
                 </div>
             </div>
             <!--ROW END-->

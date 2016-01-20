@@ -5,6 +5,7 @@
         $scope.NumAdults = 1;
         $scope.NumChildren = 0;
         $scope.Error = false;
+        $scope.selectedDate = '';
         $scope.time = {
             val: ""
         };
@@ -14,7 +15,7 @@
         var checkForAvailability = function () {
             var time = $scope.time.val;
             BookingDataService.checkForActivityAvailability($scope.selectedActivityDetails.ActivityKey,
-                $scope.NumAdults, $scope.NumChildren, $scope.date, time).then(function (result) {
+                $scope.NumAdults, $scope.NumChildren, $scope.selectedDate, time).then(function (result) {
                     if (!result.Status) {
                         $scope.ErrorMessage = result.Message;
                         $scope.Error = true;
@@ -65,29 +66,31 @@
             checkForAvailability();
         }
 
-        $scope.dateSelected = function (date, obj) {
-            $scope.date = date;
-            if (!$(".booking-wrapper").hasClass("open")) {
-                $(".booking-wrapper").addClass("open");
-                $scope.Total = $scope.selectedActivityDetails.Currency + " " + $scope.NumAdults * $scope.selectedActivityDetails.Cost;
-                $scope.ShowChildren = function () {
-                    if ($scope.selectedActivityDetails.NumChildren > 0) {
-                        $scope.Total = $scope.selectedActivityDetails.Currency + " " + ($scope.NumAdults * $scope.selectedActivityDetails.Cost +
-                                $scope.NumChildren * $scope.selectedActivityDetails.CostForChild);
-                        $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "adult";
-                        $scope.ChildCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.CostForChild + "/" + "child";
-                        return true;
+        $scope.onDateSet = function (selectedDate) {
+            $scope.selectedDate = selectedDate;
+            if ($scope.selectedDate != '') {
+                if (!$(".booking-wrapper").hasClass("open")) {
+                    $(".booking-wrapper").addClass("open");
+                    $scope.Total = $scope.selectedActivityDetails.Currency + " " + $scope.NumAdults * $scope.selectedActivityDetails.Cost;
+                    $scope.ShowChildren = function () {
+                        if ($scope.selectedActivityDetails.NumChildren > 0) {
+                            $scope.Total = $scope.selectedActivityDetails.Currency + " " + ($scope.NumAdults * $scope.selectedActivityDetails.Cost +
+                                    $scope.NumChildren * $scope.selectedActivityDetails.CostForChild);
+                            $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "adult";
+                            $scope.ChildCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.CostForChild + "/" + "child";
+                            return true;
+                        }
+                        else {
+                            $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "person";
+                            return false;
+                        }
                     }
-                    else {
-                        $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "person";
-                        return false;
-                    }
+                    //$scope.$apply();
                 }
-                $scope.$apply();
-            }
-            if ($scope.NumAdults >= 1 || $scope.NumChildren >= 1) {
-                checkForAvailability();
-            }
+                if ($scope.NumAdults >= 1 || $scope.NumChildren >= 1) {
+                    checkForAvailability();
+                }
+            }            
         }
 
         $scope.addActivityToCart = function () {

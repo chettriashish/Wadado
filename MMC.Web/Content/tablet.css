@@ -36,6 +36,8 @@
         height: 300px; /* lt ie8 */
         height: auto;
         overflow: hidden;
+        object-fit: none; /* Do not scale the image */
+        object-position: center; /* Center the image within the element */
     }
 
         img.scale, object.scale, .crop-height img {
@@ -148,7 +150,7 @@
         width: 33.33%;
     }
 
-    .imageDiscountLabel {        
+    .imageDiscountLabel {
         padding: .2em 1em;
     }
 
@@ -433,9 +435,12 @@
     }
 
     /***************SETTING DATEPICKER WIDTH***************************/
-    .ll-skin-cangas {
-        font-size: 80%;
-        width: auto;
+    .date-default-outer-container {
+        min-width: 240px;
+    }
+
+    .month-label-container {
+        width: 65%;
     }
 
     /***********************RATING*******************************/
@@ -482,18 +487,16 @@
     }
 
     .booking-wrapper {
-        visibility: collapse;
-        position: relative;
-        display: table;
-        margin: 0 auto;
+        display: none;
         opacity: 0;
         transition: 1s all;
         float: none;
-        height: auto;
+        margin: 1em auto;
+        height: 0px;
     }
 
         .booking-wrapper.open {
-            visibility: visible;
+            display: block;
             opacity: 1;
             transition: 1s all;
         }

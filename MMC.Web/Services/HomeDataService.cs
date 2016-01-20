@@ -62,11 +62,7 @@ namespace MMC.Web.Services
                         item.DefaultActivityImage.ImageURL = string.Format("{0}{1}", item.DefaultActivityImage.ImageURL, TABLET);                    
                     }
                 }
-            }
-            else
-            {
-                ///Then the viewing device is a desktop
-            }
+            }            
             return results;
         }
         private IEnumerable<ActivitiesModel> GetDummyData(string userAgent)
@@ -162,16 +158,13 @@ namespace MMC.Web.Services
             ((ActivityImages)activitySix.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
             ((ActivityImages)activitySix.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
 
-            if (deviceInfo.GetVirtualCapability("is_mobile") == "true")
-            {
-                ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/khukuri1";
-                ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/maruni1";
-                ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/buttermilk2";
-                ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/village2";
-                ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/village1";
-                ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/village3";
-            }
-           
+            ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/khukuri1";
+            ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/maruni1";
+            ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/buttermilk2";
+            ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/village2";
+            ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/village1";
+            ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/village3";
+
             results.Add(activityOne);
             results.Add(activityTwo);
             results.Add(activityThree);

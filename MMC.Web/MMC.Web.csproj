@@ -355,6 +355,7 @@
     <Content Include="Content\owl.theme.css" />
     <Content Include="Content\phone.css" />
     <Content Include="Content\reset.css" />
+    <Content Include="Content\resizer\focuspoint.css" />
     <Content Include="Content\tablet.css" />
     <Content Include="Content\mobilemenu.css" />
     <Content Include="Content\tabmenu.css" />
@@ -397,6 +398,7 @@
     <Content Include="Content\video\desktop-vid.css" />
     <Content Include="Content\video\default-vid.css" />
     <Content Include="Content\video\tablet-vid.css" />
+    <Content Include="Content\_date.css" />
     <Content Include="COPYING.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -483,11 +485,20 @@
     <Content Include="Scripts\Common\services\MenuDataService.js" />
     <Content Include="Scripts\Common\services\SearchDataService.js" />
     <Content Include="Scripts\Directives\Booking\bookingdirective.js" />
-    <Content Include="Scripts\Directives\Date\datedirective.js" />
+    <Content Include="Scripts\Directives\Date\DateDirective.js" />
+    <Content Include="Scripts\Directives\Date\datedirective1.js" />
     <Content Include="Scripts\facebook.js" />
     <Content Include="Scripts\Home\controllers\HomeController.js" />
     <Content Include="Scripts\Home\directives\HomeDirective.js" />
     <Content Include="Scripts\Home\services\HomeDataService.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uiSelectChoicesDirective.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uiSelectController.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uiSelectDirective.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uiSelectMatchDirective.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uiSelectMultipleDirective.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uiSelectSingleDirective.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uiSelectSortDirective.js" />
+    <Content Include="Scripts\angular-ui\ui-select\uisRepeatParserService.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-dj.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-er.js" />
     <Content Include="Scripts\i18n\angular-locale_aa-et.js" />
@@ -1129,6 +1140,7 @@
     <Content Include="Scripts\i18n\angular-locale_sv-fi.js" />
     <Content Include="Scripts\i18n\angular-locale_sv-se.js" />
     <Content Include="Scripts\i18n\angular-locale_sv.js" />
+    <Content Include="Scripts\i18n\angular-locale_sw-cd.js" />
     <Content Include="Scripts\i18n\angular-locale_sw-ke.js" />
     <Content Include="Scripts\i18n\angular-locale_sw-tz.js" />
     <Content Include="Scripts\i18n\angular-locale_sw-ug.js" />
@@ -1231,19 +1243,12 @@
     <Content Include="Scripts\i18n\angular-locale_zh.js" />
     <Content Include="Scripts\i18n\angular-locale_zu-za.js" />
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uiSelectChoicesDirective.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uiSelectController.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uiSelectDirective.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uiSelectMatchDirective.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uiSelectMultipleDirective.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uiSelectSingleDirective.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uiSelectSortDirective.js" />
-    <Content Include="Scripts\angular-ui\ui-select\uisRepeatParserService.js" />
     <Content Include="Scripts\Location\controllers\LocationController.js" />
     <Content Include="Scripts\Location\services\LocationDataService.js" />
     <Content Include="Scripts\Login\controllers\LoginController.js" />
     <Content Include="Scripts\Login\Model\AccountLoginModel.js" />
     <Content Include="Scripts\Login\services\LoginDataService.js" />
+    <Content Include="Scripts\resizer\jquery.focuspoint.js" />
     <Content Include="Scripts\slider\jssor.js" />
     <Content Include="Scripts\slider\jssor.slider.js" />
     <Content Include="Scripts\slider\jssor.slider.mini.js" />
@@ -1260,6 +1265,7 @@
     <Content Include="Views\Templates\match.tpl.html" />
     <Content Include="Views\Templates\select-multiple.tpl.html" />
     <Content Include="Views\Templates\select.tpl.html" />
+    <Content Include="Templates\dateTemplate.html" />
     <Content Include="WURFL AGPL License.txt" />
     <Content Include="Introspector\Introspector.pdf" />
     <Content Include="Introspector\Introspector.ashx" />
@@ -1272,6 +1278,16 @@
     <Content Include="Content\Fonts\Dooodleista.woff" />
     <Content Include="Content\Fonts\Dooodleista.woff2" />
     <None Include="Properties\PublishProfiles\wadado.pubxml" />
+    <Content Include="Scripts\errors.json" />
+    <Content Include="Scripts\angular-touch.min.js.map" />
+    <Content Include="Scripts\angular-sanitize.min.js.map" />
+    <Content Include="Scripts\angular-resource.min.js.map" />
+    <Content Include="Scripts\angular-messages.min.js.map" />
+    <Content Include="Scripts\angular-message-format.min.js.map" />
+    <Content Include="Scripts\angular-loader.min.js.map" />
+    <Content Include="Scripts\angular-cookies.min.js.map" />
+    <Content Include="Scripts\angular-aria.min.js.map" />
+    <Content Include="Scripts\angular-animate.min.js.map" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -1308,18 +1324,7 @@
     <Content Include="Views\Home\Index.smartphone.cshtml" />
     <Content Include="Views\Home\Index.tablet.cshtml" />
     <Content Include="Views\Home\Index.legacy.cshtml" />
-    <Content Include="Scripts\version.json" />
-    <Content Include="Scripts\errors.json" />
-    <Content Include="Scripts\angular-touch.min.js.map" />
-    <Content Include="Scripts\angular-sanitize.min.js.map" />
     <Content Include="Scripts\angular-route.min.js.map" />
-    <Content Include="Scripts\angular-resource.min.js.map" />
-    <Content Include="Scripts\angular-messages.min.js.map" />
-    <Content Include="Scripts\angular-message-format.min.js.map" />
-    <Content Include="Scripts\angular-loader.min.js.map" />
-    <Content Include="Scripts\angular-cookies.min.js.map" />
-    <Content Include="Scripts\angular-aria.min.js.map" />
-    <Content Include="Scripts\angular-animate.min.js.map" />
     <Content Include="Scripts\angular.min.js.map" />
     <Content Include="Scripts\angular-moment.min.js.map" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -1350,6 +1355,7 @@
     <Content Include="Views\Partial\_favourites.cshtml" />
     <Content Include="Views\Partial\_dateFilter.cshtml" />
     <Content Include="Views\Partial\_activityList.cshtml" />
+    <Content Include="Scripts\version.json" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\ActivitiesCart\directives\" />
@@ -1357,7 +1363,6 @@
     <Folder Include="Scripts\ActivityDetails\directives\" />
     <Folder Include="Scripts\Location\directives\" />
     <Folder Include="Scripts\Login\directives\" />
-    <Folder Include="Templates\" />
     <Folder Include="Views\BaseView\" />
     <Folder Include="Views\Booking\" />
     <Folder Include="Views\Menu\" />

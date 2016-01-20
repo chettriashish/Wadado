@@ -72,12 +72,12 @@
                 });
             }
         };
-      
+
         var setRating = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.allSelectedActivity, function (key, value) {
                     var count = 0;
-                    $scope.allSelectedActivity[key].ratingURL = [];                    
+                    $scope.allSelectedActivity[key].ratingURL = [];
                     var result = Math.round($scope.allSelectedActivity[key].Rating);
                     var half = false;
                     if (result > $scope.allSelectedActivity[key].Rating) {
@@ -85,15 +85,21 @@
                         half = true;
                     }
                     for (i = 0; i < result; i++) {
-                        $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star.png";
+                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                            $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
+                        }
                         count++;
                     }
                     if (half) {
-                        $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star.png";
+                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                            $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
+                        }
                         count++;
                     }
                     for (i = count; i < 5 ; i++) {
-                        $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star.png";
+                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                            $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
+                        }
                         count++;
                     }
                 });
@@ -114,7 +120,7 @@
                         selected: false,
                     };
                     activity.type = $scope.allSelectedActivity[key].ActivityType;
-                    activity.selected = true;                   
+                    activity.selected = true;
                     $scope.all.selected = true;
                     $scope.activityTypes.push(activity);
                 }
@@ -169,7 +175,7 @@
             ActivityDataService.getAllFilters().then(function (response) {
                 if (response.StartDate != null) {
                     $scope.$broadcast("DATEFILTERS", response);
-                }                
+                }
                 $scope.activityTypes = response.ActivityTypes;
                 if ($scope.activityTypes === null || $scope.activityTypes.length === 0) {
                     $scope.activityTypes = [];
@@ -184,7 +190,7 @@
 
         /*START SELECTED ACTIVITY TYPE*/
         $scope.allSelectedActivities = {};
-        var getSelectedActivites = function () {           
+        var getSelectedActivites = function () {
             ActivityDataService.getSelectedActivityTypes().then(function (selectedActivities) {
                 $scope.allSelectedActivity = selectedActivities;
                 $scope.ActivityType = selectedActivities[0].ActivityCategory;
@@ -213,7 +219,7 @@
         });
 
         $scope.$on("LISTFILTERED", function (event, args) {
-            $scope.allSelectedActivity = args.message;            
+            $scope.allSelectedActivity = args.message;
             getFilters();
             setRating();
             setImages();
@@ -224,13 +230,13 @@
             $scope.datesSelected = true;
         });
         /****************CLEAR DATE FILTER*******************/
-        $scope.clearFilter = function () {           
+        $scope.clearFilter = function () {
             $scope.dateRange = "search by date";
             $scope.datesSelected = false;
             $scope.$broadcast("CLEARDATEFILTER", true);
             ActivityDataService.clearDateFilters().then(function (response) {
                 getSelectedActivites();
-            });            
+            });
         }
         /****************END CLEAR DATE FILTER*******************/
         /****************CLEAR ACTIVITY FILTER*******************/

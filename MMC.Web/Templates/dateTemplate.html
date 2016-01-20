@@ -1,0 +1,36 @@
+﻿<div class="date-default-outer-container">
+    <!--Top header that displays the month for the current date-->
+    <div class="date-header-container">
+        <div class="left-button-container">
+            <div ng-click="getDaysForPrevMonth()">
+                <div class="hairline-left-arrow"></div>
+            </div>
+        </div>
+        <div class="month-label-container">
+            <div>
+                <span>{{currentMonthHeader}}</span>
+            </div>
+        </div>
+        <div class="right-button-container">
+            <div ng-click="getDaysForNextMonth()">
+                <div class="hairline-right-arrow"></div>
+            </div>
+        </div>
+    </div>
+    <!--Top header that displays the weekdays starting from sunday-->
+    <div class="days-container">
+        <div ng-repeat="item in days">
+            <div class="days-cell">
+                <span>{{item}}</span>
+            </div>
+        </div>
+    </div>
+    <!--this is the date body this needs to be put into a seperate directive-->
+    <div class="month-container">
+        <div ng-repeat="item in resultSet">
+            <div ng-class="item.calendarDate.css" ng-click="setDate(item)">
+                <span>{{item.calendarDate.date}}</span>
+            </div>
+        </div>
+    </div>
+</div>

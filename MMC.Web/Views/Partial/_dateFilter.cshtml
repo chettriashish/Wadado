@@ -1,4 +1,4 @@
-﻿<div class="mobile-date" data-ng-controller="DateFilterController">   
+﻿<div class="mobile-date" data-ng-controller="DateFilterController">
     <!--ROW START-->
     <div class="row">
         <div class="header-sentence">
@@ -10,30 +10,45 @@
             </div>
         </div>
     </div>
+    <!--ROW END-->   
+    <!--ROW START-->
+    <div class="row">
+        <div class="tab-main">
+            <div class="tab-header open" id="from" ng-click="showStartDate()">
+                <div><span>From</span></div>
+                <div><span>{{selectedStartDate}}</span></div>
+            </div>            
+            <div class="tab-header" id="to" ng-click="hideStartDate()">
+                <div><span>To</span></div>
+                <div><span>{{selectedEndDate}}</span></div>
+            </div>            
+        </div>        
+    </div>
+    <div class="row" ng-show="onStartDate" >
+        <div class="column-12">
+            <nds-date date-format="dd/MM/yy" months-to-display="6" nds-on-date-set="onStartDateSet(selectedStartDate)"
+                      allow-multi-date="false" allow-current-date="false" date-selected="selectedStartDate">
+            </nds-date>
+        </div>
+    </div>
+    <!--ROW START-->
+    <div class="row" ng-show="!onStartDate">
+        <div class="column-12">
+            <nds-date date-format="dd/MM/yy" months-to-display="6" nds-on-date-set="onEndDateSet(selectedEndDate)" min-start-date="selectedStartDate"
+                      allow-multi-date="false" allow-current-date="false" date-selected="selectedEndDate" num-of-days-from-start="1">
+            </nds-date>
+        </div>
+    </div>
     <!--ROW END-->
     <!--ROW START-->
     <div class="row">
         <div class="column-12">
             <div>
-                <div class="filter-button">
-                    <a ng-click="filterActivitiesByDates()">{{message}}</a>
+                <div class="filter-button ready">
+                    <a ng-click="filterActivitiesByDates()">Apply</a>
                 </div>
             </div>
         </div>
     </div>
     <!--ROW END-->
-    <div style="position:relative;">
-        <div class="row">
-            <div class="column-12">
-                <div date-val="init" ng-model="date" datepicker class="datepicker ll-skin-cangas"></div>
-            </div>
-        </div>
-        <!--ROW START-->
-        <div class="row">
-            <div class="column-12">
-                <div date-val="end" ng-model="date" datepicker class="datepicker ll-skin-cangas"></div>
-            </div>
-        </div>
-        <!--ROW END-->
-    </div>    
 </div>

@@ -2,51 +2,215 @@
     ViewBag.Title = "Home";
 }
 
+<!--SLIDER REFERENCE-->
+<script src="~/Scripts/slider/owl.carousel.min.js"></script>
+<link href="~/Content/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/owl.theme.css" rel="stylesheet" />
+
+<!--UI SELECT REFERENCE-->
 <link href="~/Content/ui-select/select.css" rel="stylesheet" />
 <link href="~/Content/ui-select/select2.css" rel="stylesheet" />
 <link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
 
-<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--WADADO REFERENCE-->
 <script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+<link href="~/Content/hometabmenu.css" rel="stylesheet" />
+
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
 <script src="~/Scripts/Home/services/HomeDataService.js"></script>
 <script src="~/Scripts/Home/controllers/HomeController.js"></script>
-<link href="~/Content/video/default-vid.css" rel="stylesheet" />
-<link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
-<link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
 
-<div id="contentWrapper" data-ng-controller="HomeController">
-    <section class="cd-hero">
-        <ul class="cd-hero-slider">
-            <li class="cd-bg-video selected">                
-                <div class="row">
-                    <div class="column-12">
-                        <div class="cd-full-width">
-                            <div class="home-search-content">
-                                <div>
-                                    <h2>Wadado</h2>
-                                </div>
-                                <div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
-                                    </p>
-                                </div>
-                                <div class="column1-center">
-                                    <ui-select ng-model="locations.selected" theme="select2" class="form-control"
-                                               append-to-body="true">
-                                        <ui-select-match placeholder="Pick a place">{{$select.selected.LocationName}}</ui-select-match>
-                                        <ui-select-choices group-by="'Country'" repeat="item in location | filter: $select.search">
-                                            <div ng-bind-html="item.LocationName | highlight: $select.search"></div>
-                                        </ui-select-choices>
-                                    </ui-select>
-                                </div>
-                            </div>                            
+<!--DATE REFERENCE-->
+<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
+<script src="~/Scripts/Directives/Date/datedirective.js"></script>
+<link href="~/Content/tablet.css" rel="stylesheet" />
+<link href="~/Content/desktop.css" rel="stylesheet" />
+<div class="contentWrapper" data-ng-controller="HomeController">
+    <section>
+        <!--row start-->
+        <div class="row">
+            <div class="cover-image">
+            </div>
+        </div>
+        <!--end row start-->
+        <div class="row">
+            <div class="column--true-12">
+                <div class="logo-div">
+                    <img src="~/Images/Icons/do_mob.png" />
+                </div>
+                <div class="menu-div">
+                    <div class="button">
+                        <a ng-click="login">Log in</a>
+                    </div>
+                    @*<div class="button">
+                            <a ng-click="login">Log in</a>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cover-search">
+                <div class="cover-search outer">
+                    <div class="home-search-content">
+                        <div>
+                            <h2>Wadado</h2>
+                        </div>
+                        <div>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            </p>
+                        </div>
+                    </div>
+                    <div class="search-main">
+                        <ui-select ng-model="locations.selected" theme="select2" class="form-control"
+                                   append-to-body="true">
+                            <ui-select-match placeholder="Where to go? What to do?">{{$select.selected.LocationName}}</ui-select-match>
+                            <ui-select-choices group-by="'Country'" repeat="item in location | filter: $select.search">
+                                <div ng-bind-html="item.LocationName | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                    <div class="search-main-button">
+                        <img src="~/Images/Icons/search-icon_dp.png" />
+                    </div>
+                </div>                
+            </div>    
+            <div class="home-nav" ng-click="goTo('owl-carousel')">
+                <div class="hairline-bottom-arrow">
+
+                </div>
+            </div>                           
+        </div>            
+    </section>
+    <div class="uppercontent">
+        <div class="column-12 top"></div>
+        <!--Row start-->
+        <div class="row">
+            <div class="column-0">
+                <img src="~/Images/Icons/offer_icon_mobile.png" />
+            </div>
+            <div class="column-6">
+                <div class="subHeader">
+                    <span>Top Offers</span>
+                </div>                
+            </div>
+            <div class="more-div">
+                <div class="button-dark">
+                    <a>More</a>
+                </div>
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row start-->
+        <!-- Slider Begin -->
+        <div class="row">
+            <div class="column-12 min">
+                <div class="owl-carousel">
+                    <div ng-repeat="item in topOffer">
+                        <div class="imageDiscountLabel">
+                            <div><span>{{item.Offer.Discount}}%</span></div>
+                            <div><span>Off</span></div>
+                        </div>
+                        <div class="crop-height">
+                            <img ng-src="{{item.ImageURL}}">
+                        </div>
+                        <div class="imageDiv">
+                            <div class="leftDiv">
+                                <p>
+                                    <span>{{item.Activity.Name}}</span>
+                                </p>
+                                <p>
+                                    <span>{{item.Activity.Address}}</span>
+                                </p>
+                            </div>
+                            <div class="rightDiv">
+                                <span>$ {{item.Activity.Cost}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="cd-bg-video-wrapper" data-video="Video/video">
+            </div>
+        </div>
+
+        <!-- Slider End -->
+        <!--Row end-->
+        <!--Row start-->
+        <div class="row">
+            <div class="column-0 ">
+                <img src="~/Images/Icons/toptrending_mobile.png" />
+            </div>
+            <div class="column-6 ">
+                <div class="subHeader">
+                    <span>Top Trending Activities</span>
+                </div>                
+            </div>
+            <div class="more-div">
+                <div class="button-dark">
+                    <a>More</a>
                 </div>
-            </li>
-        </ul>
-    </section>    
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row start-->
+        <!--Row start-->
+        <div class="row" ng-cloak>
+            <!--Row start-->
+            <div ng-repeat="item in topActivity">
+                <div class="column-4 min">
+                    <div class="crop-height">
+                        <img ng-src="{{item.ImageURL}}">
+                    </div>
+                    <div class="imageDiv">
+                        <div class="leftDiv">
+                            <p>
+                                <span>{{item.Activity.Name}}</span>
+                            </p>
+                            <p>
+                                <span>{{item.Activity.Address}}</span>
+                            </p>
+                        </div>
+                        <div class="rightDiv">
+                            <span>$ {{item.Activity.Cost}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row end-->       
+        <!--Row start-->
+        <div class="row" ng-cloak>
+            <div class="column-12 lowercontent">
+                <div class="header">
+                    <span>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet</span>
+                </div>
+                <div ng-repeat="item in latestNews">
+                    <div class="column-4">
+                        <p>
+                            {{item.Details}}
+                        </p>
+                        <p><br />
+                            - {{item.Agency}}
+                        </p>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <!--Row end-->
+    </div>
 </div>
 

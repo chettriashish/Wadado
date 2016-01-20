@@ -15,7 +15,7 @@ slide
 body {
     background-color: #E6E1D8;
     font-family: 'Lato', sans-serif;
-    font-weight: 300; /*also loaded 600 for bold*/
+    font-weight: 400; /*also loaded 600 for bold*/
     color: #494948;
 }
 
@@ -135,7 +135,7 @@ nav ul li:last-child a {
     text-align: center;
 }
 
-    .lowercontent .header {
+    .lowercontent.header {
         padding: 1em;
         font-weight: 600;
     }
@@ -192,12 +192,16 @@ nav ul li:last-child a {
     width: 100%;
 }
 
+.column-6.min, .column-6.min, .column-4.min {
+    padding: .05em;
+}
+
 .column-12 {
     width: 100%;
 }
 
     .column-12.top {
-        padding: .1em 0;
+        padding: .2em 0;
     }
 
 .column-0 {
@@ -427,27 +431,27 @@ nav ul li:last-child a {
 
 .imageDiscountLabel {
     background-color: rgba(142,199,66,1);
-    padding: .5em 1em;
-    width: 2em;
-    height: 2.5em;
+    padding: 1em 0em;
+    width: 4em;
     top: 5em;
     margin-top: -4em;
     float: right;
     color: white;
+    text-align: center;
     position: relative;
     display: table;
-    z-index: 1;
+    z-index: 3;
 }
 
-    .imageDiscountLabel div:first-of-type {
-        font-size: 0.8em;
+    /*.imageDiscountLabel div:first-of-type {
+        font-size: 0.9em;
         padding: 0;
-    }
+    }*/
 
     .imageDiscountLabel div {
         padding: 0em 1px;
         font-weight: 500;
-        font-size: .7em;
+        font-size: .9em;
     }
 
 .imageDiv {
@@ -466,12 +470,12 @@ nav ul li:last-child a {
     background-color: rgba(0,0,0,.6);
     padding: .2em .5em;
     width: 100%;
-    height: 4em;
+    height: 3em;
     position: relative;
     display: table;
     color: white;
     top: 0em;
-    margin-top: -4.5em;
+    margin-top: -3.5em;
 }
 
 .imageDiv div {
@@ -829,6 +833,29 @@ footer {
         border-color: grey;
     }
 
+/*------BOTTOM ARROW*/
+.hairline-bottom-arrow {
+    width: 3em;
+    height: 10px;
+    position: relative;
+    margin: 0 auto;
+}
+
+    .hairline-bottom-arrow:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 15px;
+        height: 15px;
+        border-width: 0px 3px 3px 0px;
+        transform: rotate(47deg) translate(5%, -55%) skew(5deg, 0deg);
+        transform-origin: left;
+        border-style: solid;
+        border-color: #fff;
+    }
+
 /*---------SEARCH START---------*/
 .mobile-search {
     position: fixed;
@@ -858,12 +885,13 @@ footer {
 /*DATE FILTER START*/
 /*---------SEARCH START---------*/
 .mobile-date {
-    position: absolute;
+    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
+    height: 100%;
     visibility: hidden;
     opacity: 0;
     transition: visibility .2s linear, opacity .5s linear;
@@ -878,6 +906,30 @@ footer {
         text-align: center;
     }
 
+.tab-main {
+    width: 100%;
+    min-height:4em;
+    display: table;
+    border-top: 1px solid #ccc;
+    position: relative;
+}
+
+.tab-header {
+    width: 50%;
+    display: table;
+    padding: 1em 1.5em 1em 1.5em;
+    position: relative;
+    float:left;
+    height:4em;
+}
+
+.tab-header div:first-of-type{
+    font-weight:bold;
+}
+
+    .tab-header.open {                
+        background-color: rgb(244,244,244);
+    }
 /*FILTER BUTTON*/
 .filter-button {
     display: table;

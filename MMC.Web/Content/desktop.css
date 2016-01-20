@@ -1,39 +1,330 @@
-﻿@media only screen and (min-width: 1140px) {
-    
-/*-----INSIDE THE WRAPPERS-----*/
-	header, nav, footer, .row {
-		max-width: 1140px;
-		margin: 0 auto; /*centers everything on the page*/
-	}
-
-/*-----HEADER -----*/
-	header {
-		padding-top: 2em;
-		padding-bottom:1em;
-	}
-
-
-
-/*-----NAVIGATION -----*/	
-nav ul {padding-left: 1%;}
-nav ul li a:hover{text-decoration:underline;}
-nav ul li {width: auto;}
-nav ul li a {padding: .2em 1.5em;}
-
-	
-	
-	
+﻿/***********************COMMON FOR ALL DESKTOP*********************************/
 
 /*-----CONTENT -----*/
-
-
-
-	
-	
-/*-----COLUMNS -----*/
-
-.column-2{
-    width:16.66%;
+body {
+    min-width: 600px;
 }
 
+.cover-image {
+    background-image: url("../Images/Desktop/default.jpg");
+    width: 100%;
+    display: table;
+    min-height: 500px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: top;
+    background-size: cover;
+}
+/***********SEARCH BLOCK*******************/
+.cover-search {
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    left: 0;
+    min-height: 200px;
+    height: 45%;
+    display: table;
+    margin: 0 auto;
+}
+
+    .cover-search.outer {
+        top: 10em;
+        position: relative;
+        margin: 0 auto;
+        display: table;
+        left: 0;
+        right: 0;
+        width: 60%;
+        min-width: 450px;
+        float: none;
+        background-color: rgba(0,0,0,.5);
+        padding: 1em 0 1em 1em;
+        float: none;
+    }
+
+.search-main {
+    float: left;
+    width: 90%;
+}
+
+.search-main-button {
+    float: left;
+    width: auto;
+    height: auto;
+    background-color: rgb(251,189,19);
+    padding: .1em;
+}
+
+    .search-main-button img {
+        height: 40px;
+    }
+
+.home-search-content {
+    top: 0;
+    background-color: transparent;
+    color: white;
+    width: 100%;
+    float: left;
+    padding: .5em 0;
+    font-size: 1.2em;
+    position: relative;
+}
+
+    .home-search-content div:first-child {
+        padding: .5em 0;
+        font-weight: 600;
+        font-size: 1.4em;
+    }
+/***********END SEARCH BLOCK*******************/
+
+/***********LOGO************************/
+.logo-div {
+    position: absolute;
+    width: auto;
+    display: table;
+    background-color: rgb(251,189,19);
+    background-size: contain;
+    float: left;
+    z-index: 10;
+    top: 0;
+    left: 1em;
+}
+
+    .logo-div img {
+        transform: scale(1);
+        height: 100px;
+    }
+/***********END LOGO************************/
+
+/******************MENU************************/
+.menu-div {
+    float: right;
+    min-width: 10em;
+    height: 100px;
+    position: absolute;
+    display: table;
+    padding: 2em 1em;
+    top: 0;
+    right: 0;
+}
+
+.button {
+    float: left;
+    display: table;
+    position: relative;
+    height: 1em;
+    font-size: 1.4em;
+    margin: 0 1em 0 0;
+}
+
+    .button a {
+        border: 1px solid #fff;
+        padding: .5em 2em;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+        color: #fff;
+        margin: 0 auto;
+        transition: 0.5s all;
+        border-radius: 5px;
+    }
+
+.button-dark {
+    float: right;
+    display: table;
+    position: relative;
+    height: 1em;
+    font-size: 1em;
+    margin: .2em 1em 0 0;
+}
+
+    .button-dark a {
+        border: 1px solid #000;
+        padding: .2em 2em;
+        background-color: transparent;
+        outline: none;
+        cursor: pointer;
+        color: #000;
+        margin: 0 auto;
+        transition: 0.5s all;
+        border-radius: 5px;
+    }
+/*******************END MENU*****************/
+
+/**************MORE BUTTONS***************/
+.more-div {
+    float: right;
+    position: relative;
+    display: table;
+    top: 0;
+    right: 0;
+}
+/**************END MORE BUTTONS***************/
+
+/***********UPPER NAVIGATION*********/
+.home-nav {
+    position: absolute;
+    width: 100%;
+    top: 90%;
+    left: 0;
+    display: table;
+    /*border: 1px solid blue;*/
+    height: auto;
+    margin: 0 auto;
+    cursor:pointer;
+    color: #fff;
+}
+
+    .home-nav > div {
+        position: relative;
+        margin: 0em auto 0em auto;
+        display: table;
+        border: 2px solid #fff;
+        height: 2em;
+        width: 2em;
+        border-radius: 20px;
+        padding: .5em 0;
+        text-align: center;
+    }
+
+img.scale, object.scale, .crop-height:hover img {
+    -webkit-transform: scale(1.05);
+    transform: scale(1.05);
+    -moz-transform: scale(1.05);
+}
+
+.crop-height {
+    overflow: hidden;
+}
+
+    .crop-height img {
+        -webkit-transition: all 2s ease;
+        transition: all 2s ease;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+    }
+
+.imageDiv {
+    background-color: rgba(0,0,0,.4);
+    margin-top: -4em;
+}
+
+    .imageDiv .leftDiv {
+        font-size: 1em;
+    }
+
+        .imageDiv .leftDiv p:first-child, .image-noPaddingDiv .leftDiv p:first-child {
+            font-size: 1em;
+        }
+
+    .imageDiv .rightDiv {
+        font-size: 1.2em;
+    }
+
+.imageDiscountLabel div:first-of-type {
+    font-size: 1.2em;
+    padding: 0;
+}
+
+.imageDiscountLabel div {
+    padding: 0em 1px;
+    font-weight: 500;
+    font-size: 1em;
+}
+
+.column-6.min, .column-12.min, .column-4.min {
+    padding: .4em;
+}
+
+.lowercontent {
+    background-color: #febe00;
+    height: auto;
+    text-align: center;
+}
+
+    .lowercontent .header {
+        padding: 1em;
+        font-weight: 600;
+        font-size: 1.5em;
+    }
+
+    .lowercontent div p:first-child, .lowercontent div p {
+        padding: 0;
+        font-size: 1em;
+        text-align: justify;
+    }
+
+    .lowercontent div p {
+        text-align: right;
+    }
+
+@media only screen and (min-height:600px) {
+}
+
+@media only screen and (max-width: 900px) {
+}
+
+@media only screen and (min-width: 1140px) {
+
+    /*-----INSIDE THE WRAPPERS-----*/
+    header, nav, footer, .row {
+        margin: 0 auto; /*centers everything on the page*/
+        max-width: 1920px;
+    }
+
+    /*-----HEADER -----*/
+    header {
+        padding-top: 2em;
+        padding-bottom: 1em;
+    }
+    /**************imageDIV is used to put labels on top of images**********************/
+    .imageDiv {
+        background-color: rgba(0,0,0,.4);
+        margin-top: -4.7em;
+    }
+
+        .imageDiv .leftDiv {
+            font-size: 1.2em;
+        }
+
+            .imageDiv .leftDiv p:first-child, .image-noPaddingDiv .leftDiv p:first-child {
+                font-size: 1.2em;
+            }
+
+        .imageDiv .rightDiv {
+            font-size: 1.5em;
+        }
+
+    /*****************END imageDIV**********************/
+
+    /*-----NAVIGATION -----*/
+    nav ul {
+        padding-left: 1%;
+    }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        nav ul li {
+            width: auto;
+        }
+
+            nav ul li a {
+                padding: .2em 1.5em;
+            }
+
+    /*-----CONTENT -----*/
+
+
+
+
+    /*-----COLUMNS -----*/
+
+    .column-2 {
+        width: 16.66%;
+    }
 }
