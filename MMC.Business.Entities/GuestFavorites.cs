@@ -9,6 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MMC.Business.Entities
 {
+    [DataContract(Namespace = "wadado.in")]
     public class GuestFavorites : EntityBase, IIdentifiableEntity
     {
         #region Properties

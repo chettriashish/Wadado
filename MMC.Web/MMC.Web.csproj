@@ -344,8 +344,11 @@
   <ItemGroup>
     <Content Include="Binding\Models\AccountLoginModel.js" />
     <Content Include="Binding\ViewModels\AccountLoginViewModel.js" />
+    <Content Include="Content\animate.css" />
     <Content Include="Content\cangas.datepicker.css" />
+    <Content Include="Content\desktop-search-bar.css" />
     <Content Include="Content\desktop.css" />
+    <Content Include="Content\desktopmenu.css" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\Fonts\Dooodleista.svg" />
@@ -1356,6 +1359,7 @@
     <Content Include="Views\Partial\_dateFilter.cshtml" />
     <Content Include="Views\Partial\_activityList.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\Partial\_desktopmenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\ActivitiesCart\directives\" />

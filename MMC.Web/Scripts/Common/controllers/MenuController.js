@@ -1,6 +1,8 @@
 ﻿(function () {
     var app = angular.module("appMain");
     var menuController = function ($scope, $http, $timeout, $interval, $location, MenuDataService) {
+        $scope.isDesktop = !WURFL.is_mobile;
+        $scope.removeFilter = false;
         $scope.LoginStatus = "Login";
         /***************************LOADING SELECTED GUEST INFORMATION *************************/
         MenuDataService.getGuestInformation().then(function (response) {
@@ -78,6 +80,14 @@
 
         /*FIRST TIME CHECK IN THE MENU IF THERE ARE ANY ACTIVITIES ADDED */
         checkForActivities();
+        $(window).resize(function () {
+            if (window.styleMedia.matchMedium("screen and (max-width:600px)")) {
+                $scope.removeFilter = true;
+            }
+            else {
+                $scope.removeFilter = false;
+            }
+        })
     }
     app.controller("MenuController", menuController);
 }());

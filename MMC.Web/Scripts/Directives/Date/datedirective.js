@@ -384,7 +384,9 @@
                     var date = getMinDates();
                     resultSet = [];
                     var month = date.getMonth();
-                    if (typeof $scope.month == "undefined" || $scope.month <= getMinDates().getMonth()) {
+                    var selectedDate = $scope.dateSelected != '' ? ($scope.dateformat == "dd/MM/yy" ? new Date($scope.dateSelected.split('/')[2], ($scope.dateSelected.split('/')[1] - 1), $scope.dateSelected.split('/')[0]) :
+                       new Date($scope.dateSelected.split('/')[2], ($scope.dateSelected.split('/')[0] - 1), $scope.dateSelected.split('/')[1])) : '';
+                    if (typeof $scope.month == "undefined" || selectedDate < getMinDates()) {
                         clearSelectedDate();
                         var positionOfFirstDate = new Date(date.getFullYear(), month, 1).getUTCDay();
                         var positionOfLastDate = new Date(date.getFullYear(), month, daysInMonth(month, date.getFullYear()), 0).getUTCDay();
@@ -403,8 +405,7 @@
                     GetCurrentDates();
                 }
                 //this responds to when initial value is set to emplty
-                $scope.clearSelectedDate = function () {
-                    clearSelectedDate();
+                $scope.clearSelectedDate = function () {                   
                     GetCurrentDates();
                 }
                 //Gets days of current month

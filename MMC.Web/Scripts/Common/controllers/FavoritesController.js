@@ -3,6 +3,7 @@
     var favoritesController = function ($scope, $http, $timeout, $interval, $location, FavoritesDataService) {
         $scope.isFavoritesAdded = false;
         $scope.activity;
+        $scope.favouritesClass = "";
         $scope.checkUserLoginAndAddToFavorites = function (item) {
             var ActivityKey = item.ActivityKey;
             if ($scope.isFavoritesAdded == true) {
@@ -35,13 +36,7 @@
             FavoritesDataService.showUserActivityCart();
         }
 
-        var setFavorites = function () {
-            //setTimeout(function () {
-            //    var width = $(".list-activity-wrapper img").width();
-            //    var height = $(".list-activity-wrapper img").height();
-            //    $(".like-container").css("width", width);
-            //    $(".like-container div").css("top", (height - 50))
-            //}, 120);
+        var setFavorites = function () {           
 
         }
 

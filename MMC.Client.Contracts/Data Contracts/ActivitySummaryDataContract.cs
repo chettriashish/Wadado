@@ -32,6 +32,8 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public decimal Cost { get; set; }
         [DataMember]
+        public string Currency { get; set; }
+        [DataMember]
         public decimal Discount { get; set; }
         [DataMember]
         public string ActivityType { get; set; }

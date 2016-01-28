@@ -9,6 +9,7 @@
 <script src="~/Scripts/slider/owl.carousel.min.js"></script>
 <link href="~/Content/owl.carousel.css" rel="stylesheet" />
 <link href="~/Content/owl.theme.css" rel="stylesheet" />
+<link href="~/Content/animate.css" rel="stylesheet" />
 
 <!--UI SELECT REFERENCE-->
 <link href="~/Content/ui-select/select.css" rel="stylesheet" />
@@ -26,6 +27,11 @@
 <script src="~/Scripts/Login/services/LoginDataService.js"></script>
 <script src="~/Scripts/Login/controllers/LoginController.js"></script>
 
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Common/controllers/FavoritesController.js"></script>
+
+
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
 <script src="~/Scripts/Common/controllers/MenuController.js"></script>
@@ -41,10 +47,6 @@
 <link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
 <link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
 <link href="~/Content/tablet.css" rel="stylesheet" />
-
-<!--DATE REFERENCE-->
-<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
-<script src="~/Scripts/Directives/Date/datedirective.js"></script>
 
 <div id="colorbar">
 </div>
@@ -109,23 +111,33 @@
                 <div class="owl-carousel">
                     <div ng-repeat="item in topOffer">
                         <div class="imageDiscountLabel">
-                            <div><span>{{item.Offer.Discount}}%</span></div>
-                            <div><span>Off</span></div>
-                        </div>
-                        <div class="item" ng-cloak>
-                            <img ng-src="{{item.ImageURL}}" />
-                        </div>
-                        <div class="imageDiv">
-                            <div class="leftDiv">
-                                <p>
-                                    <span>{{item.Activity.Name}}</span>
+                            <div>
+                                <p ng-if="item.Offer.Discount > 0">
+                                    <span>{{item.Offer.Discount}}% Off</span>
                                 </p>
                                 <p>
-                                    <span>{{item.Activity.Address}}</span>
+                                    <span>{{item.Currency}} {{item.Activity.Cost}}</span>
                                 </p>
                             </div>
+                        </div>
+                        <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                            <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                        </div>
+                        <div class="image-noPaddingDiv">
+                            <div class="leftDiv">
+                                <div>
+                                    <p><span>{{item.Activity.Name}}</span></p>
+                                </div>
+                                <div class="ratingList" id="userRating">
+                                    <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                        <img ng-src="{{imageItem}}" />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="rightDiv">
-                                <span>$ {{item.Activity.Cost}}</span>
+                                <div class="like-container">
+                                    @Html.Partial("../Partial/_favourites")
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -153,74 +165,213 @@
         <!--Row start-->
         <div class="row" ng-cloak>
             <div ng-repeat="item in topActivity">
-                <div ng-if="$index == 0">
-                    <div class="column-6 min">
-                        <div class="crop-height">
-                            <img ng-src="{{item.ImageURL}}">
-                        </div>
-                        <div class="imageDiv">
-                            <div class="leftDiv">
-                                <p>
-                                    <span>{{item.Activity.Name}}</span>
+                @*<div ng-if="$index == 0">*@
+                <div>
+                    <div class="column-6 min" ng-if="!largeScreen">
+                        <div class="imageDiscountLabel">
+                            <div>
+                                <p ng-if="item.Discount > 0">
+                                    <span>{{item.Discount}}% Off</span>
                                 </p>
                                 <p>
-                                    <span>{{item.Activity.Address}}</span>
+                                    <span>{{item.Currency}} {{item.Activity.Cost}}</span>
                                 </p>
                             </div>
+                        </div>
+                        <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                            <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                        </div>
+                        <div class="image-noPaddingDiv">
+                            <div class="leftDiv">
+                                <div>
+                                    <p><span>{{item.Activity.Name}}</span></p>
+                                </div>
+                                <div class="ratingList" id="userRating">
+                                    <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                        <img ng-src="{{imageItem}}" />
+                                    </div>
+                                </div>
+                            </div>
                             <div class="rightDiv">
-                                <span>$ {{item.Activity.Cost}}</span>
+                                <div class="like-container">
+                                    @Html.Partial("../Partial/_favourites")
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-4 min" ng-if="largeScreen">
+                        <div class="imageDiscountLabel">
+                            <div>
+                                <p ng-if="item.Discount > 0">
+                                    <span>{{item.Discount}}% Off</span>
+                                </p>
+                                <p>
+                                    <span>{{item.Currency}} {{item.Activity.Cost}}</span>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                            <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                        </div>
+                        <div class="image-noPaddingDiv">
+                            <div class="leftDiv">
+                                <div>
+                                    <p><span>{{item.Activity.Name}}</span></p>
+                                </div>
+                                <div class="ratingList" id="userRating">
+                                    <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                        <img ng-src="{{imageItem}}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rightDiv">
+                                <div class="like-container">
+                                    @Html.Partial("../Partial/_favourites")
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div ng-if="$index == 1">
-                    <div class="column-6 min">
-                        <div class="crop-height">
-                            <img ng-src="{{item.ImageURL}}">
-                        </div>
-                        <div class="imageDiv">
-                            <div class="leftDiv">
-                                <p>
-                                    <span>{{item.Activity.Name}}</span>
-                                </p>
-                                <p>
-                                    <span>{{item.Activity.Address}}</span>
-                                </p>
+                @*<div ng-if="$index == 1">
+                        <div class="column-6 min" ng-if="!largeScreen">
+                            <div class="imageDiscountLabel">
+                                <div>
+                                    <p ng-if="item.Discount > 0">
+                                        <span>{{item.Discount}}% Off</span>
+                                    </p>
+                                    <p>
+                                        <span>{{item.Currency}} {{item.Activity.Cost}}</span>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="rightDiv">
-                                <span>$ {{item.Activity.Cost}}</span>
+                            <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                                <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                            </div>
+                            <div class="image-noPaddingDiv">
+                                <div class="leftDiv">
+                                    <div>
+                                        <p><span>{{item.Activity.Name}}</span></p>
+                                    </div>
+                                    <div class="ratingList" id="userRating">
+                                        <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                            <img ng-src="{{imageItem}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rightDiv">
+                                    <div class="like-container">
+                                        @Html.Partial("../Partial/_favourites")
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                        <div class="column-4 min" ng-if="largeScreen">
+                            <div class="imageDiscountLabel">
+                                <div>
+                                    <p ng-if="item.Discount > 0">
+                                        <span>{{item.Discount}}% Off</span>
+                                    </p>
+                                    <p>
+                                        <span>{{item.Currency}} {{item.Activity.Cost}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                                <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                            </div>
+                            <div class="image-noPaddingDiv">
+                                <div class="leftDiv">
+                                    <div>
+                                        <p><span>{{item.Activity.Name}}</span></p>
+                                    </div>
+                                    <div class="ratingList" id="userRating">
+                                        <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                            <img ng-src="{{imageItem}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rightDiv">
+                                    <div class="like-container">
+                                        @Html.Partial("../Partial/_favourites")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
             </div>
         </div>
         <!--Row end-->
         <!--Row start-->
         <div class="row" ng-cloak>
             <!--Row start-->
-            <div ng-repeat="item in topActivity">
-                <div ng-if="$index > 1">
-                    <div class="column-6 min">
-                        <div class="crop-height">
-                            <img ng-src="{{item.ImageURL}}">
-                        </div>
-                        <div class="imageDiv">
-                            <div class="leftDiv">
-                                <p>
-                                    <span>{{item.Activity.Name}}</span>
-                                </p>
-                                <p>
-                                    <span>{{item.Activity.Address}}</span>
-                                </p>
+            @*<div ng-repeat="item in topActivity">
+                    <div ng-if="$index > 1">
+                        <div class="column-6 min" ng-if="!largeScreen">
+                            <div class="imageDiscountLabel">
+                                <div>
+                                    <p ng-if="item.Discount > 0">
+                                        <span>{{item.Discount}}% Off</span>
+                                    </p>
+                                    <p>
+                                        <span>{{item.Currency}} {{item.Activity.Cost}}</span>
+                                    </p>
+                                </div>
                             </div>
-                            <div class="rightDiv">
-                                <span>$ {{item.Activity.Cost}}</span>
+                            <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                                <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                            </div>
+                            <div class="image-noPaddingDiv">
+                                <div class="leftDiv">
+                                    <div>
+                                        <p><span>{{item.Activity.Name}}</span></p>
+                                    </div>
+                                    <div class="ratingList" id="userRating">
+                                        <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                            <img ng-src="{{imageItem}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rightDiv">
+                                    <div class="like-container">
+                                        @Html.Partial("../Partial/_favourites")
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-4 min" ng-if="largeScreen">
+                            <div class="imageDiscountLabel">
+                                <div>
+                                    <p ng-if="item.Discount > 0">
+                                        <span>{{item.Discount}}% Off</span>
+                                    </p>
+                                    <p>
+                                        <span>{{item.Currency}} {{item.Activity.Cost}}</span>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                                <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                            </div>
+                            <div class="image-noPaddingDiv">
+                                <div class="leftDiv">
+                                    <div>
+                                        <p><span>{{item.Activity.Name}}</span></p>
+                                    </div>
+                                    <div class="ratingList" id="userRating">
+                                        <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                            <img ng-src="{{imageItem}}" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rightDiv">
+                                    <div class="like-container">
+                                        @Html.Partial("../Partial/_favourites")
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                </div>*@
         </div>
         <!--Row end-->
         <!--Row start-->

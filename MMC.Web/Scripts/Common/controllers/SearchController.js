@@ -2,14 +2,11 @@
     var app = angular.module("appMain");
     var searchController = function ($scope, $http, $timeout, $interval, $location, SearchDataService) {
         $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';
+        $scope.activityName = "Explore";
+        
         /***************************LOADING SELECTED LOCATIONS ACTIVITY LIST *************************/
         $scope.loadSelectedLocationDetails = function (item, model) {
-            $scope.locationName = item.LocationName;
-            SearchDataService.getAllActivitiesForLocation($scope.locationName).then(function (activities) {
-                $scope.activities = activities;
-                $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\t ACTIVITIES";
-                makeBold();
-            });
+            loadSelectedLocationActivities(item.LocationName);
         };
         /*END LOADING SELECTED LOCATIONS ACTIVITY LIST*/
 
@@ -30,7 +27,12 @@
                 });
             });
         }
+        if ($.url().segment().length > 1) {
+            if ($.url().segment(2).trim().length > 0) {
+                $scope.locationName = $.url().segment(2);
 
+            }
+        }
         /*LOADING THE SELECTED ACTIVITY OR SELECTED LOCATION DETAILS*/
         $scope.loadSelectedDetails = function () {
             if ($scope.locationName != null && $scope.locationName.trim() != "") {
@@ -47,11 +49,69 @@
             $scope.selectionInformation = 'VIEW SELECTED ACTIVITY DETAILS';
         };
 
+        var loadSelectedLocationActivities = function (locationName) {
+            $scope.locationName = locationName;
+            SearchDataService.getAllActivitiesForLocation($scope.locationName).then(function (activities) {
+                $scope.activities = activities;
+                $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\t ACTIVITIES";
+                makeBold();
+                groupBy(activities, 'ActivityTypeKey', 'Activity');
+            });
+        }
         /*LOADING ALL LOCATIONS*/
         SearchDataService.getAllLocations().then(function (alllocations) {
             $scope.alllocation = alllocations;
+            if ($.url().segment().length > 1) {
+                if ($.url().segment(2).trim().length > 0) {
+                    var selectedLocation = $.url().segment(2);
+                    groupBy(alllocations, 'Country', 'location');
+                    loadSelectedLocationActivities(selectedLocation);                   
+                }
+            }
         });
         /*END LOADING ALL LOCATIONS*/
+
+        /********************GROUPING LOCATIONS BY KEY***************************/        
+        var groupBy = function (data, key, type) {
+            $scope.results = {};
+            if (!(data && key)) return;            
+            if (!this.$id) {
+            var result = {};
+            } else {
+                var scopeId = this.$id;
+                if (!$scope.results[scopeId]) {
+                    $scope.results[scopeId] = {};
+                    this.$on("$destroy", function () {
+                        delete $scope.results[scopeId];
+                    });
+                }
+                result = $scope.results[scopeId];
+            }
+
+            for (var groupKey in $scope.result)
+                result[groupKey].splice(0, result[groupKey].length);
+
+            for (var i = 0; i < data.length; i++) {
+                if (!result[data[i][key]])
+                    result[data[i][key]] = [];
+                result[data[i][key]].push(data[i]);
+            }
+
+            var keys = Object.keys(result);
+            for (var k = 0; k < keys.length; k++) {
+                if (result[keys[k]].length === 0)
+                    delete result[keys[k]];
+            }
+            if (type === 'Activity') {
+                $scope.activityResults = result;
+                return $scope.activityResults;
+            }
+            else {
+                $scope.locationResults = result;
+                return $scope.locationResults;
+            }            
+        };
+        
 
         /*****************MAKE CODE COMMON******************/
 

@@ -49,6 +49,18 @@
     var activityController = function ($scope, $http, $timeout, $interval, $location, $routeParams, ActivityDataService) {
         $scope.datesSelected = false;
         $scope.categoryFilterSelected = false;
+
+        var setLayout = function () {
+            if (window.styleMedia.matchMedium("screen and (max-width:900px)")) {
+                $scope.largeScreen = false;
+            }
+            else {
+                $scope.largeScreen = true;
+            }
+        }
+        if (!WURFL.is_mobile) {
+            setLayout();
+        }
         var setImages = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.allSelectedActivity, function (key, value) {
@@ -71,39 +83,45 @@
                     }
                 });
             }
+            else {
+                $.each($scope.allSelectedActivity, function (key, value) {
+                    $scope.allSelectedActivity[key].DefaultImageURL = Wadado.rootPath + "/" + $scope.allSelectedActivity[key].ImageURL + ".jpg";
+                });
+            }
         };
 
         var setRating = function () {
-            if (WURFL.is_mobile) {
-                $.each($scope.allSelectedActivity, function (key, value) {
-                    var count = 0;
-                    $scope.allSelectedActivity[key].ratingURL = [];
-                    var result = Math.round($scope.allSelectedActivity[key].Rating);
-                    var half = false;
-                    if (result > $scope.allSelectedActivity[key].Rating) {
-                        result = result - 1;
-                        half = true;
-                    }
-                    for (i = 0; i < result; i++) {
-                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
-                            $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
-                        }
-                        count++;
-                    }
-                    if (half) {
-                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
-                            $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
-                        }
-                        count++;
-                    }
-                    for (i = count; i < 5 ; i++) {
-                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
-                            $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
-                        }
-                        count++;
-                    }
-                });
-            }
+            $.each($scope.allSelectedActivity, function (key, value) {
+                var count = 0;
+                $scope.allSelectedActivity[key].ratingURL = [];
+                var result = Math.round($scope.allSelectedActivity[key].Rating);
+                var half = false;
+                if (result > $scope.allSelectedActivity[key].Rating) {
+                    result = result - 1;
+                    half = true;
+                }
+                for (i = 0; i < result; i++) {
+                    //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                    //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
+                    //}
+                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_yellow.png";
+                    count++;
+                }
+                if (half) {
+                    //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                    //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
+                    //}
+                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_yellow.png";
+                    count++;
+                }
+                for (i = count; i < 5 ; i++) {
+                    //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                    //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
+                    //}
+                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_yellow.png";
+                    count++;
+                }
+            });
         };
         $scope.activityTypes = [];
         $scope.all = {
@@ -280,6 +298,11 @@
         $scope.closeFilter = function () {
             $(".mobile-activityFilter").removeClass("open");
         }
+        $(window).resize(function () {
+            if (!WURFL.is_mobile) {
+                setLayout();
+            }            
+        });
     }
     app.controller("ActivityController", activityController);
 }());

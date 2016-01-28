@@ -583,8 +583,8 @@
               if (event == null) {
                   if (ctrl.open) {
                       ctrl.close();
-                      e.preventDefault();
-                      e.stopPropagation();
+                      //e.preventDefault();
+                      //e.stopPropagation();
                   }
                   else {
                       ctrl.activate();
@@ -1001,7 +1001,13 @@
 
                           // Now move the actual dropdown element to the end of the body
                           $document.find('body').append(element);
-                          element[0].style.position = 'fixed';
+                          if (WURFL.is_mobile) {
+                              element[0].style.position = 'fixed';
+                          }
+                          else {
+                              element[0].style.position = 'absolute';
+                          }
+                          
                           element[0].style.left = offset.left + 'px';
                           element[0].style.top = (position.top - scrollTop) + 'px';
                           element[0].style.width = offset.width + 'px';

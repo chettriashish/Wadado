@@ -76,7 +76,7 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activityOne.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activityOne.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityOne.Activity).DifficultyRating = 1;
+            ((ActivitiesMaster)activityOne.Activity).AverageUserRating =Convert.ToDecimal(3.5);
             ((ActivitiesMaster)activityOne.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityOne.Activity).Address = "Gangtok,Sikkim";
             ((ActivitiesMaster)activityOne.Activity).Cost = 1000;
@@ -92,7 +92,7 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activityTwo.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activityTwo.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityTwo.Activity).DifficultyRating = 2;
+            ((ActivitiesMaster)activityTwo.Activity).AverageUserRating = 3;
             ((ActivitiesMaster)activityTwo.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityTwo.Activity).Address = "Rumtek,Sikkim";
             ((ActivitiesMaster)activityTwo.Activity).Cost = 2000;
@@ -107,7 +107,7 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activityThree.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activityThree.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityThree.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)activityThree.Activity).AverageUserRating = Convert.ToDecimal(4.5);
             ((ActivitiesMaster)activityThree.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityThree.Activity).Address = "Melli,Sikkim";
             ((ActivitiesMaster)activityThree.Activity).Cost = 3000;
@@ -120,7 +120,7 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activityFour.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activityFour.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityFour.Activity).DifficultyRating = 1;
+            ((ActivitiesMaster)activityFour.Activity).AverageUserRating = 4;
             ((ActivitiesMaster)activityFour.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityFour.Activity).Address = "Gangtok,Sikkim";
             ((ActivitiesMaster)activityFour.Activity).Cost = 1000;
@@ -136,7 +136,7 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activityFive.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activityFive.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityFive.Activity).DifficultyRating = 2;
+            ((ActivitiesMaster)activityFive.Activity).AverageUserRating = 3;
             ((ActivitiesMaster)activityFive.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activityFive.Activity).Address = "Rumtek,Sikkim";
             ((ActivitiesMaster)activityFive.Activity).Cost = 2000;
@@ -151,7 +151,7 @@ namespace MMC.Web.Services
 
             ((ActivitiesMaster)activitySix.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)activitySix.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activitySix.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)activitySix.Activity).AverageUserRating = Convert.ToDecimal(4.5);
             ((ActivitiesMaster)activitySix.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)activitySix.Activity).Address = "Melli,Sikkim";
             ((ActivitiesMaster)activitySix.Activity).Cost = 3000;
@@ -185,7 +185,7 @@ namespace MMC.Web.Services
             offers1.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers1.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)offers1.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers1.Activity).DifficultyRating = 1;
+            ((ActivitiesMaster)offers1.Activity).AverageUserRating = Convert.ToDecimal(3.5);
             ((ActivitiesMaster)offers1.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)offers1.Activity).Address = "LOREM IPSUM";
             ((ActivitiesMaster)offers1.Activity).Cost = 1000;
@@ -201,7 +201,7 @@ namespace MMC.Web.Services
             offers2.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers2.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)offers2.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers2.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)offers2.Activity).AverageUserRating = 3;
             ((ActivitiesMaster)offers2.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)offers2.Activity).Address = "LOREM IPSUM";
             ((ActivitiesMaster)offers2.Activity).Cost = 1000;
@@ -217,7 +217,7 @@ namespace MMC.Web.Services
             offers3.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers3.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)offers3.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers3.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)offers3.Activity).AverageUserRating = Convert.ToDecimal(4.5);
             ((ActivitiesMaster)offers3.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)offers3.Activity).Address = "LOREM IPSUM";
             ((ActivitiesMaster)offers3.Activity).Cost = 1000;
@@ -233,7 +233,7 @@ namespace MMC.Web.Services
             offers5.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers5.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)offers5.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers5.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)offers5.Activity).AverageUserRating = Convert.ToDecimal(4.5);
             ((ActivitiesMaster)offers5.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)offers5.Activity).Address = "LOREM IPSUM";
             ((ActivitiesMaster)offers5.Activity).Cost = 1000;
@@ -249,7 +249,7 @@ namespace MMC.Web.Services
             offers4.Activity = new ActivitiesMaster();
             ((ActivitiesMaster)offers4.Activity).ActivitesKey = "ACTIVITY ONE";
             ((ActivitiesMaster)offers4.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers4.Activity).DifficultyRating = 3;
+            ((ActivitiesMaster)offers4.Activity).AverageUserRating = 3;
             ((ActivitiesMaster)offers4.Activity).Included = "A LOT OF THINGS";
             ((ActivitiesMaster)offers4.Activity).Address = "LOREM IPSUM";
             ((ActivitiesMaster)offers4.Activity).Cost = 1000;

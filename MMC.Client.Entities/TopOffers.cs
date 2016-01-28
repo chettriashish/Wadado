@@ -5,9 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentValidation;
+using System.Runtime.Serialization;
 
 namespace MMC.Client.Entities
 {
+    [DataContract(Namespace = "wadado.in")]
     public class TopOffers : ObjectBase
     {
         #region Private Variables

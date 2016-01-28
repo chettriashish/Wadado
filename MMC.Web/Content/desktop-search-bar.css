@@ -1,0 +1,40 @@
+﻿
+/*******************SEARCH INPUT*******************************/
+.mobile-search-input {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0em .2em;
+}
+
+.select2-container .select2-choice {
+    height: 30px;
+}
+
+    .select2-container .select2-choice > .select2-chosen {
+        font-size: .8em;
+        display: block;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        padding: 0px .5em;
+        color: grey;
+        margin: 0;
+    }
+
+nav div {
+    float: left;
+    width: 10em;
+}
+
+    nav div span {
+        font-size: 1em;
+        width: 100%;
+    }
+
+    nav div a {
+        display: table;
+        font-size: 1em;
+        font-weight: 400;
+        text-decoration: none;
+        margin: 0em 0;
+    }

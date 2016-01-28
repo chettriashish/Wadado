@@ -5,23 +5,7 @@
 'use strict';
 (function () {
     //var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ui.bootstrap', 'ngRoute']);
-    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ngRoute', 'angular-click-outside'])
-        .config(function ($routeProvider) {
-            $routeProvider
-            .when('/Location/:locationName', {
-                templateUrl: '/Location/Index',
-                controller: 'LocationController'
-            })
-            .when('/Activities/:locationName/:activity', {
-                templateUrl: '/Activity/Index',
-                controller: 'ActivityController'
-            })
-            .when('/', {
-                templateUrl: '/Home/Index',
-                controller: 'HomeController'
-            })
-            .otherwise({ redirectTo: "/" });
-        });    
+    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ngRoute', 'angular-click-outside'])        
 
     window.fbAsyncInit = function () {
         FB.init({
@@ -29,7 +13,7 @@
             cookie: true,
             xfbml: true,
             version: 'v2.2'
-        });        
+        });
     };
 
     (function (d, s, id) {
@@ -38,7 +22,6 @@
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-
-
+    }(document, 'script', 'facebook-jssdk'));  
+    
 }());

@@ -2,38 +2,36 @@
 using Core.Common.Core;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
-
 namespace MMC.Business.Entities
 {
     [DataContract(Namespace = "wadado.in")]
-    public class ActivityTypeCategory : EntityBase, IIdentifiableEntity
+    public class LocationDetails : EntityBase, IIdentifiableEntity
     {
-        #region Properties
         [DataMember]
-        public string ActivityTypeCategoryKey { get; set; }
+        public string LocationDetailsKey { get; set; }
         [DataMember]
-        public string ActivityTypeKey { get; set; }
+        public string LocationKey { get; set; }
         [DataMember]
-        public string ActivityCategoryKey { get; set; }
-        public bool IsPrimary { get; set; }
-        #endregion
+        public string ActivityHeader { get; set; }
+        [DataMember]
+        public string ActivityDescription { get; set; }
+        [DataMember]
+        public bool IsDeleted { get; set; }
 
-        [DataMember]
         public string EntityId
         {
             get
             {
-                return ActivityTypeCategoryKey;
+                return LocationDetailsKey;
             }
             set
             {
-                ActivityTypeCategoryKey = value;
+                LocationDetailsKey = value;
             }
         }
     }

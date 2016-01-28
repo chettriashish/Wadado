@@ -14,7 +14,7 @@
         }
 
         var getSelectedDetails = function (activity, location) {
-            if ((activity == null || activity.trim() == "") && location!= null && location.length > 0 ) {
+            if ((activity == null || activity.trim() == "Explore") && location != null && location.length > 0) {
                 window.location.href = "/Location/" + location;
             }
             else if (location != null && activity != null

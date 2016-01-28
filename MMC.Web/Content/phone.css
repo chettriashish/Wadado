@@ -51,6 +51,9 @@
     padding: 0;
 }
 
+.like-container img {
+    transform-style:initial;
+}
 /*-----------LANDSCAPE MODE FOR SMALLER PHONES-------------*/
 
 @media only screen and (min-width: 480px) {

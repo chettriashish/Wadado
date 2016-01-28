@@ -6,7 +6,7 @@
 }
 /* hide the navigation button by default */
 
-@media only screen and (min-width: 0px) and (max-width: 1141px) {
+@media only screen and (min-width: 0px) and (max-width: 1920px) {
 
     /* Navigation Button
 	-------------------------------------------------------- */
@@ -143,6 +143,7 @@
 
     .primary-nav {
         width: 100%;
+        min-width: 600px;
         float: none;
         background-color: rgba(255,255,255,.8); /* change the menu color */
         display: block;
@@ -169,6 +170,37 @@
             margin-top: .48em;
         }
     /*end overriding default styles from mobile menu*/
+    .menu-mobile-nav {
+        width: 100%;
+        min-width: 600px;
+        float: none;
+        background-color: rgba(255,255,255,1); /* change the menu color */
+        display: block;
+        height: 48px;
+        top: 0;
+        margin: 0 auto;
+        padding: 0;
+        overflow: hidden;
+        position: fixed;
+        left: 0px;
+        z-index: 999;
+        clear: both;
+    }
+
+        .menu-mobile-nav > div {
+            margin: 0 auto;
+            margin-top: .48em;
+            position: relative;
+            width: 40%;
+            display: table;
+            min-width: 450px;
+            padding: 0 5%;
+            float: none;
+        }
+
+            .menu-mobile-nav > div > div {
+                width: 50%;
+            }
 
     /*search in menu bar style begin*/
     .menusearch-input {
@@ -317,3 +349,34 @@
     /*end style for menu*/
 }
 /* End Mobile Styles */
+/*FOR DESKTOP*/
+@media only screen and (min-width: 1140px) {
+    .logo-button {
+        display: block;
+        position: fixed;
+        float: left;
+        width: 100px;
+        height: 90px;
+        top: 0em;
+        left: 5em;
+        background-color: rgb(251,189,19);
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-repeat: no-repeat;       
+        cursor: pointer;
+        border: 0 none;
+        z-index: 999;
+        text-indent: -9999px;
+        outline: none;
+        background-size: 90px auto;
+        -webkit-transition: height 0.5s ease,background-position-y 0.5s ease;
+        transition: height 0.5s ease,background-position-y 0.5s ease;
+    }
+
+        .logo-button:hover {
+            background-position-y: 20px;
+            height: 110px;
+        }
+}

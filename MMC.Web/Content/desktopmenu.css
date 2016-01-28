@@ -1,0 +1,204 @@
+﻿/*             file downloaded from https://www.astuteo.com/mobilemenu/             */
+
+
+.nav-button {
+    display: none;
+}
+/* hide the navigation button by default */
+
+@media only screen and (min-width: 0px) and (max-width: 1920px) {
+
+    /* Navigation Button
+	-------------------------------------------------------- */
+    .location-button {
+        display: block;
+        top: 8px;
+        width: 50px;
+        height: 35px;
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/location_nav.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: .9em, 0;
+        cursor: pointer;
+        border: 0 none;
+        border-radius: 5px;
+        z-index: 999;
+        text-indent: -9999px;
+        outline: none;
+    }
+
+    .logo-button {
+        display: block;
+        float: left;
+        width: 100px;
+        position: fixed;
+        height: 90px;
+        top: 0em;
+        left: 5em;
+        background-color: rgb(251,189,19);
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 0 none;
+        z-index: 999;
+        text-indent: -9999px;
+        outline: none;
+        background-size: 90px auto;
+        -webkit-transition: height 0.5s ease,background-position-y 0.5s ease;
+        transition: height 0.5s ease,background-position-y 0.5s ease;
+    }
+
+        .logo-button:hover {
+            background-position-y: 20px;
+            height: 110px;
+        }
+
+
+
+    /* Navigation Bar
+	-------------------------------------------------------- */
+
+
+    .primary-nav {
+        width: 100%;
+        min-width: 600px;
+        background-color: rgba(255,255,255,.8); /* change the menu color */
+        display: block;
+        height: 55px;
+        top: 0;
+        margin: 0;
+        padding: 0;
+        /*overflow: hidden;*/
+        position: fixed;
+        left: 0px;
+        z-index: 1;
+        clear: both;
+        float: none;
+    }
+
+        .primary-nav > div {
+            width: 100%;
+            max-width: 100%;
+            min-width: 700px;
+            position: relative;
+            margin: 0 16em;
+            display: table;
+            float: left;
+            top: 10px;
+            height: 30px;
+            cursor: pointer;
+            -ms-transform: translateY(1em);
+            transform: translateY(1em);
+        }
+
+            .primary-nav > div:last-of-type {
+                width: 100%;
+                max-width: 100%;
+                min-width: 700px;
+                position: relative;
+                margin: 0 25em;
+                display: table;
+                float: left;
+                top: -20px;
+                height: 30px;
+                cursor: pointer;
+                -ms-transform: translateY(1em);
+                transform: translateY(1em);
+            }
+
+            .primary-nav > div img {
+                height: 16px;
+            }
+
+            .primary-nav > div > div {
+                width: auto;
+                display: table;
+                height: 100%;
+            }
+
+
+                .primary-nav > div > div > div {
+                    float: left;
+                    width: auto;
+                }
+
+            .primary-nav > div span {
+                font-size: 1em;
+                color: rgb(51,51,51);
+                padding: .4em;
+            }
+
+            .primary-nav > div > div:nth-of-type(2) {
+                width: auto;
+                height: 0px;
+                position: absolute;
+                padding: 1em 0;
+                margin: 0 auto;
+                cursor: initial;
+                left: 0;
+                opacity: 0;
+                right: 0;
+                top: 25px;
+                float: inherit;
+                transform: scale(1, 1);
+                transform-origin: top;
+                visibility: collapse;
+                -ms-transform: scale(1, 1);
+                -ms-transform-origin: top center;
+                background-color: rgba(255, 255, 255,0.95);
+                -webkit-transition: all .5s linear 50ms;
+                -moz-transition: all .5s linear 50ms;
+                -ms-transition: all .5s linear 50ms;
+                transition: all .5s linear 50ms;
+            }
+
+            .primary-nav > div > div:hover + div, .primary-nav > div > div + div:hover {
+                opacity: 1;
+                display: table;
+                visibility: visible;
+                /*transform: scale(1,1);*/
+                height: auto;
+            }
+
+    .bottom-triangle {
+        width: 0;
+        height: 0;
+        border: 6px solid transparent;
+        border-top: 6px solid rgb(51,51,51);
+        margin-top: 6px;
+    }
+
+    .primary-nav > div > div:nth-of-type(2) > div {
+        width: auto;
+        float: left;
+        position: relative;
+        display: table;
+        height: auto;
+    }
+
+        .primary-nav > div > div:nth-of-type(2) > div > ul {
+            float: left;
+            position: relative;
+            width: 100%;
+            height: 100%;
+            padding: 0 1em;
+        }
+
+    .primary-nav ul li {
+        padding: .4em .2em;
+        font-size: 1em;
+        color: rgb(51,51,51);
+    }
+
+        .primary-nav ul li a {
+            cursor: pointer;
+            color: rgb(51,51,51);
+            font-size: .9em;
+        }
+}

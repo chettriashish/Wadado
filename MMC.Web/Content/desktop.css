@@ -2,20 +2,59 @@
 
 /*-----CONTENT -----*/
 body {
-    min-width: 600px;
+    min-width: 700px;
 }
-
+/*****************************COVER FOR HOME*******************************************************/
 .cover-image {
     background-image: url("../Images/Desktop/default.jpg");
     width: 100%;
     display: table;
-    min-height: 500px;
+    min-height: 480px;
     margin: 0 auto;
     left: 0;
     right: 0;
     top: 0;
     background-position: top;
     background-size: cover;
+}
+
+/******************************MAIN COVER HEIGHT*********************************************/
+.cover-height {
+    /* max-width: 1200px; /* native or declared width of img src (if known) */
+    max-height: 500px;
+    height: 500px; /* lt ie8 */
+    height: auto;
+    display: table;
+    overflow: hidden;
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1920px;
+}
+
+    img.scale, object.scale, .cover-height img {
+        display: block; /* corrects small inline gap at bottom of containing div */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        width: auto\9; /* ie8+9 */
+        /* lt ie8 */
+        -ms-interpolation-mode: bicubic;
+        background-position: top center;
+        /* force a minimum size if img src size is known */
+        /* min-height: 320px; /* max-height of .crop-height */
+        /* min-width: 480px; /* consistent with image ratio */
+        /* optionally center if img src is not as wide as div */
+        /* margin: 0 auto; */
+    }
+
+
+#colorbar {
+    height: 55px;
+    display: block;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    min-width:700px;
 }
 /***********SEARCH BLOCK*******************/
 .cover-search {
@@ -30,7 +69,7 @@ body {
 }
 
     .cover-search.outer {
-        top: 10em;
+        top: 7em;
         position: relative;
         margin: 0 auto;
         display: table;
@@ -55,10 +94,20 @@ body {
     height: auto;
     background-color: rgb(251,189,19);
     padding: .1em;
+    cursor: pointer;
 }
 
     .search-main-button img {
+        -webkit-transition: all 1s ease 10ms;
+        transition: all 1s ease 10ms;
+        cursor: pointer;
         height: 40px;
+    }
+
+    .search-main-button:hover img {
+        -webkit-transform: scale(1.05);
+        transform: scale(1.05);
+        -moz-transform: scale(1.05);
     }
 
 .home-search-content {
@@ -77,59 +126,12 @@ body {
         font-weight: 600;
         font-size: 1.4em;
     }
-/***********END SEARCH BLOCK*******************/
+/***************END SEARCH BLOCK*******************/
 
-/***********LOGO************************/
-.logo-div {
-    position: absolute;
-    width: auto;
-    display: table;
-    background-color: rgb(251,189,19);
-    background-size: contain;
-    float: left;
-    z-index: 10;
-    top: 0;
-    left: 1em;
+/**************CHANGING CAROUSEL PADDING FOR DESKTOP*/
+.owl-carousel {
+    padding: 0 .3em;
 }
-
-    .logo-div img {
-        transform: scale(1);
-        height: 100px;
-    }
-/***********END LOGO************************/
-
-/******************MENU************************/
-.menu-div {
-    float: right;
-    min-width: 10em;
-    height: 100px;
-    position: absolute;
-    display: table;
-    padding: 2em 1em;
-    top: 0;
-    right: 0;
-}
-
-.button {
-    float: left;
-    display: table;
-    position: relative;
-    height: 1em;
-    font-size: 1.4em;
-    margin: 0 1em 0 0;
-}
-
-    .button a {
-        border: 1px solid #fff;
-        padding: .5em 2em;
-        background-color: transparent;
-        outline: none;
-        cursor: pointer;
-        color: #fff;
-        margin: 0 auto;
-        transition: 0.5s all;
-        border-radius: 5px;
-    }
 
 .button-dark {
     float: right;
@@ -173,7 +175,7 @@ body {
     /*border: 1px solid blue;*/
     height: auto;
     margin: 0 auto;
-    cursor:pointer;
+    cursor: pointer;
     color: #fff;
 }
 
@@ -197,46 +199,57 @@ img.scale, object.scale, .crop-height:hover img {
 
 .crop-height {
     overflow: hidden;
+    max-height: 250px;
+    overflow: hidden;
+    object-fit: none; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
 }
 
     .crop-height img {
-        -webkit-transition: all 2s ease;
-        transition: all 2s ease;
+        -webkit-transition: all 2s ease 50ms;
+        transition: all 2s ease 50ms;
         cursor: pointer;
         width: 100%;
         height: 100%;
     }
 
-.imageDiv {
-    background-color: rgba(0,0,0,.4);
-    margin-top: -4em;
+/*********************IMAGE LABEL START*******************/
+.imageDiscountLabel {
+    margin-top: -4.5em;
 }
 
-    .imageDiv .leftDiv {
-        font-size: 1em;
-    }
+/*********************END IMAGE LABEL START*******************/
 
-        .imageDiv .leftDiv p:first-child, .image-noPaddingDiv .leftDiv p:first-child {
-            font-size: 1em;
-        }
+/*******************LOCATION PAGE STYLES**************************/
 
-    .imageDiv .rightDiv {
-        font-size: 1.2em;
-    }
+.location {
+    top: -3.5em;
+}
 
-.imageDiscountLabel div:first-of-type {
+.bestMonthsToVisitWrapper.item {
+    float: left;
+    padding: 0em 0.5em .2em;
     font-size: 1.2em;
-    padding: 0;
 }
 
-.imageDiscountLabel div {
-    padding: 0em 1px;
-    font-weight: 500;
-    font-size: 1em;
+.bestMonthsToVisitWrapper.litem {
+    float: left;
+    padding: 0em 0.5em;
+    font-size: 1.2em;
 }
+/*******************END LOCATION PAGE STYLES**************************/
 
+/*******************COLUMN STYLES**************************/
 .column-6.min, .column-12.min, .column-4.min {
-    padding: .4em;
+    padding: .3em;
+}
+
+.column-12.wide-gutter {
+    padding: .5em 2em;
+}
+
+.column-3.min {
+    padding: .1em;
 }
 
 .lowercontent {
@@ -261,13 +274,107 @@ img.scale, object.scale, .crop-height:hover img {
         text-align: right;
     }
 
-@media only screen and (min-height:600px) {
+/*******************END COLUMN  STYLES**************************/
+
+@media only screen and (min-width:600px) {
+    /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
+    .location-activity-wrapper .activityCategoryDetails > div {
+        font-size: 1.2em;
+    }
+
+        .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
+            font-size: 1.4em;
+        }
+
+    .caption {
+        font-weight: 600;
+        font-size: 1.5em;
+    }
+
+    .location {
+        top: -1.5em;
+        font-size: 3.5em;
+    }
+
+    .bestMonthsToVisitWrapper.item {
+        float: left;
+        padding: 0em 0.5em .2em;
+        font-size: 1.2em;
+    }
+
+    .bestMonthsToVisitWrapper.litem {
+        float: left;
+        padding: 0em 0.5em;
+        font-size: 1.2em;
+    }
+
+    .location-activity-wrapper {
+        height: 80px;
+        border-radius: 5px;
+        padding: 5% 0;
+        cursor: pointer;
+    }
+    /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
 }
 
-@media only screen and (max-width: 900px) {
+@media only screen and (min-width:700px) {
+
+    /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
+    .location {
+        top: -1em;
+        font-size: 4em;
+    }
+
+    .location-activity-wrapper .activityCategoryDetails > div {
+        font-size: 1.2em;
+    }
+
+        .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
+            font-size: 1.5em;
+        }
+
+    .bestMonthsToVisitWrapper.item {
+        float: left;
+        padding: 0em 0.8em .2em;
+        font-size: 1.3em;
+        text-align: left;
+    }
+
+    .bestMonthsToVisitWrapper.litem {
+        float: left;
+        padding: 0em 0.8em;
+        font-size: 1.3em;
+    }
+    /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
 }
 
 @media only screen and (min-width: 1140px) {
+
+    .location {
+        top: -2.5em;
+        font-size: 4.5em;
+    }
+
+    .location-activity-wrapper .activityCategoryDetails > div {
+        font-size: 1.4em;
+    }
+
+        .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
+            font-size: 1.8em;
+        }
+
+    .bestMonthsToVisitWrapper.item {
+        float: left;
+        padding: 0em 0.8em 0em;
+        font-size: 1.5em;
+        text-align: left;
+    }
+
+    .bestMonthsToVisitWrapper.litem {
+        float: left;
+        padding: 0em 0.8em;
+        font-size: 1.5em;
+    }
 
     /*-----INSIDE THE WRAPPERS-----*/
     header, nav, footer, .row {
@@ -275,33 +382,22 @@ img.scale, object.scale, .crop-height:hover img {
         max-width: 1920px;
     }
 
+    .location-activity-wrapper {
+        height: 100px;
+        border-radius: 5px;
+        padding: 5% 0;
+        cursor: pointer;
+    }
+
+
     /*-----HEADER -----*/
-    header {
+    /*header {
         padding-top: 2em;
         padding-bottom: 1em;
-    }
-    /**************imageDIV is used to put labels on top of images**********************/
-    .imageDiv {
-        background-color: rgba(0,0,0,.4);
-        margin-top: -4.7em;
-    }
-
-        .imageDiv .leftDiv {
-            font-size: 1.2em;
-        }
-
-            .imageDiv .leftDiv p:first-child, .image-noPaddingDiv .leftDiv p:first-child {
-                font-size: 1.2em;
-            }
-
-        .imageDiv .rightDiv {
-            font-size: 1.5em;
-        }
-
-    /*****************END imageDIV**********************/
+    }*/
 
     /*-----NAVIGATION -----*/
-    nav ul {
+    /*nav ul {
         padding-left: 1%;
     }
 
@@ -315,7 +411,7 @@ img.scale, object.scale, .crop-height:hover img {
 
             nav ul li a {
                 padding: .2em 1.5em;
-            }
+            }*/
 
     /*-----CONTENT -----*/
 

@@ -6,7 +6,7 @@
 }
 /* hide the navigation button by default */
 
-@media only screen and (min-width: 0px) and (max-width: 1141px) {
+@media only screen and (min-width: 0px) and (max-width: 1920px) {
 
     /* Navigation Button
 	-------------------------------------------------------- */
@@ -19,7 +19,7 @@
         float: right;
         width: 40px;
         height: 35px;
-         background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
+        background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
         background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
         background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
         background: url('../Images/Icons/menu-icon-white-large.png'),-webkit-linear-gradient(top, rgba(33,33,33,0.8), rgba(33,33,33,0.8));
@@ -59,25 +59,25 @@
 
     .logo-button {
         display: block;
-        position: fixed;        
+        position: fixed;
         float: left;
         width: 55px;
         height: 55px;
-        top:0em;               
-        left:.2em;   
+        top: 0em;
+        left: .2em;
         background-color: rgb(251,189,19);
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
-        background-repeat: no-repeat;        
+        background-repeat: no-repeat;
         cursor: pointer;
         border: 0 none;
         z-index: 999;
         text-indent: -9999px;
-        outline: none;        
-        background-size:contain;
-    }    
+        outline: none;
+        background-size: contain;
+    }
 
 
     .nav-button:hover {
@@ -91,14 +91,14 @@
 
     .nav-button.info div {
         text-indent: 0px;
-        width:20px;
-        height:20px;
-        margin:-10px -10px 0 20px;
-        float:right;
+        width: 20px;
+        height: 20px;
+        margin: -10px -10px 0 20px;
+        float: right;
         color: rgb(255,255,255);
-        padding:.25em 0;
+        padding: .25em 0;
         font-size: .9em;
-        font-weight:bold;
+        font-weight: bold;
         outline: none;
         background-color: rgb(229,0,0);
         border-radius: 10px;
@@ -317,3 +317,34 @@
     /*end style for menu*/
 }
 /* End Mobile Styles */
+/*FOR DESKTOP*/
+@media only screen and (min-width: 1140px) {
+    .logo-button {
+        display: block;
+        position: fixed;
+        float: left;
+        width: 100px;
+        height: 90px;
+        top: 0em;
+        left: 5em;
+        background-color: rgb(251,189,19);
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-image: url('../Images/Icons/do_mob.png');
+        background-repeat: no-repeat;
+        cursor: pointer;
+        border: 0 none;
+        z-index: 999;
+        text-indent: -9999px;
+        outline: none;
+        background-size: 90px auto;
+        -webkit-transition: height 0.5s ease,background-position-y 0.5s ease;
+        transition: height 0.5s ease,background-position-y 0.5s ease;
+    }
+
+        .logo-button:hover {
+            background-position-y: 20px;
+            height: 110px;
+        }
+}

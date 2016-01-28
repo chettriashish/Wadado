@@ -35,6 +35,16 @@
     var homeController = function ($scope, $http, $timeout, $interval, $location, HomeDataService) {
         $scope.selectedLocation = 'What to do?  Where to go? ';
         $scope.counter = 0;
+
+        var setLayout = function () {
+            if (window.styleMedia.matchMedium("screen and (max-width:900px)")) {
+                $scope.largeScreen = false;
+            }
+            else {
+                $scope.largeScreen = true;
+            }
+        }
+        setLayout();
         var sliderInit = false;
         /*****************************TOP ACTIVITIES****************************************/
         var setImages = function () {
@@ -73,6 +83,7 @@
         HomeDataService.getTopTrendingActivities().then(function (topActivities) {
             $scope.topActivity = topActivities;
             setImages();
+            setRatings($scope.topActivity);
         });
 
 
@@ -112,6 +123,7 @@
         HomeDataService.getTopOffers().then(function (topOffer) {
             $scope.topOffer = topOffer;
             setCarasoulImages();
+            setRatings($scope.topOffer);
         });
         /*END TOP OFFERS*/
 
@@ -127,6 +139,7 @@
             if (!WURFL.is_mobile) {
                 setBackground();
             }
+            setLayout();
             $scope.$apply();
         });
 
@@ -160,7 +173,7 @@
 
         /***********************SETTING TOP LEVEL CONTROLS********************************/
         var setBackground = function () {
-            var windowHeight = $(window).height() * (0.95);
+            var windowHeight = $(window).height() * (0.85);
             //parseInt removes the 'px'
             var minHeight = parseInt($('.cover-image').css("min-height"), 10);
             var navHeight = $('.home-nav').height();
@@ -179,7 +192,44 @@
                     scrollTop: $("." + loc).offset().top
                 },1000,"linear");
             };
+            setLayout();
         }
+        var setRatings = function (allActivities) {
+            //if (WURFL.is_mobile)
+            {
+                $.each(allActivities, function (key, value) {
+                    var count = 0;
+                    allActivities[key].ratingURL = [];
+                    var result = Math.round(allActivities[key].Activity.AverageUserRating);
+                    var half = false;
+                    if (result > allActivities[key].Activity.AverageUserRating) {
+                        result = result - 1;
+                        half = true;
+                    }
+                    for (i = 0; i < result; i++) {
+                        //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                        //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
+                        //}
+                        allActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_white.png";
+                        count++;
+                    }
+                    if (half) {
+                        //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                        //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
+                        //}
+                        allActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_white.png";
+                        count++;
+                    }
+                    for (i = count; i < 5 ; i++) {
+                        //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                        //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
+                        //}
+                        allActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_white.png";
+                        count++;
+                    }
+                });
+            }
+        };
     }
     app.controller("HomeController", homeController);
 }());

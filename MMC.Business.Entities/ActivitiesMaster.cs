@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MMC.Business.Entities
 {
-    [DataContract]
+    [DataContract(Namespace = "wadado.in")]
     public partial class ActivitiesMaster : EntityBase, IIdentifiableEntity
     {   
 

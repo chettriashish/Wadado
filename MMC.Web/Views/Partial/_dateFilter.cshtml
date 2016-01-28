@@ -10,18 +10,25 @@
             </div>
         </div>
     </div>
-    <!--ROW END-->   
+    <!--ROW END-->  
     <!--ROW START-->
     <div class="row">
-        <div class="tab-main">
-            <div class="tab-header open" id="from" ng-click="showStartDate()">
-                <div><span>From</span></div>
-                <div><span>{{selectedStartDate}}</span></div>
-            </div>            
-            <div class="tab-header" id="to" ng-click="hideStartDate()">
-                <div><span>To</span></div>
-                <div><span>{{selectedEndDate}}</span></div>
-            </div>            
+        <div class="column-12">&nbsp;</div>
+    </div>
+    <!--ROW END-->  
+    <!--ROW START-->
+    <div class="row">
+        <div class="column-12 top">
+            <div class="tab-main">
+                <div class="tab-header open" id="from" ng-click="showStartDate()">
+                    <div><span>From</span></div>
+                    <div><span>{{selectedStartDate}}</span></div>
+                </div>
+                <div class="tab-header" id="to" ng-click="hideStartDate()">
+                    <div><span>To</span></div>
+                    <div><span>{{selectedEndDate}}</span></div>
+                </div>
+            </div>        
         </div>        
     </div>
     <div class="row" ng-show="onStartDate" >

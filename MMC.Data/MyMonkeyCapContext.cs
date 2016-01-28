@@ -43,6 +43,8 @@ namespace MMC.Data
         public DbSet<ActivityDates> ActivityDatesSet { get; set; }
         public DbSet<GuestFavorites> GuestFavoritesSet { get; set; }
         public DbSet<ActivityTypeCategory> ActivityTypeCategorySet { get; set; }
+
+        public DbSet<LocationDetails> LocationDetailsSet { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -72,6 +74,7 @@ namespace MMC.Data
             modelBuilder.Entity<ActivityDates>().HasKey<string>(e => e.ActivityDatesKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<GuestFavorites>().HasKey<string>(e => e.GuestFavouritesKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<ActivityTypeCategory>().HasKey<string>(e => e.ActivityTypeCategoryKey).Ignore(e => e.EntityId);
+            modelBuilder.Entity<LocationDetails>().HasKey<string>(e => e.LocationDetailsKey).Ignore(e => e.EntityId);
             //base.OnModelCreating(modelBuilder);
         }
     }

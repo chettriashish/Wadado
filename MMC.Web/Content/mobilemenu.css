@@ -59,25 +59,25 @@
 
     .logo-button {
         display: block;
-        position: fixed;        
+        position: fixed;
         float: left;
         width: 55px;
         height: 55px;
-        top:0em;               
-        left:.2em;   
+        top: 0em;
+        left: .2em;
         background-color: rgb(251,189,19);
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
-        background-repeat: no-repeat;        
+        background-repeat: no-repeat;
         cursor: pointer;
         border: 0 none;
         z-index: 999;
         text-indent: -9999px;
-        outline: none;        
-        background-size:contain;
-    }    
+        outline: none;
+        background-size: contain;
+    }
 
     .nav-button:hover {
     }
@@ -97,7 +97,7 @@
         color: rgb(255,255,255);
         padding: .25em 0;
         font-size: .9em;
-        font-weight:bold;
+        font-weight: bold;
         outline: none;
         background-color: rgb(229,0,0);
         border-radius: 10px;

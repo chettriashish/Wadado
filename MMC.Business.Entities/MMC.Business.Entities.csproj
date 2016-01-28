@@ -78,6 +78,7 @@
     <Compile Include="CompanyMaster.cs" />
     <Compile Include="GuestFavorites.cs" />
     <Compile Include="GuestInformationMaster.cs" />
+    <Compile Include="LocationDetails.cs" />
     <Compile Include="LocationsMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopOffers.cs" />

@@ -8,7 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Client.Entities
-{   
+{
+    [DataContract(Namespace = "wadado.in")]
     public class UserApplicationActivityDetails : ObjectBase
     {
         private string _SessionKey;

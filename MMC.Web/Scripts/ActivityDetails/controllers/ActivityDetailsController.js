@@ -195,21 +195,24 @@
                         half = true;
                     }
                     for (i = 0; i < result; i++) {
-                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
-                            $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
-                        }
+                        //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                        //    $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
+                        //}
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_yellow.png";
                         count++;
                     }
                     if (half) {
-                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
-                            $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
-                        }
+                        //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                        //    $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
+                        //}
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_yellow.png";
                         count++;
                     }
                     for (i = count; i < 5 ; i++) {
-                        if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
-                            $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
-                        }
+                        //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
+                        //    $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
+                        //}
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_yellow.png";
                         count++;
                     }
                 });

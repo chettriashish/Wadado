@@ -114,39 +114,46 @@
                 autoplayHoverPause: true,
                 responsiveBaseElement: window,
                 responsiveRefreshRate: 50,
+                animateOut: 'fadeOut',
+                animateIn: 'flipIn',                
+                smartSpeed:450,
                 dotsEach: true,
+                nav: true,                
                 responsive: {
                     0: {
                         items: 1,
                         nav: false,
-                        loop: false,
+                        loop: true,
                         margin: 0,
                         touchDrag: true
                     },
                     600: {
                         items: 2,
                         nav: false,
-                        loop: false,
+                        loop: true,
                         touchDrag: true,
                         margin: 4,
                        
                     },
                     960: {
                         items: 3,
-                        nav: false,
-                        loop: false,
+                        nav: true,
+                        loop: true,
                         touchDrag: true,
                         margin: 5,
+                        autoplayTimeout:5000,
                         
                     },
                     1200: {
                         items: 4,
-                        nav: false,
-                        loop: false,
+                        nav: true,
+                        navText: ["<img src='../Images/Icons/prev.png' />", "<img  src='../Images/Icons/next.png' />"],
+                        loop: true,
                         touchDrag: false,
                         mouseDrag: true,
                         dotsEach: false,
-                        margin: 15,
+                        margin: 10,
+                        autoplayTimeout: 5000,
                     }
                 }
             })

@@ -4,6 +4,9 @@
         display: none;
     }
 
+    #navWrapper {
+        min-width: 600px;
+    }
     /******************************MAIN COVER HEIGHT*********************************************/
     .cover-height {
         /* max-width: 1200px; /* native or declared width of img src (if known) */
@@ -33,7 +36,6 @@
     .crop-height {
         /* max-width: 1200px; /* native or declared width of img src (if known) */
         max-height: 300px;
-        height: 300px; /* lt ie8 */
         height: auto;
         overflow: hidden;
         object-fit: none; /* Do not scale the image */
@@ -48,7 +50,9 @@
             width: auto\9; /* ie8+9 */
             /* lt ie8 */
             -ms-interpolation-mode: bicubic;
-            background-position: top center;
+            background-position: top center;           
+            margin: -10% auto 0;
+            height: 100%;
             /* force a minimum size if img src size is known */
             /* min-height: 320px; /* max-height of .crop-height */
             /* min-width: 480px; /* consistent with image ratio */
@@ -134,8 +138,8 @@
             padding: .4em 0;
         }
 
-        .column-6.min, .column-6.min, .column-4.min {
-            padding: .05em;
+        .column-6.min, .column-6.min, .column-4.min, .column-3.min {
+            padding: .1em 0.05em;
         }
 
     .uppercontent .row img, .uppercontent-home img {
@@ -151,19 +155,23 @@
     }
 
     .imageDiscountLabel {
-        padding: .2em 1em;
+        padding: .4em 0em;
+        width: 4.5em;
     }
-
-        .imageDiscountLabel div:first-of-type {
-            font-size: 1em;
-            padding: 0;
-        }
 
         .imageDiscountLabel div {
             padding: 0em 1px;
-            font-weight: 500;
-            font-size: .9em;
         }
+
+            .imageDiscountLabel div p {
+                font-weight: 500;
+                font-size: 1.2em;
+            }
+
+                .imageDiscountLabel div p:first-of-type {
+                    font-size: 1em;
+                    font-weight: 500;
+                }
 
     .imageDiv {
         background-color: rgba(0,0,0,.6);

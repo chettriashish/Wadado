@@ -1,8 +1,103 @@
-﻿
-@{
-    ViewBag.Title = "Location";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+﻿@{
+    ViewBag.Title = "WADADO.IN";
 }
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
 
-<h2>Location</h2>
+<script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<!--SEARCH REFERENCE-->
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
 
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
+<script src="~/Scripts/Location/services/LocationDataService.js"></script>
+<script src="~/Scripts/Location/controllers/LocationController.js"></script>
+@*<link href="~/Content/desktop-search-bar.css" rel="stylesheet" />*@
+<link href="~/Content/desktopmenu.css" rel="stylesheet" />
+<link href="~/Content/tablet.css" rel="stylesheet" />
+<link href="~/Content/desktop.css" rel="stylesheet" />
+<div id="colorbar">
+</div>
+<div class="cover"></div>
+<div id="contentWrapper" data-ng-controller="LocationController">    
+    <div>
+        @Html.Partial("../Partial/_desktopmenu")
+    </div>
+   @*<div class="row">
+        <div class="column--true-12">
+            <div class="logo-div">
+                <img src="~/Images/Icons/do_mob.png" />
+            </div>
+            <div class="menu-div">
+                <div class="button">
+                    <a ng-click="login">Log in</a>
+                </div>
+                <div class="button">
+                        <a ng-click="login">Log in</a>
+                    </div>
+            </div>
+        </div>
+    </div>*@
+    <div class="uppercontent">
+        <section>            
+            <div id="imageWrapper">
+                <div class="cover-height">
+                    <img class="location-image" ng-src="{{location.SelectedLocation.LocationImage}}" />
+                    <div class="location">
+                        <div ng-cloak>
+                            <span>{{location.SelectedLocation.LocationName}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+        </section>
+        <!--Row start-->
+        <div class="row" ng-cloak>
+            <div class="column-12 wide-gutter">
+                <div ng-repeat="item in location.AllActivities">
+                    <div class="column-3" ng-if="largeScreen">
+                        <div class="location-activity-wrapper" ng-click="getAllSelectedActivities(item)">
+                            <div>
+                                <img ng-src="{{Root}}/{{item.ImageURL}}" />
+                            </div>
+                            <div class="activityCategoryDetails">
+                                <div>
+                                    <span>{{item.ActivityCount}}</span>
+                                </div>
+                                <div>
+                                    <span>{{item.ActivityName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column-4" ng-if="!largeScreen">
+                        <div class="location-activity-wrapper" ng-click="getAllSelectedActivities(item)">
+                            <div>
+                                <img ng-src="{{Root}}/{{item.ImageURL}}" />
+                            </div>
+                            <div class="activityCategoryDetails">
+                                <div>
+                                    <span>{{item.ActivityCount}}</span>
+                                </div>
+                                <div>
+                                    <span>{{item.ActivityName}}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <!--Row end-->
+    </div>
+</div>

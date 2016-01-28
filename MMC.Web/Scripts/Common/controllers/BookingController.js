@@ -111,7 +111,7 @@
                         }
                         BookingDataService.addSelectedActivityToUsersCart($scope.selectedActivityDetails.ActivityKey,
                            $scope.NumAdults, $scope.NumChildren, $scope.date, $scope.time.val, total).then(function (response) {
-                               console.log("activity added to cart");
+                               //console.log("activity added to cart");
                                $scope.$emit("ACTIVITYUPDATED", { message: "ACTIVITYUPDATED" })
                            });
                     }                    

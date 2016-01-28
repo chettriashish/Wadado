@@ -42,7 +42,7 @@
                     FB.login(function (response) {
                         if (response.authResponse) {
                             FB.api('/me', function (response) {
-                                console.log(response);
+                                //console.log(response);
                                 logUserInformation(response.name, response.id, response.mail);
                             });
                         }
@@ -63,7 +63,7 @@
         $scope.FBLogout = function () {
             function logout() {
                 FB.logout(function (response) {
-                    console.log(response);
+                    //console.log(response);
                     LoginDataService.logUserOut().then(function (response) {
                         if (response == true) {
                             LoginDataService.returnUser($scope.returnUrl);

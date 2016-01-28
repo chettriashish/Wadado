@@ -1,13 +1,13 @@
 ﻿<div id="navWrapper" data-ng-controller="MenuController">
     <nav>
-        <div class="clearfix primary-nav">
-            <div>
+        <div class="clearfix primary-nav" ng-show="!isDesktop">
+            <div ng-cloak>
                 <div class="menusearch-input">
                     <div><img src="~/Images/Icons/search-icon.png" /></div>
-                    <div ng-cloak><span>{{selectedLocation}}</span></div>                    
-                </div>                
-            </div>            
-        </div>
+                    <div><span>{{selectedLocation}}</span></div>
+                </div>
+            </div>
+        </div>     
         <ul class="clearfix menu-nav">
             <li class="active" id="portfolio" ng-show="userLogIn"><a>{{UserName}}</a></li>
             <li id="services"><a ng-click="Login()">{{LoginStatus}}</a></li>
@@ -17,5 +17,5 @@
         </ul>
         <button class="logo-button">Logo Button</button>
         <button class="nav-button"><div>{{ActivityCount}}</div></button>
-    </nav>        
+    </nav>
 </div>

@@ -33,6 +33,17 @@
     });
 
     var locationController = function ($scope, $http, $timeout, $interval, $location, LocationDataService) {
+        var setLayout = function () {
+            if (window.styleMedia.matchMedium("screen and (max-width:900px)")) {
+                $scope.largeScreen = false;
+            }
+            else {
+                $scope.largeScreen = true;
+            }
+        }
+        if (!WURFL.is_mobile) {
+            setLayout();
+        }
         var setImages = function () {
             if (WURFL.is_mobile) {
                 if (WURFL.form_factor == "Smartphone") {
@@ -52,6 +63,9 @@
                     }
                 }
             }
+            else {
+                $scope.location.SelectedLocation.LocationImage = Wadado.rootPath + "/" + $scope.location.DefaultLocationImageURL + ".jpg";
+            }
         };
 
         $scope.locations = {};
@@ -68,7 +82,10 @@
         });        
 
         $(window).resize(function () {
-            setImages();
+            setImages();            
+            if (!WURFL.is_mobile) {
+                setLayout();
+            }
             $scope.$apply();
         });
 

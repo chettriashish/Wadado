@@ -9,6 +9,7 @@
 <script src="~/Scripts/slider/owl.carousel.min.js"></script>
 <link href="~/Content/owl.carousel.css" rel="stylesheet" />
 <link href="~/Content/owl.theme.css" rel="stylesheet" />
+<link href="~/Content/animate.css" rel="stylesheet" />
 
 <!--UI SELECT REFERENCE-->
 <link href="~/Content/ui-select/select.css" rel="stylesheet" />
@@ -25,6 +26,10 @@
 <script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
 <script src="~/Scripts/Login/services/LoginDataService.js"></script>
 <script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Common/controllers/FavoritesController.js"></script>
 
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
@@ -108,47 +113,37 @@
             <div class="owl-carousel">
                 <div class="item" ng-repeat="item in topOffer">
                     <div class="imageDiscountLabel">
-                        <div><span>{{item.Offer.Discount}}%</span></div>
-                        <div><span>Off</span></div>
+                        <div>
+                            <p ng-if="item.Offer.Discount > 0">
+                                <span>{{item.Offer.Discount}}% Off</span>
+                            </p>
+                            <p>
+                                <span>{{item.Currency}} {{item.Activity.Cost}}</span>
+                            </p>
+                        </div>
                     </div>
-                    <div class="crop-height" ng-cloak>
-                        <img  ng-src="{{item.ImageURL}}" />
+                    <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                        <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
                     </div>
-                    <div class="imageDiv">
+                    <div class="image-noPaddingDiv">
                         <div class="leftDiv">
-                            <p>
-                                <span>{{item.Activity.Name}}</span>
-                            </p>
-                            <p>
-                                <span>{{item.Activity.Address}}</span>
-                            </p>
+                            <div>
+                                <p><span>{{item.Activity.Name}}</span></p>
+                            </div>
+                            <div class="ratingList" id="userRating">
+                                <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                    <img ng-src="{{imageItem}}" />
+                                </div>
+                            </div>
                         </div>
                         <div class="rightDiv">
-                            <span>$ {{item.Activity.Cost}}</span>
+                            <div class="like-container">
+                                @Html.Partial("../Partial/_favourites")
+                            </div>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
             </div>
-
-            @*<div id="slider_container" class="slider">
-                    <!-- Slides Container -->
-                    <div u="slides" class="sliderContainer" ng-cloak>
-                        <div ng-repeat="item in topOffer">
-                            <img u="image" ng-src="{{item.ImageURL}}">
-                        </div>
-                    </div>
-                    <!-- bullet navigator container -->
-                    <div u="navigator" class="jssorb21" style="position: absolute; bottom: 26px; left: 6px;">
-                        <!-- bullet navigator item prototype -->
-                        <div u="prototype" style="position: absolute; WIDTH: 19px; HEIGHT: 19px; text-align:center; line-height:19px; color:White; font-size:12px;"></div>
-                    </div>
-                    <!-- Arrow Left -->
-                    <span u="arrowleft" class="jssora21l" style="width: 55px; height: 55px; top: 123px; left: 8px;">
-                    </span>
-                    <!-- Arrow Right -->
-                    <span u="arrowright" class="jssora21r" style="width: 55px; height: 55px; top: 123px; right: 8px">
-                    </span>
-                </div>*@
         </div>
 
         <!-- Slider End -->
@@ -170,29 +165,61 @@
         <!--Row end-->
         <!--Row start-->
         <div ng-repeat="item in topActivity" ng-cloak>
-            <div class="column--true-6 border">
-                <div ng-if="$index % 2 == 1">
-                    <div class="crop-height">
-                        <img ng-src="{{item.ImageURL}}" style="width:100%;">
+            <div class="column-12 top">
+                <div class="column--true-6 border">
+                    <div class="imageDiscountLabel">
+                        <div>
+                            <p ng-if="item.Discount > 0">
+                                <span>{{item.Discount}}% Off</span>
+                            </p>
+                            <p>
+                                <span>{{item.Currency}} {{item.Activity.Cost}}</span>
+                            </p>
+                        </div>
                     </div>
-                </div>
-                <div ng-if="$index % 2 == 0">
-                    <div class="crop-height" style="border-right:1px solid #fff;">
-                        <img ng-src="{{item.ImageURL}}" style="width:100%;">
+                    <div ng-if="$index % 2 == 1">
+                        <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                            <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                        </div>
+                        @*<div class="crop-height">
+                                <img ng-src="{{item.ImageURL}}" style="width:100%;">
+                            </div>*@
                     </div>
-                </div>
-                <div class="imageDiv">
-                    <div class="leftDiv">
-                        <p>
-                            <span>{{item.Activity.Name}}</span>
-                        </p>
-                        <p>
-                            <span>{{item.Activity.Address}}</span>
-                        </p>
+                    <div ng-if="$index % 2 == 0" class="right">
+                        <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                            <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                        </div>
                     </div>
-                    <div class="rightDiv">
-                        <span>$ {{item.Activity.Cost}}</span>
+                    <div class="image-noPaddingDiv">
+                        <div class="leftDiv">
+                            <div>
+                                <p><span>{{item.Activity.Name}}</span></p>
+                            </div>
+                            <div class="ratingList" id="userRating">
+                                <div ng-repeat="imageItem in item.ratingURL track by $index">
+                                    <img ng-src="{{imageItem}}" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="rightDiv">
+                            <div class="like-container">
+                                @Html.Partial("../Partial/_favourites")
+                            </div>
+                        </div>
                     </div>
+                    @*<div class="imageDiv">
+                            <div class="leftDiv">
+                                <p>
+                                    <span>{{item.Activity.Name}}</span>
+                                </p>
+                                <p>
+                                    <span>{{item.Activity.Address}}</span>
+                                </p>
+                            </div>
+                            <div class="rightDiv">
+                                <span>$ {{item.Activity.Cost}}</span>
+                            </div>
+                        </div>*@
                 </div>
             </div>
         </div>

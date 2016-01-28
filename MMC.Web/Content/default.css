@@ -75,12 +75,13 @@ header {
 
 /*-----NAVIGATION -----*/
 #navWrapper {
-    background-color: #e22121;
+    background-color: #ffffff;   
+    min-width:600px; 
 }
 
-nav div {
+nav > div {
     float: left;
-    width: 25%;
+    width: 25%;        
 }
 
 
@@ -398,9 +399,9 @@ nav ul li:last-child a {
 
 
 .jssora21l, .jssora21r, .jssora21ldn, .jssora21rdn {
-    position: absolute;
-    cursor: pointer;
-    display: block;
+    /*position: absolute;*/
+    /*cursor: pointer;*/
+    /*display: block;*/
     background: url(../Images/Icons/a21.png) center center no-repeat;
     overflow: hidden;
 }
@@ -430,8 +431,8 @@ nav ul li:last-child a {
 }
 
 .imageDiscountLabel {
-    background-color: rgba(142,199,66,1);
-    padding: 1em 0em;
+    background-color: rgba(251,189,19,1);
+    padding: .4em 0em;
     width: 4em;
     top: 5em;
     margin-top: -4em;
@@ -450,9 +451,17 @@ nav ul li:last-child a {
 
     .imageDiscountLabel div {
         padding: 0em 1px;
-        font-weight: 500;
-        font-size: .9em;
     }
+
+        .imageDiscountLabel div p {
+            font-weight: 500;
+            font-size: 1.2em;
+        }
+
+            .imageDiscountLabel div p:first-of-type {
+                font-size: .9em;
+                font-weight: 500;
+            }
 
 .imageDiv {
     background-color: rgba(0,0,0,.6);
@@ -475,35 +484,26 @@ nav ul li:last-child a {
     display: table;
     color: white;
     top: 0em;
-    margin-top: -3.5em;
+    margin-top: -3.4em;
 }
 
-.imageDiv div {
-    padding: .6em 0;
-}
-
-.image-noPaddingDiv .leftDiv {
-    float: left;
-    font-size: 1em;
-}
-
-.imageDiv .leftDiv {
-    float: left;
-    font-size: 0.8em;
-}
-
-    .imageDiv .leftDiv p:first-child, .image-noPaddingDiv .leftDiv p:first-child {
-        text-align: left;
-        padding: 0 0 .2em 0;
-        font-size: 1.2em;
-        font-weight: bold;
+    .image-noPaddingDiv .leftDiv {
+        float: left;
+        font-size: 1em;
     }
 
-.imageDiv .rightDiv, .image-noPaddingDiv .rightDiv {
-    float: right;
-    font-size: 1em;
-    font-weight: bold;
-}
+        .image-noPaddingDiv .leftDiv p:first-child {
+            text-align: left;
+            padding: 0 0 .2em 0;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+
+    .image-noPaddingDiv .rightDiv {
+        float: right;
+        font-size: 1em;
+        font-weight: bold;
+    }
 
 
 /*----------------LOCATION STYLES----------------------*/
@@ -559,7 +559,7 @@ nav ul li:last-child a {
 }
 
 .location-holder {
-    background-color: #ccc;
+    background-color: rgba(189,189,189,0.3);
     display: table;
     width: 100%;
     height: auto;
@@ -735,15 +735,17 @@ nav ul li:last-child a {
         position: relative;
         display: table;
         float: right;
+        cursor:pointer;
     }
 
-    .like-container img {
+/*.like-container.fav {
         height: 25px;
         margin: 0 auto;
         display: table;
         float: right;
         width: 1.5em;
-    }
+        transform-style: initial;
+    }*/
 
 .ratingList {
     padding: .5em 0;
@@ -908,7 +910,7 @@ footer {
 
 .tab-main {
     width: 100%;
-    min-height:4em;
+    min-height: 4em;
     display: table;
     border-top: 1px solid #ccc;
     position: relative;
@@ -919,16 +921,17 @@ footer {
     display: table;
     padding: 1em 1.5em 1em 1.5em;
     position: relative;
-    float:left;
-    height:4em;
+    float: left;
+    height: 4em;
+    background-color: rgb(244,244,244);
 }
 
-.tab-header div:first-of-type{
-    font-weight:bold;
-}
+    .tab-header div:first-of-type {
+        font-weight: bold;
+    }
 
-    .tab-header.open {                
-        background-color: rgb(244,244,244);
+    .tab-header.open {
+        background-color: rgb(255,255,255);
     }
 /*FILTER BUTTON*/
 .filter-button {

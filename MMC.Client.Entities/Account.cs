@@ -3,11 +3,13 @@ using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Client.Entities
 {
+    [DataContract(Namespace = "wadado.in")]
     public class Account : ObjectBase
     {
         #region Private variables

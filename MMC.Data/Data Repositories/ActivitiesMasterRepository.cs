@@ -312,6 +312,7 @@ namespace MMC.Data.DataRepositories
                               ThumbNailURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
                               IsSpecialOffer = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ? true : false,
                               Cost = entity.Cost,
+                              Currency = entity.Currency,
                               Discount = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ?
                               entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).FirstOrDefault().Discount : 0
                           }).ToList();
