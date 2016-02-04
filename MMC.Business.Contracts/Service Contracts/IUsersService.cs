@@ -29,7 +29,7 @@ namespace MMC.Business.Contracts
         [OperationContract]
         IEnumerable<ActivitySummaryDataContract> RemoveFromFavorites(string guestKey, string activityKey, string userAgent);
         [OperationContract]
-        IEnumerable<ActivitySummaryDataContract> GetFavorites(string guestKey, string userAgent);
+        IEnumerable<ActivitySummaryDataContract> GetFavoriteActivities(string guestKey, string userAgent);
         [OperationContract]
         bool CheckForActivityInFavorites(string guestKey, string activityKey);
     }

@@ -14,7 +14,7 @@ namespace MMC.Client.Entities
     {
         #region Private variables
         private string _TouristSeasonKey;
-        private string _LocationKey;
+        private string _CompanyKey;
         private DateTime _SeasonStartDate;
         private DateTime _SeasonEndDate;
         private string _CreatedBy;
@@ -32,13 +32,13 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => TouristSeasonKey);
             }
         }
-        public string LocationKey
+        public string CompanyKey
         {
-            get { return _LocationKey; }
+            get { return _CompanyKey; }
             set
             {
-                _LocationKey = value;
-                OnPropertyChanged(() => LocationKey);
+                _CompanyKey = value;
+                OnPropertyChanged(() => CompanyKey);
             }
         }
         public DateTime SeasonStartDate
@@ -86,7 +86,7 @@ namespace MMC.Client.Entities
                 RuleFor(obj => obj.TouristSeasonKey).NotNull();
                 RuleFor(obj => obj.SeasonEndDate).NotNull();
                 RuleFor(obj => obj.SeasonStartDate).NotNull();
-                RuleFor(obj => obj.LocationKey).NotNull();
+                RuleFor(obj => obj.CompanyKey).NotNull();
                 RuleFor(obj => obj.CreatedBy).NotNull();
                 RuleFor(obj => obj.CreatedOn).NotNull();
             }

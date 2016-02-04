@@ -18,6 +18,7 @@ namespace MMC.Client.Entities
         private string _activityKey;
         private string _guestKey;
         private bool _isDeleted;
+        private string _Type;
         #endregion
 
         #region Properties
@@ -59,7 +60,18 @@ namespace MMC.Client.Entities
                 _isDeleted = value;
                 OnPropertyChanged(() => IsDeleted);
             }
-        } 
+        }        
+
+        public string Type
+        {
+            get { return _Type; }
+            set
+            {
+                _Type = value;
+                OnPropertyChanged(() => Type);
+            }
+        }
+
         #endregion
 
         /// <summary>
@@ -70,7 +82,7 @@ namespace MMC.Client.Entities
             public GuestFavoritesValidator()
             {
                 RuleFor(obj => obj.GuestFavouritesKey).NotEmpty();
-                RuleFor(obj => obj.ActivityKey).NotEmpty();                
+                RuleFor(obj => obj.ActivityKey).NotEmpty();
             }
         }
         /// <summary>

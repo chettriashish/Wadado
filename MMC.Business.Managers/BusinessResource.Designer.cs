@@ -61,6 +61,24 @@ namespace MMC.Business.Managers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BUNDLED.
+        /// </summary>
+        internal static string BUNDLED {
+            get {
+                return ResourceManager.GetString("BUNDLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SINGLE.
+        /// </summary>
+        internal static string SINGLE {
+            get {
+                return ResourceManager.GetString("SINGLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to smartphone.
         /// </summary>
         internal static string SMARTPHONE {

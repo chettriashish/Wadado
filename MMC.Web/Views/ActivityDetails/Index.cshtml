@@ -1,4 +1,181 @@
 ﻿@{
     ViewBag.Title = "WADADO.IN";
 }
-<h2>Activity Details</h2>
+<!--SLIDER REFERENCE-->
+<script src="~/Scripts/slider/owl.carousel.min.js"></script>
+<link href="~/Content/owl.carousel.css" rel="stylesheet" />
+<link href="~/Content/animate.css" rel="stylesheet" />
+
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Directives/Favorites/favoritesdirective.js"></script>
+
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--BOOKING REFERENCE-->
+<script src="~/Scripts/Common/services/BookingDataService.js"></script>
+<script src="~/Scripts/Common/controllers/BookingController.js"></script>
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
+<script src="~/Scripts/ActivityDetails/controllers/ActivityDetailsController.js"></script>
+<script src="~/Scripts/ActivityDetails/services/ActivityDetailsDataService.js"></script>
+<script src="~/Scripts/ActivityDetails/controllers/ActivityDetailsController.js"></script>
+
+<!--DATE REFERENCE-->
+<link href="~/Content/_date.css" rel="stylesheet" />
+<script src="~/Scripts/Directives/Date/DateDirective.js"></script>
+<script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>
+<link href="~/Content/tablet.css" rel="stylesheet" />
+<link href="~/Content/desktopmenu.css" rel="stylesheet" />
+<link href="~/Content/desktop.css" rel="stylesheet" />
+<div class="cover"></div>
+<div class="contentWrapper" data-ng-controller="ActivityDetailsController">
+    <div id="colorbar">
+    </div>
+    <div>
+        @Html.Partial("../Partial/_desktopmenu")
+    </div>
+    <div class="uppercontent" ng-show="showActivityDetails()" ng-hide="hideActivityDetails()">
+        <div>
+            <div class="owl-carousel" id="activityImages">
+                <div ng-repeat="item in selectedActivityDetails.ActivityImagesURL" class="main-crop-height" ng-cloak>
+                    <img u="image" ng-src="{{item}}">
+                </div>
+            </div>
+            <!--Row end-->
+            <!--Row start-->
+            <div class="row">
+                <div class="column-12 min-top-widest-gutter" ng-cloak>
+                    <div class="column-12 top">
+                        <!--ACTIVITY NAME AND OTHER DETAILS-->
+                        <div class="header-left">
+                            <!--JS APPEND-->
+                        </div>
+                    </div>
+                    <div class="column-12 top">
+                        <span>&nbsp;</span>
+                    </div>
+                    <div class="column-7 top">
+                        <div class="column-12 top">
+                            <div class="column-auto">
+                                <img src="~/Images/Icons/location_nav.png" />
+                            </div>
+                            <div class="location-details">
+                                <span>{{selectedActivityDetails.Location}}</span>
+                            </div>
+                        </div>
+                        <div class="column-12 top">
+                            <div class="column-auto-nospace">
+                                <div class="location-detailsSpace">
+                                    <span>{{Cost}}</span>
+                                </div>
+                            </div>
+                            <div class="column-0">
+                                <img src="~/Images/Icons/time_duration_web.png" />
+                            </div>
+                            <div class="column-auto-nospace">
+                                <div class="location-detailsSpace">
+                                    <span>{{selectedActivityDetails.Duration}}</span>
+                                </div>
+                            </div>
+                            <div class="column-0">
+                                <img src="~/Images/Icons/people_web.png" />
+                            </div>
+                            <div class="column-auto">
+                                <div class="location-detailsSpace">
+                                    <span>{{NumberOfPeople}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-12 top">
+                            <div class="subHeader">
+                                <span>
+                                    Description
+                                </span>
+                            </div>
+                            <div class="column-top" ng-cloak>
+                                <div class="labelPlain">
+                                    <span>
+                                        {{selectedActivityDetails.Description | limitTo:limit}}
+                                    </span>
+                                </div>
+                                <div class="column-1">
+                                    <div class="buttonNoBorder">
+                                        <a ng-click="showMore()">{{descriptionAction}}</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rating-outer">
+                                <div class="column-5">
+                                    <div class="subHeaderCenter">
+                                        <span>User Rating</span>
+                                    </div>
+                                </div>
+                                <div class="column-2">
+                                    <div class="subHeaderCenter">
+                                        <span>|</span>
+                                    </div>
+                                </div>
+                                <div class="column-5">
+                                    <div class="subHeaderCenter">
+                                        <span>Difficulty level</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="rating-outer">
+                                <div class="column-5">
+                                    <div class="rating" id="userRating">
+                                        <div></div>
+                                    </div>
+                                </div>
+                                <div class="column-2">
+                                    <div class="subHeaderCenter">
+                                        <span>&nbsp;</span>
+                                    </div>
+                                </div>
+                                <div class="column-5">
+                                    <div class="rating" id="diffRating">
+                                        <div><span>Professional</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column-top"></div>
+                            <div class="subHeader">
+                                <span>
+                                    Cancellation Policy
+                                </span>
+                            </div>
+                            <div class="column-top" ng-cloak>
+                                <div class="labelPlain">
+                                    <span>
+                                        {{selectedActivityDetails.CancellationPolicy}}
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-controller="BookingController" class="column-5">
+                        <div class="booking-outer">
+                            @Html.Partial("../Partial/_booking")
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <!--Row end-->
+        </div>
+    </div>
+</div>

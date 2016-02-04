@@ -68,7 +68,7 @@ namespace MMC.Business.BusinessEngines
                 return false;
             }
         }
-        public IEnumerable<ActivitiesMaster> GetFavorites(string guestKey)
+        public IEnumerable<ActivitiesMaster> GetFavoriteActivities(string guestKey)
         {
             IGuestFavoritesRepository guestFavoritesRepository = _DataRepositoryFactory.GetDataRepository<IGuestFavoritesRepository>();
             IActivitiesMasterRepository activitiesMasterRepository

@@ -1,7 +1,7 @@
 ﻿<div data-ng-controller="MenuController">
     <div id="navWrapper">
         <nav>
-            <div class="clearfix primary-nav">
+            <div class="clearfix primary-nav" data-ng-controller="SearchController">
                 <div ng-show="isDesktop" ng-cloak>
                     <div>
                         <div>
@@ -10,14 +10,14 @@
                         <div><span>{{selectedLocation}}</span></div>
                         <div class="bottom-triangle"></div>
                     </div>
-                    <div data-ng-controller="SearchController">
+                    <div>
                         <div ng-repeat="(key, value) in locationResults" class="row">
                             <ul>
                                 <li>
                                     {{key}}
                                     <ul>
                                         <li ng-repeat="item in value">
-                                            <a>{{item.LocationName}}</a>
+                                            <a ng-click="loadSelectedLocationDetails(item, null)">{{item.LocationName}}</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -25,20 +25,26 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="isDesktop" data-ng-controller="SearchController" ng-cloak>
+                <div ng-show="isDesktop" ng-cloak>
                     <div>
                         <div><span>{{activityName}}</span></div>
                         <div class="bottom-triangle"></div>
                     </div>
                     <div class="row">
-                       <div>
-                           <ul>
-                               <li ng-repeat="(key, value) in activityResults"><a>{{key}}</a></li>
-                           </ul>
-                       </div>
+                        <div>
+                            <ul>
+                                <li ng-repeat="(key, value) in activityResults">
+                                    <ul>
+                                        <li ng-repeat="item in value">
+                                            <a ng-click="loadInLocationSelectedActivityCategory(key)">{{item.ActivityCategory}}</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </div>          
+            </div>
             <button class="logo-button">Logo Button</button>
         </nav>
     </div>

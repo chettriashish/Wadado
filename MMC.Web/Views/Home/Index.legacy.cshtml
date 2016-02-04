@@ -3,12 +3,9 @@
 }
 
 <!--SLIDER REFERENCE-->
-@*<script src="~/Scripts/slider/jssor.js"></script>
-    <script src="~/Scripts/slider/jssor.slider.js"></script>
-    <script src="~/Scripts/slider/slider.js"></script>*@
 <script src="~/Scripts/slider/owl.carousel.min.js"></script>
 <link href="~/Content/owl.carousel.css" rel="stylesheet" />
-<link href="~/Content/owl.theme.css" rel="stylesheet" />
+@*<link href="~/Content/owl.theme.css" rel="stylesheet" />*@
 <link href="~/Content/animate.css" rel="stylesheet" />
 
 <!--UI SELECT REFERENCE-->
@@ -29,7 +26,9 @@
 
 <!--FAVOURITES REFERENCE-->
 <script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
-<script src="~/Scripts/Common/controllers/FavoritesController.js"></script>
+
+
+<script src="~/Scripts/Directives/Favorites/favoritesdirective.js"></script>
 
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
@@ -48,7 +47,6 @@
 <link href="~/Content/phone.css" rel="stylesheet" />
 
 <!--DATE REFERENCE-->
-<link href="~/Content/cangas.datepicker.css" rel="stylesheet" />
 <script src="~/Scripts/Directives/Date/datedirective.js"></script>
 
 <div id="colorbar">
@@ -57,7 +55,6 @@
 <div>
     @Html.Partial("../Partial/_homemobilemenu")
 </div>
-
 <div class="contentWrapper" data-ng-controller="HomeController">
     <div>
         @Html.Partial("../Partial/_search")
@@ -111,15 +108,21 @@
         <!-- Slider Begin -->
         <div class="column-12 top">
             <div class="owl-carousel">
-                <div class="item" ng-repeat="item in topOffer">
-                    <div class="imageDiscountLabel">
+                <div ng-repeat="item in topOffer">
+                    <div class="imageDiscountLabel" ng-show="item.Discount > 0">
                         <div>
-                            <p ng-if="item.Offer.Discount > 0">
-                                <span>{{item.Offer.Discount}}% Off</span>
-                            </p>
-                            <p>
-                                <span>{{item.Currency}} {{item.Activity.Cost}}</span>
-                            </p>
+                            <div>
+                                <span>{{item.Discount}}%</span>
+                            </div>
+                            <div stye="position:absolute;width:100%;">
+                                <span>Off</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightDiv">
+                        <div class="like-container">
+                            <nds-favorites entity-key="item.Key" type="ACTIVITY"></nds-favorites>
+                            @*@Html.Partial("../Partial/_favourites")*@
                         </div>
                     </div>
                     <div class="crop-height" data-ng-click="loadActivityDetails(item)">
@@ -128,7 +131,7 @@
                     <div class="image-noPaddingDiv">
                         <div class="leftDiv">
                             <div>
-                                <p><span>{{item.Activity.Name}}</span></p>
+                                <p><span>{{item.Value}}</span></p>
                             </div>
                             <div class="ratingList" id="userRating">
                                 <div ng-repeat="imageItem in item.ratingURL track by $index">
@@ -137,11 +140,11 @@
                             </div>
                         </div>
                         <div class="rightDiv">
-                            <div class="like-container">
-                                @Html.Partial("../Partial/_favourites")
-                            </div>
+                            <span>
+                                {{item.Currency}} {{item.Cost}}
+                            </span>
                         </div>
-                    </div>                   
+                    </div>
                 </div>
             </div>
         </div>
@@ -166,34 +169,30 @@
         <!--Row start-->
         <div ng-repeat="item in topActivity" ng-cloak>
             <div class="column-12 top">
-                <div class="column--true-6 border">
-                    <div class="imageDiscountLabel">
+                <div class="image-container">
+                    <div class="imageDiscountLabel" ng-show="item.Discount > 0">
                         <div>
-                            <p ng-if="item.Discount > 0">
-                                <span>{{item.Discount}}% Off</span>
-                            </p>
-                            <p>
-                                <span>{{item.Currency}} {{item.Activity.Cost}}</span>
-                            </p>
+                            <div>
+                                <span>{{item.Discount}}%</span>
+                            </div>
+                            <div stye="position:absolute;width:100%;">
+                                <span>Off</span>
+                            </div>
                         </div>
                     </div>
-                    <div ng-if="$index % 2 == 1">
-                        <div class="crop-height" data-ng-click="loadActivityDetails(item)">
-                            <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
+                    <div class="rightDiv">
+                        <div class="like-container">
+                            <nds-favorites entity-key="item.ActivityKey" type="ACTIVITY"></nds-favorites>
+                            @*@Html.Partial("../Partial/_favourites")*@
                         </div>
-                        @*<div class="crop-height">
-                                <img ng-src="{{item.ImageURL}}" style="width:100%;">
-                            </div>*@
                     </div>
-                    <div ng-if="$index % 2 == 0" class="right">
-                        <div class="crop-height" data-ng-click="loadActivityDetails(item)">
-                            <img ng-src="{{item.ImageURL}}" data-ng-click="" style="width:100%;" />
-                        </div>
+                    <div class="crop-height" data-ng-click="loadActivityDetails(item)">
+                        <img ng-src="{{item.ImageURL}}" style="width:100%;" />
                     </div>
                     <div class="image-noPaddingDiv">
                         <div class="leftDiv">
                             <div>
-                                <p><span>{{item.Activity.Name}}</span></p>
+                                <p><span>{{item.ActivityName}}</span></p>
                             </div>
                             <div class="ratingList" id="userRating">
                                 <div ng-repeat="imageItem in item.ratingURL track by $index">
@@ -202,24 +201,11 @@
                             </div>
                         </div>
                         <div class="rightDiv">
-                            <div class="like-container">
-                                @Html.Partial("../Partial/_favourites")
-                            </div>
+                            <span>
+                                {{item.Currency}} {{item.Cost}}
+                            </span>
                         </div>
                     </div>
-                    @*<div class="imageDiv">
-                            <div class="leftDiv">
-                                <p>
-                                    <span>{{item.Activity.Name}}</span>
-                                </p>
-                                <p>
-                                    <span>{{item.Activity.Address}}</span>
-                                </p>
-                            </div>
-                            <div class="rightDiv">
-                                <span>$ {{item.Activity.Cost}}</span>
-                            </div>
-                        </div>*@
                 </div>
             </div>
         </div>

@@ -30,7 +30,9 @@ namespace MMC.Business.Entities
         [DataMember]
         public DateTime CreatedDate { get; set; }
         [DataMember]
-        public string CreatedBy { get; set; } 
+        public string CreatedBy { get; set; }
+
+        public string LocationCoordinates { get; set; }
         #endregion
         [DataMember]
         public string EntityId

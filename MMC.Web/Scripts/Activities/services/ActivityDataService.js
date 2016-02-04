@@ -4,10 +4,10 @@
 
         var getSelectedActivityTypes = function () {
             var deferred = $q.defer();
-            if ($.url().segment().length > 2) {
-                if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {
-                    var selectedLocation = $.url().segment(2);
-                    var selectedActivityType = $.url().segment(3);
+            if (purl().segment().length > 2) {
+                if (purl().segment(2).trim().length > 0 && purl().segment(3).trim().length) {
+                    var selectedLocation = purl().segment(2);
+                    var selectedActivityType = purl().segment(3);
                     $http({
                         url: '/Activities/GetSelectedActivityType',
                         method: 'GET',
@@ -17,6 +17,20 @@
             }
             return deferred.promise;
         }
+
+        var getSelectedActivitiesForSelectedLocation = function (selectedActivityType) {
+            var deferred = $q.defer();
+            var selectedLocation = "GANGTOK";
+            if (selectedLocation.length > 1) {
+                $http({
+                    url: '/Activities/GetSelectedActivityType',
+                    method: 'GET',
+                    params: { selectedLocation: selectedLocation, selectedActivityCategory: selectedActivityType }
+                }).success(deferred.resolve).error(deferred.reject);
+            }
+            return deferred.promise;
+        }
+
         var getAllAvailableLocations = function () {
             var deferred = $q.defer();
             $http.get('/Location/GetAllOtherLocations').success(deferred.resolve).error(deferred.reject);
@@ -36,10 +50,20 @@
         }
 
         var getSelectedActivity = function (activityKey) {
-            if ($.url().segment().length > 2) {
-                if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {
-                    var selectedLocation = $.url().segment(2);
-                    $window.location.href = "/ActivityDetails/" + selectedLocation + "/" + activityKey;
+            if (WURFL.is_mobile) {
+                if (purl().segment().length > 2) {
+                    if (purl().segment(2).trim().length > 0 && purl().segment(3).trim().length) {
+                        var selectedLocation = purl().segment(2);
+                        $window.location.href = "/ActivityDetails/" + selectedLocation + "/" + activityKey;
+                    }
+                }
+            }
+            else {
+                if (purl().segment().length >= 2) {
+                    if (purl().segment(1).trim().length > 0 && purl().segment(2).trim().length) {
+                        var selectedLocation = purl().segment(2);
+                        $window.location.href = "/ActivityDetails/" + selectedLocation + "/" + activityKey;
+                    }
                 }
             }
         }
@@ -70,6 +94,7 @@
             clearActivityTypeFilters: clearActivityTypeFilters,
             getAllFilters: getAllFilters,
             setActivityTypeFilter: setActivityTypeFilter,
+            getSelectedActivitiesForSelectedLocation: getSelectedActivitiesForSelectedLocation,
         }
     };
     app.factory("ActivityDataService", activityDataService);

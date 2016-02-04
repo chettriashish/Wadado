@@ -85,18 +85,30 @@
                     </div>
                 </div>
             </div>
+        </div>        
+        <div class="column-12">
+            <div class="booking">
+                <div>
+                    <span>Total</span>
+                </div>
+                <div>
+                    <span>{{Total}}</span>
+                </div>   
+                <div>
+                    <a ng-click="addActivityToCart()">Add to my trips </a>
+                </div>             
+            </div>
         </div>
+    </div>
+    <div class="desktop-book">
         <div class="row">
             <div class="column-12">
-                <div class="booking">
+                <div class="booking">     
+                    <div class="error-init">
+                        <span>{{ErrorMessage}}</span>
+                    </div>             
                     <div>
-                        <span>Total</span>
-                    </div>
-                    <div>
-                        <span>{{Total}}</span>
-                    </div>
-                    <div>
-                        <a ng-click="addActivityToCart()">Add to my trips </a>
+                        <a ng-click="addActivityToCart()">BOOK NOW</a>
                     </div>
                 </div>
             </div>

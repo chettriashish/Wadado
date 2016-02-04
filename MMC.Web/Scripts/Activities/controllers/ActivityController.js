@@ -104,21 +104,21 @@
                     //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
                     //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
                     //}
-                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_yellow.png";
+                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_white.png";
                     count++;
                 }
                 if (half) {
                     //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
                     //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
                     //}
-                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_yellow.png";
+                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_white.png";
                     count++;
                 }
                 for (i = count; i < 5 ; i++) {
                     //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
                     //    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
                     //}
-                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_yellow.png";
+                    $scope.allSelectedActivity[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_white.png";
                     count++;
                 }
             });
@@ -213,9 +213,9 @@
                 $scope.allSelectedActivity = selectedActivities;
                 $scope.ActivityType = selectedActivities[0].ActivityCategory;
                 /*SET LOCATION FOR ACTIVITY ONLY IF THE THE ACTIVITY EXISTS AND DATA IS RETURNED FROM THE SERVER CORRECTLY*/
-                if ($.url().segment().length > 2) {
-                    if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {
-                        $scope.selectedLocation = $.url().segment(2);
+                if (purl().segment().length > 2) {
+                    if (purl().segment(2).trim().length > 0 && purl().segment(3).trim().length) {
+                        $scope.selectedLocation = purl().segment(2);
 
                     }
                 }
@@ -228,7 +228,7 @@
 
         $scope.loadActivityDetails = function (item) {
             $scope.ActivityKey = item.ActivityKey;
-            ActivityDataService.getSelectedActivity($scope.ActivityKey);
+            ActivityDataService.getSelectedActivity(item.ActivityKey);
         };
 
         $(window).resize(function () {
@@ -267,6 +267,7 @@
         $scope.showActivityType = function () {
             if (!$(".mobile-activityFilter").hasClass("open")) {
                 $(".mobile-activityFilter").addClass("open");
+                preventScrolling();
             }
         }
 
@@ -292,17 +293,56 @@
         $scope.applyActivityFilter = function () {
             setUserSelectedFilter();
             $(".mobile-activityFilter").toggleClass("open");
+            allowScrolling();
         }
         /****************************END SETTING USER SELECTED ACTIVITY FILTER *********************************/
+        var preventScrolling = function () {
+            $('body').bind('touchmove', function (e) { e.preventDefault() });
+        }
 
+        var allowScrolling = function () {
+            $('body').unbind('touchmove');
+        }
         $scope.closeFilter = function () {
             $(".mobile-activityFilter").removeClass("open");
+            allowScrolling();
         }
         $(window).resize(function () {
             if (!WURFL.is_mobile) {
                 setLayout();
-            }            
+            }
         });
+
+        /*ONLY FOR DESKTOP*/
+        if (!WURFL.is_mobile) {
+            //CAPTURING THE ON CATEGORY CHANGED EVENT FIRED ON THE SEARCH CONTROLLER
+            $scope.$on("ONCATEGORYCHANGED", function (event, args) {
+                getSelectedActivityTypeForLocation(args);
+            });
+            $scope.$on("LOCATIONSET", function (event, args) {
+                getSelectedActivityTypeForLocation(args);
+            });
+            var getSelectedActivityTypeForLocation = function (activityType) {
+                spinner();
+                /********************************REPLACE LOCATION NAME WITH KEY WHEN WE HAVE ACTUAL DATA****************************************************************/
+                ActivityDataService.getSelectedActivitiesForSelectedLocation(activityType).then(function (response) {
+                    $scope.allSelectedActivity = response;
+                    $scope.ActivityType = response[0].ActivityCategory;
+                    setRating();
+                    setImages();
+                    spinner();
+                });
+            }
+        }
+        /***************SHOW/HIDE THE LOADING SPINNER*************************/
+        var spinner = function () {
+            if ($('.spinner').hasClass('show')) {
+                $('.spinner').removeClass('show');
+            }
+            else {
+                $('.spinner').addClass('show');
+            }
+        }
     }
     app.controller("ActivityController", activityController);
 }());

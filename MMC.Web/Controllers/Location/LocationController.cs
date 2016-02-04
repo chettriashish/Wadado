@@ -1,4 +1,5 @@
-﻿using MMC.Client.Entities;
+﻿using MMC.Client.Contracts.DataContracts;
+using MMC.Client.Entities;
 using MMC.Web.Contracts;
 using MMC.Web.Model;
 using System;
@@ -17,17 +18,21 @@ namespace MMC.Web.Controllers.Location
         {
             _locationDataService = locationDataService;
         }
-        
+
         public ActionResult Index(string locationName)
         {
+            if (locationName == null)
+            {
+                Response.Redirect("http://localhost:4197/Location/Gangtok");
+            }
             SessionHandler("Location");
             return View();
         }
-                
+
         [HttpGet]
         public ActionResult GetSelectedLocation(string selectedLocation)
-        {                    
-            LocationModel results = _locationDataService.GetAllActivitiesForSelectedLocation(selectedLocation, Request.UserAgent);         
+        {
+            LocationDetailsDataContract results = _locationDataService.GetAllActivitiesForSelectedLocation(selectedLocation, GetDeviceInformation());
             return Json(results, JsonRequestBehavior.AllowGet);
         }
         [HttpGet]

@@ -70,6 +70,7 @@
             $scope.selectedDate = selectedDate;
             if ($scope.selectedDate != '') {
                 if (!$(".booking-wrapper").hasClass("open")) {
+                    $(".desktop-book").addClass("hide");
                     $(".booking-wrapper").addClass("open");
                     $scope.Total = $scope.selectedActivityDetails.Currency + " " + $scope.NumAdults * $scope.selectedActivityDetails.Cost;
                     $scope.ShowChildren = function () {
@@ -94,13 +95,14 @@
         }
 
         $scope.addActivityToCart = function () {
-            BookingDataService.checkForActivityAvailability($scope.selectedActivityDetails.ActivityKey,
-                $scope.NumAdults, $scope.NumChildren, $scope.date, $scope.time.val).then(function(result){
+            if ($scope.date != null) {
+                BookingDataService.checkForActivityAvailability($scope.selectedActivityDetails.ActivityKey,
+                $scope.NumAdults, $scope.NumChildren, $scope.date, $scope.time.val).then(function (result) {
                     if (!result.Status) {
                         $scope.ErrorMessage = result.Message;
                         $scope.Error = true;
                     }
-                    else{
+                    else {
                         var total = 0;
                         if ($scope.selectedActivityDetails.NumChildren == 0) {
                             total = $scope.NumAdults * $scope.selectedActivityDetails.Cost;
@@ -114,8 +116,14 @@
                                //console.log("activity added to cart");
                                $scope.$emit("ACTIVITYUPDATED", { message: "ACTIVITYUPDATED" })
                            });
-                    }                    
+                    }
                 });
+            }
+            else {
+                $(".error-init").addClass("show");
+                $scope.ErrorMessage ="Please Select a Date";
+                $scope.Error = true;
+            }
 
         }            
     }

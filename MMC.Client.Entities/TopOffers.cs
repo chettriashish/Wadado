@@ -14,9 +14,7 @@ namespace MMC.Client.Entities
     {
         #region Private Variables
         private string _TopOffersKey;
-        private string _LocationKey;
-        private string _ActivityKey;
-        private decimal _Discount;
+        private string _LocationKey;       
         private DateTime _OfferStartDate;
         private DateTime _OfferEndDate;
         private bool _ShowOnHomePage;
@@ -42,17 +40,7 @@ namespace MMC.Client.Entities
                 _LocationKey = value;
                 OnPropertyChanged(() => LocationKey);
             }
-        }
-        public string ActivityKey
-        {
-            get { return _ActivityKey; }
-            set { _ActivityKey = value; }
-        }
-        public decimal Discount
-        {
-            get { return _Discount; }
-            set { _Discount = value; }
-        }
+        }      
         public DateTime OfferStartDate
         {
             get { return _OfferStartDate; }
@@ -84,8 +72,7 @@ namespace MMC.Client.Entities
                 RuleFor(obj => obj.ImageUrl).NotNull();
                 RuleFor(obj => obj.LocationKey).NotNull();
                 RuleFor(obj => obj.OfferStartDate).NotNull();
-                RuleFor(obj => obj.OfferEndDate).NotNull();
-                RuleFor(obj => obj.ActivityKey).NotNull();
+                RuleFor(obj => obj.OfferEndDate).NotNull();             
             }
         }
 

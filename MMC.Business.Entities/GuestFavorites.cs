@@ -20,7 +20,9 @@ namespace MMC.Business.Entities
         [DataMember]
         public string GuestKey { get; set; }
         [DataMember]
-        public bool IsDeleted { get; set; } 
+        public bool IsDeleted { get; set; }
+        [DataMember]
+        public string Type { get; set; }
         #endregion
         public string EntityId
         {

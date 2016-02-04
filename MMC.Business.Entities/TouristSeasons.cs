@@ -16,7 +16,7 @@ namespace MMC.Business.Entities
         [DataMember]
         public string TouristSeasonKey { get; set; }
         [DataMember]
-        public string LocationKey { get; set; }
+        public string CompanyKey { get; set; }
         [DataMember]
         public DateTime SeasonStartDate { get; set; }
         [DataMember]

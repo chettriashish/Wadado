@@ -5,13 +5,14 @@ using System.Text;
 using System.Threading.Tasks;
 using MMC.Web.Model;
 using MMC.Client.Entities;
+using MMC.Client.Contracts.DataContracts;
 
 namespace MMC.Web.Contracts
 {
     public interface IHomeDataService
     {
-        IEnumerable<TopOffersModel> GetTopOffers(string userAgent);
-        IEnumerable<ActivitiesModel> GetTrendingActivities(string userAgent);
+        IEnumerable<TopOffersDataContract> GetTopOffers(string userAgent);
+        IEnumerable<ActivitySummaryDataContract> GetTrendingActivities(string userAgent);
         IEnumerable<LocationsMaster> GetAllLocations();
         IEnumerable<NewsModel> GetLastestNews();
     }

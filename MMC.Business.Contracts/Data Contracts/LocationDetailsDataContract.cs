@@ -11,15 +11,27 @@ namespace MMC.Business.Contracts.DataContracts
     [DataContract(Namespace = "wadado.in")]
     public class LocationDetailsDataContract
     {
-        #region Properties
+        #region Properties      
         [DataMember]
-        public IEnumerable<LocationsMaster> AllLocations { get; set; }
+        public string LocationName { get; set; }
         [DataMember]
-        public IEnumerable<LocationDetails> SelectedLoctionDetails { get; set; }
+        public string ImageURL { get; set; }
         [DataMember]
-        public IEnumerable<ActivitySummaryDataContract> AllActivitiesForLocation { get; set; }
+        public string LocationKey { get; set; }
         [DataMember]
-        public IEnumerable<TopOffers> TopOffersForLocation { get; set; } 
+        public string Description { get; set; }
+        [DataMember]
+        public string MustEat { get; set; }
+        [DataMember]
+        public string MustDrink { get; set; }
+        [DataMember]
+        public string GettingAround { get; set; }        
+        [DataMember]
+        public IEnumerable<ActivityCategoryDataContract> AllActivities { get; set; }        
+        [DataMember]
+        public string DefaultActivityCategoryKey { get; set; }
+        [DataMember]
+        public IEnumerable<TopOffersDataContract> TopOffersForLocation { get; set; } 
         #endregion
     }
 }

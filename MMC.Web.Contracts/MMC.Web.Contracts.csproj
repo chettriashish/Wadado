@@ -52,9 +52,17 @@
       <Project>{b4c1331e-a761-45a4-9c75-ab4d2b36f5d5}</Project>
       <Name>Core.Common.Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Core\Core.Common.ServiceModel\Core.Common.ServiceModel.csproj">
+      <Project>{97a84af9-503d-4efd-a064-9ef3ab944b0b}</Project>
+      <Name>Core.Common.ServiceModel</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Core\Core.Common\Core.Common.csproj">
       <Project>{b5c01de3-2b10-4787-992a-8c6368227b58}</Project>
       <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MMC.Client.Contracts\MMC.Client.Contracts.csproj">
+      <Project>{1f1aa9cb-3ed4-40ab-b7fe-099e58d5fdd5}</Project>
+      <Name>MMC.Client.Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\MMC.Client.Entities\MMC.Client.Entities.csproj">
       <Project>{adcc6638-5e44-4be4-832b-424e45df1e78}</Project>

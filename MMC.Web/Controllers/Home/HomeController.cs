@@ -35,13 +35,13 @@ namespace MMC.Web.Controllers.Home
 
         public ActionResult GetTopOffers()
         {
-            IEnumerable<TopOffersModel> results = _homeDataService.GetTopOffers(Request.UserAgent);
+            IEnumerable<TopOffersDataContract> results = _homeDataService.GetTopOffers(Request.UserAgent);
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult GetTopTrendingActivities()
         {
-            IEnumerable<ActivitiesModel> results = _homeDataService.GetTrendingActivities(Request.UserAgent);
+            IEnumerable<ActivitySummaryDataContract> results = _homeDataService.GetTrendingActivities(Request.UserAgent);
             return Json(results, JsonRequestBehavior.AllowGet);
         }
 

@@ -110,12 +110,12 @@ namespace MMC.Web.Controllers
             }
         }
 
-        public ActionResult GetFavorites()
+        public ActionResult GetFavoriteActivities()
         {
             if (Session["guestKey"] != null)
             {
                 string guestKey = Convert.ToString(Session["guestKey"]);
-                return Json(_usersService.GetFavorites(guestKey, GetDeviceInformation()), JsonRequestBehavior.AllowGet);
+                return Json(_usersService.GetFavoriteActivities(guestKey, GetDeviceInformation()), JsonRequestBehavior.AllowGet);
             }
             else
             {

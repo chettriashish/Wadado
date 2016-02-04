@@ -21,7 +21,8 @@ namespace MMC.Client.Entities
         private decimal _Rating;
         private string _ContactPerson;
         private DateTime _CreatedDate;
-        private string _CreatedBy; 
+        private string _CreatedBy;
+        private string _LocationCoordinates;
         #endregion
 
         #region Properties
@@ -105,9 +106,20 @@ namespace MMC.Client.Entities
                 _CreatedBy = value;
                 OnPropertyChanged(() => CompanyKey);
             }
-        } 
+        }       
+
+        public string LocationCoordinates
+        {
+            get { return _LocationCoordinates; }
+            set
+            {
+                _LocationCoordinates = value;
+                OnPropertyChanged(() => LocationCoordinates);
+            }
+        }
+
         #endregion
-        class CompanyMasterValidator:AbstractValidator<CompanyMaster>
+        class CompanyMasterValidator : AbstractValidator<CompanyMaster>
         {
             public CompanyMasterValidator()
             {
@@ -119,7 +131,7 @@ namespace MMC.Client.Entities
                 RuleFor(obj => obj.CompanyKey).NotNull();
                 RuleFor(obj => obj.Email).Matches("EmailExpression");
                 RuleFor(obj => obj.TelephoneNumber).Matches("TelephoneExpression");
-            }            
+            }
         }
         protected override IValidator GetValidator()
         {

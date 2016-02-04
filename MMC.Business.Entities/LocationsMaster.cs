@@ -20,14 +20,12 @@ namespace MMC.Business.Entities
         public string LocationName { get; set; }
         [DataMember]
         public string LocationImage { get; set; }
+        [DataMember]
         public string Country { get; set; }
-        public string Season1Start { get; set; }
-        public string Season1End { get; set; }
-        public string Season2Start { get; set; }
-        public string Season2End { get; set; }
-        public string Season3Start { get; set; }
-        public string Season3End { get; set; }
-
+        [DataMember]
+        public string BestTimeToVisit { get; set; }
+        [DataMember]
+        public string Description { get; set; }
         #endregion
 
         [DataMember]

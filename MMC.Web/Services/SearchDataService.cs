@@ -1,4 +1,5 @@
-﻿using MMC.Client.Entities;
+﻿using MMC.Client.Contracts.DataContracts;
+using MMC.Client.Entities;
 using MMC.Web.Contracts;
 using MMC.Web.Model;
 using System;
@@ -98,54 +99,35 @@ namespace MMC.Web.Services
             return results;
         }
 
-        public IEnumerable<ActivitiesMaster> GetAllActivitiesForLocation(string userAgent, string locationKey)
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesForLocation(string userAgent, string locationKey)
         {
             var deviceInfo = WURFL.WURFLManagerBuilder.Instance.GetDeviceForRequest(userAgent);
-            IEnumerable<ActivitiesMaster> results = GetAllActivitiesForSelectedLocation(locationKey);           
+            IEnumerable<ActivitySummaryDataContract> results = GetAllActivitiesForSelectedLocation(locationKey);           
             return results;
         }
 
-        public IEnumerable<ActivitiesMaster> GetAllActivitiesForSelectedLocation(string locationKey)
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesForSelectedLocation(string locationKey)
         {
-            List<ActivitiesMaster> results = new List<ActivitiesMaster>();
-            ActivitiesMaster activityOne = new ActivitiesMaster();            
-            ((ActivitiesMaster)activityOne).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)activityOne).Name = "Enjoy rappeling at Ranka";
-            ((ActivitiesMaster)activityOne).DifficultyRating = 1;
-            ((ActivitiesMaster)activityOne).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityOne).Address = "Gangtok,Sikkim";
-            ((ActivitiesMaster)activityOne).Cost = 1000;
-            ((ActivitiesMaster)activityOne).ActivityTypeKey = "ADVENTURE";            
-            results.Add(activityOne);
+            List<ActivitySummaryDataContract> results = new List<ActivitySummaryDataContract>();
+            ActivitySummaryDataContract activityOne = new ActivitySummaryDataContract();            
+            ((ActivitySummaryDataContract)activityOne).ActivityCategory = "ADVENTURE";
+            ((ActivitySummaryDataContract)activityOne).ActivityCategoryKey = "ADVENTURE";
+            results.Add(activityOne);            
 
-            ActivitiesMaster activityTwo = new ActivitiesMaster();            
-            ((ActivitiesMaster)activityTwo).ActivitesKey = "ACTIVITY TWO";
-            ((ActivitiesMaster)activityTwo).Name = "Paraglide @ 10000 feet from Bulbuley";
-            ((ActivitiesMaster)activityTwo).DifficultyRating = 2;
-            ((ActivitiesMaster)activityTwo).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityTwo).Address = "Rumtek,Sikkim";
-            ((ActivitiesMaster)activityTwo).Cost = 2000;
-            ((ActivitiesMaster)activityTwo).ActivityTypeKey = "ADVENTURE";
-
-            ActivitiesMaster activityThree = new ActivitiesMaster();
-            ((ActivitiesMaster)activityThree).ActivitesKey = "ACTIVITY THREE";
-            ((ActivitiesMaster)activityThree).Name = "Explore a traditional Sikkimese Lepcha village";
-            ((ActivitiesMaster)activityThree).DifficultyRating = 1;
-            ((ActivitiesMaster)activityThree).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityThree).Address = "Gangtok,Sikkim";
-            ((ActivitiesMaster)activityThree).Cost = 1000;
-            ((ActivitiesMaster)activityThree).ActivityTypeKey = "ECOTOURISM";
+            ActivitySummaryDataContract activityThree = new ActivitySummaryDataContract();
+            ((ActivitySummaryDataContract)activityThree).ActivityCategory = "ECO-TOURISM";
+            ((ActivitySummaryDataContract)activityThree).ActivityCategoryKey = "ECOTOURISM";
             results.Add(activityThree);
 
-            ActivitiesMaster activityFour = new ActivitiesMaster();
-            ((ActivitiesMaster)activityFour).ActivitesKey = "ACTIVITY FOUR";
-            ((ActivitiesMaster)activityFour).Name = "Traditional Sikkimese Archery";
-            ((ActivitiesMaster)activityFour).DifficultyRating = 4;
-            ((ActivitiesMaster)activityFour).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityFour).Address = "Rumtek,Sikkim";
-            ((ActivitiesMaster)activityFour).Cost = 2000;
-            ((ActivitiesMaster)activityFour).ActivityTypeKey = "SPORTS AND GAMES";
-            results.Add(activityFour);       
+            ActivitySummaryDataContract activityFour = new ActivitySummaryDataContract();
+            ((ActivitySummaryDataContract)activityFour).ActivityCategoryKey = "SPORTSANDGAMES";
+            ((ActivitySummaryDataContract)activityFour).ActivityCategory = "SPORTS AND GAMES";
+            results.Add(activityFour);
+
+            ActivitySummaryDataContract activityFive = new ActivitySummaryDataContract();
+            ((ActivitySummaryDataContract)activityFive).ActivityCategoryKey = "TOPTRENDING";
+            ((ActivitySummaryDataContract)activityFive).ActivityCategory = "TOP TRENDING ACTIVITIES";
+            results.Add(activityFive);       
 
             return results;
         }

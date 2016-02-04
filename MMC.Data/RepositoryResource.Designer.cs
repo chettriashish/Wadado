@@ -61,6 +61,15 @@ namespace MMC.Data {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BUNDLED.
+        /// </summary>
+        internal static string BUNDLED {
+            get {
+                return ResourceManager.GetString("BUNDLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to easy.
         /// </summary>
         internal static string EASY {
@@ -93,6 +102,15 @@ namespace MMC.Data {
         internal static string MEDIUM {
             get {
                 return ResourceManager.GetString("MEDIUM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SINGLE.
+        /// </summary>
+        internal static string SINGLE {
+            get {
+                return ResourceManager.GetString("SINGLE", resourceCulture);
             }
         }
         

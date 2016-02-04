@@ -61,6 +61,10 @@
       <Project>{b5c01de3-2b10-4787-992a-8c6368227b58}</Project>
       <Name>Core.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MMC.Client.Contracts\MMC.Client.Contracts.csproj">
+      <Project>{1f1aa9cb-3ed4-40ab-b7fe-099e58d5fdd5}</Project>
+      <Name>MMC.Client.Contracts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MMC.Client.Entities\MMC.Client.Entities.csproj">
       <Project>{adcc6638-5e44-4be4-832b-424e45df1e78}</Project>
       <Name>MMC.Client.Entities</Name>

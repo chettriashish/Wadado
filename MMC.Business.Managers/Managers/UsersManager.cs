@@ -17,7 +17,7 @@ namespace MMC.Business.Managers
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
         ConcurrencyMode = ConcurrencyMode.Multiple,
-        ReleaseServiceInstanceOnTransactionComplete = false)]   
+        ReleaseServiceInstanceOnTransactionComplete = false)]
     public class UsersManager : ManagerBase, IUsersService
     {
         const string MOBILE = "_mob";
@@ -127,23 +127,23 @@ namespace MMC.Business.Managers
                 List<ActivitySummaryDataContract> result = new List<ActivitySummaryDataContract>();
                 IUserDetailsBusinessEngine userDetailsBusinessEngine = _BusinessEngineFactory.GetBusinessEngine<IUserDetailsBusinessEngine>();
                 userDetailsBusinessEngine.RemoveFromFavorites(guestKey, activityKey);
-                return GetFavorites(guestKey, userAgent);
+                return GetFavoriteActivities(guestKey, userAgent);
             });
         }
 
-        public IEnumerable<ActivitySummaryDataContract> GetFavorites(string guestKey, string userAgent)
+        public IEnumerable<ActivitySummaryDataContract> GetFavoriteActivities(string guestKey, string userAgent)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 List<ActivitySummaryDataContract> result = new List<ActivitySummaryDataContract>();
                 IUserDetailsBusinessEngine userDetailsBusinessEngine = _BusinessEngineFactory.GetBusinessEngine<IUserDetailsBusinessEngine>();
-                IEnumerable<ActivitiesMaster> activitiesResult = userDetailsBusinessEngine.GetFavorites(guestKey);
+                IEnumerable<ActivitiesMaster> activitiesResult = userDetailsBusinessEngine.GetFavoriteActivities(guestKey);
                 IActivityCategoryMasterRepository activitiesCategoryMasterRepository = _DataRepositoryFactory.GetDataRepository<IActivityCategoryMasterRepository>();
                 IActivityTypeCategoryRepository activityTypeRepository = _DataRepositoryFactory.GetDataRepository<IActivityTypeCategoryRepository>();
                 IActivityLocationRepository activityLocationRepository = _DataRepositoryFactory.GetDataRepository<IActivityLocationRepository>();
                 ILocationsMasterRepository locationMasterRepository = _DataRepositoryFactory.GetDataRepository<ILocationsMasterRepository>();
                 IActivityImagesRepository imageRepository = _DataRepositoryFactory.GetDataRepository<IActivityImagesRepository>();
-                ITopOffersRepository topOffersRepository = _DataRepositoryFactory.GetDataRepository<ITopOffersRepository>();
+                ITopOfferMappingRepository topOffersMappingRepository = _DataRepositoryFactory.GetDataRepository<ITopOfferMappingRepository>();
                 foreach (var item in activitiesResult)
                 {
                     ActivitySummaryDataContract summary = new ActivitySummaryDataContract();
@@ -173,8 +173,7 @@ namespace MMC.Business.Managers
                           imageRepository.Get().Where(entity => entity.ActivityKey == item.ActivitesKey && entity.IsThumbnail == true).FirstOrDefault().ImageURL
                           , THUMBNAIL);
                     }
-                    if (topOffersRepository.Get().Where(entity => entity.ActivityKey == item.ActivitesKey
-                        && (entity.OfferEndDate > DateTime.Now && entity.OfferStartDate <= DateTime.Now)).Count() > 0)
+                    if (topOffersMappingRepository.CheckAndFetchSingleOfferExists(item.ActivitesKey, BusinessResource.SINGLE) != null)
                     {
                         summary.IsSpecialOffer = true;
                     }

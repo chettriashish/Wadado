@@ -128,6 +128,7 @@
     <Compile Include="Data Repositories\GuestInformationMasterRepository.cs" />
     <Compile Include="Data Repositories\LocationDetailsRepository.cs" />
     <Compile Include="Data Repositories\LocationMasterRepository.cs" />
+    <Compile Include="Data Repositories\TopOfferMappingRepository.cs" />
     <Compile Include="Data Repositories\TopOffersRepository.cs" />
     <Compile Include="Data Repositories\TouristSeasonsRepository.cs" />
     <Compile Include="Data Repositories\UserApplicationActivityRepository.cs" />

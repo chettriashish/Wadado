@@ -2,10 +2,6 @@
     ViewBag.Title = "WADADO.IN";
 }
 <!--SLIDER REFERENCE-->
-@*<script src="~/Scripts/slider/jssor.js"></script>
-    <script src="~/Scripts/slider/jssor.slider.js"></script>
-    <script src="~/Scripts/slider/slider.js"></script>*@
-
 <script src="~/Scripts/slider/owl.carousel.min.js"></script>
 <link href="~/Content/owl.carousel.css" rel="stylesheet" />
 <link href="~/Content/owl.theme.css" rel="stylesheet" />
@@ -26,7 +22,7 @@
 
 <!--FAVOURITES REFERENCE-->
 <script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
-<script src="~/Scripts/Common/controllers/FavoritesController.js"></script>
+<script src="~/Scripts/Directives/Favorites/favoritesdirective.js"></script>
 
 <!--BOOKING REFERENCE-->
 <script src="~/Scripts/Common/services/BookingDataService.js"></script>
@@ -236,53 +232,32 @@
         </div>
         <!--end row-->
         <!--start row-->
-        <div class="row">
-            <div class="column-12 top">
-                <div class="owl-carousel" id="similarActivityImages" ng-if="greaterThan">
-                    <div ng-repeat="item in selectedActivityDetails.SimilarActivities" class="crop-height" ng-cloak>
-                        <div class="imageDiscountLabel">
-                            <div><span>{{item.Offer.Discount}}%</span></div>
-                            <div><span>Off</span></div>
-                        </div>
-                        <img ng-src="{{item.DefaultImageURL}}" ng-click="" />
-                        <div class="crop-height" ng-cloak>
-                            <img ng-src="{{item.ImageURL}}" />
-                        </div>
-                        <div class="image-noPaddingDiv">
-                            <div class="leftDiv">
-                                <div>
-                                    <p><span>{{item.ActivityName}}</span></p>
-                                </div>
-                                <span>$ {{item.Cost}}</span>
-                                <div class="ratingList" id="userRating">
-                                    <div ng-repeat="imageItem in item.ratingURL track by $index">
-                                        <img ng-src="{{imageItem}}" />
-                                    </div>
-                                </div>
+        <div class="column-12 top">
+            <div class="owl-carousel" id="similarActivityImages" ng-if="greaterThan">
+                <div ng-repeat="item in selectedActivityDetails.SimilarActivities" class="crop-height" ng-cloak>
+                    <div class="imageDiscountLabel" ng-show="item.Discount > 0">
+                        <div>
+                            <div>
+                                <span>{{item.Discount}}%</span>
                             </div>
-                            <div class="rightDiv">
-                                <div class="like-container">
-                                    @Html.Partial("../Partial/_favourites")
-                                </div>
+                            <div stye="position:absolute;width:100%;">
+                                <span>Off</span>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div ng-repeat="item in selectedActivityDetails.SimilarActivities"
-                     ng-cloak ng-if="greaterThan == false">
-                    <div class="imageDiscountLabel" ng-if="item.Discount > 0">
-                        <div><span>{{item.Discount}}%</span></div>
-                        <div><span>Off</span></div>
+                    <div class="rightDiv">
+                        <div class="like-container">
+                            <nds-favorites entity-key="item.ActivityKey" type="ACTIVITY"></nds-favorites>
+                        </div>
                     </div>
-                    <div class="crop-height">
-                        <img ng-src="{{item.DefaultImageURL}}" ng-click="" style="width:100%;" />
+                    <div class="crop-height" ng-cloak>
+                        <img ng-src="{{item.ImageURL}}" />
                     </div>
                     <div class="image-noPaddingDiv">
                         <div class="leftDiv">
                             <div>
                                 <p><span>{{item.ActivityName}}</span></p>
                             </div>
-                            <span>$ {{item.Cost}}</span>
                             <div class="ratingList" id="userRating">
                                 <div ng-repeat="imageItem in item.ratingURL track by $index">
                                     <img ng-src="{{imageItem}}" />
@@ -290,73 +265,39 @@
                             </div>
                         </div>
                         <div class="rightDiv">
-                            <div class="like-container">
-                                @Html.Partial("../Partial/_favourites")
-                            </div>
+                            <span>
+                                {{item.Currency}} {{item.Cost}}
+                            </span>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!--end row-->
-        <!--start row-->
-        <div class="row">
-            <div class="column-12 top">
-                <div class="owl-carousel" id="similarActivityImages" ng-if="greaterThan">
-                    <div ng-repeat="item in selectedActivityDetails.SimilarActivities" class="crop-height" ng-cloak>
-                        <div class="imageDiscountLabel">
-                            <div>
-                                <p ng-if="item.Discount > 0">
-                                    <span>{{item.Discount}}% Off</span>
-                                </p>
-                                <p>
-                                    <span>INR {{item.Cost}}</span>
-                                </p>
-                            </div>
-                        </div>
-                        <img ng-src="{{item.DefaultImageURL}}" ng-click="" />
-                        <div class="crop-height" ng-cloak>
-                            <img ng-src="{{item.ImageURL}}" />
-                        </div>
-                        <div class="image-noPaddingDiv">
-                            <div class="leftDiv">
-                                <div>
-                                    <p><span>{{item.ActivityName}}</span></p>
-                                </div>                               
-                                <div class="ratingList" id="userRating">
-                                    <div ng-repeat="imageItem in item.ratingURL track by $index">
-                                        <img ng-src="{{imageItem}}" />
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="rightDiv">
-                                <div class="like-container">
-                                    @Html.Partial("../Partial/_favourites")
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div ng-repeat="item in selectedActivityDetails.SimilarActivities"
-                     ng-cloak ng-if="greaterThan == false">
-                    <div class="imageDiscountLabel">
+            <div ng-repeat="item in selectedActivityDetails.SimilarActivities"
+                 ng-cloak ng-if="greaterThan == false">
+                <div class="image-container">
+                    <div class="imageDiscountLabel" ng-show="item.Discount > 0">
                         <div>
-                            <p ng-if="item.Discount > 0">
-                                <span>{{item.Discount}}% Off</span>
-                            </p>
-                            <p>
-                                <span>INR {{item.Cost}}</span>
-                            </p>
+                            <div>
+                                <span>{{item.Discount}}%</span>
+                            </div>
+                            <div stye="position:absolute;width:100%;">
+                                <span>Off</span>
+                            </div>
                         </div>
                     </div>
-                    <div class="crop-height">
+                    <div class="rightDiv">
+                        <div class="like-container">
+                            <nds-favorites entity-key="item.ActivityKey" type="ACTIVITY"></nds-favorites>
+                        </div>
+                    </div>
+                    <div class="crop-height" ng-click="loadActivityDetails(item)">
                         <img ng-src="{{item.DefaultImageURL}}" ng-click="" style="width:100%;" />
                     </div>
                     <div class="image-noPaddingDiv">
                         <div class="leftDiv">
                             <div>
                                 <p><span>{{item.ActivityName}}</span></p>
-                            </div>                           
+                            </div>
                             <div class="ratingList" id="userRating">
                                 <div ng-repeat="imageItem in item.ratingURL track by $index">
                                     <img ng-src="{{imageItem}}" />
@@ -364,9 +305,9 @@
                             </div>
                         </div>
                         <div class="rightDiv">
-                            <div class="like-container">
-                                @Html.Partial("../Partial/_favourites")
-                            </div>
+                            <span>
+                                {{item.Currency}} {{item.Cost}}
+                            </span>
                         </div>
                     </div>
                 </div>

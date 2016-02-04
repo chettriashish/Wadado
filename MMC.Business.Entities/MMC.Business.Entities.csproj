@@ -81,6 +81,7 @@
     <Compile Include="LocationDetails.cs" />
     <Compile Include="LocationsMaster.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TopOfferMapping.cs" />
     <Compile Include="TopOffers.cs" />
     <Compile Include="TouristSeasons.cs" />
     <Compile Include="UserApplicationActivityDetails.cs" />

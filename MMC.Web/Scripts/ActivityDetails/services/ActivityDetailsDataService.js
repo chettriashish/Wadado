@@ -5,10 +5,10 @@
         /****************FETCH SELECTED ACTIVITY DETAILS******************/
         var getSelectedActivityDetails = function () {
             var deferred = $q.defer();
-            if ($.url().segment().length > 2) {
-                if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {
-                    var selectedLocation = $.url().segment(2);
-                    var selectedActivityKey = $.url().segment(3);
+            if (purl().segment().length > 2) {
+                if (purl().segment(2).trim().length > 0 && purl().segment(3).trim().length) {
+                    var selectedLocation = purl().segment(2);
+                    var selectedActivityKey = purl().segment(3);
                     $http({
                         url: '/ActivityDetails/GetSelectedActivityDetails',
                         method: 'GET',
@@ -23,7 +23,7 @@
         /****************CHECK FOR ACTIVITY AVAILABILITY******************/
         var checkForSlotAvailability = function (date,time,numAdults,numChildren) {
             var deferred = $q.defer();            
-            var selectedActivityKey = $.url().segment(3);
+            var selectedActivityKey = purl().segment(3);
             $http({
                 url: '/ActivityDetails/CheckForSlotAvailability',
                 method: 'GET',
@@ -43,6 +43,9 @@
                 autoplayHoverPause: true,
                 responsiveBaseElement: window,
                 responsiveRefreshRate: 50,
+                animateOut: 'fadeOut',
+                animateIn: 'flipIn',
+                smartSpeed: 450,
                 dotsEach: true,
                 responsive: {
                     0: {
@@ -69,7 +72,7 @@
                     1200: {
                         items: 4,
                         nav: false,
-                        loop: false,
+                        loop: true,
                         touchDrag: false,
                         mouseDrag: true
                     }
@@ -88,6 +91,9 @@
                 responsiveBaseElement: window,
                 responsiveRefreshRate: 50,
                 dotsEach: true,
+                animateOut: 'fadeOut',
+                animateIn: 'flipIn',
+                smartSpeed: 450,
                 responsive: {
                     0: {
                         items: 1,
@@ -113,7 +119,7 @@
                     1200: {
                         items: 1,
                         nav: false,
-                        loop: false,
+                        loop: true,
                         touchDrag: false,
                         mouseDrag: true
                     }

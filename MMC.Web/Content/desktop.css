@@ -2,7 +2,28 @@
 
 /*-----CONTENT -----*/
 body {
-    min-width: 700px;
+    min-width: 800px;
+}
+
+.column-auto {
+    float: left;
+    padding: .4em 1em;
+    width: auto;
+    position: relative;
+    display: table;
+}
+
+.column-auto-nospace {
+    float: left;
+    padding: .4em 0;
+    width: auto;
+    position: relative;
+    display: table;
+}
+
+
+.labelPlain {
+    font-size: 1em;
 }
 /*****************************COVER FOR HOME*******************************************************/
 .cover-image {
@@ -29,24 +50,32 @@ body {
     width: 100%;
     margin: 0 auto;
     max-width: 1920px;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    top: 0;
 }
 
-    img.scale, object.scale, .cover-height img {
-        display: block; /* corrects small inline gap at bottom of containing div */
-        max-width: 100%;
-        /* just in case, to force correct aspect ratio */
-        height: auto !important;
-        width: auto\9; /* ie8+9 */
-        /* lt ie8 */
-        -ms-interpolation-mode: bicubic;
-        background-position: top center;
-        /* force a minimum size if img src size is known */
-        /* min-height: 320px; /* max-height of .crop-height */
-        /* min-width: 480px; /* consistent with image ratio */
-        /* optionally center if img src is not as wide as div */
-        /* margin: 0 auto; */
-    }
+nav > div {
+    float: none;
+    width: 25%;
+}
 
+img.scale, object.scale, .cover-height img {
+    display: block; /* corrects small inline gap at bottom of containing div */
+    max-width: 100%;
+    /* just in case, to force correct aspect ratio */
+    height: auto !important;
+    width: auto\9; /* ie8+9 */
+    /* lt ie8 */
+    -ms-interpolation-mode: bicubic;
+    background-position: top center;
+    /* force a minimum size if img src size is known */
+    /* min-height: 320px; /* max-height of .crop-height */
+    /* min-width: 480px; /* consistent with image ratio */
+    /* optionally center if img src is not as wide as div */
+    /* margin: 0 auto; */
+}
 
 #colorbar {
     height: 55px;
@@ -54,7 +83,7 @@ body {
     top: 0;
     margin: 0;
     padding: 0;
-    min-width:700px;
+    min-width: 700px;
 }
 /***********SEARCH BLOCK*******************/
 .cover-search {
@@ -128,10 +157,93 @@ body {
     }
 /***************END SEARCH BLOCK*******************/
 
-/**************CHANGING CAROUSEL PADDING FOR DESKTOP*/
-.owl-carousel {
-    padding: 0 .3em;
+/*CONTENT NAV - FOR DISPLAYING LISTS IN THE BODY*/
+.content-nav {
+    width: 100%;
+    display: block;
+    height: auto;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    left: 0px;
+    clear: both;
+    float: none;
+    display: table;
 }
+
+    .content-nav > div {
+        width: auto;
+        position: relative;
+        display: table;
+        float: left;
+        cursor: pointer;
+        font-size: 1.1em;
+    }
+
+        .content-nav > div > div:nth-of-type(2) {
+            margin-left: .5em;
+        }
+
+        .content-nav > div > div {
+            float: left;
+            width: auto;
+        }
+
+        .content-nav > div span {
+            color: rgb(51,51,51);
+            padding: .4em;
+        }
+
+        .content-nav > div:nth-of-type(2) {
+            font-size: .9em;
+            width: auto;
+            height: 0px;
+            position: absolute;
+            padding: 1em 1em;
+            margin: 0 auto;
+            cursor: initial;
+            left: 0;
+            opacity: 0;
+            right: 0;
+            z-index: 10;
+            top: 20px;
+            float: inherit;
+            transform: scale(1, 1);
+            transform-origin: top;
+            visibility: collapse;
+            -ms-transform: scale(1, 1);
+            -ms-transform-origin: top center;
+            background-color: rgba(255, 255, 255,0.95);
+            -webkit-transition: all .5s linear 50ms;
+            -moz-transition: all .5s linear 50ms;
+            -ms-transition: all .5s linear 50ms;
+            transition: all .5s linear 50ms;
+        }
+
+        .content-nav > div:hover + div, .content-nav > div + div:hover {
+            opacity: 1;
+            display: table;
+            visibility: visible;
+            height: auto;
+        }
+
+    .content-nav ul li {
+        padding: .4em .2em;
+        font-size: 1em;
+        color: rgb(51,51,51);
+    }
+
+        .content-nav ul li a {
+            cursor: pointer;
+            color: rgb(51,51,51);
+            font-size: .9em;
+        }
+
+/**************CHANGING CAROUSEL PADDING FOR DESKTOP*/
+/*.owl-carousel {
+    padding: 0 .3em;
+}*/
 
 .button-dark {
     float: right;
@@ -195,7 +307,31 @@ img.scale, object.scale, .crop-height:hover img {
     -webkit-transform: scale(1.05);
     transform: scale(1.05);
     -moz-transform: scale(1.05);
+    -ms-interpolation-mode: bicubic;
 }
+
+.main-crop-height {
+    overflow: hidden;
+    max-height: 400px;
+    overflow: hidden;
+    object-fit: none; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+}
+
+    .main-crop-height img {
+        width: 100%;
+        height: 100%;
+        display: block; /* corrects small inline gap at bottom of containing div */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        width: auto\9; /* ie8+9 */
+        /* lt ie8 */
+        -ms-interpolation-mode: bicubic;
+        background-position: top center;
+        margin: -25% auto 0;
+        height: 100%;
+    }
 
 .crop-height {
     overflow: hidden;
@@ -213,9 +349,22 @@ img.scale, object.scale, .crop-height:hover img {
         height: 100%;
     }
 
-/*********************IMAGE LABEL START*******************/
-.imageDiscountLabel {
-    margin-top: -4.5em;
+.imageDiscountLabel div {
+    padding: 0em 1px;
+}
+
+    .imageDiscountLabel div > div {
+        font-weight: 500;
+        font-size: 1em;
+    }
+
+        .imageDiscountLabel div > div:first-of-type {
+            font-size: 1em;
+            font-weight: 500;
+        }
+
+.image-noPaddingDiv .rightDiv > span {
+    font-size: 1.1em;
 }
 
 /*********************END IMAGE LABEL START*******************/
@@ -241,11 +390,19 @@ img.scale, object.scale, .crop-height:hover img {
 
 /*******************COLUMN STYLES**************************/
 .column-6.min, .column-12.min, .column-4.min {
-    padding: .3em;
+    padding: .1em;
 }
 
 .column-12.wide-gutter {
     padding: .5em 2em;
+}
+
+.column-12.widest-gutter {
+    padding: 1.5em 5em;
+}
+
+.column-12.min-top-widest-gutter {
+    padding: 0em 5em;
 }
 
 .column-3.min {
@@ -274,9 +431,71 @@ img.scale, object.scale, .crop-height:hover img {
         text-align: right;
     }
 
+.column-header {
+    padding: .7em 0;
+}
+
 /*******************END COLUMN  STYLES**************************/
 
+/*----- FOOTER -----*/
+.footerWrapper {
+    background-color: #000;
+    width: 100%;
+    min-width: 700px;
+    height: 4em;
+    bottom: 0;
+    padding: 1em 0;
+}
+
+footer {
+    clear: both;
+    font-size: 1.5em;
+    color: #fff;
+    text-align: center;
+    padding: 1em 0;
+}
+
+    footer a {
+        color: #fff;
+    }
+
+.subHeader, .subHeaderRight, .subHeaderCenter {
+    font-size: 1em;
+    font-weight: 600;
+    padding: .5em 0em;
+}
+
+.location-details {
+    font-size: 1.2em;
+    text-align: left;
+}
+
+.location-detailsSpace {
+    font-size: 1em;
+    padding: 0 .5em 0 0;
+}
+
+.error, .booking > div span {
+    font-size: 1em;
+}
+
+label {
+    font-size: .8em;
+}
+
+.desktop-book {
+    display: block;
+    padding: 1em 0;
+}
+
+    .desktop-book.hide {
+        display: none;
+    }
+
 @media only screen and (min-width:600px) {
+    .column-2 {
+        width: 16.6%;
+    }
     /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
     .location-activity-wrapper .activityCategoryDetails > div {
         font-size: 1.2em;
@@ -319,6 +538,21 @@ img.scale, object.scale, .crop-height:hover img {
 
 @media only screen and (min-width:700px) {
 
+    .rating {
+        font-size: 1.1em;
+        margin: -0.5em auto auto auto;
+        width: 5.8em;
+    }
+
+    .rating-outer {
+        margin: 0 1em;
+    }
+
+    .subHeader, .subHeaderRight, .subHeaderCenter {
+        font-size: 1em;
+        font-weight: 600;
+        padding: 0 1em;
+    }
     /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
     .location {
         top: -1em;
@@ -345,10 +579,78 @@ img.scale, object.scale, .crop-height:hover img {
         padding: 0em 0.8em;
         font-size: 1.3em;
     }
+
+    .labelPlain {
+        font-size: 1.2em;
+        padding: .1em 1em;
+        margin: 0;
+    }
+
+    label {
+        font-size: .9em;
+    }
+
+    .error, .error-init {
+        font-size: 1.2em;
+    }
+
+    .error-init {
+        visibility: hidden;
+        height: 1.5em;
+        position: relative;
+        color: red;
+        transition: opacity 1s linear;
+        opacity: 0;
+    }
+
+        .error-init.show {
+            opacity: 1;
+            visibility: visible;
+        }
     /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
+
+}
+
+@media only screen and (min-width: 900px) {
+    .booking-outer {
+        display: table;
+        border: 1px solid #8ec73f;
+        padding: 0 .5em;
+        border-radius: 2px;
+    }
 }
 
 @media only screen and (min-width: 1140px) {
+
+    /**************OVERDDIDING CALENDAR STYLES*******************/
+    .date-default-outer-container {
+        min-width: 300px;
+    }
+
+    .month-container {
+        font-size: 1em;
+    }
+
+    .days-container {
+        font-size: 1.1em;
+    }
+
+    .month-label-container {
+        float: left;
+        display: table;
+        width: 72%;
+    }
+
+        .month-label-container > div {
+            font-size: 1.2em;
+        }
+    /**************END OVERDDIDING CALENDAR STYLES*******************/
+    .subHeader, .subHeaderRight, .subHeaderCenter {
+        font-size: 1.25em;
+        font-weight: 600;
+        padding: 0 1em;
+    }
+
 
     .location {
         top: -2.5em;
@@ -389,7 +691,10 @@ img.scale, object.scale, .crop-height:hover img {
         cursor: pointer;
     }
 
-
+    .location-detailsSpace {
+        font-size: 1.2em;
+        padding: 0 .5em 0 0;
+    }
     /*-----HEADER -----*/
     /*header {
         padding-top: 2em;

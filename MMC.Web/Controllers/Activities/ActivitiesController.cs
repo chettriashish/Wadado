@@ -16,10 +16,12 @@ namespace MMC.Web.Controllers.Activities
     public class ActivitiesController : BaseViewController
     {
         private IActivitiesService _activitiesService;
-
-        public ActivitiesController(IActivitiesService activitiesService)
+        //this is something that will be removed once the actual data is set
+        private ILocationDataService _locationDataService;
+        public ActivitiesController(IActivitiesService activitiesService, ILocationDataService locationDataService)
         {
             _activitiesService = activitiesService;
+            _locationDataService = locationDataService;
         }
 
         // GET: Activities
@@ -31,14 +33,26 @@ namespace MMC.Web.Controllers.Activities
 
         public ActionResult GetSelectedActivityType(string selectedLocation, string selectedActivityCategory)
         {
-            if (Session["StartDate"] != null && Session["EndDate"] != null)
+            //DUMMY IMPLEMENTATION FOR TILL ACTUAL DATA IS AVALABLE - THIS SECTION WILL BE REMOVED ONCE DATA IS AVAILABLE
+            if (selectedActivityCategory == "TOPTRENDING")
             {
-                return GetSelectedActivityTypeByDate(selectedLocation, selectedActivityCategory, Session["StartDate"].ToString(), Session["EndDate"].ToString());
+                IEnumerable<ActivitySummaryDataContract> result = _locationDataService.GetTopTrendingActivities(selectedLocation);
+                return Json(result, JsonRequestBehavior.AllowGet);
             }
+
+            //END DUMMY IMPLEMENTATION FOR TILL ACTUAL DATA IS AVALABLE - THIS SECTION WILL BE REMOVED ONCE DATA IS AVAILABLE
             else
             {
-                IEnumerable<ActivitySummaryDataContract> result = _activitiesService.GetAllActivitiesByLocationAndType(selectedLocation, selectedActivityCategory, GetDeviceInformation());
-                return Json(result, JsonRequestBehavior.AllowGet);
+                //ACTUAL IMPLEMENTATION
+                if (Session["StartDate"] != null && Session["EndDate"] != null)
+                {
+                    return GetSelectedActivityTypeByDate(selectedLocation, selectedActivityCategory, Session["StartDate"].ToString(), Session["EndDate"].ToString());
+                }
+                else
+                {
+                    IEnumerable<ActivitySummaryDataContract> result = _activitiesService.GetAllActivitiesByLocationAndType(selectedLocation, selectedActivityCategory, GetDeviceInformation());
+                    return Json(result, JsonRequestBehavior.AllowGet);
+                }
             }
         }
 

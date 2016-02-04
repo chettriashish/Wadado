@@ -8,7 +8,7 @@
     var dateDirective = function ($parse) {
         return {
             restrict: 'E',//restricting the directive to an element
-            templateUrl: Wadado.rootPath + "/Templates/dateTemplate.html",
+            templateUrl:"../../Templates/dateTemplate.html",
             link: function (scope, el, attrs) {
                 scope.$watch('minStartDate', function (newValue, oldValue) {
                     if (newValue != oldValue) {

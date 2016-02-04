@@ -35,8 +35,8 @@
     /***********************IMAGE CROP******************************************/
     .crop-height {
         /* max-width: 1200px; /* native or declared width of img src (if known) */
-        max-height: 300px;
-        height: auto;
+        max-height: 250px;
+        /*height: auto;*/
         overflow: hidden;
         object-fit: none; /* Do not scale the image */
         object-position: center; /* Center the image within the element */
@@ -50,9 +50,9 @@
             width: auto\9; /* ie8+9 */
             /* lt ie8 */
             -ms-interpolation-mode: bicubic;
-            background-position: top center;           
-            margin: -10% auto 0;
-            height: 100%;
+            background-position: top center;
+            /*margin: -10% auto 0;*/
+            /*height: 100%;*/
             /* force a minimum size if img src size is known */
             /* min-height: 320px; /* max-height of .crop-height */
             /* min-width: 480px; /* consistent with image ratio */
@@ -134,7 +134,7 @@
             padding: .4em 0 .2em 1%;
         }
 
-        .column-8.top, .column-4.top, .column-6.top {
+        .column-8.top, .column-7.top, .column-4.top, .column-6.top {
             padding: .4em 0;
         }
 
@@ -153,58 +153,39 @@
     .column-2 {
         width: 33.33%;
     }
-
+    /****************IMAGE LABEL DETAILS START**********************/
     .imageDiscountLabel {
-        padding: .4em 0em;
-        width: 4.5em;
+        padding: .2em 0em;
+        width: 2.5em;
+        font-size: 1.2em;
     }
 
         .imageDiscountLabel div {
             padding: 0em 1px;
         }
 
-            .imageDiscountLabel div p {
+            .imageDiscountLabel div div {
                 font-weight: 500;
                 font-size: 1.2em;
             }
 
-                .imageDiscountLabel div p:first-of-type {
+                .imageDiscountLabel div div:first-of-type {
                     font-size: 1em;
                     font-weight: 500;
                 }
 
-    .imageDiv {
-        background-color: rgba(0,0,0,.6);
-        padding: .2em .3em;
-        width: 100%;
-        top: 0em;
-        margin-top: -4em;
-        color: white;
-        position: relative;
-        display: table;
+    .image-noPaddingDiv .leftDiv {
+        float: left;
+        font-size: 1em;
     }
 
-        .imageDiv div {
-            padding: .6em 0;
+        .image-noPaddingDiv .leftDiv p:first-child {
+            text-align: left;
+            padding: 0 0 .2em 0;
+            font-size: 1.1em;
+            font-weight: bold;
         }
-
-        .imageDiv .leftDiv {
-            float: left;
-            font-size: 0.8em;
-        }
-
-            .imageDiv .leftDiv p:first-child {
-                text-align: left;
-                padding: 0 0 .2em 0;
-                font-size: 1.2em;
-            }
-
-        .imageDiv .rightDiv {
-            float: right;
-            font-size: 1.2em;
-            padding: 0 .5em;
-        }
-
+    /****************IMAGE LABEL DETAILS END**********************/
     .lowercontent {
         background-color: #febe00;
         height: auto;
@@ -621,15 +602,19 @@
         text-align: center;
         font-size: 1.8em;
     }
+
+    .spinner img {
+        transform: scale(.5);
+    }
 }
 /*******************IPAD AND OTHER LARGER TABS IS PORTRAIT MODE***********************/
-@media only screen and (min-width: 750px) {
+@media only screen and (min-width: 750px) and (orientation:portrait) {
     .location {
         top: -5em;
     }
 }
 
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 800px) and (orientation:landscape) {
     /*.bestMonthsToVisitWrapper {       
         font-size: 1.2em;
     }*/

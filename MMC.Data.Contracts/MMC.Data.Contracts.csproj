@@ -63,6 +63,7 @@
     <Compile Include="Repository Interfaces\IGuestInformationMasterRepository.cs" />
     <Compile Include="Repository Interfaces\ILocationDetailsRepository.cs" />
     <Compile Include="Repository Interfaces\ILocationMasterRepository.cs" />
+    <Compile Include="Repository Interfaces\ITopOfferMappingRepository.cs" />
     <Compile Include="Repository Interfaces\ITopOffersRepository.cs" />
     <Compile Include="Repository Interfaces\ITouristSeasonsRepository.cs" />
     <Compile Include="Repository Interfaces\IUserApplicationActivityRepository.cs" />

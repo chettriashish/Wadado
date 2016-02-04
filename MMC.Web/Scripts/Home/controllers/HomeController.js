@@ -52,28 +52,16 @@
                 $.each($scope.topActivity, function (key, value) {
 
                     if (WURFL.form_factor == "Smartphone") {
-                        if (window.styleMedia.matchMedium("screen and (max-width:500px)")) {
-                            $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + "_portrait.jpg";
-                        }
-                        else if (window.styleMedia.matchMedium("screen and (min-width:550px)")) {
-                            $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + "_landscape.jpg";
-                        }
+                        $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].ImageURL + "_landscape.jpg";                      
                     }
                     else {
-                        if (window.styleMedia.matchMedium("screen and (max-width:800px)")) {
-                            $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + "_portrait.jpg";
-
-                        }
-                        else if (window.styleMedia.matchMedium("screen and (min-width:900px)")) {
-                            $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + "_landscape.jpg";
-
-                        }
+                        $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].ImageURL + "_landscape.jpg";                        
                     }
                 });
             }
             else {
                 $.each($scope.topActivity, function (key, value) {
-                    $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].DefaultActivityImage.ImageURL + ".jpg";
+                    $scope.topActivity[key].ImageURL = Wadado.rootPath + "/" + $scope.topActivity[key].ImageURL + ".jpg";
                 });
             }
         };
@@ -95,18 +83,17 @@
         var setCarasoulImages = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.topOffer, function (key, value) {
-
                     if (WURFL.form_factor == "Smartphone") {
-                        $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
+                        $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].ImageURL + "_landscape.jpg";
                     }
                     else {
-                        $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + "_landscape.jpg";
+                        $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].ImageURL + "_landscape.jpg";
                     }
                 });
             }
             else {
                 $.each($scope.topOffer, function (key, value) {
-                    $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].Offer.ImageUrl + ".jpg";
+                    $scope.topOffer[key].ImageURL = Wadado.rootPath + "/" + $scope.topOffer[key].ImageURL + ".jpg";
                 });
             }
             if (sliderInit == true) {
@@ -116,7 +103,7 @@
                 setTimeout(function () {
                     sliderInit = true;
                     HomeDataService.setSlider();
-                }, 100);
+                }, 1);
             }
         };
 
@@ -134,8 +121,8 @@
         /*END LATEST NEWS*/
 
         $(window).resize(function () {
-            setImages();
-            setCarasoulImages();
+            //setImages();
+            //setCarasoulImages();
             if (!WURFL.is_mobile) {
                 setBackground();
             }
@@ -200,9 +187,9 @@
                 $.each(allActivities, function (key, value) {
                     var count = 0;
                     allActivities[key].ratingURL = [];
-                    var result = Math.round(allActivities[key].Activity.AverageUserRating);
+                    var result = Math.round(allActivities[key].Rating);
                     var half = false;
-                    if (result > allActivities[key].Activity.AverageUserRating) {
+                    if (result > allActivities[key].Rating) {
                         result = result - 1;
                         half = true;
                     }

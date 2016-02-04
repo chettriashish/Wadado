@@ -15,11 +15,7 @@ namespace MMC.Business.Entities
         [DataMember]
         public string TopOffersKey { get; set; }
         [DataMember]
-        public string LocationKey { get; set; }
-        [DataMember]
-        public string ActivityKey { get; set; }
-        [DataMember]
-        public decimal Discount { get; set; }
+        public string LocationKey { get; set; }       
         [DataMember]
         public DateTime OfferStartDate { get; set; }
         [DataMember]

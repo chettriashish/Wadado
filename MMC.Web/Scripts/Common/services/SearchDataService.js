@@ -26,7 +26,7 @@
         return {
             getAllLocations: getAllLocations,
             getAllActivitiesForLocation: getAllActivitiesForLocation,
-            getSelectedDetails: getSelectedDetails,
+            getSelectedDetails: getSelectedDetails,           
         };
     };
     app.factory("SearchDataService", searchDataService);

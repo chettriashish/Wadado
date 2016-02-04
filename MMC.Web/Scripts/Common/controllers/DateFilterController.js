@@ -18,6 +18,7 @@
                 $("#to").removeClass("open");
                 $("#from").addClass("open");
             }
+            allowScrolling();
         }
         $scope.filterActivitiesByDates = function () {
             if ($scope.selectedStartDate == '') {
@@ -53,13 +54,24 @@
         }
         $("#dateFilter").click(function () {
             $(".mobile-date").toggleClass("open");
+            preventScrolling()
         });
         $("#dateRange").click(function () {
             $(".mobile-date").toggleClass("open");
+            preventScrolling()
         });
         $scope.closeDateFilter = function () {
             resetDefaults();
         }
+
+        var preventScrolling = function () {
+            $('body').bind('touchmove', function (e) { e.preventDefault() });
+        }
+
+        var allowScrolling = function () {
+            $('body').unbind('touchmove');
+        }
+
         $scope.$on("CLEARDATEFILTER", function (event, args) {
             if (args === true) {
                 $scope.selectedStartDate = '';

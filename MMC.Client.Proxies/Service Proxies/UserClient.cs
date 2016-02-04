@@ -64,9 +64,9 @@ namespace MMC.Client.Proxies
             return Channel.RemoveFromFavorites(guestKey, activityKey, userAgent);
         }
 
-        public IEnumerable<ActivitySummaryDataContract> GetFavorites(string guestKey, string userAgent)
+        public IEnumerable<ActivitySummaryDataContract> GetFavoriteActivities(string guestKey, string userAgent)
         {
-            return Channel.GetFavorites(guestKey, userAgent);
+            return Channel.GetFavoriteActivities(guestKey, userAgent);
         }
         public bool CheckForActivityInFavorites(string guestKey, string activityKey)
         {

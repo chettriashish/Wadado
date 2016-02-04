@@ -28,6 +28,8 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public string ActivityCategory { get; set; }
         [DataMember]
+        public string ActivityCategoryKey { get; set; }
+        [DataMember]
         public string Location { get; set; }        
         [DataMember]
         public decimal Cost { get; set; }

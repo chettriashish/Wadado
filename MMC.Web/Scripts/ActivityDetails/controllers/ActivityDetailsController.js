@@ -33,10 +33,9 @@
     });
     var activityDetailsController = function ($scope, $http, $timeout, $interval, $location, $routeParams, ActivityDetailsDataService) {
         var sliderInit = false;
-        var similarActivitiesInit = false;        
+        var similarActivitiesInit = false;
         var setActivityImages = function () {
             $scope.ImageURL = [];
-
             if (WURFL.is_mobile) {
                 $scope.selectedActivityDetails.ActivityImagesURL = {};
                 $.each($scope.selectedActivityDetails.ActivityImages, function (key, value) {
@@ -58,17 +57,22 @@
                     }
                 });
             }
+            else {
+                $.each($scope.selectedActivityDetails.ActivityImages, function (key, value) {
+                    $scope.selectedActivityDetails.ActivityImagesURL[key] = Wadado.rootPath + "/" + $scope.selectedActivityDetails.ActivityImages[key] + ".jpg";
+                });
+            }
             if (sliderInit == true) {
                 $scope.$apply();
             }
             else if (sliderInit == false) {
                 setTimeout(function () {
                     ActivityDetailsDataService.setActivityImageSlider();
-                }, 100);
+                }, 1);
             }
         };
 
-        var setSimilarActivityImages = function () {                        
+        var setSimilarActivityImages = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.selectedActivityDetails.SimilarActivities, function (key, value) {
                     if (WURFL.form_factor == "Smartphone") {
@@ -86,8 +90,8 @@
                 setTimeout(function () {
                     if ($scope.greaterThan) {
                         ActivityDetailsDataService.setSimilarActivityImageSlider();
-                    }                    
-                }, 100);
+                    }
+                }, 1);
             }
         };
         /*START SELECTED ACTIVITY TYPE*/
@@ -106,8 +110,8 @@
         ActivityDetailsDataService.getSelectedActivityDetails().then(function (selectedActivityDetails) {
             $scope.selectedActivityDetails = selectedActivityDetails;
             /*SET LOCATION FOR ACTIVITY ONLY IF THE THE ACTIVITY EXISTS AND DATA IS RETURNED FROM THE SERVER CORRECTLY*/
-            if ($.url().segment().length > 2) {
-                if ($.url().segment(2).trim().length > 0 && $.url().segment(3).trim().length) {
+            if (purl().segment().length > 2) {
+                if (purl().segment(2).trim().length > 0 && purl().segment(3).trim().length) {
                     setActivityImages();
                     if ($scope.selectedActivityDetails.SimilarActivities.length > 1) {
                         $scope.greaterThan = true;
@@ -118,7 +122,7 @@
                     setSimilarActivityImages();
                     setRating();
                     $scope.NumberOfPeople = $scope.selectedActivityDetails.MinPeople + "-" + $scope.selectedActivityDetails.MaxPeople;
-                    $scope.selectedLocation = $.url().segment(2);
+                    $scope.selectedLocation = purl().segment(2);
                 }
             }
             $scope.showBookingDetails = function () {
@@ -198,21 +202,21 @@
                         //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
                         //    $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_gold.png";
                         //}
-                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_yellow.png";
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/full_star_white.png";
                         count++;
                     }
                     if (half) {
                         //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
                         //    $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_gold.png";
                         //}
-                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_yellow.png";
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/half_star_white.png";
                         count++;
                     }
                     for (i = count; i < 5 ; i++) {
                         //if (window.styleMedia.matchMedium("screen and (max-width:550px)")) {
                         //    $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_gold.png";
                         //}
-                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_yellow.png";
+                        $scope.selectedActivityDetails.SimilarActivities[key].ratingURL[count] = Wadado.rootPath + "/Images/Icons/line_star_white.png";
                         count++;
                     }
                 });

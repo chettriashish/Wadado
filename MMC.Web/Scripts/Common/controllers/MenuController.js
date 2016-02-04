@@ -58,8 +58,8 @@
 
         $scope.Login = function () {
             var returnURL = '';
-            for (i = 1; i <= $.url().segment().length ; i++) {
-                returnURL = returnURL + $.url().segment(i) + "/";
+            for (i = 1; i <= purl().segment().length ; i++) {
+                returnURL = returnURL + purl().segment(i) + "/";
             }
             if ($scope.userDetails == null) {
                 MenuDataService.loginUser(returnURL);

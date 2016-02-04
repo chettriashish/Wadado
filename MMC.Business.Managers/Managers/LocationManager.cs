@@ -27,9 +27,7 @@ namespace MMC.Business.Managers
         public LocationManager(IDataRepositoryFactory dataRepositoryFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
-        } 
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]
-        [PrincipalPermission(SecurityAction.Demand, Name = Security.MMCUser)]        
+        }       
         public IEnumerable<LocationsMaster> GetAllLocations()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -42,8 +40,7 @@ namespace MMC.Business.Managers
                 return allLocations;
             });
         }
-        [OperationBehavior(TransactionScopeRequired = true)]
-        [PrincipalPermission(SecurityAction.Demand, Role = Security.MMCAdminRole)]          
+        [OperationBehavior(TransactionScopeRequired = true)]        
         public void CreateNewLocation(LocationsMaster location)
         {
             ExecuteFaultHandledOperation(() =>

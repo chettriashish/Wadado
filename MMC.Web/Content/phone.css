@@ -52,11 +52,11 @@
 }
 
 .like-container img {
-    transform-style:initial;
+    transform-style: initial;
 }
 /*-----------LANDSCAPE MODE FOR SMALLER PHONES-------------*/
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 480px) and (orientation:landscape) {
     .column-0 {
         width: 1em;
         float: left;
@@ -248,26 +248,47 @@
     }
 
         img.scale, object.scale, .crop-height img {
-            display: block; /* corrects small inline gap at bottom of containing div */
-            max-width: 100%;
-            /* just in case, to force correct aspect ratio */
-            height: auto !important;
-            width: auto\9; /* ie8+9 */
-            /* lt ie8 */
-            -ms-interpolation-mode: bicubic;
-            background-position: center;
-            /* force a minimum size if img src size is known */
-            /* min-height: 320px; /* max-height of .crop-height */
-            /* min-width: 480px; /* consistent with image ratio */
-            /* optionally center if img src is not as wide as div */
-            /* margin: 0 auto; */
+            margin: -15% auto 0;
         }
+
+    /****************IMAGE LABEL DETAILS START**********************/
+    .imageDiscountLabel {
+        width: 3em;
+    }
+
+        .imageDiscountLabel div {
+            padding: 0em 1px;
+            font-size: 1em;
+        }
+
+            .imageDiscountLabel div div {
+                font-weight: 500;
+                font-size: 1.1em;
+            }
+
+                .imageDiscountLabel div div:first-of-type {
+                    font-size: 1.1em;
+                    font-weight: 500;
+                }
+
+     .leftDiv {
+        float: left;
+        font-size: 1.1em;
+    }
+
+        .image-noPaddingDiv .leftDiv p:first-child {
+            text-align: left;
+            padding: 0 0 .2em 0;
+            font-size: 1em;
+        }
+
+    /****************IMAGE LABEL DETAILS END**********************/
 }
 
 
 
 /********************LANDSCAPE FOR PHABLETS*********************/
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 640px) and (orientation:landscape) {
 
     .column--true-12, .column--true-9, .column--true-7, .column--true-6, .column--true-5, .column--true-4, .column--true-3, .column--true-2 {
         padding: 0px;
@@ -309,16 +330,6 @@
 
     .column--true-2 {
         width: 16.6%;
-    }
-
-    .imageDiv {
-        position: relative;
-        background-color: rgba(0,0,0,.6);
-        padding: .5em .5em;
-        width: 100%;
-        height: 4em;
-        margin-top: -4em;
-        color: white;
     }
 
     .right {

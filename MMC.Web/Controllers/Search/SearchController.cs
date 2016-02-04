@@ -1,4 +1,5 @@
-﻿using MMC.Client.Entities;
+﻿using MMC.Client.Contracts.DataContracts;
+using MMC.Client.Entities;
 using MMC.Web.Contracts;
 using MMC.Web.Model;
 using System;
@@ -18,7 +19,7 @@ namespace MMC.Web.Controllers.Search
         }
         public ActionResult GetAllActivitiesForLocation(string locationKey)
         {
-            IEnumerable<ActivitiesMaster> result = _searchDataService.GetAllActivitiesForLocation(Request.UserAgent, locationKey);
+            IEnumerable<ActivitySummaryDataContract> result = _searchDataService.GetAllActivitiesForLocation(Request.UserAgent, locationKey);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         public ActionResult GetAllLocations()

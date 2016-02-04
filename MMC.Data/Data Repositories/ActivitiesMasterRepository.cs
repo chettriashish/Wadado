@@ -152,18 +152,36 @@ namespace MMC.Data.DataRepositories
                                             on entity.ActivityTypeKey equals entity1.ActivityTypeKey
                                             where entity1.ActivityTypeKey == activity.ActivityTypeKey
                                             && entity.ActivitesKey != activity.ActivitesKey
-                                            && entity.LocationKey == locationKey                                            
+                                            && entity.LocationKey == locationKey
                                             select new ActivitySummaryDataContract()
                                             {
                                                 ActivityKey = entity.ActivitesKey,
-                                                ActivityName = entity.Name,                                                                                                
+                                                ActivityName = entity.Name,
                                                 ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
                                                 Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationKey,
-                                                Rating = entity.AverageUserRating,                                                
-                                                IsSpecialOffer = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ? true : false,
+                                                Rating = entity.AverageUserRating,
+                                                IsSpecialOffer = ((from e1 in entityContext.TopOffersSet
+                                                                   join e2 in entityContext.TopOfferMappingSet
+                                                                   on e1.TopOffersKey equals e2.TopOfferKey
+                                                                   where e1.LocationKey == locationKey
+                                                                   && e2.MappingType == RepositoryResource.SINGLE
+                                                                   && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                                   select e2).Count() > 0 ? true : false),
                                                 Cost = entity.Cost,
-                                                Discount = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ?
-                                                entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).FirstOrDefault().Discount : 0
+                                                Discount = ((from e1 in entityContext.TopOffersSet
+                                                             join e2 in entityContext.TopOfferMappingSet
+                                                             on e1.TopOffersKey equals e2.TopOfferKey
+                                                             where e1.LocationKey == locationKey
+                                                             && e2.MappingType == RepositoryResource.SINGLE
+                                                             && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                             select e1).Count()) > 0 ?
+                                                (from e1 in entityContext.TopOffersSet
+                                                 join e2 in entityContext.TopOfferMappingSet
+                                                 on e1.TopOffersKey equals e2.TopOfferKey
+                                                 where e1.LocationKey == locationKey
+                                                 && e2.MappingType == RepositoryResource.SINGLE
+                                                 && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                 select e2).FirstOrDefault().Discount : 0
                                             }).Take(6).ToList();
 
                 if (result.SimilarActivities.Count() < 6)
@@ -182,10 +200,28 @@ namespace MMC.Data.DataRepositories
                                                     ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
                                                     Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationKey,
                                                     Rating = entity.AverageUserRating,
-                                                    IsSpecialOffer = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ? true : false,
+                                                    IsSpecialOffer = ((from e1 in entityContext.TopOffersSet
+                                                                       join e2 in entityContext.TopOfferMappingSet
+                                                                       on e1.TopOffersKey equals e2.TopOfferKey
+                                                                       where e1.LocationKey == locationKey
+                                                                       && e2.MappingType == RepositoryResource.SINGLE
+                                                                       && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                                       select e2).Count() > 0 ? true : false),
                                                     Cost = entity.Cost,
-                                                    Discount = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ?
-                                                    entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).FirstOrDefault().Discount : 0                                                    
+                                                    Discount = ((from e1 in entityContext.TopOffersSet
+                                                                 join e2 in entityContext.TopOfferMappingSet
+                                                                 on e1.TopOffersKey equals e2.TopOfferKey
+                                                                 where e1.LocationKey == locationKey
+                                                                 && e2.MappingType == RepositoryResource.SINGLE
+                                                                 && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                                 select e1).Count()) > 0 ?
+                                                (from e1 in entityContext.TopOffersSet
+                                                 join e2 in entityContext.TopOfferMappingSet
+                                                 on e1.TopOffersKey equals e2.TopOfferKey
+                                                 where e1.LocationKey == locationKey
+                                                 && e2.MappingType == RepositoryResource.SINGLE
+                                                 && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                 select e2).FirstOrDefault().Discount : 0
                                                 }).Take(activitiesToBeRetrieved).ToList();
                 }
 
@@ -206,7 +242,7 @@ namespace MMC.Data.DataRepositories
                                                && entity.IsDeleted == false
                                                select entity).ToList().FirstOrDefault().Date;
                 }
-                else if(result.SimilarActivities != null)
+                else if (result.SimilarActivities != null)
                 {
                     foreach (var item in result.SimilarActivities)
                     {
@@ -310,11 +346,29 @@ namespace MMC.Data.DataRepositories
                               Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationName,
                               Rating = entity.AverageUserRating,
                               ThumbNailURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
-                              IsSpecialOffer = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ? true : false,
+                              IsSpecialOffer = ((from e1 in entityContext.TopOffersSet
+                                                 join e2 in entityContext.TopOfferMappingSet
+                                                 on e1.TopOffersKey equals e2.TopOfferKey
+                                                 where e1.LocationKey == locationKey
+                                                 && e2.MappingType == RepositoryResource.SINGLE
+                                                 && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                 select e2).Count() > 0 ? true : false),
                               Cost = entity.Cost,
                               Currency = entity.Currency,
-                              Discount = entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).Count() > 0 ?
-                              entityContext.TopOffersSet.Where(e => e.ActivityKey == entity.ActivitesKey && (e.OfferStartDate <= DateTime.Now && e.OfferEndDate > DateTime.Now)).FirstOrDefault().Discount : 0
+                              Discount = ((from e1 in entityContext.TopOffersSet
+                                           join e2 in entityContext.TopOfferMappingSet
+                                           on e1.TopOffersKey equals e2.TopOfferKey
+                                           where e1.LocationKey == locationKey
+                                           && e2.MappingType == RepositoryResource.SINGLE
+                                           && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                           select e1).Count()) > 0 ?
+                                               (from e1 in entityContext.TopOffersSet
+                                                join e2 in entityContext.TopOfferMappingSet
+                                                on e1.TopOffersKey equals e2.TopOfferKey
+                                                where e1.LocationKey == locationKey
+                                                && e2.MappingType == RepositoryResource.SINGLE
+                                                && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                select e2).FirstOrDefault().Discount : 0
                           }).ToList();
 
                 foreach (var item in result)

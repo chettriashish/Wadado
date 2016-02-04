@@ -1,4 +1,5 @@
-﻿using MMC.Client.Entities;
+﻿using MMC.Client.Contracts.DataContracts;
+using MMC.Client.Entities;
 using MMC.Common.Contracts.ServiceContracts;
 using MMC.Web.Contracts;
 using MMC.Web.Model;
@@ -13,38 +14,34 @@ namespace MMC.Web.Services
     {
         const string MOBILE = "_mobile";
         const string TABLET = "_tab";
-        public IEnumerable<TopOffersModel> GetTopOffers(string userAgent)
+        public IEnumerable<TopOffersDataContract> GetTopOffers(string userAgent)
         {
             var deviceInfo = WURFL.WURFLManagerBuilder.Instance.GetDeviceForRequest(userAgent);
-            IEnumerable<TopOffersModel> results = GetDummyTopOffers();
+            IEnumerable<TopOffersDataContract> results = GetDummyTopOffers();
             if (deviceInfo.GetVirtualCapability("is_mobile") == "true")
             {
                 if (deviceInfo.GetVirtualCapability("is_smartphone") == "true")
                 {
                     foreach (var item in results)
                     {
-                        item.Offer.ImageUrl = string.Format("{0}{1}", item.Offer.ImageUrl, MOBILE);
+                        item.ImageURL = string.Format("{0}{1}", item.ImageURL, MOBILE);
                     }
                 }
                 else
                 {
                     foreach (var item in results)
                     {
-                        item.Offer.ImageUrl = string.Format("{0}{1}", item.Offer.ImageUrl, TABLET);
+                        item.ImageURL = string.Format("{0}{1}", item.ImageURL, TABLET);
                     }
                 }
-            }
-            else
-            {
-                ///Then the viewing device is a desktop
-            }
+            }           
             return results;
         }
 
-        public IEnumerable<ActivitiesModel> GetTrendingActivities(string userAgent)
+        public IEnumerable<ActivitySummaryDataContract> GetTrendingActivities(string userAgent)
         {
             var deviceInfo = WURFL.WURFLManagerBuilder.Instance.GetDeviceForRequest(userAgent);
-            IEnumerable<ActivitiesModel> results = GetDummyData(userAgent);
+            IEnumerable<ActivitySummaryDataContract> results = GetDummyData(userAgent);
 
             if (deviceInfo.GetVirtualCapability("is_mobile") == "true")
             {
@@ -52,210 +49,152 @@ namespace MMC.Web.Services
                 {
                     foreach (var item in results)
                     {
-                        item.DefaultActivityImage.ImageURL = string.Format("{0}{1}", item.DefaultActivityImage.ImageURL, MOBILE);
+                        item.ImageURL = string.Format("{0}{1}", item.ImageURL, MOBILE);
                     }
                 }
                 else
                 {                    
                     foreach (var item in results)
                     {
-                        item.DefaultActivityImage.ImageURL = string.Format("{0}{1}", item.DefaultActivityImage.ImageURL, TABLET);                    
+                        item.ImageURL = string.Format("{0}{1}", item.ImageURL, TABLET);                    
                     }
                 }
             }            
             return results;
         }
-        private IEnumerable<ActivitiesModel> GetDummyData(string userAgent)
+        private IEnumerable<ActivitySummaryDataContract> GetDummyData(string userAgent)
         {
-            List<ActivitiesModel> results = new List<ActivitiesModel>();
+            List<ActivitySummaryDataContract> results = new List<ActivitySummaryDataContract>();
             var deviceInfo = WURFL.WURFLManagerBuilder.Instance.GetDeviceForRequest(userAgent);
 
-            ActivitiesModel activityOne = new ActivitiesModel();
-            activityOne.Activity = new ActivitiesMaster();
-            activityOne.DefaultActivityImage = new ActivityImages();
+            ActivitySummaryDataContract activityOne = new ActivitySummaryDataContract();
 
-            ((ActivitiesMaster)activityOne.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)activityOne.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityOne.Activity).AverageUserRating =Convert.ToDecimal(3.5);
-            ((ActivitiesMaster)activityOne.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityOne.Activity).Address = "Gangtok,Sikkim";
-            ((ActivitiesMaster)activityOne.Activity).Cost = 1000;
-            ((ActivityImages)activityOne.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
-            ((ActivityImages)activityOne.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-           
-            
-        
-
-            ActivitiesModel activityTwo = new ActivitiesModel();
-            activityTwo.Activity = new ActivitiesMaster();
-            activityTwo.DefaultActivityImage = new ActivityImages();
-
-            ((ActivitiesMaster)activityTwo.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)activityTwo.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityTwo.Activity).AverageUserRating = 3;
-            ((ActivitiesMaster)activityTwo.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityTwo.Activity).Address = "Rumtek,Sikkim";
-            ((ActivitiesMaster)activityTwo.Activity).Cost = 2000;
-            ((ActivityImages)activityTwo.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
-            ((ActivityImages)activityTwo.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-            
-            
-
-            ActivitiesModel activityThree = new ActivitiesModel();
-            activityThree.Activity = new ActivitiesMaster();
-            activityThree.DefaultActivityImage = new ActivityImages();
-
-            ((ActivitiesMaster)activityThree.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)activityThree.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityThree.Activity).AverageUserRating = Convert.ToDecimal(4.5);
-            ((ActivitiesMaster)activityThree.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityThree.Activity).Address = "Melli,Sikkim";
-            ((ActivitiesMaster)activityThree.Activity).Cost = 3000;
-            ((ActivityImages)activityThree.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
-            ((ActivityImages)activityThree.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-
-            ActivitiesModel activityFour = new ActivitiesModel();
-            activityFour.Activity = new ActivitiesMaster();
-            activityFour.DefaultActivityImage = new ActivityImages();
-
-            ((ActivitiesMaster)activityFour.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)activityFour.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityFour.Activity).AverageUserRating = 4;
-            ((ActivitiesMaster)activityFour.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityFour.Activity).Address = "Gangtok,Sikkim";
-            ((ActivitiesMaster)activityFour.Activity).Cost = 1000;
-            ((ActivityImages)activityFour.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
-            ((ActivityImages)activityFour.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-
-
-
-
-            ActivitiesModel activityFive = new ActivitiesModel();
-            activityFive.Activity = new ActivitiesMaster();
-            activityFive.DefaultActivityImage = new ActivityImages();
-
-            ((ActivitiesMaster)activityFive.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)activityFive.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activityFive.Activity).AverageUserRating = 3;
-            ((ActivitiesMaster)activityFive.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activityFive.Activity).Address = "Rumtek,Sikkim";
-            ((ActivitiesMaster)activityFive.Activity).Cost = 2000;
-            ((ActivityImages)activityFive.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
-            ((ActivityImages)activityFive.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-
-
-
-            ActivitiesModel activitySix = new ActivitiesModel();
-            activitySix.Activity = new ActivitiesMaster();
-            activitySix.DefaultActivityImage = new ActivityImages();
-
-            ((ActivitiesMaster)activitySix.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)activitySix.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)activitySix.Activity).AverageUserRating = Convert.ToDecimal(4.5);
-            ((ActivitiesMaster)activitySix.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)activitySix.Activity).Address = "Melli,Sikkim";
-            ((ActivitiesMaster)activitySix.Activity).Cost = 3000;
-            ((ActivityImages)activitySix.DefaultActivityImage).ActivityKey = "ACTIVITY ONE";
-            ((ActivityImages)activitySix.DefaultActivityImage).ActivityImageKey = "ACTIVITY ONE IMAGE";
-
-            ((ActivityImages)activityOne.DefaultActivityImage).ImageURL = "Images/khukuri1";
-            ((ActivityImages)activityTwo.DefaultActivityImage).ImageURL = "Images/maruni1";
-            ((ActivityImages)activityThree.DefaultActivityImage).ImageURL = "Images/buttermilk2";
-            ((ActivityImages)activityFour.DefaultActivityImage).ImageURL = "Images/village2";
-            ((ActivityImages)activityFive.DefaultActivityImage).ImageURL = "Images/village1";
-            ((ActivityImages)activitySix.DefaultActivityImage).ImageURL = "Images/village3";
-
+            activityOne.ActivityKey = "ACTIVITY ONE";
+            activityOne.ActivityName = "Learn the art of the famous traditional gurkha khukuri";
+            activityOne.Rating = Convert.ToDecimal(3.5);            
+            activityOne.Cost = 1000;
+            activityOne.Currency = "INR";
+            activityOne.ImageURL = "Images/khukuri1";
             results.Add(activityOne);
+
+
+            ActivitySummaryDataContract activityTwo = new ActivitySummaryDataContract();
+            activityTwo.ActivityKey = "ACTIVITY TWO";
+            activityTwo.ActivityName = "Enjoy a tradional maruni dance performance";
+            activityTwo.Rating = Convert.ToDecimal(3.5);
+            activityTwo.Cost = 1000;
+            activityTwo.Currency = "INR";
+            activityTwo.ImageURL = "Images/maruni1";
             results.Add(activityTwo);
+
+            ActivitySummaryDataContract activityThree = new ActivitySummaryDataContract();
+            activityThree.ActivityKey = "ACTIVITY THREE";
+            activityThree.ActivityName = "Explore the villages of Sikkim and learn and enjoy the old art of butter milk making.";
+            activityThree.Rating = Convert.ToDecimal(3.5);
+            activityThree.Cost = 1000;
+            activityThree.Currency = "INR";
+            activityThree.ImageURL = "Images/buttermilk2";
             results.Add(activityThree);
+
+
+            ActivitySummaryDataContract activityFour = new ActivitySummaryDataContract();
+            activityFour.ActivityKey = "ACTIVITY FOUR";
+            activityFour.ActivityName = "Learn and buy tradiional handicrafts";
+            activityFour.Rating = Convert.ToDecimal(3.5);
+            activityFour.Cost = 1000;
+            activityFour.Currency = "INR";
+            activityFour.ImageURL = "Images/village2";
             results.Add(activityFour);
+
+            ActivitySummaryDataContract activityFive = new ActivitySummaryDataContract();
+            activityFive.ActivityKey = "ACTIVITY FIVE";
+            activityFive.ActivityName = "Enjoy a tradional nepali village meal";
+            activityFive.Rating = Convert.ToDecimal(3.5);
+            activityFive.Cost = 1000;
+            activityFive.Currency = "INR";
+            activityFive.ImageURL = "Images/village1";
             results.Add(activityFive);
-            results.Add(activitySix);
+
+            ActivitySummaryDataContract activitySix = new ActivitySummaryDataContract();
+            activitySix.ActivityKey = "ACTIVITY SIX";
+            activitySix.ActivityName = "Become a farmer for a day";
+            activitySix.Rating = Convert.ToDecimal(3.5);
+            activitySix.Cost = 1000;
+            activitySix.Currency = "INR";
+            activitySix.ImageURL = "Images/village3";
+            results.Add(activitySix);            
             return results;
         }
-        private IEnumerable<TopOffersModel> GetDummyTopOffers()
+        private IEnumerable<TopOffersDataContract> GetDummyTopOffers()
         {
-            List<TopOffersModel> result = new List<TopOffersModel>();
-            TopOffersModel offers1 = new TopOffersModel();
-            TopOffers topOffer1 = new TopOffers();
+            List<TopOffersDataContract> result = new List<TopOffersDataContract>();
+            TopOffersDataContract topOffer1 = new TopOffersDataContract();            
             topOffer1.TopOffersKey = "TOPOFFER1";
             topOffer1.Discount = 10;
-            topOffer1.ImageUrl = "Images/khukuri2";
-            offers1.Offer = topOffer1;
-            offers1.Activity = new ActivitiesMaster();
-            ((ActivitiesMaster)offers1.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)offers1.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers1.Activity).AverageUserRating = Convert.ToDecimal(3.5);
-            ((ActivitiesMaster)offers1.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)offers1.Activity).Address = "LOREM IPSUM";
-            ((ActivitiesMaster)offers1.Activity).Cost = 1000;
-            offers1.DiscountedPrice = 800;
-            result.Add(offers1);
+            topOffer1.Cost = 450;
+            topOffer1.ImageURL = "Images/khukuri2";
+            topOffer1.Currency = "INR";
+            topOffer1.Key = "ACTIVITY ONE";
+            topOffer1.Location = "GANGTOK";
+            topOffer1.OfferType = "Activities";
+            topOffer1.Value = "LOREM IPSUM";
+            topOffer1.Rating = 3M;
+            result.Add(topOffer1);
 
-            TopOffersModel offers2 = new TopOffersModel();
-            TopOffers topOffer2 = new TopOffers();
-            topOffer2.TopOffersKey = "TOPOFFER1";
+            TopOffersDataContract topOffer2 = new TopOffersDataContract();
+            topOffer2.TopOffersKey = "TOPOFFER2";
             topOffer2.Discount = 10;
-            topOffer2.ImageUrl = "Images/khukuri1";
-            offers2.Offer = topOffer2;
-            offers2.Activity = new ActivitiesMaster();
-            ((ActivitiesMaster)offers2.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)offers2.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers2.Activity).AverageUserRating = 3;
-            ((ActivitiesMaster)offers2.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)offers2.Activity).Address = "LOREM IPSUM";
-            ((ActivitiesMaster)offers2.Activity).Cost = 1000;
-            offers2.DiscountedPrice = 800;
-            result.Add(offers2);
+            topOffer2.Cost = 500;
+            topOffer2.ImageURL = "Images/khukuri1";
+            topOffer2.Currency = "INR";
+            topOffer2.Key = "ACTIVITY TWO";
+            topOffer2.Location = "GANGTOK";
+            topOffer2.OfferType = "Activities";
+            topOffer2.Value = "LOREM IPSUM";
+            topOffer2.Rating = 3.5M;
+            result.Add(topOffer2);
 
-            TopOffersModel offers3 = new TopOffersModel();
-            TopOffers topOffer3 = new TopOffers();
-            topOffer3.TopOffersKey = "TOPOFFER1";
-            topOffer3.Discount = 10;
-            topOffer3.ImageUrl = "Images/maruni1";
-            offers3.Offer = topOffer3;
-            offers3.Activity = new ActivitiesMaster();
-            ((ActivitiesMaster)offers3.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)offers3.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers3.Activity).AverageUserRating = Convert.ToDecimal(4.5);
-            ((ActivitiesMaster)offers3.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)offers3.Activity).Address = "LOREM IPSUM";
-            ((ActivitiesMaster)offers3.Activity).Cost = 1000;
-            offers3.DiscountedPrice = 800;
-            result.Add(offers3);
 
-            TopOffersModel offers5 = new TopOffersModel();
-            TopOffers topOffer5 = new TopOffers();
-            topOffer5.TopOffersKey = "TOPOFFER1";
+            TopOffersDataContract topOffer3 = new TopOffersDataContract();
+            topOffer3.TopOffersKey = "TOPOFFER3";
+            topOffer3.Discount = 15;
+            topOffer3.Cost = 50;
+            topOffer3.ImageURL = "Images/maruni1";
+            topOffer3.Currency = "INR";
+            topOffer3.Key = "ACTIVITY THREE";
+            topOffer3.Location = "GANGTOK";
+            topOffer3.OfferType = "Activities";
+            topOffer3.Value = "LOREM IPSUM";
+            topOffer3.Rating = 4M;
+            result.Add(topOffer3);
+
+
+            TopOffersDataContract topOffer4 = new TopOffersDataContract();
+            topOffer4.TopOffersKey = "TOPOFFER4";
+            topOffer4.Discount = 12;
+            topOffer4.Cost = 100;
+            topOffer4.ImageURL = "Images/maruni2";
+            topOffer4.Currency = "INR";
+            topOffer4.Key = "ACTIVITY FOUR";
+            topOffer4.Location = "GANGTOK";
+            topOffer4.OfferType = "Activities";
+            topOffer4.Value = "LOREM IPSUM";
+            topOffer4.Rating = 4.5M;
+            result.Add(topOffer4);
+
+
+            TopOffersDataContract topOffer5 = new TopOffersDataContract();
+            topOffer5.TopOffersKey = "TOPOFFER5";
             topOffer5.Discount = 10;
-            topOffer5.ImageUrl = "Images/maruni2";
-            offers5.Offer = topOffer5;
-            offers5.Activity = new ActivitiesMaster();
-            ((ActivitiesMaster)offers5.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)offers5.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers5.Activity).AverageUserRating = Convert.ToDecimal(4.5);
-            ((ActivitiesMaster)offers5.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)offers5.Activity).Address = "LOREM IPSUM";
-            ((ActivitiesMaster)offers5.Activity).Cost = 1000;
-            offers5.DiscountedPrice = 800;
-            result.Add(offers5);
-
-            TopOffersModel offers4 = new TopOffersModel();
-            TopOffers topOffer4 = new TopOffers();
-            topOffer4.TopOffersKey = "TOPOFFER1";
-            topOffer4.Discount = 10;
-            topOffer4.ImageUrl = "Images/village2";
-            offers4.Offer = topOffer4;
-            offers4.Activity = new ActivitiesMaster();
-            ((ActivitiesMaster)offers4.Activity).ActivitesKey = "ACTIVITY ONE";
-            ((ActivitiesMaster)offers4.Activity).Name = "LOREM IPSUM";
-            ((ActivitiesMaster)offers4.Activity).AverageUserRating = 3;
-            ((ActivitiesMaster)offers4.Activity).Included = "A LOT OF THINGS";
-            ((ActivitiesMaster)offers4.Activity).Address = "LOREM IPSUM";
-            ((ActivitiesMaster)offers4.Activity).Cost = 1000;
-            offers4.DiscountedPrice = 800;
-            result.Add(offers4);
-
+            topOffer5.Cost = 150;
+            topOffer5.ImageURL = "Images/village2";
+            topOffer5.Currency = "INR";
+            topOffer5.Key = "ACTIVITY FIVE";
+            topOffer5.Location = "GANGTOK";
+            topOffer5.OfferType = "Activities";
+            topOffer5.Value = "LOREM IPSUM";
+            topOffer5.Rating = 4.5M;
+            result.Add(topOffer5);
             return result;
         }
         public IEnumerable<LocationsMaster> GetAllLocations()
