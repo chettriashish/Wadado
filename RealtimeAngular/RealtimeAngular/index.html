@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Gauge test</title>
+    <script src="Scripts/jquery-2.2.0.min.js"></script>
+    <script src="Scripts/jquery.signalR-2.2.0.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+
+    <script src="ext-modules/psWebMetricsService/psWebMetricsService.js"></script>
+    <script src="ext-modules/psGauge/psGaugeModule.js"></script>
+    <script src="ext-modules/psGauge/psGaugeDirective.js"></script>
+
+    <script src="signalr/hubs"></script>
+    <script src="app/appModule.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', { 'packages': ['gauge'] });
+        google.charts.setOnLoadCallback(function () {
+            angular.bootstrap(document, ['app']);
+        });
+    </script>
+</head>
+<body>
+    <h1>Gauge test</h1>
+    <ps-gauge></ps-gauge>
+</body>
+</html>
