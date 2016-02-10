@@ -221,7 +221,7 @@
                 }
                 getFilters();
                 setRating();
-                setImages();
+                setImages();                
             });
             /*END SELECTED ACTIVITY TYPE*/
         }
@@ -328,12 +328,15 @@
                 ActivityDataService.getSelectedActivitiesForSelectedLocation(activityType).then(function (response) {
                     $scope.allSelectedActivity = response;
                     $scope.ActivityType = response[0].ActivityCategory;
+                    $scope.ActivityIconURL = response[0].MapIconURL;
                     setRating();
                     setImages();
                     spinner();
                 });
             }
         }
+        
+
         /***************SHOW/HIDE THE LOADING SPINNER*************************/
         var spinner = function () {
             if ($('.spinner').hasClass('show')) {

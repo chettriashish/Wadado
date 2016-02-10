@@ -60,7 +60,10 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public string Currency { get; set; }
         [DataMember]
-        public string ActivityLocation { get; set; }
+        public string LocationLatLong { get; set; }
+
+        [DataMember]
+        public string LatLong { get; set; }
         [DataMember]
         public string DistanceFromNearestCity { get; set; }
         [DataMember]

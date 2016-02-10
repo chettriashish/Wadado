@@ -41,8 +41,16 @@ namespace MMC.Client.Proxies.Tests
             (proxy as ICommunicationObject).Open();
             //ActivityDetailsDataContract contract = new ActivityDetailsDataContract();
             //contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,9),new DateTime(2016,1,11), "smartphone");            
-            IEnumerable<ActivitySummaryDataContract> contract = proxy.GetAllActivitiesByLocationAndType("GANGTOK", "ADVENTURE", "smartphone");            
-            (proxy as ICommunicationObject).Close();
+            try
+            {
+                ActivityDetailsDataContract contract = proxy.GetAllActivities("GANGTOK", "MEDIUMFLY", "smartphone");
+                (proxy as ICommunicationObject).Close();
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+            
         }
     }
 }

@@ -83,6 +83,8 @@ namespace MMC.Data.DataRepositories
                     .Where(entity => entity.ActivityKey == activityKey)
                                                               .ToList();
 
+
+
                 result.ActivityCategory = activityCategory.ActivityCategory;
                 result.CancellationPolicy = activity.CancellationPolicy;
                 result.Cost = activity.Cost;
@@ -90,7 +92,8 @@ namespace MMC.Data.DataRepositories
                 result.Description = activity.Description;
                 result.DifficultyRating = activity.DifficultyRating;
                 result.Location = activity.Address;
-                result.ActivityLocation = activity.ActivityLocation;
+                result.LocationLatLong = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == locationKey).FirstOrDefault().LocationKey).FirstOrDefault().LatLng;
+                result.LatLong = activity.ActivityLocation;
                 result.DistanceFromNearestCity = activity.DistanceFromNearestCity;
                 result.NumAdults = activity.NumAdults;
                 result.CostForChild = activity.CostForChild;
@@ -102,7 +105,7 @@ namespace MMC.Data.DataRepositories
                 result.Duration = activity.Duration;
                 result.UserRating = activity.AverageUserRating;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
-                result.ActivityKey = activity.ActivitesKey;
+                result.ActivityKey = activity.ActivitesKey;                
                 foreach (var item in activityImages)
                 {
                     if (userAgent == RepositoryResource.SMARTPHONE)
@@ -353,6 +356,7 @@ namespace MMC.Data.DataRepositories
                                                  && e2.MappingType == RepositoryResource.SINGLE
                                                  && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
                                                  select e2).Count() > 0 ? true : false),
+                              LatLong = entity.ActivityLocation,
                               Cost = entity.Cost,
                               Currency = entity.Currency,
                               Discount = ((from e1 in entityContext.TopOffersSet

@@ -39,6 +39,9 @@ namespace MMC.Business.Contracts.DataContracts
         public decimal Discount { get; set; }
         [DataMember]
         public string ActivityType { get; set; }
-
+        [DataMember]
+        public string LatLong { get; set; }
+        [DataMember]
+        public string MapIconURL { get; set; }
     }
 }

@@ -1,10 +1,9 @@
 ﻿/***********************COMMON FOR ALL DESKTOP*********************************/
 
 /*-----CONTENT -----*/
-body {
-    min-width: 800px;
+body, #body {
+    min-width: 800px;    
 }
-
 .column-auto {
     float: left;
     padding: .4em 1em;
@@ -332,7 +331,48 @@ img.scale, object.scale, .crop-height:hover img {
         margin: -25% auto 0;
         height: 100%;
     }
+/*CROPPING IMAGES FOR MAPS INFO WINDOW*/
+.map-crop-height {
+    overflow: hidden;
+    max-height: 150px;
+    overflow: hidden;
+    object-fit: none; /* Do not scale the image */
+    object-position: center; /* Center the image within the element */
+}
 
+    .map-crop-height img {
+        width: 100%;
+        height: 100%;
+        display: block; /* corrects small inline gap at bottom of containing div */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        width: auto\9; /* ie8+9 */
+        /* lt ie8 */
+        -ms-interpolation-mode: bicubic;
+        background-position: top center;
+        margin: -15% auto 0;
+        height: 100%;
+    }
+
+.map-content {
+    font-size: 1.2em;
+    min-width: 5em;
+    width: auto;
+}
+
+    .map-content > div > div:nth-of-type(2) {
+        cursor: pointer;
+    }
+
+.map-label {
+    color: white;
+    font-family: "Lucida Grande", "Arial", sans-serif;
+    margin-top: 2px;
+    text-align: center;
+    white-space: nowrap;
+}
+/*END CROPPING IMAGES FOR MAPS INFO WINDOW*/
 .crop-height {
     overflow: hidden;
     max-height: 250px;
@@ -492,6 +532,8 @@ label {
         display: none;
     }
 
+/********************ACTIVITY CART END**************************/
+
 @media only screen and (min-width:600px) {
     .column-2 {
         width: 16.6%;
@@ -608,7 +650,11 @@ label {
             visibility: visible;
         }
     /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
-
+    .list-booking-wrapper > div:first-of-type {
+        float: left;
+        width: 25%;
+        padding: 0;
+    }
 }
 
 @media only screen and (min-width: 900px) {
@@ -617,6 +663,22 @@ label {
         border: 1px solid #8ec73f;
         padding: 0 .5em;
         border-radius: 2px;
+    }
+
+    /************ACTIVITY CART START**************/
+    .list-booking-wrapper .activitybookingDetails div:first-of-type {
+        font-size: 1.1em;
+        letter-spacing: 1px;
+        padding: 0 .5em 0 0;
+        float: left;
+        font-weight: 600;
+    }
+
+    .list-booking-wrapper .activitybookingDetails > div {
+        font-size: 1em;
+        padding: .1em .5em 0 0;
+        float: left;
+        font-weight: 500;
     }
 }
 
@@ -695,32 +757,18 @@ label {
         font-size: 1.2em;
         padding: 0 .5em 0 0;
     }
-    /*-----HEADER -----*/
-    /*header {
-        padding-top: 2em;
-        padding-bottom: 1em;
-    }*/
 
-    /*-----NAVIGATION -----*/
-    /*nav ul {
-        padding-left: 1%;
+    /*******SETTING MAP HEIGHT********/
+    .map-container > div:nth-of-type(2) {
+        position: relative;
+        min-height: 26em;
     }
 
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-
-        nav ul li {
-            width: auto;
-        }
-
-            nav ul li a {
-                padding: .2em 1.5em;
-            }*/
-
-    /*-----CONTENT -----*/
-
-
+    .list-booking-wrapper > div:first-of-type {
+        float: left;
+        width: 20%;
+        padding: 0;
+    }
 
 
     /*-----COLUMNS -----*/

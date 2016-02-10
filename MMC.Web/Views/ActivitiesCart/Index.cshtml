@@ -1,4 +1,151 @@
 ﻿@{
     ViewBag.Title = "WADADO.IN";
 }
-<h2>Cart</h2>
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Directives/Favorites/favoritesdirective.js"></script>
+
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--BOOKING REFERENCE-->
+<script src="~/Scripts/Common/services/BookingDataService.js"></script>
+<script src="~/Scripts/Common/controllers/BookingController.js"></script>
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
+<script src="~/Scripts/ActivitiesCart/controllers/ActivitiesCartController.js"></script>
+<script src="~/Scripts/ActivitiesCart/services/ActivitiesCartDataService.js"></script>
+
+<!--MAPS DIRECTIVE REFERENCE-->
+<script src="~/Scripts/Directives/Maps/MapsDirective.js"></script>
+
+<!--DATE REFERENCE-->
+<link href="~/Content/_date.css" rel="stylesheet" />
+<script src="~/Scripts/Directives/Date/DateDirective.js"></script>
+<script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>
+<link href="~/Content/tablet.css" rel="stylesheet" />
+<link href="~/Content/desktopmenu.css" rel="stylesheet" />
+<link href="~/Content/desktop.css" rel="stylesheet" />
+<div class="cover"></div>
+<div class="contentWrapper" data-ng-controller="ActivitiesCartController">
+    <div id="colorbar">
+    </div>
+    <div>
+        @Html.Partial("../Partial/_desktopmenu")
+    </div>
+    <div class="uppercontent" ng-cloak>
+        <div class="background grey">
+            <div class="column-12">
+                <div class="header-upper-noborder">
+                    <div>
+                        <span>Cart</span>
+                    </div>
+                </div>
+            </div>
+            <div class="column-7">
+                <div>
+                    <div class="column-top">
+                        <div class="labelHeader">
+                            <span>Items: {{Count}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ROW START-->
+            <div class="row">
+                <div class="column-7">                   
+                    <div class="background white">
+                        <div class="column-top">
+                        </div>                        
+                        <div class="column-top">
+                            <div ng-repeat="item in activities">
+                                <div class="list-booking-wrapper">
+                                    <div class="thumbnail-crop-height">
+                                        <img ng-src="{{item.ImageURL}}" />
+                                    </div>
+                                    <div class="activitybookingDetails">
+                                        <div>
+                                            <span>{{item.ActivityWithLocation}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="activitybookingDetails">
+                                        <div class="column-auto">
+                                            <img src="~/Images/Icons/events_icon_mobile.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.f_BookingDate}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="activitybookingDetails">
+                                        <div class="column-auto">
+                                            <img src="~/Images/Icons/people_web.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.f_pax}}</span>
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.f_Cost}}</span>
+                                        </div>                                        
+                                    </div>
+                                    <div class="activitybookingDetails" ng-show="showChildInfo()">
+                                        <div class="column-auto">
+                                            <img src="~/Images/Icons/kids.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.ChildParticipants}}</span>
+                                        </div>
+                                        <div class="inline" ng-if="isINR()">
+                                            <img src="~/Images/Icons/rupee_mob.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.CostForChild}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="column-6 top">
+                                        <div class="button-container left">
+                                            <div class="center-element-relative-table">
+                                                <div class="column-auto">
+                                                    <img src="~/Images/Icons/edit.png" />
+                                                </div>
+                                                <div class="column-auto-nospace">
+                                                    <span>Edit</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column-6 top">
+                                        <div class="button-container">
+                                            <div class="center-element-relative-table">
+                                                <div class="column-auto-nospace">
+                                                    <img src="~/Images/Icons/bin.png" />
+                                                </div>
+                                                <div class="column-auto">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--ROW END-->
+        </div>       
+    </div>
+</div>

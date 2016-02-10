@@ -14,15 +14,15 @@
             wdo.rootPath = rootPath;
         }(window.Wadado));
         //For development
-        Wadado.rootPath = 'http://localhost:4197/';
+        //Wadado.rootPath = 'http://localhost:4197/';
         //For Testing
-        //Wadado.rootPath = 'http://www.thefigtree.in/';
+        Wadado.rootPath = 'http://www.thefigtree.in/';
         //For Production
         //Wadado.rootPath = 'http://www.wadado.in/';
     </script>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")    
+    @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/angular")
     <script type='text/javascript' src="//wurfl.io/wurfl.js"></script>
@@ -30,7 +30,10 @@
     <!-- *************** LOAD THE GOOGLE FONT ****************** -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-url-parser/2.3.1/purl.min.js" type="text/javascript"></script>
-   
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA33swsSU1sw2nOllXZhB9cJ1bsfp-OV1U">
+    </script>
+    @*<base href="http://www.thefigtree.in">*@	
     <script src="~/Scripts/app.js"></script>
 
     <!--[if lt IE 9]>
@@ -44,11 +47,11 @@
         document.createElement('ui-select-choices');
       </script>
     <![endif]-->
-
+        
 </head>
 <body>
     <div class="spinner">
-        <img src="~/Images/Icons/spinner.gif"/>
+        <img src="~/Images/Icons/spinner.gif" />
     </div>
     <div id="body">
         <div id="fb-root"></div>
@@ -59,7 +62,7 @@
     <footer>
         <div class="footerWrapper">
             <div class="footer">
-                <p>An Ashish Chettri Production</p>
+                <p>close to beta</p>
             </div>
         </div>
     </footer>

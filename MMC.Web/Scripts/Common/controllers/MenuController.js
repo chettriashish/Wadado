@@ -22,14 +22,24 @@
             MenuDataService.getUsersActivityCartCount().then(function (response) {
                 if (response > 0) {
                     $scope.ActivityCount = response;
-                    if (!$(".nav-button").hasClass("info")) {
-                        $(".nav-button").toggleClass("info");
-                    }                   
+                    if (WURFL.is_mobile) {
+                        if (!$(".nav-button").hasClass("info")) {
+                            $(".nav-button").toggleClass("info");
+                        }
+                    }
+                    else {
+
+                    }                    
                 }
                 else {
                     $scope.ActivityCount = null;
-                    if ($(".nav-button").hasClass("info")) {
-                        $(".nav-button").toggleClass("info");
+                    if (WURFL.is_mobile) {
+                        if ($(".nav-button").hasClass("info")) {
+                            $(".nav-button").toggleClass("info");
+                        }
+                    }
+                    else {
+
                     }
                 }
                 $scope.ActivityInCart = function () {

@@ -44,6 +44,10 @@
 
 <script src="~/Scripts/Activities/services/ActivityDataService.js"></script>
 <script src="~/Scripts/Activities/controllers/ActivityController.js"></script>
+
+<!--MAPS DIRECTIVE REFERENCE-->
+<script src="~/Scripts/Directives/Maps/MapsDirective.js"></script>
+
 <link href="~/Content/tablet.css" rel="stylesheet" />
 <link href="~/Content/desktopmenu.css" rel="stylesheet" />
 <link href="~/Content/desktop.css" rel="stylesheet" />
@@ -186,7 +190,7 @@
             </div>
             <!--row end-->
         </div>
-        <!--Row end-->
+        <!--Row end-->         
         <!--Row start-->
         <div class="row" ng-show="location != null">
             <div class="column-12 wide-gutter" ng-cloak>
@@ -213,10 +217,19 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                 </div>
+                <div class="row" ng-show="location != null">
+                    <div class="column-12" ng-cloak>
+                        <nds-maps nds-data-source="allSelectedActivity" center="location.LatLong" activity-icon="ActivityIconURL" nds-on-activity-select="loadActivityDetails(item)"
+                                  show-route=false start-icon="location.MapIconURL"></nds-maps>
+                    </div>
+                </div>                
                 <!--Row end-->
+                <div class="column-12 wide-gutter" ng-cloak>
+                    &nbsp;
+                </div>
                 <!--Row start-->
                 <div class="row" ng-cloak>
                     <div class="column-12 widest-gutter">
@@ -276,7 +289,7 @@
                                     </div>
                                     <div class="rightDiv">
                                         <div class="like-container">
-                                            <nds-favorites entity-key="item.ActivityKey" type="ACTIVITY"></nds-favorites>                                            
+                                            <nds-favorites entity-key="item.ActivityKey" type="ACTIVITY"></nds-favorites>
                                         </div>
                                     </div>
                                     <div class="crop-height" ng-click="loadActivityDetails(item)">
@@ -306,6 +319,6 @@
                 </div>
                 <!--Row end-->
             </div>
-        </div>        
+        </div>
     </div>
 </div>

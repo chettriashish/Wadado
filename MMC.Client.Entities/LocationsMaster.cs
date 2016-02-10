@@ -17,7 +17,8 @@ namespace MMC.Client.Entities
         private string _LocationImage;
         private string _country;
         private string _Description;
-        private string _BestTimeToVisit;       
+        private string _BestTimeToVisit;
+        private string _LatLng;
         public string LocationKey
         {
             get { return _LocationKey; }
@@ -66,7 +67,7 @@ namespace MMC.Client.Entities
                 _BestTimeToVisit = value;
                 OnPropertyChanged(() => BestTimeToVisit);
             }
-        }        
+        }
 
         public string Description
         {
@@ -76,7 +77,18 @@ namespace MMC.Client.Entities
                 _Description = value;
                 OnPropertyChanged(() => Description);
             }
+        }       
+
+        public string LatLng
+        {
+            get { return _LatLng; }
+            set
+            {
+                _LatLng = value;
+                OnPropertyChanged(() => LatLng);
+            }
         }
+
 
         class LocationMasterValidator : AbstractValidator<LocationsMaster>
         {

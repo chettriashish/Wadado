@@ -34,6 +34,9 @@
 <script src="~/Scripts/ActivityDetails/services/ActivityDetailsDataService.js"></script>
 <script src="~/Scripts/ActivityDetails/controllers/ActivityDetailsController.js"></script>
 
+<!--MAPS DIRECTIVE REFERENCE-->
+<script src="~/Scripts/Directives/Maps/MapsDirective.js"></script>
+
 <!--DATE REFERENCE-->
 <link href="~/Content/_date.css" rel="stylesheet" />
 <script src="~/Scripts/Directives/Date/DateDirective.js"></script>
@@ -165,6 +168,10 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="column-12 wide-gutter">
+                                <nds-maps nds-data-source="selectedActivityDetails" center="selectedActivityDetails.LocationLatLong" activity-icon="ActivityIconURL"
+                                          show-route="true" start-icon="location.MapIconURL"></nds-maps>
+                            </div>
                         </div>
                     </div>
                     <div ng-controller="BookingController" class="column-5">
@@ -172,9 +179,9 @@
                             @Html.Partial("../Partial/_booking")
                         </div>
                     </div>
-
                 </div>
             </div>
+
             <!--Row end-->
         </div>
     </div>

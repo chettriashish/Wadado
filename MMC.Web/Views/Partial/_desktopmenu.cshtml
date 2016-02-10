@@ -25,12 +25,12 @@
                         </div>
                     </div>
                 </div>
-                <div ng-show="isDesktop" ng-cloak>
-                    <div>
+                <div ng-cloak>
+                    <div ng-show="isLocationSelected">
                         <div><span>{{activityName}}</span></div>
                         <div class="bottom-triangle"></div>
                     </div>
-                    <div class="row">
+                    <div class="row" ng-show="isLocationSelected">
                         <div>
                             <ul>
                                 <li ng-repeat="(key, value) in activityResults">
@@ -41,6 +41,18 @@
                                     </ul>
                                 </li>
                             </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div id="checkout" ng-show="ActivityInCart()">
+                        <div ng-click="showCart()">
+                            <div class="column-auto-nospace">
+                                <img src="~/Images/Icons/menu-icon-large.png" />
+                            </div>
+                            <div class="column-auto-nospace">
+                                <div class="balloon">{{ActivityCount}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>

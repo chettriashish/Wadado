@@ -110,23 +110,23 @@ namespace MMC.Web.Services
         {
             List<ActivitySummaryDataContract> results = new List<ActivitySummaryDataContract>();
             ActivitySummaryDataContract activityOne = new ActivitySummaryDataContract();            
-            ((ActivitySummaryDataContract)activityOne).ActivityCategory = "ADVENTURE";
+            ((ActivitySummaryDataContract)activityOne).ActivityCategory = "Adventure";
             ((ActivitySummaryDataContract)activityOne).ActivityCategoryKey = "ADVENTURE";
             results.Add(activityOne);            
 
             ActivitySummaryDataContract activityThree = new ActivitySummaryDataContract();
-            ((ActivitySummaryDataContract)activityThree).ActivityCategory = "ECO-TOURISM";
+            ((ActivitySummaryDataContract)activityThree).ActivityCategory = "Eco-Tourism";
             ((ActivitySummaryDataContract)activityThree).ActivityCategoryKey = "ECOTOURISM";
             results.Add(activityThree);
 
             ActivitySummaryDataContract activityFour = new ActivitySummaryDataContract();
             ((ActivitySummaryDataContract)activityFour).ActivityCategoryKey = "SPORTSANDGAMES";
-            ((ActivitySummaryDataContract)activityFour).ActivityCategory = "SPORTS AND GAMES";
+            ((ActivitySummaryDataContract)activityFour).ActivityCategory = "Sports and games";
             results.Add(activityFour);
 
             ActivitySummaryDataContract activityFive = new ActivitySummaryDataContract();
             ((ActivitySummaryDataContract)activityFive).ActivityCategoryKey = "TOPTRENDING";
-            ((ActivitySummaryDataContract)activityFive).ActivityCategory = "TOP TRENDING ACTIVITIES";
+            ((ActivitySummaryDataContract)activityFive).ActivityCategory = "Top trending activities";
             results.Add(activityFive);       
 
             return results;

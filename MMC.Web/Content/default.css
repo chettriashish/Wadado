@@ -13,10 +13,16 @@ html {
 slide
 /*-----BODY -----*/
 body {
-    background-color: #E6E1D8;
+    background-color: rgb(244,244,244);
     font-family: 'Lato', sans-serif;
     font-weight: 400; /*also loaded 600 for bold*/
     color: #494948;
+    height: 100%;
+}
+
+#body {    
+    padding-bottom: 60px;
+    background-color: rgb(244,244,244);
 }
 
 .spinner {
@@ -94,6 +100,13 @@ header {
     display: block;
 }
 
+.center-element-relative-table {
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    position: relative;
+}
+
 
 /*-----NAVIGATION -----*/
 #navWrapper {
@@ -145,11 +158,20 @@ nav ul li:last-child a {
         text-shadow: 1px 1px 2px #999;
     }
 
+.background.grey {
+    background-color: rgb(244,244,244);
+}
+
+.background.white {
+    background-color: rgb(255,255,255);
+    border:1px solid #ccc;
+}
 
 .uppercontent, .lowercontent {
     padding: 0;
     height: auto;
     z-index: 1;
+    background-color: rgb(244,244,244);
 }
 
 .lowercontent {
@@ -204,7 +226,7 @@ nav ul li:last-child a {
     transition: 1s all;
 }
 /*-----COLUMNS -----*/
-.column-12, .column-9, .column-7, .column-6, .column-5, .column-4, .column-3, .column-2, .column-0 {
+.column-12, .column-9, .column-8, .column-7, .column-6, .column-5, .column-4, .column-3, .column-2, .column-0 {
     padding: .3em 2%;
     float: left;
 }
@@ -217,6 +239,10 @@ nav ul li:last-child a {
 
 .column-6.min, .column-6.min, .column-4.min {
     padding: .05em;
+}
+
+.column-8.top, .column-7.top, .column-4.top, .column-6.top {
+    padding: .4em 0;
 }
 
 .column-12 {
@@ -334,6 +360,7 @@ nav ul li:last-child a {
     transition: 0.5s all;
     display: table;
 }
+
 .label-left {
     height: 2em;
     float: left;
@@ -341,18 +368,18 @@ nav ul li:last-child a {
     padding: .4em .5em;
     font-weight: 500;
     background-color: rgb(251,189,19);
-    outline: none;    
+    outline: none;
     color: #fff;
     margin: 0 auto;
     transition: 0.5s all;
     display: table;
-    cursor:initial;
+    cursor: initial;
 }
 
 .labelPlain {
     float: left;
     font-size: .8em;
-    margin: .2em .2em;
+    margin: .2em .5em;
     font-weight: 400;
     outline: none;
     color: #000;
@@ -671,10 +698,10 @@ nav ul li:last-child a {
     }
 
 .list-booking-wrapper {
-    border-bottom: 1px solid #ccc;
     width: 100%;
     display: inline-table;
     height: auto;
+    padding:1.5em 1em;
 }
 
     .list-booking-wrapper > div:first-of-type img {
@@ -818,11 +845,12 @@ nav ul li:last-child a {
 
 /*----- FOOTER -----*/
 .footerWrapper {
+    position:relative;
     background-color: #000;
     width: 100%;
-    height: 3em;
+    height: 1em;
     bottom: 0;
-    padding: 1em 0;
+    padding: 1em 0 0 0;
 }
 
 footer {
@@ -830,7 +858,11 @@ footer {
     font-size: 1.5em;
     color: #fff;
     text-align: center;
-    padding: 1em 0;
+    padding: 1em 0 0 0;
+    position:relative;
+    bottom:0;
+    background-color: #000;
+    width: 100%;
 }
 
     footer a {
@@ -1357,11 +1389,11 @@ footer {
     font-size: 1.25em;
     font-weight: 600;
     text-align: left;
-    display: block;   
+    display: block;
 }
 
 .subHeaderCenter {
-    text-align: center;   
+    text-align: center;
 }
 
 .subHeaderRight {
@@ -1412,6 +1444,32 @@ footer {
         /* margin: 0 auto; */
     }
 
+.thumbnail-crop-height {
+    /* max-width: 1200px; /* native or declared width of img src (if known) */
+    max-height: 110px;
+    height: 110px; /* lt ie8 */
+    height: auto;
+    overflow: hidden;
+}
+
+    img.scale, object.scale, .thumbnail-crop-height img {
+        display: block; /* corrects small inline gap at bottom of containing div */
+        max-width: 100%;
+        /* just in case, to force correct aspect ratio */
+        height: auto !important;
+        width: auto\9; /* ie8+9 */
+        /* lt ie8 */
+        -ms-interpolation-mode: bicubic;
+        background-position: top center;
+        margin: -10% auto 0;
+        height: 100%;
+        /* force a minimum size if img src size is known */
+        /* min-height: 320px; /* max-height of .crop-height */
+        /* min-width: 480px; /* consistent with image ratio */
+        /* optionally center if img src is not as wide as div */
+        /* margin: 0 auto; */
+    }
+
 .cover-height {
     /* max-width: 1200px; /* native or declared width of img src (if known) */
     max-height: 275px;
@@ -1441,7 +1499,7 @@ footer {
     background-color: #ccc;
     width: 100%;
     position: relative;
-    min-width:320px;
+    min-width: 320px;
 }
 
 .num-left {
@@ -1561,9 +1619,28 @@ label {
         text-transform: uppercase;
     }
 
-    .desktop-book{
-        display:none;
+.map {
+    height: auto;
+    margin: 1em auto;
+    float: right;
+}
+
+    .map a {
+        margin: 0 auto;
+        height: 1em;
+        font-size: .8em;
+        padding: 1em 2em;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: rgb(255,255,255);
+        transition: 0.5s all;
+        text-transform: uppercase;
     }
+
+.desktop-book {
+    display: none;
+}
 
 .socialButtons {
     margin: 1em auto .5em auto;
@@ -1622,3 +1699,39 @@ label {
     font-size: 1.3em;
     padding: 0 .2em;
 }
+
+/********************MAPS START************************/
+
+.map-container {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 10px;
+}
+
+    .map-container > div:first-of-type {
+        position: relative;
+    }
+
+    .map-container > div:nth-of-type(2) {
+        height: 0;
+        overflow: hidden;
+        padding-bottom: 22.25%;
+        padding-top: 30px;
+        position: relative;
+    }
+
+/****************MAPS END*****************/
+
+/*****************EDIT/DELETE BUTTON CONTAINERS FOR CART*************************/
+.button-container {
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 2em;
+    float: none;
+    padding: 0em 0;
+    border-width: 1px 0 1px 0;
+}
+
+    .button-container.left {
+        border-width: 1px 1px 1px 0;
+    }

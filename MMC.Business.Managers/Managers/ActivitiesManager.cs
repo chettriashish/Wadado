@@ -176,15 +176,15 @@ namespace MMC.Business.Managers
                         && entity.IsThumbnail == true).FirstOrDefault().ImageURL;
                     if (userAgent == BusinessResource.SMARTPHONE)
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, THUMBNAIL, MOBILE);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, MOBILE);
                     }
                     else if (userAgent == BusinessResource.TABLET)
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, THUMBNAIL, TABLET);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, MOBILE);
                     }
                     else
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}", thumbnailImageURL, THUMBNAIL);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}", thumbnailImageURL, MOBILE);
                     }
                     result.Add(bookedActivities);
                 }

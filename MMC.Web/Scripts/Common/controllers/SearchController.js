@@ -1,9 +1,9 @@
 ﻿(function () {
     var app = angular.module("appMain");
     var searchController = function ($scope, $http, $timeout, $interval, $location, SearchDataService) {
-        $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';
+        $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';        
         $scope.activityName = "Explore";
-
+        $scope.isLocationSelected = false;
         /***************************LOADING SELECTED LOCATIONS ACTIVITY LIST *************************/
         $scope.loadSelectedLocationDetails = function (item, model) {
             if (!WURFL.is_mobile) {
@@ -77,12 +77,16 @@
         /*LOADING ALL LOCATIONS*/
         SearchDataService.getAllLocations().then(function (alllocations) {
             $scope.alllocation = alllocations;
+            groupBy(alllocations, 'Country', 'location');
             if (purl().segment().length > 1) {
                 if (purl().segment(2).trim().length > 0) {
-                    var selectedLocation = purl().segment(2);
-                    groupBy(alllocations, 'Country', 'location');
+                    var selectedLocation = purl().segment(2);                   
                     loadSelectedLocationActivities(selectedLocation);
+                    $scope.isLocationSelected = true;
                 }
+            }
+            else {
+                $scope.isLocationSelected = false;
             }
         });
 

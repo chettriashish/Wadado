@@ -95,9 +95,9 @@
         }
 
         $scope.addActivityToCart = function () {
-            if ($scope.date != null) {
+            if ($scope.selectedDate != null) {
                 BookingDataService.checkForActivityAvailability($scope.selectedActivityDetails.ActivityKey,
-                $scope.NumAdults, $scope.NumChildren, $scope.date, $scope.time.val).then(function (result) {
+                $scope.NumAdults, $scope.NumChildren, $scope.selectedDate, $scope.time.val).then(function (result) {
                     if (!result.Status) {
                         $scope.ErrorMessage = result.Message;
                         $scope.Error = true;
@@ -112,7 +112,7 @@
                                 $scope.NumChildren * $scope.selectedActivityDetails.CostForChild);
                         }
                         BookingDataService.addSelectedActivityToUsersCart($scope.selectedActivityDetails.ActivityKey,
-                           $scope.NumAdults, $scope.NumChildren, $scope.date, $scope.time.val, total).then(function (response) {
+                           $scope.NumAdults, $scope.NumChildren, $scope.selectedDate, $scope.time.val, total).then(function (response) {
                                //console.log("activity added to cart");
                                $scope.$emit("ACTIVITYUPDATED", { message: "ACTIVITYUPDATED" })
                            });

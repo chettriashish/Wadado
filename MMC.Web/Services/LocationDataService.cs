@@ -117,6 +117,8 @@ namespace MMC.Web.Services
 
             results.MustDrink = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor consectetur adipiscing elit, sed do eiusmod.";
             results.MustEat = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor consectetur adipiscing elit, sed do eiusmod.";
+            results.LatLong = "27.3300, 88.6200";
+            results.MapIconURL = "Images/icons/location_nav.png";
             return results;
         }
 
@@ -133,6 +135,8 @@ namespace MMC.Web.Services
             activityOne.ImageURL = "Images/khukuri1";
             activityOne.ActivityCategory = "TOP TRENDING ACTIVITIES";
             activityOne.ActivityCategoryKey = "TOPTRENDING";
+            activityOne.LatLong = "27.3394,88.603";
+            activityOne.MapIconURL = "Images/icons/full_star_yellow.png";
             activities.Add(activityOne);
 
 
@@ -145,6 +149,8 @@ namespace MMC.Web.Services
             activityTwo.ImageURL = "Images/maruni1";
             activityTwo.ActivityCategory = "TOP TRENDING ACTIVITIES";
             activityTwo.ActivityCategoryKey = "TOPTRENDING";
+            activityTwo.LatLong = "27.3849,88.6582";
+            activityTwo.MapIconURL = "Images/icons/full_star_yellow.png";
             activities.Add(activityTwo);
 
             ActivitySummaryDataContract activityThree = new ActivitySummaryDataContract();
@@ -156,6 +162,8 @@ namespace MMC.Web.Services
             activityThree.ImageURL = "Images/buttermilk2";
             activityThree.ActivityCategory = "TOP TRENDING ACTIVITIES";
             activityThree.ActivityCategoryKey = "TOPTRENDING";
+            activityThree.LatLong = "27.3059,88.5363";
+            activityThree.MapIconURL = "Images/icons/full_star_yellow.png";
             activities.Add(activityThree);
 
 
@@ -168,6 +176,8 @@ namespace MMC.Web.Services
             activityFour.ImageURL = "Images/village2";
             activityFour.ActivityCategory = "TOP TRENDING ACTIVITIES";
             activityFour.ActivityCategoryKey = "TOPTRENDING";
+            activityFour.LatLong = "27.3394,88.600";
+            activityFour.MapIconURL = "Images/icons/full_star_yellow.png";
             activities.Add(activityFour);
 
             ActivitySummaryDataContract activityFive = new ActivitySummaryDataContract();
@@ -179,6 +189,8 @@ namespace MMC.Web.Services
             activityFive.ImageURL = "Images/village1";
             activityFive.ActivityCategory = "TOP TRENDING ACTIVITIES";
             activityFive.ActivityCategoryKey = "TOPTRENDING";
+            activityFive.LatLong = "27.328,88.6276";
+            activityFive.MapIconURL = "Images/icons/full_star_yellow.png";
             activities.Add(activityFive);
 
             ActivitySummaryDataContract activitySix = new ActivitySummaryDataContract();
@@ -190,8 +202,10 @@ namespace MMC.Web.Services
             activitySix.ImageURL = "Images/village3";
             activitySix.ActivityCategory = "TOP TRENDING ACTIVITIES";
             activitySix.ActivityCategoryKey = "TOPTRENDING";
+            activitySix.LatLong = "27.2282,88.6125";
+            activitySix.MapIconURL = "Images/icons/full_star_yellow.png";
             activities.Add(activitySix);
-
+            
             return activities;
         }
 

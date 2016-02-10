@@ -26,6 +26,8 @@ namespace MMC.Business.Entities
         public string BestTimeToVisit { get; set; }
         [DataMember]
         public string Description { get; set; }
+        [DataMember]
+        public string LatLng { get; set; }
         #endregion
 
         [DataMember]

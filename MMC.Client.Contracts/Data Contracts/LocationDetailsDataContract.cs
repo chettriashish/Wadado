@@ -31,6 +31,10 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public string DefaultActivityCategoryKey { get; set; }
         [DataMember]
+        public string LatLong { get; set; }
+        [DataMember]
+        public string MapIconURL { get; set; }
+        [DataMember]
         public IEnumerable<TopOffersDataContract> TopOffersForLocation { get; set; }
         #endregion
     }

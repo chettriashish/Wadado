@@ -64,7 +64,7 @@
                     }
                 }
             }
-            else {              
+            else {
                 $scope.location.ImageURL = Wadado.rootPath + "/" + $scope.location.ImageURL + ".jpg";
             }
         };
@@ -82,7 +82,7 @@
                 $scope.$apply();
             }
             else if (sliderInit == false) {
-                setTimeout(function () {                    
+                setTimeout(function () {
                     if (!WURFL.is_mobile) {
                         sliderInit = true;
                         LocationDataService.setSlider();
@@ -101,9 +101,9 @@
                 }
             }
             $scope.Root = Wadado.rootPath;
-            setImages();            
+            setImages();
             if (!WURFL.is_mobile) {
-                setCarasoulImages();                
+                setCarasoulImages();
                 setRatings($scope.location.TopOffersForLocation);
             }
             $scope.$broadcast("LOCATIONSET", $scope.location.DefaultActivityCategoryKey);
@@ -121,7 +121,7 @@
                         }
                     }
                 });
-            });
+            });            
         });
 
         var setRatings = function (allActivities) {
@@ -151,11 +151,11 @@
             }
         };
 
-        $(window).resize(function () {            
+        $(window).resize(function () {
             if (!WURFL.is_mobile) {
                 setLayout();
                 $scope.$apply();
-            }            
+            }
         });
 
         /***************************LOADING SELECTED LOCATIONS ACTIVITY TYPE *************************/
@@ -164,7 +164,7 @@
             $scope.ActivityType = item.ActivityName;
             LocationDataService.getActivitiesForType($scope.ActivityType, $scope.locationName);
         };
-        /*END LOADING SELECTED LOCATION ACTIVITY TYPE*/
+        /*END LOADING SELECTED LOCATION ACTIVITY TYPE*/        
     }
     app.controller("LocationController", locationController);
 }());

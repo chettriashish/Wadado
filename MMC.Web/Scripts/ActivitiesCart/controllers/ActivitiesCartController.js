@@ -2,6 +2,7 @@
     var app = angular.module("appMain");
 
     var activitiesCartController = function ($scope, $http, $timeout, $interval, $location, $routeParams, ActivitiesCartDataService) {
+        $scope.selectedLocation = "Select location";
         var setImages = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.activities, function (key, value) {
@@ -12,6 +13,8 @@
                     var date = $scope.activities[key].BookingDate;
                     var result = Number(date.match(regex)[0]);
                     $scope.activities[key].f_BookingDate = new Date(result).toDateString();
+                    $scope.activities[key].f_Cost = $scope.activities[key].Currency + "\t" + $scope.activities[key].Cost + "";
+                    $scope.activities[key].f_pax = $scope.activities[key].Participants + "\tPAX\t,";
                     if (WURFL.form_factor == "Smartphone") {
                         if (window.styleMedia.matchMedium("screen and (max-width:500px)")) {
                             $scope.activities[key].ImageURL = Wadado.rootPath + "/" + $scope.activities[key].ThumbnailImage + "_portrait.jpg";
@@ -28,6 +31,21 @@
                             $scope.activities[key].ImageURL = Wadado.rootPath + "/" + $scope.activities[key].ThumbnailImage + "_landscape.jpg";
                         }
                     }
+                });
+            }
+            else {
+                $.each($scope.activities, function (key, value) {
+                    /*SETTING LOCATION INFORMATION*/
+                    $scope.activities[key].ActivityWithLocation = $scope.activities[key].ActivityName + "\t-\t" + $scope.activities[key].Location + "";
+                    //Setting Dates Correctly
+                    var regex = /[0-9]+/;
+                    var date = $scope.activities[key].BookingDate;
+                    var result = Number(date.match(regex)[0]);
+                    $scope.activities[key].f_BookingDate = new Date(result).toDateString();
+                    $scope.activities[key].f_BookingDate = new Date(result).toDateString();
+                    $scope.activities[key].f_Cost = $scope.activities[key].Currency + "\t" + $scope.activities[key].Cost + "";
+                    $scope.activities[key].f_pax = $scope.activities[key].Participants + "\tPAX\t,";
+                    $scope.activities[key].ImageURL = Wadado.rootPath + "/" + $scope.activities[key].ThumbnailImage + "_portrait.jpg";
                 });
             }
         };

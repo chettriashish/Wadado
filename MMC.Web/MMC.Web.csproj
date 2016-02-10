@@ -491,6 +491,7 @@
     <Content Include="Scripts\Directives\Date\DateDirective.js" />
     <Content Include="Scripts\Directives\Date\datedirective1.js" />
     <Content Include="Scripts\Directives\Favorites\FavoritesDirective.js" />
+    <Content Include="Scripts\Directives\Maps\MapsDirective.js" />
     <Content Include="Scripts\facebook.js" />
     <Content Include="Scripts\Home\controllers\HomeController.js" />
     <Content Include="Scripts\Home\directives\HomeDirective.js" />
@@ -1268,6 +1269,7 @@
     <Content Include="Scripts\slider\owl.video.js" />
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
+    <Content Include="Templates\_mapTemplate.html" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Unity.Wcf.README.txt" />
     <Content Include="Video\video.mp4" />

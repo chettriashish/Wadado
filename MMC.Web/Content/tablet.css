@@ -134,10 +134,6 @@
             padding: .4em 0 .2em 1%;
         }
 
-        .column-8.top, .column-7.top, .column-4.top, .column-6.top {
-            padding: .4em 0;
-        }
-
         .column-6.min, .column-6.min, .column-4.min, .column-3.min {
             padding: .1em 0.05em;
         }
@@ -316,8 +312,7 @@
     .list-booking-wrapper > div:first-of-type {
         float: left;
         width: 20%;
-        padding: 0;
-        border: 1px solid;
+        padding: 0;       
     }
 
     .list-booking-wrapper div {
