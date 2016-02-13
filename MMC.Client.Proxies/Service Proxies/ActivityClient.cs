@@ -141,5 +141,14 @@ namespace MMC.Client.Proxies
         {
             return Channel.GetAllActivitiesByLocationFilteredCategory(locationKey, activityCategoryKey, startDate, endDate, userAgent);
         }
+
+        public bool RemoveSelectedActivity(string sessionKey, string activityBookingKey)
+        {
+            return Channel.RemoveSelectedActivity(sessionKey, activityBookingKey);
+        }
+        public Task<bool> RemoveSelectedActivityAsync(string sessionKey, string activityBookingKey)
+        {
+            return Channel.RemoveSelectedActivityAsync(sessionKey, activityBookingKey);
+        }
     }
 }

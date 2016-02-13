@@ -1,8 +1,10 @@
 ﻿using MMC.Client.Contracts;
 using MMC.Client.Contracts.DataContracts;
+using MMC.Web.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 
@@ -20,8 +22,13 @@ namespace MMC.Web.Controllers.ActivitiesCart
             return View();
         }
 
-        public JsonResult RemoveSelectedActivityFromUsersCart(string activityKey, string sessionKey)
+        public JsonResult RemoveSelectedActivityFromUsersCart(string activityBookingKey)
         {
+            if (Session["sessionKey"] != null)
+            {
+                string sessionKey = Convert.ToString(Session["sessionKey"]);
+                return Json(_activitiesService.RemoveSelectedActivity(sessionKey, activityBookingKey), JsonRequestBehavior.AllowGet);
+            }
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
@@ -47,5 +54,22 @@ namespace MMC.Web.Controllers.ActivitiesCart
                 return Json(new ActivityBookingDataContract(), JsonRequestBehavior.AllowGet);
             }
         }
+
+        public ActionResult ProceedToPayment(string firstName, string lastName, string phoneNumber, string email)
+        {
+            bool isValid = false;
+            string emailRegex = @"[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?";
+            if(!string.IsNullOrWhiteSpace(firstName) && !string.IsNullOrWhiteSpace(lastName)
+                && !string.IsNullOrWhiteSpace(phoneNumber) && !string.IsNullOrWhiteSpace(email))
+            {
+                if(Regex.IsMatch(email,emailRegex))
+                {
+                    isValid = true;
+                }
+                UserModel userDetails = new UserModel() { FirstName = firstName, LastName = lastName, Email = email, PhoneNumber = phoneNumber };
+                TempData.Add("userData", userDetails);
+            }             
+            return Json(isValid, JsonRequestBehavior.AllowGet);            
+        }       
     }
 }

@@ -4,7 +4,7 @@
 ///<reference path="angular-ui/ui-bootstrap.js" />
 (function () {
     //var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ui.bootstrap', 'ngRoute']);
-    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ngRoute', 'angular-click-outside'])        
+    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ngRoute', 'angular-click-outside'])
 
     window.fbAsyncInit = function () {
         FB.init({
@@ -21,6 +21,5 @@
         js = d.createElement(s); js.id = id;
         js.src = "//connect.facebook.net/en_US/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));  
-    
+    }(document, 'script', 'facebook-jssdk'));   
 }());

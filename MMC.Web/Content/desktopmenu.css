@@ -6,7 +6,7 @@
 }
 /* hide the navigation button by default */
 
-@media only screen and (min-width: 0px) and (max-width: 1920px) {
+@media only screen and (min-width: 0px)  {
 
     /* Navigation Button
 	-------------------------------------------------------- */
@@ -80,7 +80,7 @@
         z-index: 10;
         clear: both;
         float: none;
-        border-bottom: 1px solid grey;
+        border-bottom: 1px solid #ccc;
     }
 
         .primary-nav > div:first-of-type {
@@ -123,19 +123,29 @@
             -ms-transform: translateY(1em);
             transform: translateY(1em);
             right: 15%;
-            padding: 1em;                        
-        }
-      
-    }
-    @media only screen and (max-width:700px) {
-        .primary-nav > div:nth-of-type(3) {
-            display:none;
+            padding: 1em;
         }
     }
 
-    .primary-nav > div:nth-of-type(3) > div {
-        float: right;
+    @media only screen and (max-width:700px) {
+        .primary-nav > div:nth-of-type(3) {
+            display: none;
+        }
     }
+
+    .primary-nav > div:nth-of-type(3){
+        padding:0;
+    }
+
+    .primary-nav > div:nth-of-type(3) > div {
+        border: 1px solid #ccc;        
+        padding: 1em 1em;
+        border-width:0 1px 0 1px;
+    }
+
+        .primary-nav > div:nth-of-type(3) > div {
+            float: right;
+        }
 
     .primary-nav > div img {
         height: 16px;
@@ -209,7 +219,7 @@
     .primary-nav > div > div:hover + div, .primary-nav > div > div + div:hover {
         opacity: 1;
         display: table;
-        visibility: visible;        
+        visibility: visible;
         height: auto;
     }
 

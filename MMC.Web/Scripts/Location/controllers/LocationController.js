@@ -42,9 +42,7 @@
                 $scope.largeScreen = true;
             }
         }
-        if (!WURFL.is_mobile) {
-            setLayout();
-        }
+        setLayout();
         var setImages = function () {
             if (WURFL.is_mobile) {
                 if (WURFL.form_factor == "Smartphone") {
@@ -152,10 +150,8 @@
         };
 
         $(window).resize(function () {
-            if (!WURFL.is_mobile) {
-                setLayout();
-                $scope.$apply();
-            }
+            setLayout();
+            $scope.$apply();
         });
 
         /***************************LOADING SELECTED LOCATIONS ACTIVITY TYPE *************************/

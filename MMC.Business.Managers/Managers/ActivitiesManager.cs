@@ -176,11 +176,11 @@ namespace MMC.Business.Managers
                         && entity.IsThumbnail == true).FirstOrDefault().ImageURL;
                     if (userAgent == BusinessResource.SMARTPHONE)
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, MOBILE);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}", thumbnailImageURL, MOBILE);
                     }
                     else if (userAgent == BusinessResource.TABLET)
                     {
-                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}{2}", thumbnailImageURL, MOBILE);
+                        bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}", thumbnailImageURL, MOBILE);
                     }
                     else
                     {
@@ -213,6 +213,21 @@ namespace MMC.Business.Managers
 
                 IEnumerable<ActivitySummaryDataContract> allActivitiesForLocationCategory = activitiesMasterRepository.GetAllActivitiesByLocationFilteredCategory(locationKey: locationKey, activityCategoryKey: activityCategoryKey, startDate: startDate, endDate: endDate, userAgent: userAgent);
                 return allActivitiesForLocationCategory;
+            });
+        }
+
+        public bool RemoveSelectedActivity(string sessionKey, string activityBookingKey)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {                
+                IActivityBookingRepository activitiesBookingRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                IActivitiesBookingEngine activitiesBookingEngine
+                   = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
+
+                ActivityBooking bookedActivity = activitiesBookingEngine.GetBookedActivitiesForUser(sessionKey, default(string)).Where(e => e.ActivityBookingKey == activityBookingKey).FirstOrDefault();
+                activitiesBookingRepository.Remove(bookedActivity);
+                return true;
             });
         }
     }

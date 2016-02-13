@@ -64,21 +64,25 @@
                 <div class="column-12 min-top-widest-gutter" ng-cloak>
                     <div class="column-12 top">
                         <!--ACTIVITY NAME AND OTHER DETAILS-->
-                        <div class="header-left">
-                            <!--JS APPEND-->
-                        </div>
+                        <div>
+                            <div class="header-left">
+                                <!--JS APPEND-->
+                            </div>
+                        </div>                        
                     </div>
                     <div class="column-12 top">
                         <span>&nbsp;</span>
                     </div>
                     <div class="column-7 top">
                         <div class="column-12 top">
-                            <div class="column-auto">
-                                <img src="~/Images/Icons/location_nav.png" />
-                            </div>
-                            <div class="location-details">
-                                <span>{{selectedActivityDetails.Location}}</span>
-                            </div>
+                            <div>
+                                <div class="column-auto">
+                                    <img src="~/Images/Icons/location_nav.png" />
+                                </div>
+                                <div class="location-details">
+                                    <span>{{selectedActivityDetails.Location}}</span>
+                                </div>
+                            </div>                            
                         </div>
                         <div class="column-12 top">
                             <div class="column-auto-nospace">
@@ -86,7 +90,7 @@
                                     <span>{{Cost}}</span>
                                 </div>
                             </div>
-                            <div class="column-0">
+                            <div class="column-auto">
                                 <img src="~/Images/Icons/time_duration_web.png" />
                             </div>
                             <div class="column-auto-nospace">
@@ -94,7 +98,7 @@
                                     <span>{{selectedActivityDetails.Duration}}</span>
                                 </div>
                             </div>
-                            <div class="column-0">
+                            <div class="column-auto">
                                 <img src="~/Images/Icons/people_web.png" />
                             </div>
                             <div class="column-auto">
@@ -167,11 +171,11 @@
                                         {{selectedActivityDetails.CancellationPolicy}}
                                     </span>
                                 </div>
-                            </div>
-                            <div class="column-12 wide-gutter">
-                                <nds-maps nds-data-source="selectedActivityDetails" center="selectedActivityDetails.LocationLatLong" activity-icon="ActivityIconURL"
-                                          show-route="true" start-icon="location.MapIconURL"></nds-maps>
-                            </div>
+                            </div>                           
+                        </div>
+                        <div class="column-12">
+                            <nds-maps nds-data-source="selectedActivityDetails" center="selectedActivityDetails.LocationLatLong" activity-icon="ActivityIconURL"
+                                      show-route="true" start-icon="location.MapIconURL"></nds-maps>
                         </div>
                     </div>
                     <div ng-controller="BookingController" class="column-5">

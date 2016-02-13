@@ -15,7 +15,7 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
         ActivityDetailsDataContract GetActivityByLocation(string locationKey, string activityKey, string userAgent);
         void AddActivityToUserItenerary(string activityKey, string activityDate, int numberOfPeople, string activityTime);
         IEnumerable<ActivitiesMaster> GetAllActivitiesBooked(string userAccountKey);
-        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationCategory(string locationKey, string activityCategoryKey, string userAgent);
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationCategory(string locationKey, string activityCategoryKey, string userAgent);      
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);
     }
 }

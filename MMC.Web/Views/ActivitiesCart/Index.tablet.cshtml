@@ -1,27 +1,21 @@
 ﻿@{
     ViewBag.Title = "WADADO.IN";
 }
-<!--SLIDER REFERENCE-->
-<script src="~/Scripts/slider/jssor.js"></script>
-<script src="~/Scripts/slider/jssor.slider.js"></script>
-<script src="~/Scripts/slider/slider.js"></script>
-
-<!--UI SELECT REFERENCE-->
-<link href="~/Content/ui-select/select.css" rel="stylesheet" />
-<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
-<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
-
 <!--JQUERY UI REFERENCE-->
 <link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
 
-<!--WADADO REFERENCE-->
-<script src="~/Scripts/Video/video.js"></script>
-<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Directives/Favorites/favoritesdirective.js"></script>
 
-<!--SEARCH REFERENCE-->
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
 <script src="~/Scripts/Common/services/SearchDataService.js"></script>
 <script src="~/Scripts/Common/controllers/SearchController.js"></script>
 
+<!--BOOKING REFERENCE-->
+<script src="~/Scripts/Common/services/BookingDataService.js"></script>
+<script src="~/Scripts/Common/controllers/BookingController.js"></script>
 <!--ACCOUNT REFERENCE-->
 <script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
 <script src="~/Scripts/Login/services/LoginDataService.js"></script>
@@ -30,16 +24,17 @@
 <!--MENU REFERENCE-->
 <script src="~/Scripts/Common/services/MenuDataService.js"></script>
 <script src="~/Scripts/Common/controllers/MenuController.js"></script>
-<link href="~/Content/tabmenu.css" rel="stylesheet" />
 
-<script src="~/Scripts/ActivitiesCart/services/ActivitiesCartDataService.js"></script>
 <script src="~/Scripts/ActivitiesCart/controllers/ActivitiesCartController.js"></script>
+<script src="~/Scripts/ActivitiesCart/services/ActivitiesCartDataService.js"></script>
 
+<!--MAPS DIRECTIVE REFERENCE-->
+<script src="~/Scripts/Directives/Maps/MapsDirective.js"></script>
 
-<!--VIDEO REFERENCE-->
-<link href="~/Content/video/default-vid.css" rel="stylesheet" />
-<link href="~/Content/video/tablet-vid.css" rel="stylesheet" />
-<link href="~/Content/video/desktop-vid.css" rel="stylesheet" />
+<!--DATE REFERENCE-->
+<link href="~/Content/_date.css" rel="stylesheet" />
+<script src="~/Scripts/Directives/Date/DateDirective.js"></script>
+<script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>
 <link href="~/Content/tablet.css" rel="stylesheet" />
 
 <div id="colorbar">
@@ -52,90 +47,386 @@
     <div>
         @Html.Partial("../Partial/_mobilemenu")
     </div>
-    <div class="uppercontent" ng-cloak>
-        <!--ROW START-->
-        <div class="row">
-            <div class="header-upper-noborder">
-                <div>
-                    <span>Cart</span>
-                </div>
-            </div>
-        </div>
-        <!--ROW END-->
-        <!--ROW START-->
-        <div class="column-12">
-            <div class="column-7">
-                <div class="labelHeader">
-                    <span>Cart total ({{Count}} item)</span>
-                </div>
-            </div>
-            @*<div class="column-4">
+    <div class="uppercontent grey" ng-cloak>
+        <div class="background grey">
+            <div class="column-12">
+                <div class="header-upper-noborder">
                     <div>
-                        <div ng-if="isINR()" style="float:left;">
-                            <img src="~/Images/Icons/rupeered_mob.png" />
+                        <span>Cart</span>
+                    </div>
+                </div>
+            </div>
+            <!--ROW START-->
+            <div class="row" ng-if="largeScreen">
+                <div class="column-8 min-top-left-widest-gutter">
+                    <div>
+                        <div class="column-top">
                         </div>
-                        <div style="float:left;">
-                            <span>{{Total}}</span>
+                        <div class="column-no-padding">
+                            <div ng-repeat="(key, value) in activityResults">
+                                <div class="column-12">
+                                    <div class="header-upper-noborder-left">
+                                        <div class="column-auto-left">
+                                            <img src="~/Images/Icons/nav_location_icon.png">
+                                        </div>
+                                        <div class="column-auto-left">
+                                            <span>{{key}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column-12">
+                                    <div class="background white" ng-repeat="item in value">
+                                        <div class="list-booking-wrapper">
+                                            <div class="thumbnail-crop-height">
+                                                <img ng-src="{{item.ImageURL}}" />
+                                            </div>
+                                            <div class="activitybookingDetails">
+                                                <div>
+                                                    <span>{{item.ActivityWithLocation}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="activitybookingDetails">
+                                                <div class="column-auto">
+                                                    <img src="~/Images/Icons/events_icon_mobile.png" />
+                                                </div>
+                                                <div class="labelPlain">
+                                                    <span>{{item.f_BookingDate}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="activitybookingDetails">
+                                                <div class="column-auto">
+                                                    <img src="~/Images/Icons/people_web.png" />
+                                                </div>
+                                                <div class="labelPlain">
+                                                    <span>{{item.f_pax}}</span>
+                                                </div>
+                                                <div class="labelPlain">
+                                                    <span>{{item.f_Cost}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="activitybookingDetails" ng-show="showChildInfo()">
+                                                <div class="column-auto">
+                                                    <img src="~/Images/Icons/kids.png" />
+                                                </div>
+                                                <div class="labelPlain">
+                                                    <span>{{item.ChildParticipants}}</span>
+                                                </div>
+                                                <div class="inline" ng-if="isINR()">
+                                                    <img src="~/Images/Icons/rupee_mob.png" />
+                                                </div>
+                                                <div class="labelPlain">
+                                                    <span>{{item.CostForChild}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="column-6 nopadding">
+                                                <div class="button-container left">
+                                                    <div class="center-element-relative-table">
+                                                        <div class="column-auto">
+                                                            <img src="~/Images/Icons/edit.png" />
+                                                        </div>
+                                                        <div class="column-auto">
+                                                            <span>Edit</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="column-6 nopadding">
+                                                <div class="button-container">
+                                                    <div class="center-element-relative-table">
+                                                        <div class="column-auto">
+                                                            <img src="~/Images/Icons/bin.png" />
+                                                        </div>
+                                                        <div class="column-auto" ng-click="removeActivityFromUserCart(item)">
+                                                            <span>Delete</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
-                </div>*@
-        </div>
-        <!--ROW END-->
-        <div ng-repeat="item in activities">
-            <div class="list-booking-wrapper">
-                <div>
-                    <img ng-src="{{item.ImageURL}}" />
                 </div>
-                <div class="activitybookingDetails">
+                <div class="column-4 min-top-right-widest-gutter">
                     <div>
-                        <span>{{item.ActivityWithLocation}}</span>
-                    </div>
-                </div>
-                <div class="activitybookingDetails">
-                    <div>
-                        <img src="~/Images/Icons/events_icon_mobile.png" />
-                    </div>
-                    <div class="labelPlain">
-                        <span>{{item.f_BookingDate}}</span>
-                    </div>
-                </div>
-                <div class="activitybookingDetails">
-                    <div>
-                        <img src="~/Images/Icons/people_web.png" />
-                    </div>
-                    <div class="labelPlain">
-                        <span>{{item.Participants}}</span>
-                    </div>
-                    <div class="inline" ng-if="isINR()">
-                        <img src="~/Images/Icons/rupee_mob.png" />
-                    </div>
-                    <div class="labelPlain">
-                        <span>{{item.Cost}}</span>
-                    </div>
-                </div>
-                <div class="activitybookingDetails" ng-show="showChildInfo()">
-                    <div>
-                        <img src="~/Images/Icons/kids.png" />
-                    </div>
-                    <div class="labelPlain">
-                        <span>{{item.ChildParticipants}}</span>
-                    </div>
-                    <div class="inline" ng-if="isINR()">
-                        <img src="~/Images/Icons/rupee_mob.png" />
-                    </div>
-                    <div class="labelPlain">
-                        <span>{{item.CostForChild}}</span>
+                        <div class="column-top">
+                        </div>
+                        <div class="column-12">
+                            <div class="header-upper-noborder-left">
+                                <div class="column-auto-left">
+                                    <span>Amount details</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-12 top">
+                            <div class="background white">
+                                <div class="list-amount-wrapper">
+                                    <div>
+                                        <div>
+                                            <span>Packages</span>
+                                        </div>
+                                        <div>
+                                            <span>INR 10,000</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span>VAT</span>
+                                        </div>
+                                        <div>
+                                            <span>INR 2,000</span>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span>Total</span>
+                                        </div>
+                                        <div>
+                                            <span>INR 12,000</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-12 top">
+                            <div class="background white">
+                                <div class="user-details">
+                                    <div>
+                                        <div>
+                                            <span>First Name</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" required placeholder="First Name" ng-model="userInfo.firstName" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span>Last Name</span>
+                                        </div>
+                                        <div>
+                                            <input type="text" required placeholder="Last Name" ng-model="userInfo.lastName" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span>Phone Number</span>
+                                        </div>
+                                        <div>
+                                            <input type="tel" required placeholder="Phone Number" ng-model="userInfo.phoneNumber" />
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div>
+                                            <span>Email</span>
+                                        </div>
+                                        <div>
+                                            <input type="email" required placeholder="Email" ng-model="userInfo.email" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-12">
+                            <div class="column-top">
+                            </div>
+                            <div class="booking">
+                                <div>
+                                    <a ng-click="addActivityToCart()">Proceed to payment</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="column-6">
-                    <button class="editButton"><div>Edit</div></button>
+            <!--ROW END-->
+            <!--ROW START-->
+            <div ng-if="!largeScreen">
+                <div class="row">
+                    <div ng-repeat="(key, value) in activityResults">
+                        <div class="column-12">
+                            <div class="column-no-padding">
+                                <div class="header-upper-noborder-left">
+                                    <div class="column-auto-left">
+                                        <img src="~/Images/Icons/nav_location_icon.png">
+                                    </div>
+                                    <div class="column-auto-left">
+                                        <span>{{key}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column-12">
+                            <div class="background white" ng-repeat="item in value">
+                                <div class="list-booking-wrapper">
+                                    <div class="thumbnail-crop-height">
+                                        <img ng-src="{{item.ImageURL}}" />
+                                    </div>
+                                    <div class="activitybookingDetails">
+                                        <div>
+                                            <span>{{item.ActivityWithLocation}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="activitybookingDetails">
+                                        <div class="column-auto">
+                                            <img src="~/Images/Icons/events_icon_mobile.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.f_BookingDate}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="activitybookingDetails">
+                                        <div class="column-auto">
+                                            <img src="~/Images/Icons/people_web.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.f_pax}}</span>
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.f_Cost}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="activitybookingDetails" ng-show="showChildInfo()">
+                                        <div class="column-auto">
+                                            <img src="~/Images/Icons/kids.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.ChildParticipants}}</span>
+                                        </div>
+                                        <div class="inline" ng-if="isINR()">
+                                            <img src="~/Images/Icons/rupee_mob.png" />
+                                        </div>
+                                        <div class="labelPlain">
+                                            <span>{{item.CostForChild}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="column-6 nopadding">
+                                        <div class="button-container left">
+                                            <div class="center-element-relative-table">
+                                                <div class="column-auto">
+                                                    <img src="~/Images/Icons/edit.png" />
+                                                </div>
+                                                <div class="column-auto">
+                                                    <span>Edit</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column-6 nopadding">
+                                        <div class="button-container">
+                                            <div class="center-element-relative-table">
+                                                <div class="column-auto">
+                                                    <img src="~/Images/Icons/bin.png" />
+                                                </div>
+                                                <div class="column-auto" ng-click="removeActivityFromUserCart(item)">
+                                                    <span>Delete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>             
+                <div class="row">
+                    <div class="column-12">
+                        <div class="column-auto-left">
+                            <span>Amount details</span>
+                        </div>
+                    </div>
                 </div>
-                <div class="column-6">
-                    <button class="removeButton"><div>Remove</div></button>
+                <div class="row">
+                    <div class="column-12">
+                        <div class="background white">
+                            <div class="list-amount-wrapper">
+                                <div>
+                                    <div>
+                                        <span>Packages</span>
+                                    </div>
+                                    <div>
+                                        <span>INR 10,000</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <span>VAT</span>
+                                    </div>
+                                    <div>
+                                        <span>INR 2,000</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <span>Total</span>
+                                    </div>
+                                    <div>
+                                        <span>INR 12,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column-12">
+                        <div class="background white">
+                            <div class="user-details">
+                                <div>
+                                    <div>
+                                        <span>First Name</span>
+                                    </div>
+                                    <div>
+                                        <input type="text" required placeholder="First Name" ng-model="userInfo.firstName" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <span>Last Name</span>
+                                    </div>
+                                    <div>
+                                        <input type="text" required placeholder="Last Name" ng-model="userInfo.lastName" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <span>Phone Number</span>
+                                    </div>
+                                    <div>
+                                        <input type="tel" required placeholder="Phone Number" ng-model="userInfo.phoneNumber" />
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <span>Email</span>
+                                    </div>
+                                    <div>
+                                        <input type="email" required placeholder="Email" ng-model="userInfo.email" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="column-12">
+                        <div class="column-top">
+                        </div>
+                        <div class="booking">
+                            <div>
+                                <a ng-click="proceedToCart()">Proceed to payment</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!--ROW END-->
         </div>
     </div>
 </div>

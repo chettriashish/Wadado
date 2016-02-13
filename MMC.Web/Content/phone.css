@@ -54,6 +54,15 @@
 .like-container img {
     transform-style: initial;
 }
+
+ .footerWrapper {
+        height: 4em;
+        padding: 1em 0 0;
+    }
+
+  footer img{      
+        bottom:2em;        
+    }
 /*-----------LANDSCAPE MODE FOR SMALLER PHONES-------------*/
 
 @media only screen and (min-width: 480px) and (orientation:landscape) {

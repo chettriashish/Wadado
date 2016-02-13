@@ -66,9 +66,10 @@
             checkForAvailability();
         }
 
-        $scope.onDateSet = function (selectedDate) {
+        $scope.onDateSet = function (selectedDate) {            
             $scope.selectedDate = selectedDate;
             if ($scope.selectedDate != '') {
+                spinner();
                 if (!$(".booking-wrapper").hasClass("open")) {
                     $(".desktop-book").addClass("hide");
                     $(".booking-wrapper").addClass("open");
@@ -91,16 +92,19 @@
                 if ($scope.NumAdults >= 1 || $scope.NumChildren >= 1) {
                     checkForAvailability();
                 }
+                spinner();
             }            
         }
 
-        $scope.addActivityToCart = function () {
-            if ($scope.selectedDate != null) {
+        $scope.addActivityToCart = function () {          
+            if ($scope.selectedDate != '') {
+                spinner();
                 BookingDataService.checkForActivityAvailability($scope.selectedActivityDetails.ActivityKey,
                 $scope.NumAdults, $scope.NumChildren, $scope.selectedDate, $scope.time.val).then(function (result) {
                     if (!result.Status) {
                         $scope.ErrorMessage = result.Message;
                         $scope.Error = true;
+                        spinner();
                     }
                     else {
                         var total = 0;
@@ -113,10 +117,11 @@
                         }
                         BookingDataService.addSelectedActivityToUsersCart($scope.selectedActivityDetails.ActivityKey,
                            $scope.NumAdults, $scope.NumChildren, $scope.selectedDate, $scope.time.val, total).then(function (response) {
-                               //console.log("activity added to cart");
+                               console.log("activity added to cart");
                                $scope.$emit("ACTIVITYUPDATED", { message: "ACTIVITYUPDATED" })
+                               spinner();
                            });
-                    }
+                    }                    
                 });
             }
             else {
@@ -125,7 +130,17 @@
                 $scope.Error = true;
             }
 
-        }            
+        }
+
+        /***************SHOW/HIDE THE LOADING SPINNER*************************/
+        var spinner = function () {
+            if ($('.spinner').hasClass('show')) {
+                $('.spinner').removeClass('show');
+            }
+            else {
+                $('.spinner').addClass('show');
+            }
+        }
     }
     app.controller("BookingController", bookingController);
 }());

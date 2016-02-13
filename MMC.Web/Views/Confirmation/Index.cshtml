@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "WADADO.IN";
+}
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--FAVOURITES REFERENCE-->
+<script src="~/Scripts/Common/services/FavoritesDataService.js"></script>
+<script src="~/Scripts/Directives/Favorites/favoritesdirective.js"></script>
+
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--BOOKING REFERENCE-->
+<script src="~/Scripts/Common/services/BookingDataService.js"></script>
+<script src="~/Scripts/Common/controllers/BookingController.js"></script>
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+
+<!--DATE REFERENCE-->
+<link href="~/Content/_date.css" rel="stylesheet" />
+<script src="~/Scripts/Directives/Date/DateDirective.js"></script>
+<script src="~/Scripts/Directives/Booking/bookingdirective.js"></script>
+<link href="~/Content/tablet.css" rel="stylesheet" />
+<link href="~/Content/desktopmenu.css" rel="stylesheet" />
+<link href="~/Content/desktop.css" rel="stylesheet" />
+<div class="cover"></div>
+<div class="contentWrapper" data-ng-controller="ActivityDetailsController">
+    <div id="colorbar">
+    </div>
+    <div>
+        @Html.Partial("../Partial/_confirmationdesktopmenu")
+    </div>
+    <div class="uppercontent" ng-show="showActivityDetails()" ng-hide="hideActivityDetails()">
+        <div class="row">
+            <div class="column-12 widest-gutter">
+                <div class="center-element">                    
+                    <div class="dummy">
+                        <img src="~/Images/Icons/monkeycap.gif" />
+                    </div>                    
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12 widest-gutter">
+                <div class="center-element-relative-table">
+                    <div class="header">
+                        <span>Congratulations, you've just booked the greatest activity on earth ...or not!!</span>
+                    </div>                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

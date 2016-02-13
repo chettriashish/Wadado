@@ -32,5 +32,7 @@ namespace MMC.Business.Contracts
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationAndType(string locationKey, string activityCategoryKey, string userAgent);
         [OperationContract]
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);
+        [OperationContract]
+        bool RemoveSelectedActivity(string sessionKey, string activityBookingKey);
     }
 }

@@ -50,6 +50,8 @@ namespace MMC.Client.Contracts
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationAndType(string locationKey, string activityCategoryKey, string userAgent);
         [OperationContract]
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);
+        [OperationContract]
+        bool RemoveSelectedActivity(string sessionKey, string activityBookingKey);
         #endregion
 
         #region Async Operations
@@ -63,6 +65,9 @@ namespace MMC.Client.Contracts
         Task<ActivityBookingDataContract> BookActivityForUserAsync(ActivityBookingDataContract bookingDetails);
         Task<ActivityBookingDataContract> AddUserActivityToCartAsync(string activityKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey);
+
+        [OperationContract]
+        Task<bool> RemoveSelectedActivityAsync(string sessionKey, string activityBookingKey);
         #endregion
     }
 }

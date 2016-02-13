@@ -31,6 +31,7 @@
                         zoom: 11,
                         mapTypeId: google.maps.MapTypeId.ROADMAP,
                         mapTypeControl: false,
+                        scrollwheel:false,
                     };
 
                     map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -43,7 +44,7 @@
                     }
                     else {
                         createGeoJSON();
-                    }
+                    }                   
                 }
 
 

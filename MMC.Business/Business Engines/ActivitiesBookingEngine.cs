@@ -216,7 +216,7 @@ namespace MMC.Business.BusinessEngines
             {
                 result = activityBookingRepository.GetBookedActivitiesByUserKey(guestKey);                
             }
-            return result;
+            return result.OrderBy(entity => entity.BookingDate);
         }
     }
 }

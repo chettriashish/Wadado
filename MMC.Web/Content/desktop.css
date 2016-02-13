@@ -2,11 +2,12 @@
 
 /*-----CONTENT -----*/
 body, #body {
-    min-width: 800px;    
+    min-width: 1100px;
 }
+
 .column-auto {
     float: left;
-    padding: .4em 1em;
+    padding: .4em .5em 0 0;
     width: auto;
     position: relative;
     display: table;
@@ -20,6 +21,14 @@ body, #body {
     display: table;
 }
 
+.column-auto-left {
+    float: left;
+    padding: 0 .2em .5em 0;
+}
+
+.header-upper-noborder {
+    font-size: 2.5em;
+}
 
 .labelPlain {
     font-size: 1em;
@@ -433,16 +442,24 @@ img.scale, object.scale, .crop-height:hover img {
     padding: .1em;
 }
 
-.column-12.wide-gutter {
+.column-12.wide-gutter, .column-7.wide-gutter {
     padding: .5em 2em;
 }
 
-.column-12.widest-gutter {
+.column-12.widest-gutter, .column-7.widest-gutter {
     padding: 1.5em 5em;
 }
 
-.column-12.min-top-widest-gutter {
+.column-12.min-top-widest-gutter, .column-8.min-top-widest-gutter {
     padding: 0em 5em;
+}
+
+.column-8.min-top-left-widest-gutter {
+    padding: .5em 0 0 5em;
+}
+
+.column-4.min-top-right-widest-gutter {
+    padding: .7em 5em 0 5em;
 }
 
 .column-3.min {
@@ -513,6 +530,8 @@ footer {
 .location-detailsSpace {
     font-size: 1em;
     padding: 0 .5em 0 0;
+    text-align: left;
+    text-indent: 0px;
 }
 
 .error, .booking > div span {
@@ -532,6 +551,13 @@ label {
         display: none;
     }
 
+.booking-outer {
+    display: table;
+    border: 1px solid #8ec73f;
+    padding: 0 .5em;
+    border-radius: 2px;
+}
+
 /********************ACTIVITY CART END**************************/
 
 @media only screen and (min-width:600px) {
@@ -546,6 +572,13 @@ label {
         .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
             font-size: 1.4em;
         }
+
+    .list-booking-wrapper .activitybookingDetails div:first-of-type {
+        font-size: 1.2em;
+        padding: .1em .5em 0 0;
+        float: left;
+        font-weight: 400;
+    }
 
     .caption {
         font-weight: 600;
@@ -578,6 +611,10 @@ label {
     /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
 }
 
+.header-upper-noborder-left {
+    font-size: 1.4em;
+}
+
 @media only screen and (min-width:700px) {
 
     .rating {
@@ -587,7 +624,7 @@ label {
     }
 
     .rating-outer {
-        margin: 0 1em;
+        margin: 0em;
     }
 
     .subHeader, .subHeaderRight, .subHeaderCenter {
@@ -624,7 +661,7 @@ label {
 
     .labelPlain {
         font-size: 1.2em;
-        padding: .1em 1em;
+        padding: .1em 0em;
         margin: 0;
     }
 
@@ -652,33 +689,41 @@ label {
     /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
     .list-booking-wrapper > div:first-of-type {
         float: left;
-        width: 25%;
-        padding: 0;
+        width: 40%;
+        padding: 2em 0;
+    }
+
+    .list-booking-wrapper .activitybookingDetails {
+        float: right;
+        width: 60%;
+        text-align: left;
+    }
+
+    footer img {
+        transform: scale(.7);
     }
 }
 
 @media only screen and (min-width: 900px) {
-    .booking-outer {
-        display: table;
-        border: 1px solid #8ec73f;
-        padding: 0 .5em;
-        border-radius: 2px;
-    }
 
     /************ACTIVITY CART START**************/
     .list-booking-wrapper .activitybookingDetails div:first-of-type {
-        font-size: 1.1em;
+        font-size: 1.5em;
         letter-spacing: 1px;
         padding: 0 .5em 0 0;
         float: left;
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .list-booking-wrapper .activitybookingDetails > div {
-        font-size: 1em;
+        font-size: 1.1em;
         padding: .1em .5em 0 0;
         float: left;
         font-weight: 500;
+    }
+
+    .header-upper-noborder-left {
+        font-size: 1.2em;
     }
 }
 
@@ -710,7 +755,7 @@ label {
     .subHeader, .subHeaderRight, .subHeaderCenter {
         font-size: 1.25em;
         font-weight: 600;
-        padding: 0 1em;
+        padding: 0 0em;
     }
 
 
@@ -766,14 +811,34 @@ label {
 
     .list-booking-wrapper > div:first-of-type {
         float: left;
-        width: 20%;
-        padding: 0;
+        width: 25%;
+        padding: 1em 0;
     }
 
-
+    .list-booking-wrapper .activitybookingDetails {
+        float: right;
+        width: 70%;
+        text-align: left;
+    }
     /*-----COLUMNS -----*/
 
     .column-2 {
         width: 16.66%;
+    }
+
+    .header-upper-noborder-left {
+        font-size: 1.4em;
+    }
+
+    input[type=text], input[type=email], input[type=tel] {
+        min-height: 2.8em;
+    }
+
+    footer img {
+        transform: scale(.8);
+    }
+
+    .dummy img {
+        transform: scale(.5);
     }
 }

@@ -35,6 +35,21 @@
             });
         }
 
+        var logGoogleUserInformation = function (userName, userInfo, mail) {
+            LoginDataService.logUserSession().then(function (response) {
+                LoginDataService.saveUserDetails(userName, userInfo, mail, "g_p").then(function (response) {
+                    if ($scope.Action == "a_f") {
+                        LoginDataService.addFavorites($scope.ActivityKey).then(function (response) {
+                            LoginDataService.returnUser($scope.returnUrl);
+                        });
+                    }
+                    else {
+                        LoginDataService.returnUser($scope.returnUrl);
+                    }
+                });
+            });
+        }
+
         var checkLoginState = function () {
             FB.getLoginStatus(function (response) {
                 statusChangeCallback(response);
@@ -90,6 +105,43 @@
         $scope.continueAsGuest = function () {
             LoginDataService.returnUser($scope.returnUrl);
         };
+
+        /*******************GOOGLE CODE********************************/
+
+        gapi.load('auth2', function () {
+            // Retrieve the singleton for the GoogleAuth library and set up the client.
+            auth2 = gapi.auth2.init({
+                client_id: '906159375301-v2fqno1s4s7p6v9qktk48jqiorce7v75.apps.googleusercontent.com',
+                cookiepolicy: 'single_host_origin',
+                // Request scopes in addition to 'profile' and 'email'
+                //scope: 'additional_scope'
+            });
+            attachSignin(document.getElementById('customBtn'));
+        });
+
+
+        var attachSignin = function (element) {
+            console.log(element.id);
+            auth2.attachClickHandler(element, {},
+                function (googleUser) {
+                    logGoogleUserInformation(googleUser.getBasicProfile().getName(), googleUser.getBasicProfile().getId(), googleUser.getBasicProfile().getEmail());
+                }, function (error) {
+                    alert(JSON.stringify(error, undefined, 2));
+                });
+        }
+
+        var signOut = function () {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+                LoginDataService.logUserOut().then(function (response) {
+                    if (response == true) {
+                        LoginDataService.returnUser($scope.returnUrl);
+                    }
+                });
+            });
+        }
+
+        /***************************END GOOGLE CODE**********************************/
     }
     app.controller("LoginController", loginController);
 }());

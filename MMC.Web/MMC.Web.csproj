@@ -323,6 +323,7 @@
     <Compile Include="Controllers\ActivityDetails\ActivityDetailsController.cs" />
     <Compile Include="Controllers\BaseViewController.cs" />
     <Compile Include="Controllers\Booking\BookingController.cs" />
+    <Compile Include="Controllers\Confirmation\ConfirmationController.cs" />
     <Compile Include="Controllers\Home\HomeController.cs" />
     <Compile Include="Controllers\Location\LocationController.cs" />
     <Compile Include="Controllers\Menu\MenuController.cs" />
@@ -1273,6 +1274,12 @@
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Unity.Wcf.README.txt" />
     <Content Include="Video\video.mp4" />
+    <Content Include="Views\Confirmation\Index.cshtml" />
+    <Content Include="Views\Confirmation\Index.legacy.cshtml" />
+    <Content Include="Views\Confirmation\Index.smartphone.cshtml" />
+    <Content Include="Views\Confirmation\Index.tablet.cshtml" />
+    <Content Include="Views\Partial\_confirmationmobilemenu.cshtml" />
+    <Content Include="Views\Partial\_confirmationdesktopmenu.cshtml" />
     <None Include="Views\Partial\_favourites.cshtml" />
     <Content Include="Views\Templates\choices.tpl.html" />
     <Content Include="Views\Templates\match-multiple.tpl.html" />

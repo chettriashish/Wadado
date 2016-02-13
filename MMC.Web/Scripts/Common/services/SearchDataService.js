@@ -1,6 +1,6 @@
 ﻿(function () {
     var app = angular.module("appMain");
-    var searchDataService = function ($http, $q) {
+    var searchDataService = function ($http, $q, $window) {
 
         var getAllLocations = function () {
             var deferred = $q.defer();
@@ -15,11 +15,11 @@
 
         var getSelectedDetails = function (activity, location) {
             if ((activity == null || activity.trim() == "Explore") && location != null && location.length > 0) {
-                window.location.href = "/Location/" + location;
+                $window.location.href = "/Location/" + location;
             }
             else if (location != null && activity != null
                 && location.trim() != "" && activity.trim() != "") {
-                window.location.href = "/Activities/" + location + "/" + activity;
+                $window.location.href = "/Activities/" + location + "/" + activity;
             }
         }
 

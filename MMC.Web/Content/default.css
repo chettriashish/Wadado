@@ -20,9 +20,8 @@ body {
     height: 100%;
 }
 
-#body {    
+#body {
     padding-bottom: 60px;
-    background-color: rgb(244,244,244);
 }
 
 .spinner {
@@ -107,6 +106,17 @@ header {
     position: relative;
 }
 
+.dummy {
+    float: none;
+    position: relative;
+    margin: 0 auto;    
+    width: 40%;
+}
+
+    .dummy img {
+        width: 50%;
+        height: auto;
+    }
 
 /*-----NAVIGATION -----*/
 #navWrapper {
@@ -141,7 +151,7 @@ nav ul li:last-child a {
 
 /*-----CONTENT -----*/
 .contentWrapper {
-    background-color: #fff;
+    background-color: rgb(255,255,255);
     transition: 1s all;
 }
 
@@ -164,15 +174,19 @@ nav ul li:last-child a {
 
 .background.white {
     background-color: rgb(255,255,255);
-    border:1px solid #ccc;
+    border: 1px solid #ccc;
+    padding: 1em 0 0 0;
 }
 
 .uppercontent, .lowercontent {
     padding: 0;
     height: auto;
     z-index: 1;
-    background-color: rgb(244,244,244);
 }
+
+    .uppercontent.grey {
+        background-color: rgb(244,244,244);
+    }
 
 .lowercontent {
     background-color: #febe00;
@@ -245,6 +259,11 @@ nav ul li:last-child a {
     padding: .4em 0;
 }
 
+.column-8.nopadding, .column-7.nopadding, .column-4.nopadding, .column-6.nopadding {
+    padding: 0em 0;
+}
+
+
 .column-12 {
     width: 100%;
 }
@@ -257,6 +276,10 @@ nav ul li:last-child a {
     width: 1.5em;
 }
 
+.column-top {
+    padding: .4em 0;
+}
+
 .column-1 {
     float: right;
     padding: .4em 2%;
@@ -264,6 +287,10 @@ nav ul li:last-child a {
 
 .column-9 {
     width: 75%;
+}
+
+.column-8 {
+    width: 66.6%;
 }
 
 .column-7 {
@@ -294,7 +321,30 @@ nav ul li:last-child a {
     width: 16.6%;
 }
 
+.column-auto-left {
+    float: left;
+    padding: 0 .2em .5em 0;
+}
 
+.column-auto {
+    float: left;
+    padding: .4em 0;
+    width: auto;
+    position: relative;
+    display: table;
+}
+
+.header-upper-noborder-left {
+    font-size: 1.2em;
+}
+
+.column-8.min-top-left-widest-gutter {
+    padding: 0.5em 0 0 0em;
+}
+
+.column-4.min-top-right-widest-gutter {
+    padding: .8em 0.5em 0 0em;
+}
 
 .border-top {
     padding: .5em 0 0 0;
@@ -680,8 +730,6 @@ nav ul li:last-child a {
     width: 100%;
 }
 
-
-
 /*----------------ACTIVITY LIST STYLES----------------------*/
 
 .list-activity-wrapper {
@@ -701,7 +749,7 @@ nav ul li:last-child a {
     width: 100%;
     display: inline-table;
     height: auto;
-    padding:1.5em 1em;
+    padding: 0em 1em;
 }
 
     .list-booking-wrapper > div:first-of-type img {
@@ -711,13 +759,48 @@ nav ul li:last-child a {
     .list-booking-wrapper > div:first-of-type {
         float: left;
         width: 30%;
-        padding: 0;
+        padding: 1em 0;
     }
 
     .list-booking-wrapper div {
         float: left;
         padding: 4%;
     }
+
+.list-amount-wrapper {
+    width: 100%;
+    display: inline-table;
+    height: auto;
+    padding: 0;
+}
+
+    .list-amount-wrapper > div {
+        padding: 0em 1em;
+        width: 100%;
+        display: inherit;
+    }
+
+        .list-amount-wrapper > div:last-of-type {
+            padding: 0 1em 1em;
+        }
+
+        .list-amount-wrapper > div > div {
+            float: left;
+            padding: .5em;
+            font-size: 1em;
+        }
+
+            .list-amount-wrapper > div > div:first-of-type {
+                padding: .5em;
+                text-align: left;
+                width: 40%;
+            }
+
+            .list-amount-wrapper > div > div:nth-of-type(2) {
+                padding: .5em 1em 0 0;
+                text-align: left;
+                width: 60%;
+            }
 
 .date-range {
     font-size: 0.9em;
@@ -783,10 +866,10 @@ nav ul li:last-child a {
 }
 
     .list-booking-wrapper .activitybookingDetails div:first-of-type {
-        font-size: 1em;
+        font-size: 1.1em;
         padding: .1em 0 0 0;
         float: left;
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .list-booking-wrapper .activitybookingDetails > div {
@@ -845,7 +928,7 @@ nav ul li:last-child a {
 
 /*----- FOOTER -----*/
 .footerWrapper {
-    position:relative;
+    position: relative;
     background-color: #000;
     width: 100%;
     height: 1em;
@@ -859,8 +942,8 @@ footer {
     color: #fff;
     text-align: center;
     padding: 1em 0 0 0;
-    position:relative;
-    bottom:0;
+    position: relative;
+    bottom: 0;
     background-color: #000;
     width: 100%;
 }
@@ -869,6 +952,11 @@ footer {
         color: #fff;
     }
 
+    footer img {
+        transform: scale(.5);
+        position: relative;
+        bottom: 1.5em;
+    }
 
 /*----- OTHER -----*/
 .clearfix:after {
@@ -1342,6 +1430,32 @@ footer {
     transition: .5s all;
     padding: .3em 0 .2em 0;
 }
+
+.header-upper-noborder-left {
+    width: 100%;
+    text-align: left;
+    color: #000;
+    text-transform: capitalize;
+    font-size: 1.4em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    background-color: rgba(244,244,244,.8);
+    transition: .5s all;
+    padding: .3em 0 .4em 0;
+}
+
+.label-upper-noborder-left {
+    width: 100%;
+    text-align: left;
+    color: #000;
+    text-transform: capitalize;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    font-weight: 400;
+    background-color: rgba(244,244,244,.8);
+    transition: .5s all;
+    padding: .3em 0 .2em 0;
+}
 /***************ACTIVITY DETAIL**************/
 .header-left {
     font-family: Dooodleista;
@@ -1355,7 +1469,7 @@ footer {
     -webkit-transition: .2s all;
     -o-transition: .2s all;
     transition: .2s all;
-    padding: 0em .2em;
+    padding: 0em;
 }
 
     .header-left span {
@@ -1446,8 +1560,8 @@ footer {
 
 .thumbnail-crop-height {
     /* max-width: 1200px; /* native or declared width of img src (if known) */
-    max-height: 110px;
-    height: 110px; /* lt ie8 */
+    max-height: 150px;
+    height: 150px; /* lt ie8 */
     height: auto;
     overflow: hidden;
 }
@@ -1568,7 +1682,35 @@ input[type=checkbox] {
         color: green;
     }
 
+input[type=text], input[type=email], input[type=tel] {
+    min-height: 2.5em;
+    padding: .2em;
+    width: 90%;
+    border-radius: 0;
+}
 
+input:required:invalid, input:focus:invalid {
+    -moz-box-shadow: none;
+}
+
+input:required:valid {
+    -moz-box-shadow: none;
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+/*********************USER DETAILS FORM*******************/
+.user-details {
+    width: 100%;
+    display: inline-table;
+    height: auto;
+    padding: 0 0 1em 0;
+    position: relative;
+}
+
+    .user-details div {
+        padding: .4em;
+    }
+/*********************END USER DETAILS FORM*******************/
 label {
     font-size: .7em;
 }
@@ -1641,35 +1783,34 @@ label {
 .desktop-book {
     display: none;
 }
-
+/**********************SOCIAL BUTTONS**********************/
 .socialButtons {
     margin: 1em auto .5em auto;
     float: none;
     display: table;
 }
 
-    .socialButtons.right {
-        float: right;
-    }
-
-    .socialButtons.left {
+    .socialButtons > div {
         float: left;
+        color: white;
     }
 
-    .socialButtons a {
-        margin: 0 auto;
-        height: 3em;
-        font-size: .9em;
-        outline: none;
-        cursor: pointer;
-        color: rgb(255,255,255);
-        padding: .8em 2em;
-        margin: 0 auto;
-        transition: 0.5s all;
-        border-radius: 5px;
-        border: none;
-        background-color: rgb(251,189,19);
-    }
+        .socialButtons > div:first-of-type img {
+        }
+
+        .socialButtons > div a {
+            margin: 0 auto;
+            height: 3em;
+            font-size: .9em;
+            outline: none;
+            cursor: pointer;
+            padding: .8em 2em;
+            margin: 0 auto;
+            transition: 0.5s all;
+            border-radius: 5px;
+            border: none;
+            background-color: rgb(251,189,19);
+        }
 
     .socialButtons #facebook {
         padding: .8em 2em;
@@ -1681,6 +1822,49 @@ label {
         background-color: rgb(211,72,54);
     }
 
+/*******************GOOGLE CUSTOM BUTTON***********************/
+
+#customBtn {
+    display: inline-block;
+    background: #FFFFFF;
+    color: grey;
+    width: 190px;
+    border-radius: 2px;
+    white-space: nowrap;
+    border: 1px solid red;
+}
+
+    #customBtn:hover {
+        cursor: pointer;
+    }
+
+span.label {
+    font-weight: bold;
+}
+
+span.icon {
+    background: url('../Images/Icons/google_icon.png') transparent -10px 50% no-repeat;
+    background-size: 64px 64px;
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+    border-right: red 1px solid;
+}
+
+span.buttonText {
+    display: inline-block;
+    vertical-align: middle;
+    padding-left: 42px;
+    padding-right: 42px;
+    font-size: 14px;
+    font-weight: bold;
+    /* Use the Roboto font that is loaded in the <head> */
+    font-family: 'Roboto', sans-serif;
+}
+
+/*******************END GOOGLE CUSTOM BUTTON*******************/
+/********************END SOCIAL BUTTONS******************************/
 .error {
     font-size: .8em;
     color: red;
@@ -1729,9 +1913,9 @@ label {
     height: 2em;
     float: none;
     padding: 0em 0;
-    border-width: 1px 0 1px 0;
+    border-width: 1px 0 0px 0;
 }
 
     .button-container.left {
-        border-width: 1px 1px 1px 0;
+        border-width: 1px 1px 0px 0;
     }

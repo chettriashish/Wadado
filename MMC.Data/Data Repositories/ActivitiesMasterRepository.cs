@@ -318,7 +318,7 @@ namespace MMC.Data.DataRepositories
         public void AddActivityToUserItenerary(string activityKey, string activityDate, int numberOfPeople, string activityTime)
         {
             throw new NotImplementedException();
-        }
+        }       
 
         /// <summary>
         /// Fetch user information based on user account details
