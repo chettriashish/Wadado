@@ -93,8 +93,7 @@
 .owl-carousel .owl-nav .owl-prev,
 .owl-carousel .owl-nav .owl-next,
 .owl-carousel .owl-dot {
-    cursor: pointer;
-    cursor: hand;
+    cursor: pointer;    
     -webkit-user-select: none;
     -khtml-user-select: none;
     -moz-user-select: none;
@@ -125,11 +124,11 @@
     }
 
 .owl-prev {
-    left: 5px;
+    left: 0px;
 }
 
 .owl-next {
-    right: 5px;
+    right: 0px;
 }
 
 .owl-carousel.owl-loaded {

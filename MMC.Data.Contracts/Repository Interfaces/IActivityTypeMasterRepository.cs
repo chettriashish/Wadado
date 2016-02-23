@@ -10,5 +10,6 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
 {
     public interface IActivityTypeMasterRepository : IDataRepository<ActivityTypeMaster>
     {
+        IEnumerable<ActivityTypeMaster> GetAllTypesForSelectedCategory(string activityCategoryKey);
     }
 }

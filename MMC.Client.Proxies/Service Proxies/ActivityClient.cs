@@ -150,5 +150,47 @@ namespace MMC.Client.Proxies
         {
             return Channel.RemoveSelectedActivityAsync(sessionKey, activityBookingKey);
         }
+        public IEnumerable<ActivityCategoryMaster> GetAllActivityCategories()
+        {
+            return Channel.GetAllActivityCategories();
+        }
+        public IEnumerable<ActivityTypeMaster> GetAllActivitySubCategories()
+        {
+            return Channel.GetAllActivitySubCategories();
+        }
+
+        public void SaveCategory(string activityCategoryKey, string activityCategory)
+        {
+            ActivityCategoryMaster newActivityCategory = new ActivityCategoryMaster() { ActivityCategoryKey = activityCategoryKey, ActivityCategory = activityCategory };
+            SaveCategories(newActivityCategory);
+        }
+        public void SaveSubCategory(string activityTypeKey, string activityType)
+        {
+            ActivityTypeMaster newActivityType = new ActivityTypeMaster() {ActivityTypeKey = activityTypeKey,ActivityType =activityType };
+            SaveSubCategories(newActivityType);
+        }
+        public void SaveCategories(ActivityCategoryMaster activityCategory)
+        {
+            Channel.SaveCategories(activityCategory);
+        }
+        public void SaveSubCategories(ActivityTypeMaster activitySubCategory)
+        {
+            Channel.SaveSubCategories(activitySubCategory);
+        }
+
+        public IEnumerable<ActivityTypeMaster> GetSubCategoriesForSelectedActivity(string activityCategoryKey)
+        {
+            return Channel.GetSubCategoriesForSelectedActivity(activityCategoryKey);
+        }
+
+        public void SaveActivityCategoryMapping(IEnumerable<string> activityTypeKeys, string activityCategoryKey)
+        {
+            Channel.SaveActivityCategoryMapping(activityTypeKeys, activityCategoryKey);
+        }
+
+        public Task<IEnumerable<ActivityTypeMaster>> GetSubCategoriesForSelectedActivityAsync(string activityCategoryKey)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

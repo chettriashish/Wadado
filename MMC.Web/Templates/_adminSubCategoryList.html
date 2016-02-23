@@ -1,0 +1,87 @@
+﻿<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-table">
+        <div style="float:right">
+            <div class="column-12">
+                <div class="admin-booking">
+                    <div>
+                        <a ng-click="addNewSubCategory()">ADD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-table">
+        <div class="admin-table header">
+            <div class="column-12">
+                <div style="float:left;">
+                    <span>SUB CATEGORY NAME</span>
+                </div>
+                <div style="float:left;">
+                    <span>&nbsp;</span>
+                </div>
+                <div style="float:left;">
+                    <span>&nbsp;</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div ng-repeat="item in allSubCategoryDetailsList">
+                <div class="column-5">
+                    <div class="column-12" ng-if="!item.editMode">
+                        <span style="text-transform:uppercase;">{{item.ActivityType}}</span>
+                    </div>
+                    <div class="column-12" ng-if="!!item.editMode">
+                        <input type="text" ng-model="item.ActivityType" style="text-transform:uppercase;" placeholder="eg. trekking" />
+                    </div>
+                </div>
+                <div class="column-3" ng-if="!item.editMode">
+                    <div ng-click="editSelectedSubCategory(item)" class="column-button">
+                        <div class="column-0">
+                            <img src="/Images/Icons/edit.png" />
+                        </div>
+                        <div class="column-2">
+                            <span>Edit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-3" ng-if="!!item.editMode">
+                    <div ng-click="saveSelectedSubCategoryDetails(item)" class="column-button">
+                        <div class="column-0">
+                            <img src="/Images/Icons/done.png" />
+                        </div>
+                        <div class="column-2">
+                            <span>Done</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-3" ng-if="!item.editMode">
+                    <div ng-click="deleteSelectedCategory(item)" class="column-button">
+                        <div class="column-0">
+                            <img src="/Images/Icons/bin.png" />
+                        </div>
+                        <div class="column-2">
+                            <span>Delete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

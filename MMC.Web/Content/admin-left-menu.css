@@ -1,0 +1,110 @@
+﻿@media only screen and (min-width: 0px) {
+    body {
+        padding-top: 55px;
+    }
+
+    .menu-container {
+        clear: both;
+        position: relative;
+        top: 5em;
+    }
+
+        .menu-container nav {
+        }
+
+            .menu-container nav ul {
+                width: 100%;
+            }
+
+                .menu-container nav ul li:first-of-type {
+                    padding: 1em;
+                    border: 1px solid #ccc;
+                    border-width: 1px 0 1px 0;
+                }
+
+                .menu-container nav ul li {
+                    padding: 1em;
+                    border: 1px solid #ccc;
+                    border-width: 0px 0 1px 0;
+                    cursor: pointer;
+                }
+
+                    .menu-container nav ul li:hover {                        
+                        background-color: rgb(253,253,253);
+                    }
+
+                    .menu-container nav ul li.active {
+                        padding: 1em;
+                        background-color: rgb(244,244,244);
+                    }
+
+                    .menu-container nav ul li:nth-of-type(2n) {
+                    }
+
+                    .menu-container nav ul li:nth-of-type(2n + 1) {
+                    }
+
+                    .menu-container nav ul li a {
+                        cursor: pointer;
+                    }
+
+    .top-pane {
+        display: table;
+        width: 100%;
+        height: 55px;
+        position: fixed;
+        top: 0;
+        clear: both;
+        background-color: rgba(255,255,255,1);
+        z-index: 100;
+        border: 1px solid #ccc;
+        border-width: 0 0 1px 0;
+    }
+
+        .top-pane nav {
+        }
+
+            .top-pane nav > div {
+                display: block;
+                float: left;
+                width: 100px;
+                position: fixed;
+                height: 90px;
+                top: 0em;
+                left: 5em;
+                background-color: rgb(251,189,19);
+                background-image: url('../Images/Icons/do_mob.png');
+                background-image: url('../Images/Icons/do_mob.png');
+                background-image: url('../Images/Icons/do_mob.png');
+                background-image: url('../Images/Icons/do_mob.png');
+                background-repeat: no-repeat;
+                cursor: pointer;
+                border: 0 none;
+                z-index: 999;
+                text-indent: -9999px;
+                outline: none;
+                background-size: 90px auto;
+                -webkit-transition: height 0.5s ease,background-position-y 0.5s ease;
+                transition: height 0.5s ease,background-position-y 0.5s ease;
+            }
+
+                .top-pane nav > div:hover {
+                    background-position-y: 20px;
+                    height: 110px;
+                }
+
+            .top-pane nav ul {
+                float: right;
+                padding-right: 5%;
+            }
+
+                .top-pane nav ul li {
+                    padding: 1em;
+                    float: left;
+                }
+
+                    .top-pane nav ul li a {
+                        text-decoration: none;
+                        color: black;
+                    }
+}

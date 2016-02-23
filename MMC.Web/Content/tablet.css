@@ -680,4 +680,38 @@
     footer img {
         transform: scale(.8);
     }
+
+    .column--true-12 {
+        padding: 1px 0;
+        float: left;
+        width: 100%;
+    }
+
+    .column--true-9 {
+        width: 75%;
+    }
+
+    .column--true-7 {
+        width: 58.33%;
+    }
+
+    .column--true-6 {
+        width: 50%;
+    }
+
+    .column--true-5 {
+        width: 41.67%;
+    }
+
+    .column--true-4 {
+        width: 33.33%;
+    }
+
+    .column--true-3 {
+        width: 25%;
+    }
+
+    .column--true-2 {
+        width: 16.67%;
+    }
 }

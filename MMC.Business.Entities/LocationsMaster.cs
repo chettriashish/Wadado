@@ -8,11 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Business.Entities
-{
-    [DataContract(Namespace = "wadado.in")]
+{  
     public class LocationsMaster : EntityBase, IIdentifiableEntity
-    {
-        public ExtensionDataObject ExtensionData { get; set; }
+    {        
         #region Properties
         [DataMember]
         public string LocationKey { get; set; }

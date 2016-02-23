@@ -120,6 +120,18 @@
   <data name="BUNDLED" xml:space="preserve">
     <value>BUNDLED</value>
   </data>
+  <data name="DESCRIPTION" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="GETTINGAROUND" xml:space="preserve">
+    <value>Getting Around</value>
+  </data>
+  <data name="MUSTDRINK" xml:space="preserve">
+    <value>Must Drink</value>
+  </data>
+  <data name="MUSTEAT" xml:space="preserve">
+    <value>Must Eat</value>
+  </data>
   <data name="SINGLE" xml:space="preserve">
     <value>SINGLE</value>
   </data>

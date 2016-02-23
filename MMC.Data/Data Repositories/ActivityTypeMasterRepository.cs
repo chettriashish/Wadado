@@ -38,5 +38,19 @@ namespace MMC.Data.DataRepositories
 
             return results;
         }
+
+        public IEnumerable<ActivityTypeMaster> GetAllTypesForSelectedCategory(string activityCategoryKey)
+        {
+            using (MyMonkeyCapContext context = new MyMonkeyCapContext())
+            {
+                var query = (from e1 in context.ActivityTypeMasterSet
+                             join e2 in context.ActivityTypeCategorySet
+                             on e1.ActivityTypeKey equals e2.ActivityTypeKey
+                             where e2.ActivityCategoryKey == activityCategoryKey
+                             select e1).ToList();
+
+                return query;
+            }
+        }
     }
 }

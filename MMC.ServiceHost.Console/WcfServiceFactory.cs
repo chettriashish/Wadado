@@ -25,6 +25,7 @@ namespace MMC.ServiceHost
         {
             container.RegisterType<IActivitiesService, ActivitiesManager>();
             container.RegisterType<IUsersService, UsersManager>();
+            container.RegisterType<ILocationService, LocationManager>();
             container.RegisterType<IActivitiesMasterRepository, ActivitiesMasterRepository>();
             container.RegisterType<IDataRepositoryFactory, DataRepositoryFactory>();
             container.RegisterType<IBusinessEngineFactory, BusinessEngineFactory>();

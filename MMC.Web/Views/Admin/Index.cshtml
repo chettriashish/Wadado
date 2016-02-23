@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = "Location";
+}
+<script src="~/Scripts/Admin/controllers/AdminController.js"></script>
+<script src="~/Scripts/AdminLocation/services/AdminLocationDataService.js"></script>
+<script src="~/Scripts/AdminLocation/controllers/AdminLocationController.js"></script>
+<script src="~/Scripts/AdminCategory/controllers/AdminCategoryContainerController.js"></script>
+<script src="~/Scripts/AdminCategory/services/AdminCategoryDataService.js"></script>
+<script src="~/Scripts/AdminCategory/controllers/AdminCategoryController.js"></script>
+<script src="~/Scripts/AdminCategory/controllers/AdminSubCategoryController.js"></script>
+<script src="~/Scripts/AdminCategory/controllers/AdminCategoryTypeMappingController.js"></script>
+<script src="~/Scripts/AdminLocationSummary/services/AdminLocationSummaryDataService.js"></script>
+<script src="~/Scripts/AdminLocationSummary/controllers/AdminLocationSummaryController.js"></script>
+<script src="~/Scripts/Common/controllers/DialogController.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+<link href="~/Content/tablet.css" rel="stylesheet" />
+<link href="~/Content/desktop.css" rel="stylesheet" />
+<link href="~/Content/admin-left-menu.css" rel="stylesheet" />
+
+<div class="contentWrapper" data-ng-controller="AdminController">
+    <div class="row">
+        <div class="top-pane">
+            <nav>
+                <div ng-click="home()">                 
+                </div>
+                <ul>
+                    <li><a ui-sref="adminLocation">Location</a></li>
+                    <li><a ui-sref="admincategory_parent.admincategories">Categories</a></li>
+                </ul>
+            </nav>
+        </div>        
+    </div>
+    <div>
+        <ng-include src="'Templates/_dialog.html'" autoscroll="false" />
+    </div>
+    <div ui-view></div>   
+</div>
+

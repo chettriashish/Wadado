@@ -52,6 +52,21 @@ namespace MMC.Client.Contracts
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);
         [OperationContract]
         bool RemoveSelectedActivity(string sessionKey, string activityBookingKey);
+        [OperationContract]
+        IEnumerable<ActivityCategoryMaster> GetAllActivityCategories();
+        [OperationContract]
+        IEnumerable<ActivityTypeMaster> GetAllActivitySubCategories();
+        [OperationContract]
+        void SaveCategories(ActivityCategoryMaster activityCategory);
+        [OperationContract]
+        void SaveSubCategories(ActivityTypeMaster activitySubCategory);
+
+        void SaveCategory(string activityCategoryKey, string activityCategory);
+        void SaveSubCategory(string activityTypeKey, string activityType);
+        [OperationContract]
+        IEnumerable<ActivityTypeMaster> GetSubCategoriesForSelectedActivity(string activityCategoryKey);
+        [OperationContract]
+        void SaveActivityCategoryMapping(IEnumerable<string> activityTypeKeys, string activityCategoryKey);
         #endregion
 
         #region Async Operations
@@ -68,6 +83,8 @@ namespace MMC.Client.Contracts
 
         [OperationContract]
         Task<bool> RemoveSelectedActivityAsync(string sessionKey, string activityBookingKey);
+        [OperationContract]
+        Task<IEnumerable<ActivityTypeMaster>> GetSubCategoriesForSelectedActivityAsync(string activityCategoryKey);
         #endregion
     }
 }

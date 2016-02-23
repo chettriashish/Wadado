@@ -24,6 +24,11 @@ namespace MMC.ServiceHost
             SM.ServiceHost host1 = hostFactory.CreateServiceHostWithType(typeof(UsersManager));
 
             StartService(host1, "User Manager");
+
+            SM.ServiceHost host2 = hostFactory.CreateServiceHostWithType(typeof(LocationManager));
+
+            StartService(host2, "Location Manager");
+
             System.Console.WriteLine("");
             System.Console.WriteLine("Press [Enter] to exit.");
             StopService(host,"Activities Manager");

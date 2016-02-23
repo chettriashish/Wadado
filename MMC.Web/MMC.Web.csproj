@@ -321,6 +321,13 @@
     <Compile Include="Controllers\ActivitiesCart\ActivitiesCartController.cs" />
     <Compile Include="Controllers\Activities\ActivitiesController.cs" />
     <Compile Include="Controllers\ActivityDetails\ActivityDetailsController.cs" />
+    <Compile Include="Controllers\Admin\Activities\AdminActivityController.cs" />
+    <Compile Include="Controllers\Admin\ActivityCategory\AdminActivityCategoryController.cs" />
+    <Compile Include="Controllers\Admin\AdminController.cs" />
+    <Compile Include="Controllers\Admin\Bookings\AdminBookingsController.cs" />
+    <Compile Include="Controllers\Admin\Home\AdminHomeController.cs" />
+    <Compile Include="Controllers\Admin\Locations\AdminLocationController.cs" />
+    <Compile Include="Controllers\Admin\Login\AdminLoginController.cs" />
     <Compile Include="Controllers\BaseViewController.cs" />
     <Compile Include="Controllers\Booking\BookingController.cs" />
     <Compile Include="Controllers\Confirmation\ConfirmationController.cs" />
@@ -345,6 +352,7 @@
   <ItemGroup>
     <Content Include="Binding\Models\AccountLoginModel.js" />
     <Content Include="Binding\ViewModels\AccountLoginViewModel.js" />
+    <Content Include="Content\admin-left-menu.css" />
     <Content Include="Content\animate.css" />
     <Content Include="Content\cangas.datepicker.css" />
     <Content Include="Content\desktop-search-bar.css" />
@@ -444,6 +452,16 @@
     <Content Include="Scripts\Activities\services\ActivityDataService.js" />
     <Content Include="Scripts\ActivityDetails\controllers\ActivityDetailsController.js" />
     <Content Include="Scripts\ActivityDetails\services\ActivityDetailsDataService.js" />
+    <Content Include="Scripts\AdminCategory\controllers\AdminCategoryContainerController.js" />
+    <Content Include="Scripts\AdminCategory\controllers\AdminCategoryController.js" />
+    <Content Include="Scripts\AdminCategory\controllers\AdminCategoryTypeMappingController.js" />
+    <Content Include="Scripts\AdminCategory\controllers\AdminSubCategoryController.js" />
+    <Content Include="Scripts\AdminCategory\services\AdminCategoryDataService.js" />
+    <Content Include="Scripts\AdminLocationSummary\controllers\AdminLocationSummaryController.js" />
+    <Content Include="Scripts\AdminLocationSummary\services\AdminLocationSummaryDataService.js" />
+    <Content Include="Scripts\AdminLocation\controllers\AdminLocationController.js" />
+    <Content Include="Scripts\AdminLocation\services\AdminLocationDataService.js" />
+    <Content Include="Scripts\Admin\controllers\AdminController.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -469,6 +487,8 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\angular-ui-router.js" />
+    <Content Include="Scripts\angular-ui-router.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
@@ -480,6 +500,7 @@
     <Content Include="Scripts\clickoutside.directive.js" />
     <Content Include="Scripts\Common\controllers\BookingController.js" />
     <Content Include="Scripts\Common\controllers\DateFilterController.js" />
+    <Content Include="Scripts\Common\controllers\DialogController.js" />
     <Content Include="Scripts\Common\controllers\FavoritesController.js" />
     <Content Include="Scripts\Common\controllers\MenuController.js" />
     <Content Include="Scripts\Common\controllers\SearchController.js" />
@@ -1270,6 +1291,15 @@
     <Content Include="Scripts\slider\owl.video.js" />
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
+    <Content Include="Templates\_adminCategoryContainer.html" />
+    <Content Include="Templates\_adminCategoryList.html" />
+    <Content Include="Templates\_adminCategoryTypeMapping.html" />
+    <Content Include="Templates\_adminLocationDetailsEdit.html" />
+    <Content Include="Templates\_adminLocationDetailsView.html" />
+    <Content Include="Templates\_adminLocationDetailsCreate.html" />
+    <Content Include="Templates\_adminLogin.html" />
+    <Content Include="Templates\_adminSubCategoryList.html" />
+    <Content Include="Templates\_dialog.html" />
     <Content Include="Templates\_mapTemplate.html" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Unity.Wcf.README.txt" />
@@ -1280,6 +1310,7 @@
     <Content Include="Views\Confirmation\Index.tablet.cshtml" />
     <Content Include="Views\Partial\_confirmationmobilemenu.cshtml" />
     <Content Include="Views\Partial\_confirmationdesktopmenu.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Views\Partial\_favourites.cshtml" />
     <Content Include="Views\Templates\choices.tpl.html" />
     <Content Include="Views\Templates\match-multiple.tpl.html" />
@@ -1287,6 +1318,7 @@
     <Content Include="Views\Templates\select-multiple.tpl.html" />
     <Content Include="Views\Templates\select.tpl.html" />
     <Content Include="Templates\dateTemplate.html" />
+    <Content Include="Templates\_adminLocationList.html" />
     <Content Include="WURFL AGPL License.txt" />
     <Content Include="Introspector\Introspector.pdf" />
     <Content Include="Introspector\Introspector.ashx" />
@@ -1386,7 +1418,6 @@
     <Folder Include="Scripts\Location\directives\" />
     <Folder Include="Scripts\Login\directives\" />
     <Folder Include="Views\BaseView\" />
-    <Folder Include="Views\Booking\" />
     <Folder Include="Views\Menu\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>

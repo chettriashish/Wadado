@@ -8,8 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Client.Entities
-{
-    [DataContract(Namespace = "wadado.in")]
+{       
     public class LocationsMaster : ObjectBase
     {
         private string _LocationKey;

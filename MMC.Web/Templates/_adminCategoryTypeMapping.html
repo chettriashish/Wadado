@@ -1,0 +1,103 @@
+﻿<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-list">
+        <div class="column-3">
+            <div class="admin-list label-left"><span>Select a Category</span></div>
+        </div>        
+    </div>
+    <div class="admin-list">        
+        <div class="column-9">
+            <ui-select ng-model="item.selected" theme="selectize" on-select="getAllSubCategoriesForSelectedItem(item)" class="admin-category-select">
+                <ui-select-match placeholder="eg. adventure">{{$select.selected.ActivityCategory}}</ui-select-match>
+                <ui-select-choices repeat="item in allCategoryDetailsList | filter: $select.search">
+                    <span ng-bind-html="item.ActivityCategory | highlight: $select.search"></span>
+                </ui-select-choices>
+            </ui-select>
+        </div>
+    </div>
+</div>
+<div class="admin-list">
+    <div class="column-12">
+        <div class="row">
+            <div ng-repeat="item in allSelectedSubCategory">
+                <div class="column-auto">
+                    <div class="selected-filter">
+                        <div class="column-auto">
+                            <span>{{item.ActivityType}}</span>
+                        </div>
+                        <div class="column-0" ng-click="removeSelectedItem(item)">
+                            <span style="cursor:pointer;">x</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-list">
+        <div class="column-3">
+            <div class="admin-list label-left"><span>Sub Categories</span></div>
+        </div>       
+    </div>
+    <div class="admin-list">        
+        <div class="column-12">
+            <div class="admin-category-list">
+                <div ng-repeat="item in allSubCategoryDetailsList">
+                    <div>
+                        <div class="column-4">
+                            <label>
+                                <input type="checkbox" ng-click="toggleSelectedItem(item)" ng-model="item.selected" />{{item.ActivityType}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row" ng-if="categorySelected">
+    <div class="column-12">
+        <div class="column-2">
+            <span>&nbsp;</span>
+        </div>
+        <div class="column-12">
+            <div class="center-element-relative-table">
+                <div class="admin-booking">
+                    <div>
+                        <a ng-click="saveMapping()">SAVE</a>
+                    </div>
+                </div>
+                <div class="admin-booking">
+                    <div>
+                        <a ng-click="cancelChanges()">CANCEL</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

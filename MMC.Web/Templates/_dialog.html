@@ -1,0 +1,37 @@
+﻿<div class="dialog" data-ng-controller="DialogController">
+    <div ng-show="showDialog">
+        <div class="row">
+            <div class="dialog-header">
+                {{dialog.header}}
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <div class="dialog-body">
+                    <span>{{dialog.body}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="isUserAction">
+            <div class="column-12">
+                <div class="dialog-buttons-container">
+                    <div class="dialog-button">
+                        <a ng-click="">OK</a>
+                    </div>
+                    <div class="dialog-button">
+                        <a ng-click="">CANCEL</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="showButtons">
+            <div class="column-12">
+                <div class="dialog-buttons-container">
+                    <div class="dialog-button">
+                        <a ng-click="">OK</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

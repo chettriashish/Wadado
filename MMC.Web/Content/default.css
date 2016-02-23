@@ -22,6 +22,7 @@ body {
 
 #body {
     padding-bottom: 60px;
+    font-family: 'Lato', sans-serif;
 }
 
 .spinner {
@@ -100,16 +101,21 @@ header {
 }
 
 .center-element-relative-table {
-    margin-left: auto;
-    margin-right: auto;
+    margin:0 auto;
     display: table;
-    position: relative;
+    position: relative;        
+}
+
+.center-element-relative {   
+    margin:0 auto;
+    min-width: 320px;
+    height: auto;    
 }
 
 .dummy {
     float: none;
     position: relative;
-    margin: 0 auto;    
+    margin: 0 auto;
     width: 40%;
 }
 
@@ -255,7 +261,7 @@ nav ul li:last-child a {
     padding: .05em;
 }
 
-.column-8.top, .column-7.top, .column-4.top, .column-6.top {
+.column-8.top, .column-7.top, .column-4.top, .column-3.top, .column-6.top {
     padding: .4em 0;
 }
 
@@ -928,12 +934,8 @@ nav ul li:last-child a {
 
 /*----- FOOTER -----*/
 .footerWrapper {
-    position: relative;
-    background-color: #000;
     width: 100%;
-    height: 1em;
     bottom: 0;
-    padding: 1em 0 0 0;
 }
 
 footer {
@@ -941,11 +943,12 @@ footer {
     font-size: 1.5em;
     color: #fff;
     text-align: center;
-    padding: 1em 0 0 0;
-    position: relative;
     bottom: 0;
+    margin-bottom: 0;
     background-color: #000;
     width: 100%;
+    padding: 1em 0;
+    overflow: hidden;
 }
 
     footer a {
@@ -1687,10 +1690,12 @@ input[type=text], input[type=email], input[type=tel] {
     padding: .2em;
     width: 90%;
     border-radius: 0;
+    font-family: 'Lato';
 }
 
 input:required:invalid, input:focus:invalid {
     -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 input:required:valid {
@@ -1919,3 +1924,199 @@ span.buttonText {
     .button-container.left {
         border-width: 1px 1px 0px 0;
     }
+
+/*******************EDIT/DELETE CONTAINER FOR ALL ADMIN LIST**********************/
+
+.column-col {
+    padding: 1em 0 0 0;
+    float: left;
+    font-size: .9em;
+}
+
+.multiline {
+    width: 90%;
+    height: 10em;
+    font-size: .9em;
+    left: 0;
+    padding: .5em .3em;
+    resize: none;
+    font-family: 'Lato';
+}
+
+.admin-list {
+    position: relative;
+    width: 95%;
+    margin: 0 auto;
+    display: table;    
+}
+
+    .admin-list.label {
+        text-align: right;
+        padding: .1em 0;
+        background-color: white;
+        color: black;
+        font-size: .9em;
+    }
+
+    .admin-list.label-left {
+        text-align: left;       
+        background-color: white;
+        color: black;
+        font-size: .9em;
+        font-weight:600;
+    }
+
+.admin-table {
+    position: relative;
+    width: 90%;
+    margin: 0 auto;
+    display: table;
+}
+
+    .admin-table.header {
+        background-color: rgba(0,0,0,1);
+        width: 100%;
+        color: white;
+        font-size: 1em;
+        text-transform: uppercase;
+        padding: .4em .2em;
+        font-weight: 600;
+    }
+
+    .admin-table > div:nth-child(2) > div:nth-of-type(2n+1) {
+        background-color: rgba(255,255,255,1);
+        display: table;
+        width: 100%;
+        font-size:.9em;
+    }
+
+    .admin-table > div:nth-child(2) > div:nth-of-type(2n) {
+        background-color: rgba(230,230,230,1);
+        display: table;
+        width: 100%;
+        font-size:.9em;
+    }
+
+.admin-booking {
+    margin: 0 1em;
+    float: left;
+    display: table;
+}
+
+    .admin-booking div:first-of-type {
+        transition: margin .2s linear;
+        margin: 0em auto;
+        text-align: center;
+    }
+
+    .admin-booking div {
+        margin: 1em auto;
+        text-align: center;
+        position: relative;
+    }
+
+    .admin-booking a {
+        margin: 0 auto;
+        height: 1em;
+        font-size: .8em;
+        padding: .8em 3em;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: rgb(255,255,255);
+        margin: 0 auto;
+        transition: 0.5s all;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+.column-button {
+    cursor: pointer;
+}
+/*************DIALOG****************/
+.dialog {
+    position: fixed;
+    top: 40%;
+    margin: 0 auto;
+    left: 0;
+    right: 0;
+    width: 30%;
+    display: table;
+    background-color: rgb(244,244,244);
+    z-index: 1000;
+    padding: 0;
+    font-family: 'Lato';
+}
+
+.dialog-header {
+    position: relative;
+    width: 100%;
+    display: table;
+    color: white;
+    padding: .5em;
+    background-color: rgb(0,0,0);
+    font-size: 1em;
+    font-weight: 600;
+}
+
+.dialog-body {
+    position: relative;
+    width: 100%;
+    display: table;
+    color: black;
+    text-align: left;
+    padding: 1em .5em;
+    font-size: .9em;
+}
+
+.dialog-buttons-container {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.dialog-button {
+    float: left;
+}
+
+    .dialog-button a {
+        margin: 0 auto;
+        height: 1em;
+        font-size: .8em;
+        padding: .8em 3em;
+        background-color: rgb(251,189,19);
+        outline: none;
+        cursor: pointer;
+        color: rgb(255,255,255);
+        margin: 0 auto;
+        transition: 0.5s all;
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+.admin-category-select {
+    min-width: 320px;
+    text-transform: uppercase;
+}
+
+.admin-category-list {
+    /*border: 1px solid rgb(144,144,144);*/
+    display: inline-block;
+    min-width: 320px;
+    max-height: 250px;
+    width: 100%;
+    text-transform: uppercase;
+    overflow-y: auto;
+    font-size:.9em;
+}
+
+.selected-filter {
+    float: left;
+    font-size: .7em;
+    text-transform: lowercase;
+    background-color: rgb(144,144,144);
+    border-radius: 10px;
+    color: white;
+    padding: .2em .4em;
+    text-align: center;
+}

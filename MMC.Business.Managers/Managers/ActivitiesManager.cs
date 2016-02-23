@@ -21,7 +21,7 @@ namespace MMC.Business.Managers
 {
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall,
         ConcurrencyMode = ConcurrencyMode.Multiple,
-        ReleaseServiceInstanceOnTransactionComplete = false)]    
+        ReleaseServiceInstanceOnTransactionComplete = false)]
     public class ActivitiesManager : ManagerBase, IActivitiesService
     {
         const string MOBILE = "_mob";
@@ -219,7 +219,7 @@ namespace MMC.Business.Managers
         public bool RemoveSelectedActivity(string sessionKey, string activityBookingKey)
         {
             return ExecuteFaultHandledOperation(() =>
-            {                
+            {
                 IActivityBookingRepository activitiesBookingRepository
                 = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
                 IActivitiesBookingEngine activitiesBookingEngine
@@ -228,6 +228,115 @@ namespace MMC.Business.Managers
                 ActivityBooking bookedActivity = activitiesBookingEngine.GetBookedActivitiesForUser(sessionKey, default(string)).Where(e => e.ActivityBookingKey == activityBookingKey).FirstOrDefault();
                 activitiesBookingRepository.Remove(bookedActivity);
                 return true;
+            });
+        }
+
+
+        public IEnumerable<ActivityCategoryMaster> GetAllActivityCategories()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityCategoryMasterRepository activityCategoryMasterRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityCategoryMasterRepository>();
+
+                IEnumerable<ActivityCategoryMaster> allActivityCategory = activityCategoryMasterRepository.Get().OrderBy(entity => entity.ActivityCategory);
+                return allActivityCategory;
+            });
+        }
+
+        public IEnumerable<ActivityTypeMaster> GetAllActivitySubCategories()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityTypeMasterRepository activitySubCategoryRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityTypeMasterRepository>();
+                IEnumerable<ActivityTypeMaster> allActivitiesTypes = activitySubCategoryRepository.Get().OrderBy(entity => entity.ActivityType);
+                return allActivitiesTypes;
+            });
+        }
+
+
+        public void SaveCategories(ActivityCategoryMaster activityCategory)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                IActivityCategoryMasterRepository activityCategoryMasterRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityCategoryMasterRepository>();
+
+                if (activityCategory.ActivityCategoryKey.Trim() == string.Empty || activityCategoryMasterRepository.Get(activityCategory.ActivityCategoryKey) == null)
+                {
+                    activityCategory.ActivityCategoryKey = Guid.NewGuid().ToString();
+                    activityCategoryMasterRepository.Add(activityCategory);
+                }
+                else
+                {
+                    ActivityCategoryMaster existingActivityCategory = activityCategoryMasterRepository.Get(activityCategory.ActivityCategoryKey);
+                    if (existingActivityCategory.ActivityCategory != activityCategory.ActivityCategory)
+                    {
+                        activityCategoryMasterRepository.Update(activityCategory);
+                    }
+                }
+            });
+        }
+
+        public void SaveSubCategories(ActivityTypeMaster activitySubCategory)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                IActivityTypeMasterRepository activitySubCategoryMasterRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityTypeMasterRepository>();
+
+                if (activitySubCategory.ActivityTypeKey.Trim() == string.Empty || activitySubCategoryMasterRepository.Get(activitySubCategory.ActivityTypeKey) == null)
+                {
+                    activitySubCategory.ActivityTypeKey = Guid.NewGuid().ToString();
+                    activitySubCategoryMasterRepository.Add(activitySubCategory);
+                }
+                else
+                {
+                    ActivityTypeMaster existingActivityCategory = activitySubCategoryMasterRepository.Get(activitySubCategory.ActivityTypeKey);
+                    if (existingActivityCategory.ActivityType != activitySubCategory.ActivityType)
+                    {
+                        activitySubCategoryMasterRepository.Update(activitySubCategory);
+                    }
+                }
+            });
+        }
+
+        public IEnumerable<ActivityTypeMaster> GetSubCategoriesForSelectedActivity(string activityCategoryKey)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityTypeMasterRepository activitySubCategoryRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityTypeMasterRepository>();
+
+                return activitySubCategoryRepository.GetAllTypesForSelectedCategory(activityCategoryKey);
+            });
+        }
+        public void SaveActivityCategoryMapping(IEnumerable<string> activityTypeKeys, string activityCategoryKey)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                IActivityTypeCategoryRepository activityTypeCategoryRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivityTypeCategoryRepository>();
+
+                IEnumerable<ActivityTypeCategory> currentMappedTypes = activityTypeCategoryRepository.Get().Where(e => e.ActivityCategoryKey == activityCategoryKey);
+                //creating new mappings
+                foreach(var activityTypeKey in activityTypeKeys)
+                {
+                    if (!(currentMappedTypes.Where(e => e.ActivityTypeKey == activityTypeKey).Count() > 0))
+                    {
+                        ActivityTypeCategory newType = new ActivityTypeCategory() { ActivityTypeCategoryKey = Guid.NewGuid().ToString(), ActivityTypeKey = activityTypeKey, ActivityCategoryKey = activityCategoryKey, IsPrimary = false };
+                        activityTypeCategoryRepository.Add(newType);
+                    }
+                }
+                //Removing all mappings that have been deleted
+                foreach (var item in currentMappedTypes)
+                {
+                    if (!activityTypeKeys.Contains(item.ActivityTypeKey))
+                    {
+                        activityTypeCategoryRepository.Remove(item);
+                    }
+                }
             });
         }
     }

@@ -46,6 +46,7 @@
     <Compile Include="ActivityAvailabilityDetails.cs" />
     <Compile Include="ActivityCategoryModel.cs" />
     <Compile Include="ActivityFilterModel.cs" />
+    <Compile Include="AdminLocationModel.cs" />
     <Compile Include="LocationModel.cs" />
     <Compile Include="NewsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

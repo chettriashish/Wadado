@@ -70,6 +70,42 @@ namespace MMC.Business.Managers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string DESCRIPTION {
+            get {
+                return ResourceManager.GetString("DESCRIPTION", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Getting Around.
+        /// </summary>
+        internal static string GETTINGAROUND {
+            get {
+                return ResourceManager.GetString("GETTINGAROUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must Drink.
+        /// </summary>
+        internal static string MUSTDRINK {
+            get {
+                return ResourceManager.GetString("MUSTDRINK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Must Eat.
+        /// </summary>
+        internal static string MUSTEAT {
+            get {
+                return ResourceManager.GetString("MUSTEAT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SINGLE.
         /// </summary>
         internal static string SINGLE {

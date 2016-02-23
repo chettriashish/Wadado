@@ -36,4 +36,4 @@ using System.Runtime.Serialization;
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
 
-[assembly: ContractNamespace("http://www.mmc.com/services", ClrNamespace = "MMC.Client.Contracts")]
+[assembly: ContractNamespace("http://www.wadado.in", ClrNamespace = "MMC.Client.Contracts")]

@@ -1,0 +1,115 @@
+﻿<div class="admin-list">
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Name</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" ng-model="locationDetails.LocationName" required placeholder="location name" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Location(lat and long)</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" ng-model="locationDetails.LatLong" required placeholder="latitude, longitude" />
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Description</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <textarea ng-model="locationDetails.Description" class="multiline" required placeholder="location description" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Getting Around</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <textarea ng-model="locationDetails.GettingAround" class="multiline" required placeholder="getting around, places to visit etc" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Must Eat</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <textarea ng-model="locationDetails.MustEat" class="multiline" required placeholder="must eats" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Must Drink</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <textarea type="text" ng-model="locationDetails.MustDrink" class="multiline" required placeholder="local beverages etc" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <span>&nbsp;</span>
+                </div>                
+                <div class="column-8">
+                    <div class="center-element-relative-table">
+                        <div class="admin-booking">
+                            <div>
+                                <a ng-click="saveLocationDetails()">SAVE</a>
+                            </div>
+                        </div>
+                        <div class="admin-booking">
+                            <div>
+                                <a ng-click="cancelChanges()">RETURN TO LIST</a>
+                            </div>
+                        </div>
+                    </div>                                 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

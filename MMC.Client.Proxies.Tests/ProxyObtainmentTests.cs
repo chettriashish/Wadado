@@ -31,7 +31,7 @@ namespace MMC.Client.Proxies.Tests
             IServiceFactory factory = 
                 ObjectBase.Container.Resolve<IServiceFactory>();
 
-            ILocationService proxy = factory.CreateClient<ILocationService>();
+            ILocationService proxy = factory.CreateClient<ILocationService>();            
             Assert.IsTrue(proxy is LocationClient);
         }
     }

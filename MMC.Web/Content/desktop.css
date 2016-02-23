@@ -447,7 +447,7 @@ img.scale, object.scale, .crop-height:hover img {
 }
 
 .column-12.widest-gutter, .column-7.widest-gutter {
-    padding: 1.5em 5em;
+    padding: .5em 5em;
 }
 
 .column-12.min-top-widest-gutter, .column-8.min-top-widest-gutter {
@@ -495,17 +495,13 @@ img.scale, object.scale, .crop-height:hover img {
 /*******************END COLUMN  STYLES**************************/
 
 /*----- FOOTER -----*/
-.footerWrapper {
-    background-color: #000;
+.footerWrapper {    
     width: 100%;
-    min-width: 700px;
-    height: 4em;
-    bottom: 0;
-    padding: 1em 0;
+    min-width: 700px;    
+    bottom: 0;    
 }
 
-footer {
-    clear: both;
+footer {    
     font-size: 1.5em;
     color: #fff;
     text-align: center;

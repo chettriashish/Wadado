@@ -1,0 +1,24 @@
+﻿<div class="row">
+    <div class="column-3">
+        <div class="left-pane">
+            <div ui-view="menu-container" class="menu-container">
+                <nav>
+                    <ul>
+                        <li ng-click="loadContent('category')" class="active"><a id="category">View Category</a></li>
+                        <li ng-click="loadContent('subcategory')"><a id="subcategory">View Sub Category</a></li>
+                        <li ng-click="loadContent('mapping')"><a id="mapping">Category Mapping</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="column-9">
+        <div ui-view="category-list">
+        </div>
+        <div ui-view="admin-subcategory-list">
+        </div>
+        <div ui-view="admin-category-type-mapping">
+        </div>
+    </div>
+</div>
+

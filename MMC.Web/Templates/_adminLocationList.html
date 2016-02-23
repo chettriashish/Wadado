@@ -1,0 +1,74 @@
+﻿<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-table">
+        <div style="float:right">
+            <div class="column-12">
+                <div class="admin-booking">
+                    <div>
+                        <a ng-click="createNewLocation()">ADD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-table">
+        <div class="admin-table header">
+            <div class="column-12">
+                <div style="float:left;">
+                    <span>Location Name</span>
+                </div>
+                <div style="float:left;">
+                    <span>&nbsp;</span>
+                </div>
+                <div style="float:left;">
+                    <span>&nbsp;</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div ng-repeat="item in locations">
+                <div class="column-5">
+                    <div class="column-12">
+                        <span>{{item.LocationName}}</span>
+                    </div>
+                </div>
+                <div class="column-3">
+                    <div ng-click="editSelectedLocation(item)" class="column-button">
+                        <div class="column-0">
+                            <img src="/Images/Icons/edit.png" />
+                        </div>
+                        <div class="column-2">
+                            <span>Edit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-3">
+                    <div ng-click="deleteSelectedLocation(item)" class="column-button">
+                        <div class="column-0">
+                            <img src="/Images/Icons/bin.png" />
+                        </div>
+                        <div class="column-2">
+                            <span>Delete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,8 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Business.Entities
-{
-    [DataContract(Namespace = "wadado.in")]
+{    
     public class ActivityTypeMaster:EntityBase,IIdentifiableEntity
     {
         #region Properties

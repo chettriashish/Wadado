@@ -67,7 +67,15 @@ namespace MMC.Web
             // /ActivityDetails/LocationName/ActivityCode
             routes.MapRoute("ActivityDetails",
               "ActivityDetails/{selectedLocation}/{activityKey}",
-              new { controller = "ActivityDetails", action = "Index", locationName = UrlParameter.Optional, activityCode = UrlParameter.Optional });          
+              new { controller = "ActivityDetails", action = "Index", locationName = UrlParameter.Optional, activityCode = UrlParameter.Optional });
+
+            routes.MapRoute("Admin",
+              "professional",
+              new { controller = "Admin", action = "Index" });
+
+            routes.MapRoute("GetAllAdminLocations",
+             "AdminLocation/GetAllLocations",
+             new { controller = "AdminLocation", action = "GetAllLocations" });          
 
             routes.MapRoute(
                 name: "Default",

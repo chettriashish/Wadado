@@ -1,5 +1,6 @@
 ﻿using Core.Common.ServiceModel;
 using MMC.Client.Contracts;
+using MMC.Client.Contracts.DataContracts;
 using MMC.Client.Entities;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,19 @@ namespace MMC.Client.Proxies
         {
             return Channel.GetAllLocations();
         }
-
-        public void CreateNewLocation(LocationsMaster location)
+        public void CreateNewLocation(LocationDetailsDataContract locationDetails)
         {
-            Channel.CreateNewLocation(location);
+            Channel.CreateNewLocation(locationDetails);
         }
+
+        public IEnumerable<LocationDetailsDataContract> GetSelectedLocationDetails(string locationKey)
+        {
+            return Channel.GetSelectedLocationDetails(locationKey);
+        }
+
+        public void UpdateLocationDetails(LocationDetailsDataContract locationDetails)
+        {
+            Channel.UpdateLocationDetails(locationDetails);
+        }       
     }
 }

@@ -9,14 +9,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Client.Entities
-{
-    [DataContract(Namespace = "wadado.in")]
+{    
     public class ActivityTypeMaster : ObjectBase
     {
         #region Private variables
         private string _ActivityTypeKey;        
         private string _ActivityType;
-        private DateTime _CreatedDate;
+        private string _CreatedDate;
         private string _CreatedBy;
         #endregion
 
@@ -35,7 +34,7 @@ namespace MMC.Client.Entities
             get { return _ActivityType; }
             set { _ActivityType = value; }
         }
-        public DateTime CreatedDate
+        public string CreatedDate
         {
             get { return _CreatedDate; }
             set { _CreatedDate = value; }
