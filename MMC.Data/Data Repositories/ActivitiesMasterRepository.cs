@@ -60,10 +60,16 @@ namespace MMC.Data.DataRepositories
             ActivityDetailsDataContract result = new ActivityDetailsDataContract();
             using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
             {
-                //fetching all details for selected activity
-                ActivitiesMaster activity = Get().Where(entity => entity.ActivitesKey == activityKey
-                    && entity.LocationKey == locationKey)
-                    .ToList().FirstOrDefault();
+                ActivitiesMaster activity = new ActivitiesMaster();
+                if (locationKey != default(string))
+                {
+                    //fetching all details for selected activity
+                    activity = Get().Where(entity => entity.ActivitesKey == activityKey && entity.LocationKey == locationKey).ToList().FirstOrDefault();
+                }
+                else
+                {
+                    activity = Get().Where(entity => entity.ActivitesKey == activityKey).ToList().FirstOrDefault();
+                }
 
                 ActivityDayScheduler activityDayScheduler = entityContext.ActivityDaySchedulerSet.Where(entity =>
                                                             entity.ActivityKey == activityKey).FirstOrDefault();
@@ -76,16 +82,17 @@ namespace MMC.Data.DataRepositories
                                                            join entity1 in entityContext.ActivityCategoryMasterSet
                                                            on entity.ActivityCategoryKey equals entity1.ActivityCategoryKey
                                                            where entity.ActivityTypeKey == activity.ActivityTypeKey
-                                                           && entity.IsPrimary == true
                                                            select entity1).FirstOrDefault();
 
+                ActivityTypeMaster activityType = (from entity in entityContext.ActivityTypeMasterSet
+                                                   where entity.ActivityTypeKey == activity.ActivityTypeKey
+                                                   select entity).ToList().FirstOrDefault();
+
                 IEnumerable<ActivityImages> activityImages = entityContext.ActivityImagesSet
-                    .Where(entity => entity.ActivityKey == activityKey)
-                                                              .ToList();
+                    .Where(entity => entity.ActivityKey == activityKey).ToList();
 
-
-
-                result.ActivityCategory = activityCategory.ActivityCategory;
+                result.ActivitySubCategory = activityType.ActivityType;
+                result.ActivityCategory = activityCategory != null ? activityCategory.ActivityCategory : default(string);
                 result.CancellationPolicy = activity.CancellationPolicy;
                 result.Cost = activity.Cost;
                 result.Currency = activity.Currency;
@@ -105,7 +112,7 @@ namespace MMC.Data.DataRepositories
                 result.Duration = activity.Duration;
                 result.UserRating = activity.AverageUserRating;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
-                result.ActivityKey = activity.ActivitesKey;                
+                result.ActivityKey = activity.ActivitesKey;
                 foreach (var item in activityImages)
                 {
                     if (userAgent == RepositoryResource.SMARTPHONE)
@@ -187,7 +194,7 @@ namespace MMC.Data.DataRepositories
                                                  select e2).FirstOrDefault().Discount : 0
                                             }).Take(6).ToList();
 
-                if (result.SimilarActivities.Count() < 6)
+                if (result.SimilarActivities.Count() < 6 && activityCategory != null)
                 {
                     int activitiesToBeRetrieved = 6 - result.SimilarActivities.Count();
                     result.SimilarActivities = (from entity in entityContext.ActivitiesMasterSet
@@ -318,7 +325,7 @@ namespace MMC.Data.DataRepositories
         public void AddActivityToUserItenerary(string activityKey, string activityDate, int numberOfPeople, string activityTime)
         {
             throw new NotImplementedException();
-        }       
+        }
 
         /// <summary>
         /// Fetch user information based on user account details
@@ -345,6 +352,66 @@ namespace MMC.Data.DataRepositories
                               ActivityName = entity.Name,
                               ActivityType = entityContext.ActivityTypeMasterSet.Where(e => e.ActivityTypeKey == entity.ActivityTypeKey).FirstOrDefault().ActivityType,
                               ActivityCategory = entityContext.ActivityCategoryMasterSet.Where(e => e.ActivityCategoryKey == activityCategoryKey).FirstOrDefault().ActivityCategory,
+                              ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
+                              Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationName,
+                              Rating = entity.AverageUserRating,
+                              ThumbNailURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
+                              IsSpecialOffer = ((from e1 in entityContext.TopOffersSet
+                                                 join e2 in entityContext.TopOfferMappingSet
+                                                 on e1.TopOffersKey equals e2.TopOfferKey
+                                                 where e1.LocationKey == locationKey
+                                                 && e2.MappingType == RepositoryResource.SINGLE
+                                                 && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                 select e2).Count() > 0 ? true : false),
+                              LatLong = entity.ActivityLocation,
+                              Cost = entity.Cost,
+                              Currency = entity.Currency,
+                              Discount = ((from e1 in entityContext.TopOffersSet
+                                           join e2 in entityContext.TopOfferMappingSet
+                                           on e1.TopOffersKey equals e2.TopOfferKey
+                                           where e1.LocationKey == locationKey
+                                           && e2.MappingType == RepositoryResource.SINGLE
+                                           && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                           select e1).Count()) > 0 ?
+                                               (from e1 in entityContext.TopOffersSet
+                                                join e2 in entityContext.TopOfferMappingSet
+                                                on e1.TopOffersKey equals e2.TopOfferKey
+                                                where e1.LocationKey == locationKey
+                                                && e2.MappingType == RepositoryResource.SINGLE
+                                                && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
+                                                select e2).FirstOrDefault().Discount : 0
+                          }).ToList();
+
+                foreach (var item in result)
+                {
+                    if (userAgent == RepositoryResource.SMARTPHONE)
+                    {
+                        item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, MOBILE);
+                    }
+                    else if (userAgent == RepositoryResource.TABLET)
+                    {
+                        item.ImageURL = string.Format("Images/{0}{1}", item.ImageURL, TABLET);
+                    }
+                    else
+                    {
+                        item.ImageURL = string.Format("Images/{0}", item.ImageURL);
+                    }
+                }
+            }
+            return result;
+        }
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocation(string locationKey, string userAgent)
+        {
+            IEnumerable<ActivitySummaryDataContract> result = new List<ActivitySummaryDataContract>();
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                result = (from entity in entityContext.ActivitiesMasterSet
+                          where entity.LocationKey == locationKey
+                          select new ActivitySummaryDataContract()
+                          {
+                              ActivityKey = entity.ActivitesKey,
+                              ActivityName = entity.Name,
+                              ActivityType = entityContext.ActivityTypeMasterSet.Where(e => e.ActivityTypeKey == entity.ActivityTypeKey).FirstOrDefault().ActivityType,
                               ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
                               Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationName,
                               Rating = entity.AverageUserRating,

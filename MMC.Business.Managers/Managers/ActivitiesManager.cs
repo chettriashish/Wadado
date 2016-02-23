@@ -216,6 +216,18 @@ namespace MMC.Business.Managers
             });
         }
 
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocation(string locationKey, string userAgent)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivitiesMasterRepository activitiesMasterRepository
+                = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+
+                IEnumerable<ActivitySummaryDataContract> allActivitiesForLocationCategory = activitiesMasterRepository.GetAllActivitiesByLocation(locationKey: locationKey, userAgent: userAgent);
+                return allActivitiesForLocationCategory;
+            });
+        }
+
         public bool RemoveSelectedActivity(string sessionKey, string activityBookingKey)
         {
             return ExecuteFaultHandledOperation(() =>

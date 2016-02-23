@@ -67,6 +67,8 @@ namespace MMC.Client.Contracts
         IEnumerable<ActivityTypeMaster> GetSubCategoriesForSelectedActivity(string activityCategoryKey);
         [OperationContract]
         void SaveActivityCategoryMapping(IEnumerable<string> activityTypeKeys, string activityCategoryKey);
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocation(string locationKey, string userAgent);
         #endregion
 
         #region Async Operations

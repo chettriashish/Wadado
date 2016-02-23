@@ -15,7 +15,7 @@ namespace MMC.Client.Proxies
     public class ActivityClient : UserClientBase<IActivitiesService>, IActivitiesService
     {
         public ActivityDetailsDataContract GetAllActivities(string locationKey, string activityKey, string userAgent)
-        {          
+        {
             return Channel.GetAllActivities(locationKey, activityKey, userAgent);
         }
 
@@ -95,7 +95,7 @@ namespace MMC.Client.Proxies
 
         public Task<bool> CheckForActivityAvailablityAsync(string activityKey, int adults,
             int children, DateTime bookingDate, string time)
-        {            
+        {
             return Channel.CheckForActivityAvailablityAsync(activityKey, adults, children, bookingDate, time);
         }
 
@@ -108,7 +108,7 @@ namespace MMC.Client.Proxies
         {
             return Channel.BookActivityForUserAsync(bookingDetails);
         }
-        
+
         public Task<ActivityBookingDataContract> AddUserActivityToCartAsync(string activityKey, int adults, int children, DateTime bookingDate,
             string time, decimal total, string sessionKey)
         {
@@ -166,7 +166,7 @@ namespace MMC.Client.Proxies
         }
         public void SaveSubCategory(string activityTypeKey, string activityType)
         {
-            ActivityTypeMaster newActivityType = new ActivityTypeMaster() {ActivityTypeKey = activityTypeKey,ActivityType =activityType };
+            ActivityTypeMaster newActivityType = new ActivityTypeMaster() { ActivityTypeKey = activityTypeKey, ActivityType = activityType };
             SaveSubCategories(newActivityType);
         }
         public void SaveCategories(ActivityCategoryMaster activityCategory)
@@ -188,6 +188,10 @@ namespace MMC.Client.Proxies
             Channel.SaveActivityCategoryMapping(activityTypeKeys, activityCategoryKey);
         }
 
+        public IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocation(string locationKey, string userAgent)
+        {
+            return Channel.GetAllActivitiesByLocation(locationKey, userAgent);
+        }
         public Task<IEnumerable<ActivityTypeMaster>> GetSubCategoriesForSelectedActivityAsync(string activityCategoryKey)
         {
             throw new NotImplementedException();

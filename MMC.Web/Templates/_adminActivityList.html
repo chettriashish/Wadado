@@ -1,0 +1,78 @@
+﻿<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-table">
+        <div style="float:right">
+            <div class="column-12">
+                <div class="admin-booking">
+                    <div>
+                        <a ng-click="createNewActivity()">ADD</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="column-12">
+        <span>&nbsp;</span>
+    </div>
+</div>
+<div class="row">
+    <div class="admin-table">
+        <div class="admin-table header">
+            <div class="column-12">                
+                <div class="column-3">
+                    <span>Activity Name</span>
+                </div>
+                <div style="float:right;">                             
+                    <div class="column-3">
+                        <ui-select ng-model="item.selected" theme="selectize" on-select="getAllActivitiesForSelectedLocation(item)" class="admin-category-select">
+                            <ui-select-match placeholder="Select a location: eg. GANGTOK">{{$select.selected.LocationName}}</ui-select-match>
+                            <ui-select-choices repeat="item in locations | filter: $select.search">
+                                <span ng-bind-html="item.LocationName | highlight: $select.search"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>                
+            </div>
+        </div>
+        <div>
+            <div ng-repeat="item in allActivities">
+                <div class="column-5">
+                    <div class="column-12">
+                        <span>{{item.ActivityName}}</span>
+                    </div>
+                </div>
+                <div class="column-3">
+                    <div ng-click="editSelectedActivity(item)" class="column-button">
+                        <div class="column-0">
+                            <img src="/Images/Icons/edit.png" />
+                        </div>
+                        <div class="column-2">
+                            <span>Edit</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-3">
+                    <div ng-click="deleteSelectedActivity(item)" class="column-button">
+                        <div class="column-0">
+                            <img src="/Images/Icons/bin.png" />
+                        </div>
+                        <div class="column-2">
+                            <span>Delete</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

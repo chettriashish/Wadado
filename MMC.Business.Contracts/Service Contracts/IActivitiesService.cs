@@ -47,5 +47,8 @@ namespace MMC.Business.Contracts
 
         [OperationContract]
         void SaveActivityCategoryMapping(IEnumerable<string> activityTypeKeys, string activityCategoryKey);
+
+        [OperationContract]
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocation(string locationKey, string userAgent);
     }
 }

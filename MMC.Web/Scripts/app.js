@@ -111,6 +111,26 @@
                     }
                 }                
             }
+        })
+        .state('adminActivities', {
+            url: '/activities',
+            controller: 'AdminActivitySummaryController',
+            templateUrl: Wadado.rootPath + '/Templates/_adminActivityList.html',
+            resolve: {
+                allAvailableLocations: function (AdminActivityDataService) {
+                    return AdminActivityDataService.getAllAvailableLocations();
+                }
+            }
+        })
+        .state('adminActivityEdit', {
+            url: '/activities/:id',
+            controller: 'AdminActivityDetailsController',
+            templateUrl: Wadado.rootPath + '/Templates/_adminActivityDetails.html',
+            resolve: {
+                activityDetails: function (AdminActivityDataService, $stateParams) {
+                    return AdminActivityDataService.getSelectedActivityDetails($stateParams.id);
+                }
+            }
         });
 
         //.state('adminSubCategoryList', {

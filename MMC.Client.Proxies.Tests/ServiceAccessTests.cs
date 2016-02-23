@@ -48,11 +48,11 @@ namespace MMC.Client.Proxies.Tests
             try
             {
                 //IEnumerable<LocationDetailsDataContract> location = proxy.GetSelectedLocationDetails("DARJEELING");
-                List<string> newList = new List<string>();
-                newList.Add("223c0391-9c5f-4fe0-9471-bccb70084d6a");
+                //List<string> newList = new List<string>();
+                //newList.Add("223c0391-9c5f-4fe0-9471-bccb70084d6a");
                 //IEnumerable<ActivityTypeMaster> contract = proxy.GetSubCategoriesForSelectedActivity("ADVENTURE");
-                proxy.SaveActivityCategoryMapping(newList,"ADVENTURE");
-                //ActivityDetailsDataContract contract = proxy.GetAllActivities("GANGTOK", "MEDIUMFLY", "smartphone");
+                //proxy.SaveActivityCategoryMapping(newList,"ADVENTURE");
+                ActivityDetailsDataContract contract = proxy.GetAllActivities(default(string), "HIGHFLY", "desktop");
                 (proxy as ICommunicationObject).Close();
             }
             catch (Exception ex)

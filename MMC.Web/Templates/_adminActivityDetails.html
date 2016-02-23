@@ -1,0 +1,261 @@
+﻿<div class="admin-list">
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Name</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" ng-model="activityDetails.Name" required placeholder="activity name" />
+                </div>
+            </div>
+        </div>
+    </div>   
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Activity Category</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8" ng-if="isEdit">
+                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select">
+                        <ui-select-match placeholder="activityDetails.ActivitySubCategory">{{$select.selected.ActivityType}}</ui-select-match>
+                        <ui-select-choices repeat="item in allActivitySubCategories | filter: $select.search">
+                            <span ng-bind-html="item.ActivityType | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="column-8" ng-if="!isEdit">
+                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select">
+                        <ui-select-match placeholder="eg. adventure">{{$select.selected.ActivityType}}</ui-select-match>
+                        <ui-select-choices repeat="item in allActivitySubCategories | filter: $select.search">
+                            <span ng-bind-html="item.ActivityType | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Location</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8" ng-if="isEdit">
+                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select">
+                        <ui-select-match placeholder="activityDetails.Location">{{$select.selected.LocationName}}</ui-select-match>
+                        <ui-select-choices repeat="item in allLocations | filter: $select.search">
+                            <span ng-bind-html="item.LocationName | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+                <div class="column-8" ng-if="!isEdit">
+                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select">
+                        <ui-select-match placeholder="eg. gangtok">{{$select.selected.LocationName}}</ui-select-match>
+                        <ui-select-choices repeat="item in allLocations | filter: $select.search">
+                            <span ng-bind-html="item.LocationName | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Location(lat and long)</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" ng-model="activityDetails.LatLong" required placeholder="latitude, longitude" />
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Description</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <textarea type="text" ng-model="locationDetails.Description" class="multiline" required placeholder="activity description etc" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Min People</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="number" min="1" max="1000" ng-model="locationDetails.MinPeople" required placeholder="eg. 5" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Max People</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="number" min="1" max="1000" ng-model="locationDetails.MaxPeople" required placeholder="eg. 5" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Max Number of Adults</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="number" min="1" max="1000" ng-model="locationDetails.NumAdults" required placeholder="eg. 5" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Max Number of Children</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="number" min="1" max="1000" ng-model="locationDetails.NumChildren" required placeholder="eg. 5" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Difficulty Rating</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="number" min="1" max="5" ng-model="locationDetails.DifficultyRating" required placeholder="eg. 5" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Cost for Adult</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" ng-model="activityDetails.Cost" required placeholder="Professional" />
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Cost for Child</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" ng-model="activityDetails.CostForChild" required placeholder="Professional" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Cancellation Policy</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <textarea type="text" ng-model="locationDetails.CancellationPolicy" class="multiline" required placeholder="activity description etc" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Difficulty Level</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" ng-model="activityDetails.DifficultyLevel" required placeholder="Professional" />
+                </div>
+            </div>
+        </div>
+    </div>  
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <span>&nbsp;</span>
+                </div>
+                <div class="column-8">
+                    <div class="center-element-relative-table">
+                        <div class="admin-booking">
+                            <div>
+                                <a ng-click="saveLocationDetails()">SAVE</a>
+                            </div>
+                        </div>
+                        <div class="admin-booking">
+                            <div>
+                                <a ng-click="cancelChanges()">RETURN TO LIST</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</div>

@@ -101,15 +101,15 @@ header {
 }
 
 .center-element-relative-table {
-    margin:0 auto;
+    margin: 0 auto;
     display: table;
-    position: relative;        
+    position: relative;
 }
 
-.center-element-relative {   
-    margin:0 auto;
+.center-element-relative {
+    margin: 0 auto;
     min-width: 320px;
-    height: auto;    
+    height: auto;
 }
 
 .dummy {
@@ -1947,23 +1947,28 @@ span.buttonText {
     position: relative;
     width: 95%;
     margin: 0 auto;
-    display: table;    
+    display: table;
 }
 
     .admin-list.label {
         text-align: right;
         padding: .1em 0;
-        background-color: white;
-        color: black;
+        background-color: transparent;
         font-size: .9em;
+        color:black;
     }
 
-    .admin-list.label-left {
-        text-align: left;       
-        background-color: white;
+    .admin-list.label-left{
+        text-align: left;
+        background-color: transparent;
         color: black;
         font-size: .9em;
-        font-weight:600;
+        font-weight: 600;
+    }
+
+    .admin-list.label-left.white {        
+        color: white;
+        background-color: black;
     }
 
 .admin-table {
@@ -1981,20 +1986,21 @@ span.buttonText {
         text-transform: uppercase;
         padding: .4em .2em;
         font-weight: 600;
+        display:inline-block;
     }
 
     .admin-table > div:nth-child(2) > div:nth-of-type(2n+1) {
         background-color: rgba(255,255,255,1);
         display: table;
         width: 100%;
-        font-size:.9em;
+        font-size: .9em;
     }
 
     .admin-table > div:nth-child(2) > div:nth-of-type(2n) {
         background-color: rgba(230,230,230,1);
         display: table;
         width: 100%;
-        font-size:.9em;
+        font-size: .9em;
     }
 
 .admin-booking {
@@ -2107,7 +2113,7 @@ span.buttonText {
     width: 100%;
     text-transform: uppercase;
     overflow-y: auto;
-    font-size:.9em;
+    font-size: .9em;
 }
 
 .selected-filter {
