@@ -123,12 +123,18 @@
             }
         })
         .state('adminActivityEdit', {
-            url: '/activities/:id',
+            url: '/activities/:id/{location}',
             controller: 'AdminActivityDetailsController',
             templateUrl: Wadado.rootPath + '/Templates/_adminActivityDetails.html',
             resolve: {
-                activityDetails: function (AdminActivityDataService, $stateParams) {
+                activity: function (AdminActivityDataService, $stateParams) {
                     return AdminActivityDataService.getSelectedActivityDetails($stateParams.id);
+                },
+                isEdit: function () {
+                    return true;
+                },
+                location: function ($stateParams) {
+                    return $stateParams.location;
                 }
             }
         });

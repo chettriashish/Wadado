@@ -8,8 +8,7 @@ using Core.Common.Core;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MMC.Business.Entities
-{
-    [DataContract(Namespace = "wadado.in")]
+{    
     public partial class ActivitiesMaster : EntityBase, IIdentifiableEntity
     {   
 
@@ -78,6 +77,8 @@ namespace MMC.Business.Entities
         public string ActivityLocation { get; set; }
         public string DistanceFromNearestCity { get; set; }
         public decimal AverageUserRating { get; set; }
+        public string ActivityStartTime { get; set; }
+        public string ActivityEndTime { get; set; }
         #endregion
         [DataMember]
         public string EntityId

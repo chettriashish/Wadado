@@ -29,5 +29,11 @@ namespace MMC.Web.Controllers.Admin.Activities
             ActivityDetailsDataContract selectedActivityDetails = _activitiesService.GetAllActivities(locationKey: default(string), activityKey: activityKey, userAgent: device);
             return Json(selectedActivityDetails, JsonRequestBehavior.AllowGet);
         }
+
+        public JsonResult SaveActivityDetails(ActivityDetailsDataContract activityDetails, Dictionary<string, bool> activityDays, IEnumerable<string> activityTimes)
+        {
+            //Make call to service
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
     }
 }

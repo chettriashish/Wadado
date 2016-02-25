@@ -99,7 +99,7 @@ namespace MMC.Data.DataRepositories
                 result.Description = activity.Description;
                 result.DifficultyRating = activity.DifficultyRating;
                 result.Location = activity.Address;
-                result.LocationLatLong = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == locationKey).FirstOrDefault().LocationKey).FirstOrDefault().LatLng;
+                result.LocationLatLong = locationKey != default(string) ? entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == locationKey).FirstOrDefault().LocationKey).FirstOrDefault().LatLng: default(string);
                 result.LatLong = activity.ActivityLocation;
                 result.DistanceFromNearestCity = activity.DistanceFromNearestCity;
                 result.NumAdults = activity.NumAdults;
@@ -113,6 +113,8 @@ namespace MMC.Data.DataRepositories
                 result.UserRating = activity.AverageUserRating;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
                 result.ActivityKey = activity.ActivitesKey;
+                result.ActivityStartTime = activity.ActivityStartTime;
+                result.ActivityEndTime = activity.ActivityEndTime;
                 foreach (var item in activityImages)
                 {
                     if (userAgent == RepositoryResource.SMARTPHONE)

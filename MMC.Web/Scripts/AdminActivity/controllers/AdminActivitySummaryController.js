@@ -4,7 +4,7 @@
         $scope.locations = allAvailableLocations;
 
         $scope.editSelectedActivity = function (item) {
-            $state.go("adminActivityEdit", { id: item.ActivityKey });
+            $state.go("adminActivityEdit", { id: item.ActivityKey, location: item.Location });
         }
 
         $scope.getAllActivitiesForSelectedLocation = function (item) {

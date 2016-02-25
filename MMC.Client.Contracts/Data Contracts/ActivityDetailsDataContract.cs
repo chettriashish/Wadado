@@ -76,5 +76,9 @@ namespace MMC.Client.Contracts.DataContracts
         public IDictionary<string, string> Reviews { get; set; }
         [DataMember]
         public List<ActivitySummaryDataContract> SimilarActivities { get; set; }
+        [DataMember]
+        public string ActivityStartTime { get; set; }
+        [DataMember]
+        public string ActivityEndTime { get; set; }
     }
 }

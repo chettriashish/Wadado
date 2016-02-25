@@ -29,7 +29,7 @@
                     cursor: pointer;
                 }
 
-                    .menu-container nav ul li:hover {                        
+                    .menu-container nav ul li:hover {
                         background-color: rgb(253,253,253);
                     }
 
@@ -107,4 +107,23 @@
                         text-decoration: none;
                         color: black;
                     }
+
+    .admin-wizard-tab-container {
+        z-index: 2;
+        margin: 0 auto;
+        position: fixed;
+    }
+
+    .admin-wizard {
+        font-size: 1em;
+        font-weight: 600;
+        color: black;
+        display: inline-block;
+        padding: 1em;
+        cursor: pointer;     
+    }
+        .admin-wizard.active span {
+            padding: 0 0 .2em 0;
+            border-bottom: 4px solid rgb(251,189,19);            
+        }      
 }

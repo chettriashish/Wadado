@@ -1685,7 +1685,7 @@ input[type=checkbox] {
         color: green;
     }
 
-input[type=text], input[type=email], input[type=tel] {
+input[type=text], input[type=email], input[type=tel], input[type=number] {
     min-height: 2.5em;
     padding: .2em;
     width: 90%;
@@ -1693,9 +1693,20 @@ input[type=text], input[type=email], input[type=tel] {
     font-family: 'Lato';
 }
 
+input[type=number] {
+    width: 20%;
+}
+
 input:required:invalid, input:focus:invalid {
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+input[type=time], select {    
+    padding:.2em 0;
+    width: 100%;
+    border-radius: 0;
+    min-height:2.2em;
 }
 
 input:required:valid {
@@ -1955,10 +1966,10 @@ span.buttonText {
         padding: .1em 0;
         background-color: transparent;
         font-size: .9em;
-        color:black;
+        color: black;
     }
 
-    .admin-list.label-left{
+    .admin-list.label-left {
         text-align: left;
         background-color: transparent;
         color: black;
@@ -1966,10 +1977,10 @@ span.buttonText {
         font-weight: 600;
     }
 
-    .admin-list.label-left.white {        
-        color: white;
-        background-color: black;
-    }
+        .admin-list.label-left.white {
+            color: white;
+            background-color: black;
+        }
 
 .admin-table {
     position: relative;
@@ -1986,7 +1997,7 @@ span.buttonText {
         text-transform: uppercase;
         padding: .4em .2em;
         font-weight: 600;
-        display:inline-block;
+        display: inline-block;
     }
 
     .admin-table > div:nth-child(2) > div:nth-of-type(2n+1) {
@@ -2125,4 +2136,13 @@ span.buttonText {
     color: white;
     padding: .2em .4em;
     text-align: center;
+}
+
+.admin-wizard-container {
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(144,144,144,0.5);
+    -moz-box-shadow: 0px 2px 5px 0px rgba(144,144,144,0.5);
+    box-shadow: 0px 2px 5px 0px rgba(144,144,144,0.5);
+    display: block;
+    padding: 1em 0;
+    float: none;
 }

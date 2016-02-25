@@ -1,0 +1,187 @@
+﻿<div class="admin-list">
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Start Time</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <div class="column-auto-nospace"><input type="time" ng-model="activityStartEnd.activityStartTime" step="300" placeholder="HH:mm" /></div>
+                    <div class="column-auto-nospace"><select ng-model="activityStartEnd.activityStartTimeAMPM"><option value="AM">AM</option><option value="PM">PM</option></select></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>End Time</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <div class="column-auto-nospace"><input type="time" ng-model="activityStartEnd.activityEndTime" step="300" placeholder="HH:mm" /></div>
+                    <div class="column-auto-nospace"><select ng-model="activityStartEnd.activityEndTimeAMPM"><option value="AM">AM</option><option value="PM">PM</option></select></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Duration</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <input type="text" min="1" max="1000" ng-model="activityDetails.Duration" required placeholder="eg. 5 minutes/hours/days" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div class="column-3">
+                <div class="admin-list label"><span>Activity Days</span></div>
+            </div>
+            <div class="column-col">
+                <div><span>:</span></div>
+            </div>
+            <div class="column-8">
+                <div class="admin-category-list">
+                    <div class="column-4">
+                        <label>
+                            <input type="checkbox" ng-click="setDay(days.sun)" ng-model="days.sun" />Sunday
+                        </label>
+                    </div>
+                    <div class="column-4">
+                        <label>
+                            <input type="checkbox" ng-click="setDay(days.mon)" ng-model="days.mon" />Monday
+                        </label>
+                    </div>
+                    <div class="column-4">
+                        <label>
+                            <input type="checkbox" ng-click="setDay(days.tue)" ng-model="days.tue" />Tuesday
+                        </label>
+                    </div>
+                    <div class="column-4">
+                        <label>
+                            <input type="checkbox" ng-click="setDay(days.wed)" ng-model="days.wed" />Wednesday
+                        </label>
+                    </div>
+                    <div class="column-4">
+                        <label>
+                            <input type="checkbox" ng-click="setDay(days.thu)" ng-model="days.thu" />Thursday
+                        </label>
+                    </div>
+                    <div class="column-4">
+                        <label>
+                            <input type="checkbox" ng-click="setDay(days.fri)" ng-model="days.fri" />Friday
+                        </label>
+                    </div>
+                    <div class="column-4">
+                        <label>
+                            <input type="checkbox" ng-click="setDay(days.sat)" ng-model="days.sat" />Saturday
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div class="column-3">
+                <div class="admin-list label"><span>Activity Time</span></div>
+            </div>
+            <div class="column-col">
+                <div><span>:</span></div>
+            </div>
+            <div class="column-8">
+                <div>
+                    <div class="column-auto"><span>Every</span></div>
+                    <div class="column-auto"><input type="time" placeholder="20 mins" step="300" ng-disabled="!!listTime" ng-model="interval.minutes" /></div>
+                    <div class="column-auto"><span> minutes</span></div>
+                    <div class="column-auto" ng-if="!listTime">
+                        <div class="admin-booking">
+                            <a ng-click="setTimeInterval()">SET TIME</a>
+                        </div>
+                    </div>
+                    <div class="column-auto"><span>or</span></div>
+                    <div class="column-auto">
+                        <div class="admin-booking">
+                            <a ng-click="addNewTime()">ADD TIME</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column-12">
+                    <span>&nbsp;</span>
+                </div>
+                <div class="admin-table" ng-if="listTime">
+                    <div class="admin-table header">
+                        <div class="column-12">
+                            <div style="float:left;">
+                                <span>ACTIVITY TIME</span>
+                            </div>
+                            <div style="float:left;">
+                                <span>&nbsp;</span>
+                            </div>
+                            <div style="float:left;">
+                                <span>&nbsp;</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div ng-repeat="item in AllActivityTimes">
+                            <div class="column-5">
+                                <div class="column-12" ng-if="!item.editMode">
+                                    <span style="text-transform:uppercase;">{{item.time}}</span>
+                                </div>
+                                <div class="column-12" ng-if="!!item.editMode">
+                                    <div class="column-auto-nospace"><input type="time" ng-model="item.timeComp" step="300" placeholder="HH:mm" /></div>
+                                    <div class="column-auto-nospace"><select ng-model="item.AMPM"><option value="AM">AM</option><option value="PM">PM</option></select></div>
+                                </div>
+                            </div>
+                            <div class="column-3" ng-if="!item.editMode">
+                                <div ng-click="editSelectedTime(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/edit.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Edit</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column-3" ng-if="!!item.editMode">
+                                <div ng-click="saveSelectedTime(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/done.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Done</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column-3" ng-if="!item.editMode">
+                                <div ng-click="deleteSelectedTime(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/bin.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Delete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

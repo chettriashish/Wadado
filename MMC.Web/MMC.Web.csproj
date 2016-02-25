@@ -1295,6 +1295,9 @@
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
     <Content Include="Templates\_adminActivityDetails.html" />
+    <Content Include="Templates\_adminActivityDetailsBasic.html" />
+    <Content Include="Templates\_adminActivityDetailsDates.html" />
+    <Content Include="Templates\_adminActivityDetailsPeople.html" />
     <Content Include="Templates\_adminActivityList.html" />
     <Content Include="Templates\_adminCategoryContainer.html" />
     <Content Include="Templates\_adminCategoryList.html" />

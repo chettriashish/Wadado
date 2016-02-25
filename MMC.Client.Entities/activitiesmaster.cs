@@ -42,6 +42,8 @@ namespace MMC.Client.Entities
         private string _distanceFromNearestCity;
         private string _currency;
         private decimal _averageUserRating;
+        private string _activityEndTime;
+        private string _activityStartTime;
         #endregion
 
         #region Properties
@@ -116,7 +118,7 @@ namespace MMC.Client.Entities
                     OnPropertyChanged(() => Cost);
                 }
             }
-        }       
+        }
 
         public decimal CostForChild
         {
@@ -398,8 +400,28 @@ namespace MMC.Client.Entities
                 _averageUserRating = value;
                 OnPropertyChanged(() => AverageUserRating);
             }
+        }        
+
+        public string ActivityStartTime
+        {
+            get { return _activityStartTime; }
+            set
+            {
+                _activityStartTime = value;
+                OnPropertyChanged(() => ActivityStartTime);
+            }
         }
 
+
+        public string ActivityEndTime
+        {
+            get { return _activityEndTime; }
+            set
+            {
+                _activityEndTime = value;
+                OnPropertyChanged(() => ActivityEndTime);
+            }
+        }
 
         #endregion
         /// <summary>

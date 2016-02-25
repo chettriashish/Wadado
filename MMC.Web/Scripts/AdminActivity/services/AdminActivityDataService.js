@@ -12,6 +12,12 @@
             });
         }
 
+        var getAllAvailableLocationsAsync = function () {
+            var deferred = $q.defer();
+            $http.get('/AdminLocation/GetAllLocations').success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+        }
+
         var getAllActivitiesForSelectedLocation = function (item) {
             var deferred = $q.defer();
             $http({
@@ -24,7 +30,7 @@
         }
 
         var getSelectedActivityDetails = function (activityKey) {
-            $http({
+            return $http({
                 method: 'GET',
                 url: 'AdminActivity/GetSelectedActivityDetails',
                 params: { activityKey: activityKey }
@@ -37,12 +43,16 @@
                 });
         }
 
-        var saveActivityDetails = function (item) {
+        var saveActivityDetails = function (activityDetails, activityDays, activityTimes) {
             var deferred = $q.defer();
+            var time = [];
+            $.each(activityTimes, function (key, value) {
+                time.push(activityTimes[key].time);
+            });
             $http({
                 method: 'POST',
-                url: '',
-                data: { activityDetails: item }
+                url: 'AdminActivity/SaveActivityDetails',
+                data: { activityDetails: activityDetails, activityDays: activityDays, activityTimes: time }
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }
@@ -53,6 +63,7 @@
             getAllActivitiesForSelectedLocation: getAllActivitiesForSelectedLocation,
             getSelectedActivityDetails: getSelectedActivityDetails,
             saveActivityDetails: saveActivityDetails,
+            getAllAvailableLocationsAsync: getAllAvailableLocationsAsync,
         }
     };
     app.factory("AdminActivityDataService", adminActivityDataService);
