@@ -27,6 +27,7 @@ namespace MMC.Business.Managers
         const string MOBILE = "_mob";
         const string TABLET = "_tab";
         const string THUMBNAIL = "_thumb";
+        const string ALL = "All";
         public ActivitiesManager(IDataRepositoryFactory dataRepositoryFactory, IBusinessEngineFactory businessEngineFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
@@ -243,7 +244,6 @@ namespace MMC.Business.Managers
             });
         }
 
-
         public IEnumerable<ActivityCategoryMaster> GetAllActivityCategories()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -266,7 +266,6 @@ namespace MMC.Business.Managers
                 return allActivitiesTypes;
             });
         }
-
 
         public void SaveCategories(ActivityCategoryMaster activityCategory)
         {
@@ -333,7 +332,7 @@ namespace MMC.Business.Managers
 
                 IEnumerable<ActivityTypeCategory> currentMappedTypes = activityTypeCategoryRepository.Get().Where(e => e.ActivityCategoryKey == activityCategoryKey);
                 //creating new mappings
-                foreach(var activityTypeKey in activityTypeKeys)
+                foreach (var activityTypeKey in activityTypeKeys)
                 {
                     if (!(currentMappedTypes.Where(e => e.ActivityTypeKey == activityTypeKey).Count() > 0))
                     {
@@ -349,6 +348,340 @@ namespace MMC.Business.Managers
                         activityTypeCategoryRepository.Remove(item);
                     }
                 }
+            });
+        }
+
+        public void SaveActivityDetails(ActivityDetailsDataContract activity, Dictionary<string, bool> activityDays,
+            IEnumerable<string> activityTimes, string locationKey, string activityTypeKey, string user)
+        {
+            ExecuteFaultHandledOperation(() =>
+            {
+                IActivitiesMasterRepository activitiesRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+                IActivityDaySchedulerRepository activityDaySchedulerRepository = _DataRepositoryFactory.GetDataRepository<IActivityDaySchedulerRepository>();
+                IActivityTimeSchedulerRepository activityTimeSchedulerRepository = _DataRepositoryFactory.GetDataRepository<IActivityTimeSchedulerRepository>();
+                ActivitiesMaster activitiesMaster = new ActivitiesMaster();
+                activitiesMaster.ActivityEndTime = activity.ActivityEndTime;
+                activitiesMaster.ActivityLocation = activity.LatLong;
+                activitiesMaster.ActivityStartTime = activity.ActivityStartTime;
+                activitiesMaster.CancellationPolicy = activity.CancellationPolicy;
+                activitiesMaster.Address = activity.Location;
+                activitiesMaster.AverageUserRating = activity.UserRating;
+                activitiesMaster.DifficultyRating = activity.DifficultyRating;
+                activitiesMaster.Cost = activity.Cost;
+                activitiesMaster.Currency = activity.Currency;
+                activitiesMaster.Description = activity.Description;
+                activitiesMaster.MinAdults = activity.MinPeople;
+                activitiesMaster.MinChildren = activity.MinChildren;
+                activitiesMaster.Name = activity.Name;
+                activitiesMaster.CostForChild = activity.CostForChild;
+                activitiesMaster.Duration = activity.Duration;
+                activitiesMaster.MaxAdults = activity.NumAdults;
+                activitiesMaster.MaxChildren = activity.NumChildren;
+                activitiesMaster.NumAdults = activity.NumAdults;
+                activitiesMaster.NumChildren = activity.NumChildren;
+                activitiesMaster.LocationKey = locationKey;
+                activitiesMaster.ActivityTypeKey = activityTypeKey;
+                activitiesMaster.CreatedDate = DateTime.Now;
+                activitiesMaster.CreatedBy = user;
+                activitiesMaster.IsPermitRequired = activity.IsPermitRequired;
+                activitiesMaster.Included = activity.Included;
+                activitiesMaster.Advice = activity.Advice;
+                activitiesMaster.ThingsToCarry = activity.ThingsToCarry;
+                if (activity.ActivityKey == default(string))
+                {
+                    activitiesMaster.ActivitesKey = Guid.NewGuid().ToString();
+                    activitiesMaster.IsValidated = false;
+                    activitiesRepository.Add(activitiesMaster);
+                }
+                else
+                {
+                    activitiesMaster.ActivitesKey = activity.ActivityKey;
+                    activitiesMaster.IsValidated = activity.IsValidated;
+                    activitiesRepository.Update(activitiesMaster);
+                }
+
+                ActivityDayScheduler dayScheduler = activityDaySchedulerRepository.Get().Where(e => e.ActivityKey == activitiesMaster.ActivitesKey).FirstOrDefault();
+                if (dayScheduler == null)
+                {
+                    dayScheduler = new ActivityDayScheduler();
+                    dayScheduler.ActivityDaySchedulerKey = Guid.NewGuid().ToString();
+                    dayScheduler.ActivityKey = activitiesMaster.ActivitesKey;
+                }
+                int count = 0;
+                foreach (var day in activityDays)
+                {
+                    switch (count)
+                    {
+                        case 0: dayScheduler.IsSunday = day.Value; break;
+                        case 1: dayScheduler.IsMonday = day.Value; break;
+                        case 2: dayScheduler.IsTuesday = day.Value; break;
+                        case 3: dayScheduler.IsWednesday = day.Value; break;
+                        case 4: dayScheduler.IsThursday = day.Value; break;
+                        case 5: dayScheduler.IsFriday = day.Value; break;
+                        case 6: dayScheduler.IsSaturday = day.Value; break;
+                    }
+                    count++;
+                }
+
+                if (activityDaySchedulerRepository.Get(dayScheduler.ActivityDaySchedulerKey) != null)
+                {
+                    activityDaySchedulerRepository.Update(dayScheduler);
+                }
+                else
+                {
+                    activityDaySchedulerRepository.Add(dayScheduler);
+                }
+
+                List<ActivityTimeScheduler> timeScheduler = activityTimeSchedulerRepository.Get().Where(e => e.ActivityKey == activitiesMaster.ActivitesKey).ToList();
+                if (timeScheduler != null && timeScheduler.Count() > 0)
+                {
+                    foreach (ActivityTimeScheduler item in timeScheduler)
+                    {
+                        activityTimeSchedulerRepository.Remove(item);
+                    }
+                }
+                //setting activity times after clearing the old time values
+                //creating new activiy times
+                timeScheduler = new List<ActivityTimeScheduler>();
+                foreach (string time in activityTimes)
+                {
+                    ActivityTimeScheduler newTime = new ActivityTimeScheduler() { ActivityTimeSchedulerKey = Guid.NewGuid().ToString() };
+                    newTime.ActivityKey = activitiesMaster.ActivitesKey;
+                    newTime.ActivityTime = time;
+                    activityTimeSchedulerRepository.Add(newTime);
+                }
+            });
+        }
+
+        public IEnumerable<ActivityBookingDataContract> GetAllActivitiesPendingForConfirmation()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository
+                  = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                IActivitiesMasterRepository activitiesMasterRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+                IEnumerable<ActivityBooking> allBookings = activityBookingRepository.GetAllActivitiesPendingForConfirmation();
+                List<ActivityBookingDataContract> activityBookingList = new List<ActivityBookingDataContract>();
+                foreach (var activityBooking in allBookings)
+                {
+                    ActivityBookingDataContract bookingContract = new ActivityBookingDataContract();
+                    ActivitiesMaster activity = activitiesMasterRepository.Get(activityBooking.ActivityKey);
+                    bookingContract.ActivityBookingKey = activityBooking.ActivityBookingKey;
+                    bookingContract.ActivityKey = activityBooking.ActivityKey;
+                    bookingContract.ActivityName = activity.Name;
+                    bookingContract.BookingDate = activityBooking.BookingDate;
+                    bookingContract.BookingNumber = activityBooking.BookingNumber;
+                    bookingContract.ChildParticipants = activityBooking.ChildParticipants;
+                    bookingContract.Participants = activityBooking.Participants;
+                    bookingContract.PaymentAmount = activityBooking.PaymentAmount;
+                    bookingContract.Currency = activity.Currency;
+                    bookingContract.Cost = activityBooking.PaymentAmount;
+                    bookingContract.Time = activityBooking.Time;
+                    activityBookingList.Add(bookingContract);
+                }
+
+                return activityBookingList.OrderBy(e => e.BookingDate);
+            });
+        }
+
+        public IEnumerable<CompanyMaster> GetAllRegisteredCompanies()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                ICompanyMasterRepository companyMasterRepository
+                  = _DataRepositoryFactory.GetDataRepository<ICompanyMasterRepository>();
+                List<CompanyMaster> results = companyMasterRepository.Get().ToList();
+
+                CompanyMaster company = new CompanyMaster
+                {
+                    CompanyKey = ALL,
+                    Name = ALL,
+                    ContactPerson = ALL
+                };
+                results.Insert(0, company);
+                return results;
+            });
+        }
+
+        public IEnumerable<ActivityBookingDataContract> GetAllCompanyActivitiesPendingForConfirmation(string companyKey)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository
+                  = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                IActivitiesMasterRepository activitiesMasterRepository =
+                    _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+
+                IEnumerable<ActivityBooking> allBookings = new List<ActivityBooking>();
+
+                if (companyKey == ALL)
+                {
+                    allBookings = activityBookingRepository.GetAllActivitiesPendingForConfirmation();
+                }
+                else
+                {
+                    allBookings = activityBookingRepository.GetAllCompanyActivitiesPendingForConfirmation(companyKey);
+                }
+                List<ActivityBookingDataContract> activityBookingList = new List<ActivityBookingDataContract>();
+                foreach (var activityBooking in allBookings)
+                {
+                    ActivityBookingDataContract bookingContract = new ActivityBookingDataContract();
+                    ActivitiesMaster activity = activitiesMasterRepository.Get(activityBooking.ActivityKey);
+                    bookingContract.ActivityBookingKey = activityBooking.ActivityBookingKey;
+                    bookingContract.ActivityKey = activityBooking.ActivityKey;
+                    bookingContract.ActivityName = activity.Name;
+                    bookingContract.BookingDate = activityBooking.BookingDate;
+                    bookingContract.BookingNumber = activityBooking.BookingNumber;
+                    bookingContract.ChildParticipants = activityBooking.ChildParticipants;
+                    bookingContract.Participants = activityBooking.Participants;
+                    bookingContract.PaymentAmount = activityBooking.PaymentAmount;
+                    bookingContract.Currency = activity.Currency;
+                    bookingContract.Cost = activityBooking.PaymentAmount;
+                    bookingContract.Time = activityBooking.Time;
+                    activityBookingList.Add(bookingContract);
+                }
+                return activityBookingList.OrderBy(e => e.BookingDate);
+            });
+        }
+
+        public IEnumerable<ActivityBookingDataContract> GetAllActivitiesCompleted()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository
+                  = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                IActivitiesMasterRepository activitiesMasterRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+                IEnumerable<ActivityBooking> allBookings = activityBookingRepository.GetAllActivitiesCompleted();
+                List<ActivityBookingDataContract> activityBookingList = new List<ActivityBookingDataContract>();
+                foreach (var activityBooking in allBookings)
+                {
+                    ActivityBookingDataContract bookingContract = new ActivityBookingDataContract();
+                    ActivitiesMaster activity = activitiesMasterRepository.Get(activityBooking.ActivityKey);
+                    bookingContract.ActivityBookingKey = activityBooking.ActivityBookingKey;
+                    bookingContract.ActivityKey = activityBooking.ActivityKey;
+                    bookingContract.ActivityName = activity.Name;
+                    bookingContract.BookingDate = activityBooking.BookingDate;
+                    bookingContract.BookingNumber = activityBooking.BookingNumber;
+                    bookingContract.ChildParticipants = activityBooking.ChildParticipants;
+                    bookingContract.Participants = activityBooking.Participants;
+                    bookingContract.PaymentAmount = activityBooking.PaymentAmount;
+                    bookingContract.Currency = activity.Currency;
+                    bookingContract.Cost = activityBooking.PaymentAmount;
+                    bookingContract.Time = activityBooking.Time;
+                    activityBookingList.Add(bookingContract);
+                }
+
+                return activityBookingList.OrderBy(e => e.BookingDate);
+            });
+        }
+        public IEnumerable<ActivityBookingDataContract> GetAllCompanyActivitiesCompleted(string companyKey)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository
+                  = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                IActivitiesMasterRepository activitiesMasterRepository =
+                    _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+
+                IEnumerable<ActivityBooking> allBookings = new List<ActivityBooking>();
+
+                if (companyKey == ALL)
+                {
+                    allBookings = activityBookingRepository.GetAllActivitiesCompleted();
+                }
+                else
+                {
+                    allBookings = activityBookingRepository.GetAllCompanyActivitiesCompleted(companyKey);
+                }
+                List<ActivityBookingDataContract> activityBookingList = new List<ActivityBookingDataContract>();
+                foreach (var activityBooking in allBookings)
+                {
+                    ActivityBookingDataContract bookingContract = new ActivityBookingDataContract();
+                    ActivitiesMaster activity = activitiesMasterRepository.Get(activityBooking.ActivityKey);
+                    bookingContract.ActivityBookingKey = activityBooking.ActivityBookingKey;
+                    bookingContract.ActivityKey = activityBooking.ActivityKey;
+                    bookingContract.ActivityName = activity.Name;
+                    bookingContract.BookingDate = activityBooking.BookingDate;
+                    bookingContract.BookingNumber = activityBooking.BookingNumber;
+                    bookingContract.ChildParticipants = activityBooking.ChildParticipants;
+                    bookingContract.Participants = activityBooking.Participants;
+                    bookingContract.PaymentAmount = activityBooking.PaymentAmount;
+                    bookingContract.Currency = activity.Currency;
+                    bookingContract.Cost = activityBooking.PaymentAmount;
+                    bookingContract.Time = activityBooking.Time;
+                    activityBookingList.Add(bookingContract);
+                }
+                return activityBookingList.OrderBy(e => e.BookingDate);
+            });
+        }
+        public IEnumerable<ActivityBookingDataContract> GetAllUpcomingActivities()
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository
+                  = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                IActivitiesMasterRepository activitiesMasterRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+                IEnumerable<ActivityBooking> allBookings = activityBookingRepository.GetAllUpcomingActivities();
+                List<ActivityBookingDataContract> activityBookingList = new List<ActivityBookingDataContract>();
+                foreach (var activityBooking in allBookings)
+                {
+                    ActivityBookingDataContract bookingContract = new ActivityBookingDataContract();
+                    ActivitiesMaster activity = activitiesMasterRepository.Get(activityBooking.ActivityKey);
+                    bookingContract.ActivityBookingKey = activityBooking.ActivityBookingKey;
+                    bookingContract.ActivityKey = activityBooking.ActivityKey;
+                    bookingContract.ActivityName = activity.Name;
+                    bookingContract.BookingDate = activityBooking.BookingDate;
+                    bookingContract.BookingNumber = activityBooking.BookingNumber;
+                    bookingContract.ChildParticipants = activityBooking.ChildParticipants;
+                    bookingContract.Participants = activityBooking.Participants;
+                    bookingContract.PaymentAmount = activityBooking.PaymentAmount;
+                    bookingContract.Currency = activity.Currency;
+                    bookingContract.Cost = activityBooking.PaymentAmount;
+                    bookingContract.Time = activityBooking.Time;
+                    activityBookingList.Add(bookingContract);
+                }
+
+                return activityBookingList.OrderBy(e => e.BookingDate);
+            });
+        }
+        public IEnumerable<ActivityBookingDataContract> GetAllUpcomingCompanyActivities(string companyKey)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository
+                  = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                IActivitiesMasterRepository activitiesMasterRepository =
+                    _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+
+                IEnumerable<ActivityBooking> allBookings = new List<ActivityBooking>();
+
+                if (companyKey == ALL)
+                {
+                    allBookings = activityBookingRepository.GetAllUpcomingActivities();
+                }
+                else
+                {
+                    allBookings = activityBookingRepository.GetAllUpcomingCompanyActivities(companyKey);
+                }
+                List<ActivityBookingDataContract> activityBookingList = new List<ActivityBookingDataContract>();
+                foreach (var activityBooking in allBookings)
+                {
+                    ActivityBookingDataContract bookingContract = new ActivityBookingDataContract();
+                    ActivitiesMaster activity = activitiesMasterRepository.Get(activityBooking.ActivityKey);
+                    bookingContract.ActivityBookingKey = activityBooking.ActivityBookingKey;
+                    bookingContract.ActivityKey = activityBooking.ActivityKey;
+                    bookingContract.ActivityName = activity.Name;
+                    bookingContract.BookingDate = activityBooking.BookingDate;
+                    bookingContract.BookingNumber = activityBooking.BookingNumber;
+                    bookingContract.ChildParticipants = activityBooking.ChildParticipants;
+                    bookingContract.Participants = activityBooking.Participants;
+                    bookingContract.PaymentAmount = activityBooking.PaymentAmount;
+                    bookingContract.Currency = activity.Currency;
+                    bookingContract.Cost = activityBooking.PaymentAmount;
+                    bookingContract.Time = activityBooking.Time;
+                    activityBookingList.Add(bookingContract);
+                }
+                return activityBookingList.OrderBy(e => e.BookingDate);
             });
         }
     }

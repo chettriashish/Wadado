@@ -69,6 +69,24 @@ namespace MMC.Client.Contracts
         void SaveActivityCategoryMapping(IEnumerable<string> activityTypeKeys, string activityCategoryKey);
         [OperationContract]
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocation(string locationKey, string userAgent);
+        [OperationContract]
+        void SaveActivityDetails(ActivityDetailsDataContract activity, Dictionary<string, bool> activityDays,
+            IEnumerable<string> activityTimes, string locationKey, string activityTypeKey, string user);
+
+        [OperationContract]
+        IEnumerable<ActivityBookingDataContract> GetAllActivitiesPendingForConfirmation();
+        [OperationContract]
+        IEnumerable<CompanyMaster> GetAllRegisteredCompanies();
+        [OperationContract]
+        IEnumerable<ActivityBookingDataContract> GetAllCompanyActivitiesPendingForConfirmation(string companyKey);
+        [OperationContract]
+        IEnumerable<ActivityBookingDataContract> GetAllCompanyActivitiesCompleted(string companyKey);
+        [OperationContract]
+        IEnumerable<ActivityBookingDataContract> GetAllActivitiesCompleted();
+        [OperationContract]
+        IEnumerable<ActivityBookingDataContract> GetAllUpcomingActivities();
+        [OperationContract]
+        IEnumerable<ActivityBookingDataContract> GetAllUpcomingCompanyActivities(string companyKey);
         #endregion
 
         #region Async Operations

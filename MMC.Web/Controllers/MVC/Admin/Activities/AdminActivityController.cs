@@ -30,10 +30,16 @@ namespace MMC.Web.Controllers.Admin.Activities
             return Json(selectedActivityDetails, JsonRequestBehavior.AllowGet);
         }
 
-        public JsonResult SaveActivityDetails(ActivityDetailsDataContract activityDetails, Dictionary<string, bool> activityDays, IEnumerable<string> activityTimes)
+        public JsonResult SaveActivityDetails(ActivityDetailsDataContract activityDetails, Dictionary<string, bool> activityDays, IEnumerable<string> activityTimes, string activityCategoryKey, string activityLocationKey)
         {
             //Make call to service
+            _activitiesService.SaveActivityDetails(activityDetails, activityDays, activityTimes, activityLocationKey, activityCategoryKey, "TBD");
             return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult CreateNewActivity()
+        {
+            return Json(new ActivityDetailsDataContract(), JsonRequestBehavior.AllowGet);
         }
     }
 }

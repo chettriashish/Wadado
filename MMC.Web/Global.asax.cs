@@ -1,5 +1,4 @@
 ﻿using MMC.Business.Managers;
-using MMC.Client.Bootstrapper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +22,7 @@ namespace MMC.Web
         {
             AreaRegistration.RegisterAllAreas();
             Bootstrapper.Initialise();
-            WebApiConfig.Register(GlobalConfiguration.Configuration);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);            
             BundleConfig.RegisterBundles(BundleTable.Bundles);

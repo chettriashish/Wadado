@@ -196,5 +196,44 @@ namespace MMC.Client.Proxies
         {
             throw new NotImplementedException();
         }
+
+        public void SaveActivityDetails(ActivityDetailsDataContract activity, Dictionary<string, bool> activityDays,
+            IEnumerable<string> activityTimes, string locationKey, string activityTypeKey, string user)
+        {
+            Channel.SaveActivityDetails(activity, activityDays, activityTimes, locationKey, activityTypeKey, user);
+        }
+
+        public IEnumerable<ActivityBookingDataContract> GetAllActivitiesPendingForConfirmation()
+        {
+            return Channel.GetAllActivitiesPendingForConfirmation();
+        }
+
+        public IEnumerable<CompanyMaster> GetAllRegisteredCompanies()
+        {
+            return Channel.GetAllRegisteredCompanies();
+        }
+        public IEnumerable<ActivityBookingDataContract> GetAllCompanyActivitiesPendingForConfirmation(string companyKey)
+        {
+            return Channel.GetAllCompanyActivitiesPendingForConfirmation(companyKey);
+        }
+
+        public IEnumerable<ActivityBookingDataContract> GetAllCompanyActivitiesCompleted(string companyKey)
+        {
+            return Channel.GetAllCompanyActivitiesCompleted(companyKey);
+        }
+
+        public IEnumerable<ActivityBookingDataContract> GetAllActivitiesCompleted()
+        {
+            return Channel.GetAllActivitiesCompleted();
+        }
+        public IEnumerable<ActivityBookingDataContract> GetAllUpcomingActivities()
+        {
+            return Channel.GetAllUpcomingActivities();
+        }
+
+        public IEnumerable<ActivityBookingDataContract> GetAllUpcomingCompanyActivities(string companyKey)
+        {
+            return Channel.GetAllUpcomingCompanyActivities(companyKey);
+        }
     }
 }

@@ -4,7 +4,7 @@
 ///<reference path="angular-ui/ui-bootstrap.js" />
 (function () {
     //var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ui.bootstrap', 'ngRoute']);
-    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ngRoute', 'angular-click-outside', 'ui.router'])
+    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'common.services', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-click-outside', 'ui.router'])
 
     window.fbAsyncInit = function () {
         FB.init({
@@ -31,8 +31,25 @@
         $stateProvider
         .state('adminLogin', {
             url: '/',
-            //controller: 'AdminLoginController',
-            templateUrl: Wadado.rootPath + '/Templates/_adminLogin.html'
+            controller: 'AdminLoginController',
+            controllerAs: 'vm',
+            templateUrl: Wadado.rootPath + '/Templates/_adminLogin.html',
+            resolve: {
+                isLoggedIn: function () {
+                    return false;
+                }
+            }
+        })
+        .state('adminRegisterUser', {
+            url: '/register',
+            controller: 'AdminLoginController',
+            controllerAs: 'vm',
+            templateUrl: Wadado.rootPath + '/Templates/_registration.html',
+            resolve: {
+                isLoggedIn: function () {
+                    return false;
+                }
+            }
         })
         .state('adminLocation', {
             url: '/location',
@@ -87,7 +104,7 @@
         .state('admincategory_parent.adminsubcategories', {
             url: '/subcategory-list',
             views: {
-                'admin-subcategory-list':{
+                'admin-subcategory-list': {
                     controller: 'AdminSubCategoryController',
                     templateUrl: Wadado.rootPath + '/Templates/_adminSubCategoryList.html',
                     resolve: {
@@ -95,13 +112,13 @@
                             return AdminCategoryDataService.getAllAvailableSubCategories();
                         }
                     }
-                }                
+                }
             }
         })
         .state('admincategory_parent.admincategorytypemapping', {
             url: '/category-mapping',
             views: {
-                'admin-category-type-mapping':{
+                'admin-category-type-mapping': {
                     controller: 'AdminCategoryTypeMappingController',
                     templateUrl: Wadado.rootPath + '/Templates/_adminCategoryTypeMapping.html',
                     resolve: {
@@ -109,7 +126,7 @@
                             return AdminCategoryDataService.getAllAvailableCategories();
                         }
                     }
-                }                
+                }
             }
         })
         .state('adminActivities', {
@@ -123,7 +140,7 @@
             }
         })
         .state('adminActivityEdit', {
-            url: '/activities/:id/{location}',
+            url: '/activities/edit/:id/{location}',
             controller: 'AdminActivityDetailsController',
             templateUrl: Wadado.rootPath + '/Templates/_adminActivityDetails.html',
             resolve: {
@@ -135,6 +152,74 @@
                 },
                 location: function ($stateParams) {
                     return $stateParams.location;
+                }
+            }
+        })
+        .state('adminActivityCreate', {
+            url: '/activities/add/{location}',
+            controller: 'AdminActivityDetailsController',
+            templateUrl: Wadado.rootPath + '/Templates/_adminActivityDetails.html',
+            resolve: {
+                activity: function (AdminActivityDataService, $stateParams) {
+                    return AdminActivityDataService.createNewActivity();
+                },
+                isEdit: function () {
+                    return false;
+                },
+                location: function () {
+                    return '';
+                }
+            }
+        })
+        .state('adminbookings_parent', {
+            url: '/bookings',
+            abstract: true,
+            templateUrl: Wadado.rootPath + '/Templates/_adminActivityBookingDetailsContainer.html',
+            controller: 'AdminActivityBookingsContainerController'
+
+        })
+        .state('adminbookings_parent.adminActivityBookingsPending', {
+            url: '/pending',
+            views: {
+                'admin-activitybooking-pending': {
+                    controller: 'AdminActivityBookingController',
+                    controllerAs: 'vm',
+                    templateUrl: Wadado.rootPath + '/Templates/_adminClientPendingActivities.html',
+                    resolve: {
+                        allActivities: function (AdminActivityBookingDataService) {
+                            return AdminActivityBookingDataService.getAllActivitiesPendingBooking();
+                        }
+                    }
+                }
+            }
+        })
+        .state('adminbookings_parent.adminUpcomingActivityBooking', {
+            url: '/upcoming',
+            views: {
+                'admin-activitybooking-upcoming': {
+                    controller: 'AdminActivityBookingController',
+                    controllerAs: 'vm',
+                    templateUrl: Wadado.rootPath + '/Templates/_adminClientCompletedActivities.html',
+                    resolve: {
+                        allActivities: function (AdminActivityBookingDataService) {
+                            return AdminActivityBookingDataService.getAllUpcomingActivities();
+                        }
+                    }
+                }
+            }
+        })
+        .state('adminbookings_parent.adminActivityBookingCompleted', {
+            url: '/completed',
+            views: {
+                'admin-activitybooking-completed': {
+                    controller: 'AdminActivityBookingController',
+                    controllerAs: 'vm',
+                    templateUrl: Wadado.rootPath + '/Templates/_adminClientCompletedActivities.html',
+                    resolve: {
+                        allActivities: function (AdminActivityBookingDataService) {
+                            return AdminActivityBookingDataService.getAllActivitiesCompletedBooking();
+                        }
+                    }
                 }
             }
         });

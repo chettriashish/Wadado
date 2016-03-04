@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace MMC.Business.Contracts.DataContracts
 {
-    [DataContract(Namespace="wadado.in")]
-    public class ActivityDetailsDataContract:DataContractBase
+    [DataContract(Namespace = "wadado.in")]
+    public class ActivityDetailsDataContract : DataContractBase
     {
         [DataMember]
         public string ActivityKey { get; set; }
@@ -72,12 +72,24 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public DateTime NextAvaiableDate { get; set; }
         [DataMember]
-        public IDictionary<string,string> Reviews { get; set; }
+        public IDictionary<string, string> Reviews { get; set; }
         [DataMember]
         public List<ActivitySummaryDataContract> SimilarActivities { get; set; }
         [DataMember]
         public string ActivityStartTime { get; set; }
         [DataMember]
         public string ActivityEndTime { get; set; }
+        [DataMember]
+        public bool IsValidated { get; set; }
+        [DataMember]
+        public int MinChildren { get; set; }
+        [DataMember]
+        public string ThingsToCarry { get; set; }
+        [DataMember]
+        public string Advice { get; set; }
+        [DataMember]
+        public string Included { get; set; }
+        [DataMember]
+        public bool IsPermitRequired { get; set; }
     }
 }

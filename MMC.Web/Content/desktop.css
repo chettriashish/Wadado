@@ -96,7 +96,7 @@ img.scale, object.scale, .cover-height img {
 /***********SEARCH BLOCK*******************/
 .cover-search {
     position: absolute;
-    top: 25%;
+    top: 15%;
     width: 100%;
     left: 0;
     min-height: 200px;
@@ -826,7 +826,7 @@ label {
         font-size: 1.4em;
     }
 
-    input[type=text], input[type=email], input[type=tel] {
+    input[type=text], input[type=email], input[type=tel], input[type=password] {
         min-height: 2.8em;
     }
 

@@ -12,5 +12,11 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
     {
         IEnumerable<ActivityBooking> GetBookedActivitiesBySession(string sessionKey);
         IEnumerable<ActivityBooking> GetBookedActivitiesByUserKey(string userKey);
+        IEnumerable<ActivityBooking> GetAllCompanyActivitiesPendingForConfirmation(string companyKey);
+        IEnumerable<ActivityBooking> GetAllActivitiesPendingForConfirmation();
+        IEnumerable<ActivityBooking> GetAllActivitiesCompleted();
+        IEnumerable<ActivityBooking> GetAllCompanyActivitiesCompleted(string companyKey);
+        IEnumerable<ActivityBooking> GetAllUpcomingActivities();
+        IEnumerable<ActivityBooking> GetAllUpcomingCompanyActivities(string companyKey);
     }
 }

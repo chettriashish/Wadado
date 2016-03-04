@@ -111,6 +111,9 @@ namespace MMC.Data.DataRepositories
                 result.Name = activity.Name;
                 result.Duration = activity.Duration;
                 result.UserRating = activity.AverageUserRating;
+                result.IsValidated = activity.IsValidated;
+                result.Included = activity.Included;
+                result.IsPermitRequired = activity.IsPermitRequired;                
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
                 result.ActivityKey = activity.ActivitesKey;
                 result.ActivityStartTime = activity.ActivityStartTime;
@@ -427,6 +430,7 @@ namespace MMC.Data.DataRepositories
                                                  select e2).Count() > 0 ? true : false),
                               LatLong = entity.ActivityLocation,
                               Cost = entity.Cost,
+                              
                               Currency = entity.Currency,
                               Discount = ((from e1 in entityContext.TopOffersSet
                                            join e2 in entityContext.TopOfferMappingSet
@@ -549,6 +553,6 @@ namespace MMC.Data.DataRepositories
                 }
             }
             return finalResult;
-        }
+        }        
     }
 }

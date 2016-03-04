@@ -1,8 +1,7 @@
 ﻿(function () {
     var app = angular.module("appMain");
-    var adminLocationSummaryController = function ($scope, $http, $timeout, $interval, $location, $state, allAvailableLocations, AdminLocationSummaryDataService) {
-        $scope.locations = allAvailableLocations;
-
+    var adminLocationSummaryController = function ($scope, $http, $state, allAvailableLocations, AdminLocationSummaryDataService) {
+        $scope.locations = allAvailableLocations;        
         $scope.editSelectedLocation = function (item) {
             $state.go("adminLocationEdit", { id: item.LocationKey });
         }

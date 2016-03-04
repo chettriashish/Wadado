@@ -1,0 +1,24 @@
+﻿<div class="row">
+    <div class="column-2">
+        <div class="left-pane">
+            <div ui-view="menu-container" class="menu-container">
+                <nav>
+                    <ul>
+                        <li ng-click="loadContent('pending')" class="active"><a id="pending">View Pending</a></li>
+                        <li ng-click="loadContent('upcoming')"><a id="upcoming">View Upcoming</a></li>   
+                        <li ng-click="loadContent('completed')"><a id="completed">View Completed</a></li>                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <div class="column-10">
+        <div ui-view="admin-activitybooking-pending">
+        </div>        
+        <div ui-view="admin-activitybooking-upcoming">
+        </div>        
+        <div ui-view="admin-activitybooking-completed">
+        </div>
+    </div>
+</div>
+

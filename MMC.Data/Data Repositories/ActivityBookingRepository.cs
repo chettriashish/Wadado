@@ -47,7 +47,7 @@ namespace MMC.Data.DataRepositories
                              where e.SessionKey == sessionKey
                              && e.IsDeleted == false
                              select e);
-                return query.ToList();
+                return query.OrderBy(e => e.BookingDate).ToList();
             }
         }
         public IEnumerable<ActivityBooking> GetBookedActivitiesByUserKey(string userKey)
@@ -58,7 +58,95 @@ namespace MMC.Data.DataRepositories
                              where e.GuestKey == userKey
                              && e.IsDeleted == false
                              select e);
-                return query.ToList();
+                return query.OrderBy(e => e.BookingDate).ToList();
+            }
+        }
+
+        public IEnumerable<ActivityBooking> GetAllCompanyActivitiesPendingForConfirmation(string companyKey)
+        {
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext()) 
+            {
+                var query = (from e in entityContext.ActivityBookingSet
+                             join e1 in entityContext.ActivityCompanySet
+                             on e.ActivityKey equals e1.ActivityKey
+                             where e1.CompanyKey == companyKey
+                             && e.IsConfirmed == false &&  e.IsDeleted == false
+                             select e);
+
+                return query.OrderBy(e => e.BookingDate).ToList();
+            }
+        }       
+        public IEnumerable<ActivityBooking> GetAllActivitiesPendingForConfirmation()
+        {
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.ActivityBookingSet
+                             join e1 in entityContext.ActivitiesMasterSet
+                             on e.ActivityKey equals e1.ActivitesKey
+                             where e.IsConfirmed == false && e.IsDeleted == false
+                             select e);
+
+                return query.OrderBy(e => e.BookingDate).ToList();
+            }
+        }
+
+        public IEnumerable<ActivityBooking> GetAllCompanyActivitiesCompleted(string companyKey)
+        {
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.ActivityBookingSet
+                             join e1 in entityContext.ActivityCompanySet
+                             on e.ActivityKey equals e1.ActivityKey
+                             where e1.CompanyKey == companyKey
+                             && e.IsConfirmed == true && e.IsDeleted == false
+                             && e.IsPaymentComplete == true && e.BookingDate < DateTime.Now
+                             select e);
+
+                return query.OrderBy(e => e.BookingDate).ToList();
+            }
+        }
+        public IEnumerable<ActivityBooking> GetAllActivitiesCompleted()
+        {
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.ActivityBookingSet
+                             join e1 in entityContext.ActivitiesMasterSet
+                             on e.ActivityKey equals e1.ActivitesKey
+                             where e.IsConfirmed == true && e.IsDeleted == false
+                             && e.IsPaymentComplete == true && e.BookingDate < DateTime.Now
+                             select e);
+
+                return query.OrderBy(e => e.BookingDate).ToList();
+            }
+        }
+
+        public IEnumerable<ActivityBooking> GetAllUpcomingCompanyActivities(string companyKey)
+        {
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.ActivityBookingSet
+                             join e1 in entityContext.ActivityCompanySet
+                             on e.ActivityKey equals e1.ActivityKey
+                             where e1.CompanyKey == companyKey
+                             && e.IsConfirmed == true && e.IsDeleted == false
+                             && e.IsPaymentComplete == true && e.BookingDate >= DateTime.Now
+                             select e);
+
+                return query.OrderBy(e => e.BookingDate).ToList();
+            }
+        }
+        public IEnumerable<ActivityBooking> GetAllUpcomingActivities()
+        {
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.ActivityBookingSet
+                             join e1 in entityContext.ActivitiesMasterSet
+                             on e.ActivityKey equals e1.ActivitesKey
+                             where e.IsConfirmed == true && e.IsDeleted == false
+                             && e.IsPaymentComplete == true && e.BookingDate >= DateTime.Now
+                             select e);
+
+                return query.OrderBy(e => e.BookingDate).ToList();
             }
         }
     }

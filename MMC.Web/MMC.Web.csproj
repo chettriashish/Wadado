@@ -101,6 +101,15 @@
     <Reference Include="JbUnixUtils">
       <HintPath>..\packages\JetBrains.Unix.Utils.20150702.4\lib\net40\JbUnixUtils.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Data.Edm, Version=5.6.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -122,8 +131,20 @@
     <Reference Include="Microsoft.Owin">
       <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Owin.Security">
       <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Owin.Security.OAuth">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
@@ -132,13 +153,16 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Unity, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.dll</HintPath>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+    <Reference Include="Microsoft.Practices.Unity.Configuration, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.3.0.1304.1\lib\Net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
+      <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.Shell.Interop, Version=7.1.40304.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
       <Private>True</Private>
@@ -179,6 +203,9 @@
     </Reference>
     <Reference Include="NVelocity">
       <HintPath>..\packages\NVelocity.1.0.3\lib\NVelocity.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
     <Reference Include="RouteDebugger">
       <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
@@ -223,6 +250,9 @@
     <Reference Include="System.Web.Http.OData, Version=5.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.OData.5.5.1\lib\net45\System.Web.Http.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Owin.5.2.3\lib\net45\System.Web.Http.Owin.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Http.WebHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -275,7 +305,7 @@
     </Reference>
     <Reference Include="Unity.Mvc4, Version=1.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Unity.Mvc4.1.4.0.0\lib\net45\Unity.Mvc4.dll</HintPath>
+      <HintPath>..\packages\Unity.Mvc4.1.5.0.0\lib\net45\Unity.Mvc4.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Wcf, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -283,6 +313,9 @@
     </Reference>
     <Reference Include="Vestris.ResourceLib">
       <HintPath>..\packages\Vestris.ResourceLib.JetBrains.1.4.20150303.0\lib\Net\Vestris.ResourceLib.dll</HintPath>
+    </Reference>
+    <Reference Include="WebApiContrib.IoC.Unity">
+      <HintPath>..\packages\WebApiContrib.IoC.Unity.0.9.3.0\lib\net40\WebApiContrib.IoC.Unity.dll</HintPath>
     </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -314,40 +347,50 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\DisplayConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\WurflConfig.cs" />
-    <Compile Include="Controllers\Account\AccountController.cs" />
-    <Compile Include="Controllers\ActivitiesCart\ActivitiesCartController.cs" />
-    <Compile Include="Controllers\Activities\ActivitiesController.cs" />
-    <Compile Include="Controllers\ActivityDetails\ActivityDetailsController.cs" />
-    <Compile Include="Controllers\Admin\Activities\AdminActivityController.cs" />
-    <Compile Include="Controllers\Admin\ActivityCategory\AdminActivityCategoryController.cs" />
-    <Compile Include="Controllers\Admin\AdminController.cs" />
-    <Compile Include="Controllers\Admin\Bookings\AdminBookingsController.cs" />
-    <Compile Include="Controllers\Admin\Home\AdminHomeController.cs" />
-    <Compile Include="Controllers\Admin\Locations\AdminLocationController.cs" />
-    <Compile Include="Controllers\Admin\Login\AdminLoginController.cs" />
-    <Compile Include="Controllers\BaseViewController.cs" />
-    <Compile Include="Controllers\Booking\BookingController.cs" />
-    <Compile Include="Controllers\Confirmation\ConfirmationController.cs" />
-    <Compile Include="Controllers\Home\HomeController.cs" />
-    <Compile Include="Controllers\Location\LocationController.cs" />
-    <Compile Include="Controllers\Menu\MenuController.cs" />
-    <Compile Include="Controllers\Search\SearchController.cs" />
+    <Compile Include="Bootstrapper.cs" />
+    <Compile Include="Controllers\API\AccountApiController.cs" />
+    <Compile Include="Controllers\MVC\Account\AccountController.cs" />
+    <Compile Include="Controllers\MVC\ActivitiesCart\ActivitiesCartController.cs" />
+    <Compile Include="Controllers\MVC\Activities\ActivitiesController.cs" />
+    <Compile Include="Controllers\MVC\ActivityDetails\ActivityDetailsController.cs" />
+    <Compile Include="Controllers\MVC\Admin\Activities\AdminActivityController.cs" />
+    <Compile Include="Controllers\MVC\Admin\ActivityCategory\AdminActivityCategoryController.cs" />
+    <Compile Include="Controllers\MVC\Admin\AdminController.cs" />
+    <Compile Include="Controllers\MVC\Admin\Bookings\AdminBookingsController.cs" />
+    <Compile Include="Controllers\MVC\Admin\Home\AdminHomeController.cs" />
+    <Compile Include="Controllers\MVC\Admin\Locations\AdminLocationController.cs" />
+    <Compile Include="Controllers\MVC\Admin\Login\AdminLoginController.cs" />
+    <Compile Include="Controllers\MVC\BaseViewController.cs" />
+    <Compile Include="Controllers\MVC\Booking\BookingController.cs" />
+    <Compile Include="Controllers\MVC\Confirmation\ConfirmationController.cs" />
+    <Compile Include="Controllers\MVC\Home\HomeController.cs" />
+    <Compile Include="Controllers\MVC\Location\LocationController.cs" />
+    <Compile Include="Controllers\MVC\Menu\MenuController.cs" />
+    <Compile Include="Controllers\MVC\Search\SearchController.cs" />
     <Compile Include="Core\ISecurityAdapter.cs" />
     <Compile Include="Core\ViewControllerBase.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountBindingModels.cs" />
+    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Base\HomeBasePage.cs" />
+    <Compile Include="Providers\ApplicationOAuthProvider.cs" />
+    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Services\ActivitiesDataService.cs" />
     <Compile Include="Services\ActivityDetailsDataService.cs" />
     <Compile Include="Services\HomeDataService.cs" />
     <Compile Include="Services\LocationDataService.cs" />
     <Compile Include="Services\SearchDataService.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Binding\Models\AccountLoginModel.js" />
@@ -452,6 +495,9 @@
     <Content Include="Scripts\Activities\services\ActivityDataService.js" />
     <Content Include="Scripts\ActivityDetails\controllers\ActivityDetailsController.js" />
     <Content Include="Scripts\ActivityDetails\services\ActivityDetailsDataService.js" />
+    <Content Include="Scripts\AdminActivityBookings\controllers\AdminActivityBookingController.js" />
+    <Content Include="Scripts\AdminActivityBookings\controllers\AdminActivityBookingsContainerController.js" />
+    <Content Include="Scripts\AdminActivityBookings\services\AdminActivityBookingDataService.js" />
     <Content Include="Scripts\AdminActivity\controllers\AdminActivityDetailsController.js" />
     <Content Include="Scripts\AdminActivity\controllers\AdminActivitySummaryController.js" />
     <Content Include="Scripts\AdminActivity\services\AdminActivityDataService.js" />
@@ -464,6 +510,7 @@
     <Content Include="Scripts\AdminLocationSummary\services\AdminLocationSummaryDataService.js" />
     <Content Include="Scripts\AdminLocation\controllers\AdminLocationController.js" />
     <Content Include="Scripts\AdminLocation\services\AdminLocationDataService.js" />
+    <Content Include="Scripts\AdminLogin\controllers\AdminLoginController.js" />
     <Content Include="Scripts\Admin\controllers\AdminController.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
@@ -508,10 +555,12 @@
     <Content Include="Scripts\Common\controllers\MenuController.js" />
     <Content Include="Scripts\Common\controllers\SearchController.js" />
     <Content Include="Scripts\Common\services\BookingDataService.js" />
+    <Content Include="Scripts\Common\services\common.services.js" />
     <Content Include="Scripts\Common\services\DateFilterDataService.js" />
     <Content Include="Scripts\Common\services\FavoritesDataService.js" />
     <Content Include="Scripts\Common\services\MenuDataService.js" />
     <Content Include="Scripts\Common\services\SearchDataService.js" />
+    <Content Include="Scripts\AdminLogin\services\UserAccountDataService.js" />
     <Content Include="Scripts\Directives\Booking\bookingdirective.js" />
     <Content Include="Scripts\Directives\Date\DateDirective.js" />
     <Content Include="Scripts\Directives\Date\datedirective1.js" />
@@ -1294,6 +1343,8 @@
     <Content Include="Scripts\slider\owl.video.js" />
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
+    <Content Include="Templates\_adminActivityBookingDetailsContainer.html" />
+    <Content Include="Templates\_adminActivityDashboard.html" />
     <Content Include="Templates\_adminActivityDetails.html" />
     <Content Include="Templates\_adminActivityDetailsBasic.html" />
     <Content Include="Templates\_adminActivityDetailsDates.html" />
@@ -1302,13 +1353,17 @@
     <Content Include="Templates\_adminCategoryContainer.html" />
     <Content Include="Templates\_adminCategoryList.html" />
     <Content Include="Templates\_adminCategoryTypeMapping.html" />
+    <Content Include="Templates\_adminClientCompletedActivities.html" />
+    <Content Include="Templates\_adminClientPendingActivities.html" />
     <Content Include="Templates\_adminLocationDetailsEdit.html" />
     <Content Include="Templates\_adminLocationDetailsView.html" />
     <Content Include="Templates\_adminLocationDetailsCreate.html" />
     <Content Include="Templates\_adminLogin.html" />
     <Content Include="Templates\_adminSubCategoryList.html" />
+    <Content Include="Templates\_changePassword.html" />
     <Content Include="Templates\_dialog.html" />
     <Content Include="Templates\_mapTemplate.html" />
+    <Content Include="Templates\_registration.html" />
     <Content Include="Unity.Mvc4.README.txt" />
     <Content Include="Unity.Wcf.README.txt" />
     <Content Include="Video\video.mp4" />
@@ -1418,6 +1473,7 @@
     <Content Include="Views\Partial\_activityList.cshtml" />
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Partial\_desktopmenu.cshtml" />
+    <Content Include="Views\Partial\_login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\ActivitiesCart\directives\" />
@@ -1464,10 +1520,6 @@
     <ProjectReference Include="..\MMC.Business\MMC.Business.csproj">
       <Project>{8c701f5f-522f-4956-a1a9-b61d2a8dd0c4}</Project>
       <Name>MMC.Business</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MMC.Client.Bootstrapper\MMC.Client.Bootstrapper.csproj">
-      <Project>{8cbb4e86-2b01-404b-8aa1-d476bdef78d2}</Project>
-      <Name>MMC.Client.Bootstrapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\MMC.Client.Contracts\MMC.Client.Contracts.csproj">
       <Project>{1f1aa9cb-3ed4-40ab-b7fe-099e58d5fdd5}</Project>

@@ -18,8 +18,8 @@
 
         }
 
-        $scope.createNewLocation = function () {
-            $state.go("adminLocationCreate");
+        $scope.createNewActivity = function () {
+            $state.go("adminActivityCreate");
         }
     }
     app.controller("AdminActivitySummaryController", adminActivitySummaryController);

@@ -29,6 +29,14 @@
             return deferred.promise;
         }
 
+        var createNewActivity = function () {
+            return $http.get('/AdminActivity/CreateNewActivity').then(function (response) {
+                return response.data;
+            }).catch(function (response) {
+                console.log(response);
+            });
+        }
+
         var getSelectedActivityDetails = function (activityKey) {
             return $http({
                 method: 'GET',
@@ -43,7 +51,7 @@
                 });
         }
 
-        var saveActivityDetails = function (activityDetails, activityDays, activityTimes) {
+        var saveActivityDetails = function (activityDetails, activityDays, activityTimes, activityCategoryKey, activityLocationKey) {
             var deferred = $q.defer();
             var time = [];
             $.each(activityTimes, function (key, value) {
@@ -52,7 +60,7 @@
             $http({
                 method: 'POST',
                 url: 'AdminActivity/SaveActivityDetails',
-                data: { activityDetails: activityDetails, activityDays: activityDays, activityTimes: time }
+                data: { activityDetails: activityDetails, activityDays: activityDays, activityTimes: time, activityCategoryKey: activityCategoryKey, activityLocationKey: activityLocationKey }
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }
@@ -64,6 +72,7 @@
             getSelectedActivityDetails: getSelectedActivityDetails,
             saveActivityDetails: saveActivityDetails,
             getAllAvailableLocationsAsync: getAllAvailableLocationsAsync,
+            createNewActivity: createNewActivity,
         }
     };
     app.factory("AdminActivityDataService", adminActivityDataService);

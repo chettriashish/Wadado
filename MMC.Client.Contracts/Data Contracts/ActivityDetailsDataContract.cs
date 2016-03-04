@@ -80,5 +80,17 @@ namespace MMC.Client.Contracts.DataContracts
         public string ActivityStartTime { get; set; }
         [DataMember]
         public string ActivityEndTime { get; set; }
+        [DataMember]
+        public bool IsValidated { get; set; }
+        [DataMember]
+        public int MinChildren { get; set; }
+        [DataMember]
+        public string ThingsToCarry { get; set; }
+        [DataMember]
+        public string Advice { get; set; }
+        [DataMember]
+        public string Included { get; set; }
+        [DataMember]
+        public bool IsPermitRequired { get; set; }
     }
 }

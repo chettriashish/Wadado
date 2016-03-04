@@ -1,0 +1,97 @@
+﻿<div class="uppercontent">
+    <div>
+        <!--Row start-->
+        <div class="row">
+            <div class="column-12">
+                <div class="subHeaderCenter">
+                    <span>Login</span>
+                </div>
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row start-->
+        <div class="row">
+            <div class="column-12">
+            </div>
+        </div>
+        <!--Row end-->
+        <!--Row end-->
+        <!--Row start-->
+        <div class="row">
+            <div class="column-12">
+                <span>&nbsp;</span>
+            </div>
+            <div class="column-12">
+                <span>&nbsp;</span>
+            </div>
+            <div class="column-12">
+                <div class="center-element-relative-table" ng-click="FBLogin()">
+                    <div class="socialButtons">
+                        <div>
+                        </div>
+                        <div>
+                            <a id="facebook">Sign in with Facebook</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--Row start-->
+        <div class="row">
+            <div class="column-12">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+        <!--Row end-->
+        <div class="row">
+            <div class="column-12">
+                <div class="center-element-relative-table">
+                    <div id="customBtn" class="customGPlusSignIn">
+                        <span class="icon"></span>
+                        <span class="buttonText">Sign in with Google</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Row end-->
+    <!--Row start-->
+    <div class="row">
+        <div class="column-12">
+
+        </div>
+    </div>
+    <!--Row end-->
+    <!--Row start-->
+    <div class="row" ng-if="AllowGuest == true" ng-cloak>
+        <div class="column-12">
+            <div class="subHeaderCenter">
+                <span>or</span>
+            </div>
+        </div>
+    </div>
+    <!--Row end-->
+    <!--Row start-->
+    <div class="row">
+        <div class="column-12">
+
+        </div>
+    </div>
+    <!--Row end-->
+    <!--Row start-->
+    <div class="row" ng-if="AllowGuest == true" ng-cloak>
+        <div class="column-12">
+            <div class="socialButtons">
+                <div>
+                    <a ng-click="continueAsGuest()">Continue as Guest</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <span>&nbsp;</span>
+        </div>
+    </div>
+    <!--Row end-->
+</div>

@@ -30,7 +30,7 @@
                 }
 
                     .menu-container nav ul li:hover {
-                        background-color: rgb(253,253,253);
+                        background-color: rgb(244,253,253);
                     }
 
                     .menu-container nav ul li.active {
@@ -103,6 +103,19 @@
                     float: left;
                 }
 
+                    .top-pane nav ul li.active a {
+                        padding: 0 0 .2em 0;
+                        border-bottom: 4px solid rgb(251,189,19);
+                    }
+
+                    .top-pane nav ul li > div {
+                        padding: .2em 1em;
+                        float: left;
+                        cursor: pointer;
+                        border-left: 1px solid #ccc;
+                        font-size: 1em;
+                    }
+
                     .top-pane nav ul li a {
                         text-decoration: none;
                         color: black;
@@ -111,7 +124,7 @@
     .admin-wizard-tab-container {
         z-index: 2;
         margin: 0 auto;
-        position: fixed;
+        position: absolute;
     }
 
     .admin-wizard {
@@ -120,10 +133,11 @@
         color: black;
         display: inline-block;
         padding: 1em;
-        cursor: pointer;     
+        cursor: pointer;
     }
+
         .admin-wizard.active span {
             padding: 0 0 .2em 0;
-            border-bottom: 4px solid rgb(251,189,19);            
-        }      
+            border-bottom: 4px solid rgb(251,189,19);
+        }
 }

@@ -10,9 +10,9 @@ namespace MMC.Web
         public static void Register(HttpConfiguration config)
         {
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                name: "Account",
+                routeTemplate: "api/account/register",
+                defaults: new { controller = "accountapi", Action = "Register" }
             );
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

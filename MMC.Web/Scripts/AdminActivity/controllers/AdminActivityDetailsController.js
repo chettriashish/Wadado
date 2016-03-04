@@ -26,6 +26,9 @@
             else if ($scope.activityDetails.ActivityStartTime.indexOf(':') == -1 && timeComp.length == 2) {
                 $scope.activityStartEnd.activityStartTime = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), 0, 0);
             }
+            else if ($scope.activityDetails.ActivityStartTime.indexOf(':') == -1 && timeComp.length == 1) {
+                $scope.activityStartEnd.activityStartTime = new Date(1970, 0, 1, ('0' + timeComp[0]), 0, 0);
+            }
             $scope.activityStartEnd.activityStartTimeAMPM = (amPM[0] + amPM[1]);
         }
         else {
@@ -41,8 +44,11 @@
             else if ($scope.activityDetails.ActivityEndTime.indexOf(':') > -1 && timeComp.length == 4) {
                 $scope.activityStartEnd.activityEndTime = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), (timeComp[2] + '' + (typeof timeComp[3] == 'undefined' ? 0 : timeComp[3])), 0);
             }
-            else if ($scope.activityDetails.ActivityEndTime.indexOf(':') == -1 && timeComp.length == 2) {
-                $scope.activityStartEnd.activityStartTime = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), 0, 0);
+            else if ($scope.activityDetails.ActivityEndTime.indexOf(':') == -1 && timeComp.length > 1) {
+                $scope.activityStartEnd.activityEndTime = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), 0, 0);
+            }
+            else if ($scope.activityDetails.ActivityEndTime.indexOf(':') == -1 && timeComp.length == 1) {
+                $scope.activityStartEnd.activityEndTime = new Date(1970, 0, 1, ('0' + timeComp[0]), 0, 0);
             }
             $scope.activityStartEnd.activityEndTimeAMPM = (amPM[0] + amPM[1]);
         }
@@ -54,12 +60,13 @@
         $scope.activityDetails.Location = location;
         AdminCategoryDataService.getAllAvailableSubCategoriesAsync().then(function (response) {
             $scope.allActivitySubCategories = response;
+            $scope.category = {};
+
             $.each($scope.allActivitySubCategories, function (key, value) {
-                if ($scope.allActivitySubCategories[key].ActivityType == $scope.activityDetails.ActivitySubCategory) {
-                    $scope.category = {};
+                if ($scope.allActivitySubCategories[key].ActivityType == $scope.activityDetails.ActivitySubCategory) {                    
                     $scope.category.selected = $scope.allActivitySubCategories[key];
                     return false;
-                }
+                }                
             });
         });
 
@@ -79,14 +86,22 @@
             }
         });
 
+        $scope.setSelectedSubCategory = function (item) {
+            $scope.category = item;
+        }
+
+        $scope.selectedLocation = function (item) {
+            $scope.location = item;
+        }
+
         AdminActivityDataService.getAllAvailableLocationsAsync().then(function (response) {
             $scope.allLocations = response;
+            $scope.location = {};
             $.each($scope.allLocations, function (key, value) {
-                if ($scope.allLocations[key].LocationName == $scope.activityDetails.Location) {
-                    $scope.location = {};
+                if ($scope.allLocations[key].LocationName == $scope.activityDetails.Location) {                    
                     $scope.location.selected = $scope.allLocations[key];
                     return false;
-                }
+                }              
             });
 
         });
@@ -100,21 +115,22 @@
             fri: false,
             sat: false
         }
-
-        $.each($scope.activityDetails.AllActivityDates, function (key, value) {
-            switch ($scope.activityDetails.AllActivityDates[value]) {
-                case 0: $scope.days.sun = true; break;
-                case 1: $scope.days.mon = true; break;
-                case 2: $scope.days.tue = true; break;
-                case 3: $scope.days.wed = true; break;
-                case 4: $scope.days.thu = true; break;
-                case 5: $scope.days.fri = true; break;
-                case 6: $scope.days.sat = true; break;
-            }
-        });
-
-        if ($scope.activityDetails.AllActivityTimes.length > 0) {
-            $scope.AllActivityTimes = [];
+        if ($scope.activityDetails.AllActivityDates != null) {
+            $.each($scope.activityDetails.AllActivityDates, function (key, value) {
+                switch ($scope.activityDetails.AllActivityDates[key]) {
+                    case 0: $scope.days.sun = true; break;
+                    case 1: $scope.days.mon = true; break;
+                    case 2: $scope.days.tue = true; break;
+                    case 3: $scope.days.wed = true; break;
+                    case 4: $scope.days.thu = true; break;
+                    case 5: $scope.days.fri = true; break;
+                    case 6: $scope.days.sat = true; break;
+                }
+            });
+        }
+        
+        $scope.AllActivityTimes = [];
+        if ($scope.activityDetails.AllActivityTimes != null && $scope.activityDetails.AllActivityTimes.length > 0) {
             $.each($scope.activityDetails.AllActivityTimes, function (key, value) {
                 var activityTime = {};
                 activityTime.ActivityKey = $scope.activityDetails.ActivityKey;
@@ -128,7 +144,7 @@
                 else if (activityTime.time.indexOf(':') > -1 && timeComp.length == 4) {
                     activityTime.timeComp = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), (timeComp[2] + '' + (typeof timeComp[3] == 'undefined' ? 0 : timeComp[3])), 0);
                 }
-                else if (activityTime.time.indexOf(':') == -1 && timeComp.length == 2) {
+                else if (activityTime.time.indexOf(':') == -1 && timeComp.length > 1) {
                     activityTime.timeComp = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), 0, 0);
                 }
                 activityTime.AMPM = (amPM[0] + amPM[1]);
@@ -281,7 +297,22 @@
         $scope.saveChanges = function () {
             $scope.activityDetails.ActivityStartTime = ($scope.activityStartEnd.activityStartTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityStartTime.getHours() % 12) + ($scope.activityStartEnd.activityStartTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityStartTime.getMinutes() : '') + $scope.activityStartEnd.activityStartTimeAMPM;
             $scope.activityDetails.ActivityEndTime = ($scope.activityStartEnd.activityEndTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityEndTime.getHours() % 12) + ($scope.activityStartEnd.activityEndTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityEndTime.getMinutes() : '') + $scope.activityStartEnd.activityEndTimeAMPM;
-            AdminActivityDataService.saveActivityDetails($scope.activityDetails, $scope.days, $scope.AllActivityTimes)
+            AdminActivityDataService.saveActivityDetails($scope.activityDetails, $scope.days, $scope.AllActivityTimes, $scope.category.selected.ActivityTypeKey, $scope.location.selected.LocationKey).then(function (response) {
+                if (response == true) {
+                    var message = {};
+                    message.header = 'Confirmation';
+                    message.body = 'activity has been saved';
+                    message.showButtons = false;
+                    message.isUserAction = false;
+                    $scope.$emit("DIALOG_S", message);
+                    setTimeout(function () {
+                        $scope.$emit("DIALOG_H", message);
+                    }, 1500);
+                }
+            })
+            .catch(function (response) {
+                console.log(response);
+            });
         }
 
         $scope.cancelChanges = function () {

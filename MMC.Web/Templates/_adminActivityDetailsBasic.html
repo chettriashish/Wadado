@@ -24,7 +24,7 @@
                     <div><span>:</span></div>
                 </div>
                 <div class="column-8" ng-if="isEdit">
-                    <ui-select ng-model="category.selected" theme="selectize" class="admin-category-select" on-select="setSelectedCategory(category.selected)">
+                    <ui-select ng-model="category.selected" theme="selectize" class="admin-category-select">
                         <ui-select-match placeholder="eg. paragliding">{{$select.selected.ActivityType}}</ui-select-match>
                         <ui-select-choices repeat="item in allActivitySubCategories | filter: $select.search">
                             <span ng-bind-html="item.ActivityType | highlight: $select.search"></span>
@@ -32,8 +32,9 @@
                     </ui-select>
                 </div>
                 <div class="column-8" ng-if="!isEdit">
-                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select">
-                        <ui-select-match placeholder="eg. paragliding">{{$select.selected.ActivityType}}</ui-select-match>
+                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select" on-select="setSelectedSubCategory(item)">
+                        <ui-select-match placeholder=" eg. paragliding">
+                        {{$select.selected.ActivityType}}</ui-select-match>
                         <ui-select-choices repeat="item in allActivitySubCategories | filter: $select.search">
                             <span ng-bind-html="item.ActivityType | highlight: $select.search"></span>
                         </ui-select-choices>
@@ -52,7 +53,7 @@
                     <div><span>:</span></div>
                 </div>
                 <div class="column-8" ng-if="isEdit">
-                    <ui-select ng-model="location.selected" theme="selectize" class="admin-category-select" on-select="setSelectedLocation(item)">
+                    <ui-select ng-model="location.selected" theme="selectize" class="admin-category-select">
                         <ui-select-match placeholder="eg. GANGTOK">{{$select.selected.LocationName}}</ui-select-match>
                         <ui-select-choices repeat="item in allLocations | filter: $select.search">
                             <span ng-bind-html="item.LocationName | highlight: $select.search"></span>
@@ -60,7 +61,7 @@
                     </ui-select>
                 </div>
                 <div class="column-8" ng-if="!isEdit">
-                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select">
+                    <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select" on-select="selectedLocation(item)">
                         <ui-select-match placeholder="eg. gangtok">{{$select.selected.LocationName}}</ui-select-match>
                         <ui-select-choices repeat="item in allLocations | filter: $select.search">
                             <span ng-bind-html="item.LocationName | highlight: $select.search"></span>

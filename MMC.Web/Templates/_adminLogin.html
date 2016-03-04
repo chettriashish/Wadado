@@ -1,5 +1,41 @@
-﻿<div class="row">
-    <div class="column-12">
-        <span>Login</span>
-    </div>    
-</div>
+﻿<form>    
+    <div class="top-center-element">
+        <div class="row">
+            <div class="column-12">
+                <span>
+                   MyMonkeyCap Professional
+                </span>
+            </div>            
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <input type="email"
+                       placeholder="username (email)"
+                       ng-model="vm.userData.email">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <input type="password"
+                       placeholder="password"
+                       ng-model="vm.userData.password">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <div class="column-auto">
+                    <button type="submit"
+                            ng-click="vm.login()">
+                        Login
+                    </button>
+                </div>
+                <div class="column-auto">
+                    <button type="submit"
+                            ng-click="vm.registerNewUser()">
+                        Register
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

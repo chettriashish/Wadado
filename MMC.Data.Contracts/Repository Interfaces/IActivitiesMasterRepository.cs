@@ -17,6 +17,6 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
         IEnumerable<ActivitiesMaster> GetAllActivitiesBooked(string userAccountKey);
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocation(string locationKey,string userAgent);      
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationCategory(string locationKey, string activityCategoryKey, string userAgent);      
-        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);
+        IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationFilteredCategory(string locationKey, string activityCategoryKey, DateTime startDate, DateTime endDate, string userAgent);        
     }
 }

@@ -26,6 +26,7 @@ namespace MMC.Web
                "~/Scripts/angular-sanitize.min.js",
                "~/Scripts/clickoutside.directive.js",    
                "~/Scripts/angular-ui-router.min.js",
+               "~/Scripts/Common/services/common.services.js",
                //"~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
                "~/Scripts/app.js"));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're

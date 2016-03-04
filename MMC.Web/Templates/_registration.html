@@ -1,0 +1,42 @@
+﻿<form ng-if="!isLoggedIn()">
+    <div class="top-center-element">
+        <div class="row">
+            <div class="column-12">
+                <span>
+                    Register your business
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <input type="email"
+                       placeholder="email"
+                       ng-model="vm.userData.email">
+            </div>
+            <div class="column-12">
+                <input type="password"
+                       placeholder="password"
+                       ng-model="vm.userData.password">
+            </div>
+            <div class="column-12">
+                <input type="password"
+                       placeholder="confirm password"
+                       ng-model="vm.userData.confirmPassword">
+            </div>
+            <div class="column-12">
+                <div class="column-auto">
+                    <button type="submit"
+                            ng-click="vm.registerUser()">
+                        Register
+                    </button>
+                </div>
+                <div class="column-auto">
+                    <button type="submit"
+                            ng-click="vm.goToLogin()">
+                        Back
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
