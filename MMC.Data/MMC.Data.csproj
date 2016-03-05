@@ -120,6 +120,7 @@
     <Compile Include="Data Repositories\ActivityHolidaysRepository.cs" />
     <Compile Include="Data Repositories\ActivityImagesRepository.cs" />
     <Compile Include="Data Repositories\ActivityLocationRepository.cs" />
+    <Compile Include="Data Repositories\ActivityPriceMappingRepository.cs" />
     <Compile Include="Data Repositories\ActivityRatesRepository.cs" />
     <Compile Include="Data Repositories\ActivityTimeSchedulerRepository.cs" />
     <Compile Include="Data Repositories\ActivityTypeCategoryRepository.cs" />

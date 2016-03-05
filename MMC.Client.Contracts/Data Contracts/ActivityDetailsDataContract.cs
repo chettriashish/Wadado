@@ -1,4 +1,5 @@
 ﻿using Core.Common.ServiceModel;
+using MMC.Client.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public bool PermitRequired { get; set; }
         [DataMember]
-        public string ActivityCategory { get; set; }
+        public List<string> ActivityCategory { get; set; }
         [DataMember]
         public string ActivitySubCategory { get; set; }
         [DataMember]
@@ -92,5 +93,13 @@ namespace MMC.Client.Contracts.DataContracts
         public string Included { get; set; }
         [DataMember]
         public bool IsPermitRequired { get; set; }
+        [DataMember]
+        public IEnumerable<ActivityPriceMapping> AllPriceOptions { get; set; }
+        [DataMember]
+        public IEnumerable<ActivityDates> AllActivityUniqueDates { get; set; }
+        [DataMember]
+        public bool IsActivity { get; set; }
+        [DataMember]
+        public bool IsEvent { get; set; }
     }
 }

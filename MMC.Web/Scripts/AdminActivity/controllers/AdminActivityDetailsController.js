@@ -63,10 +63,10 @@
             $scope.category = {};
 
             $.each($scope.allActivitySubCategories, function (key, value) {
-                if ($scope.allActivitySubCategories[key].ActivityType == $scope.activityDetails.ActivitySubCategory) {                    
+                if ($scope.allActivitySubCategories[key].ActivityType == $scope.activityDetails.ActivitySubCategory) {
                     $scope.category.selected = $scope.allActivitySubCategories[key];
                     return false;
-                }                
+                }
             });
         });
 
@@ -98,10 +98,10 @@
             $scope.allLocations = response;
             $scope.location = {};
             $.each($scope.allLocations, function (key, value) {
-                if ($scope.allLocations[key].LocationName == $scope.activityDetails.Location) {                    
+                if ($scope.allLocations[key].LocationName == $scope.activityDetails.Location) {
                     $scope.location.selected = $scope.allLocations[key];
                     return false;
-                }              
+                }
             });
 
         });
@@ -128,8 +128,10 @@
                 }
             });
         }
-        
+
         $scope.AllActivityTimes = [];
+        $scope.AllEventDateTimes = [];
+        $scope.AllActivityPricingOptions = [];
         if ($scope.activityDetails.AllActivityTimes != null && $scope.activityDetails.AllActivityTimes.length > 0) {
             $.each($scope.activityDetails.AllActivityTimes, function (key, value) {
                 var activityTime = {};
@@ -157,6 +159,54 @@
 
             }
         }
+
+        if ($scope.activityDetails.AllActivityUniqueDates != null && $scope.activityDetails.AllActivityUniqueDates.length > 0) {
+            $.each($scope.activityDetails.AllActivityUniqueDates, function (key, value) {
+                var eventDateTime = {};
+                eventDateTime.ActivityKey = $scope.activityDetails.ActivityKey;
+                eventDateTime.time = $scope.activityDetails.AllActivityUniqueDates[key].Time;                
+                eventDateTime.editMode = false;
+                var regex = /[0-9]+/;
+                var date = $scope.activityDetails.AllActivityUniqueDates[key].Date;
+                var result = Number(date.match(regex)[0]);                
+                eventDateTime.m_date = new Date(result).toDateString();
+                eventDateTime.Date = new Date(result);
+                var timeComp = eventDateTime.time.match(patt1);
+                var amPM = eventDateTime.time.match(patt2);
+                if (eventDateTime.time.indexOf(':') > -1 && timeComp.length < 4) {
+                    eventDateTime.timeComp = new Date(1970, 0, 1, timeComp[0], (timeComp[1] + '' + (typeof timeComp[2] == 'undefined' ? 0 : timeComp[2])), 0);
+                }
+                else if (eventDateTime.time.indexOf(':') > -1 && timeComp.length == 4) {
+                    eventDateTime.timeComp = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), (timeComp[2] + '' + (typeof timeComp[3] == 'undefined' ? 0 : timeComp[3])), 0);
+                }
+                else if (eventDateTime.time.indexOf(':') == -1 && timeComp.length > 1) {
+                    eventDateTime.timeComp = new Date(1970, 0, 1, (timeComp[0] + '' + timeComp[1]), 0, 0);
+                }
+                eventDateTime.AMPM = (amPM[0] + amPM[1]);
+                $scope.AllEventDateTimes.push(eventDateTime);
+            });
+            $scope.listEventTime = true;
+        }
+
+        if ($scope.activityDetails.AllPriceOptions != null && $scope.activityDetails.AllPriceOptions.length > 0) {
+            $.each($scope.activityDetails.AllPriceOptions, function (key, value) {
+                var priceOption = {};
+                priceOption.OptionDescription = $scope.activityDetails.AllPriceOptions[key].OptionDescription;
+                priceOption.PriceForAdults = $scope.activityDetails.AllPriceOptions[key].PriceForAdults;
+                priceOption.PriceForChildren = $scope.activityDetails.AllPriceOptions[key].PriceForChildren;
+                priceOption.editMode = false;
+                $scope.AllActivityPricingOptions.push(priceOption);
+            });
+        }
+
+        $scope.editSelectedDateTime = function (item) {
+            item.editMode = true;
+        }
+
+        $scope.editSelectedPriceOption = function (item) {
+            item.editMode = true;
+        }
+
         $scope.loadBasicDetails = function () {
             setBasicInfo();
         }
@@ -196,6 +246,24 @@
             $("#booking").addClass("active");
         }
 
+        $scope.saveSelectedDateTime = function (item) {
+            if (item == "") {
+                var index = $scope.AllEventDateTimes.indexOf(item);
+                if (index > -1) {
+                    $scope.AllEventDateTimes.splice(index, 1);
+                    item.editMode = false;
+                }                
+            }
+            else {
+                item.time = (item.timeComp.getHours() == 12 ? 12 : item.timeComp.getHours() % 12) + (item.timeComp.getMinutes() > 0 ? ':' + item.timeComp.getMinutes() : '') + item.AMPM;
+                item.editMode = false;
+                //Setting Dates Correctly
+                var regex = /[0-9]+/;
+                var date = item.Date.toDateString();               
+                item.m_date = date;
+            }
+        }
+
         $scope.saveSelectedTime = function (item) {
             if (item == "") {
                 var index = $scope.AllActivityTimes.indexOf(item);
@@ -208,6 +276,33 @@
                 item.time = (item.timeComp.getHours() == 12 ? 12 : item.timeComp.getHours() % 12) + (item.timeComp.getMinutes() > 0 ? ':' + item.timeComp.getMinutes() : '') + item.AMPM;
                 item.editMode = false;
             }
+        }
+        $scope.saveSelectedPriceOption = function (item) {
+            if (item == "") {
+                var index = $scope.AllActivityPricingOptions.indexOf(item);
+                if (index > -1) {
+                    $scope.AllActivityPricingOptions.splice(index, 1);
+                    item.editMode = false;
+                }
+            }
+            else {                
+                item.editMode = false;                
+            }
+        }
+        $scope.addNewEventDateTime = function () {
+            var newEventDateTime = {
+                ActivityKey: $scope.activityDetails.ActivityKey,
+                Date: new Date(),
+                timeComp: new Date(1970, 0, 1, 1, 0, 0),
+                editMode: true,
+                AMPM: 'PM',
+                time: '1 PM',
+                m_date: ''
+            };
+            if ($scope.AllEventDateTimes.length > 0) {
+                $scope.isEvent = true;
+            }
+            $scope.AllEventDateTimes.push(newEventDateTime);
         }
 
         $scope.addNewTime = function () {
@@ -224,12 +319,46 @@
             $scope.AllActivityTimes.push(newTime);
         }
 
+        $scope.addPriceOption = function () {
+            var newPriceOption = {
+                ActivityKey: $scope.activityDetails.ActivityKey,
+                OptionDescription: '',
+                PriceForAdults: 0,
+                PriceForChildren: 0,
+                editMode:true
+            };
+            if ($scope.AllActivityPricingOptions.length > 0) {
+                $scope.isPriceOptionEvent = true;
+            }
+            $scope.AllActivityPricingOptions.push(newPriceOption);
+        }
+
         $scope.deleteSelectedTime = function (item) {
             var index = $scope.AllActivityTimes.indexOf(item);
             if (index > -1) {
                 $scope.AllActivityTimes.splice(index, 1);
                 if ($scope.AllActivityTimes.length == 0) {
                     $scope.listTime = false;
+                }
+            }
+        }
+
+        $scope.deleteSelectedDateTime = function (item) {
+            var index = $scope.AllEventDateTimes.indexOf(item);
+            if (index > -1) {
+                $scope.AllEventDateTimes.splice(index, 1);
+                if ($scope.AllEventDateTimes.length == 0) {
+                    $scope.listTime = false;
+                }
+            }
+        }
+
+        $scope.deleteSelectedPriceOption = function (item) {
+            var index = $scope.AllActivityPricingOptions.indexOf(item);
+            if (index > -1) {
+                $scope.AllActivityPricingOptions.splice(index, 1);
+                if ($scope.AllActivityPricingOptions.length == 0) {
+                    $scope.isPriceOptionEvent = false;
                 }
             }
         }
@@ -295,28 +424,55 @@
         }
 
         $scope.saveChanges = function () {
-            $scope.activityDetails.ActivityStartTime = ($scope.activityStartEnd.activityStartTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityStartTime.getHours() % 12) + ($scope.activityStartEnd.activityStartTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityStartTime.getMinutes() : '') + $scope.activityStartEnd.activityStartTimeAMPM;
-            $scope.activityDetails.ActivityEndTime = ($scope.activityStartEnd.activityEndTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityEndTime.getHours() % 12) + ($scope.activityStartEnd.activityEndTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityEndTime.getMinutes() : '') + $scope.activityStartEnd.activityEndTimeAMPM;
-            AdminActivityDataService.saveActivityDetails($scope.activityDetails, $scope.days, $scope.AllActivityTimes, $scope.category.selected.ActivityTypeKey, $scope.location.selected.LocationKey).then(function (response) {
-                if (response == true) {
-                    var message = {};
-                    message.header = 'Confirmation';
-                    message.body = 'activity has been saved';
-                    message.showButtons = false;
-                    message.isUserAction = false;
-                    $scope.$emit("DIALOG_S", message);
-                    setTimeout(function () {
-                        $scope.$emit("DIALOG_H", message);
-                    }, 1500);
-                }
-            })
-            .catch(function (response) {
-                console.log(response);
-            });
+            if ($scope.activityDetails.IsActivity) {
+                $scope.activityDetails.ActivityStartTime = ($scope.activityStartEnd.activityStartTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityStartTime.getHours() % 12) + ($scope.activityStartEnd.activityStartTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityStartTime.getMinutes() : '') + $scope.activityStartEnd.activityStartTimeAMPM;
+                $scope.activityDetails.ActivityEndTime = ($scope.activityStartEnd.activityEndTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityEndTime.getHours() % 12) + ($scope.activityStartEnd.activityEndTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityEndTime.getMinutes() : '') + $scope.activityStartEnd.activityEndTimeAMPM;
+                AdminActivityDataService.saveActivityDetails($scope.activityDetails, $scope.days, $scope.AllActivityTimes,$scope.AllActivityPricingOptions, $scope.category.selected.ActivityTypeKey, $scope.location.selected.LocationKey).then(function (response) {
+                    if (response == true) {
+                        var message = {};
+                        message.header = 'Confirmation';
+                        message.body = 'activity has been saved';
+                        message.showButtons = false;
+                        message.isUserAction = false;
+                        $scope.$emit("DIALOG_S", message);
+                        setTimeout(function () {
+                            $scope.$emit("DIALOG_H", message);
+                        }, 1500);
+                    }
+                })
+                .catch(function (response) {
+                    console.log(response);
+                });
+            }
+            else if ($scope.activityDetails.IsEvent) {
+                AdminActivityDataService.saveEventDetails($scope.activityDetails, $scope.AllEventDateTimes, $scope.AllActivityPricingOptions, $scope.category.selected.ActivityTypeKey, $scope.location.selected.LocationKey).then(function (response) {
+                    if (response == true) {
+                        var message = {};
+                        message.header = 'Confirmation';
+                        message.body = 'activity has been saved';
+                        message.showButtons = false;
+                        message.isUserAction = false;
+                        $scope.$emit("DIALOG_S", message);
+                        setTimeout(function () {
+                            $scope.$emit("DIALOG_H", message);
+                        }, 1500);
+                    }
+                })
+                .catch(function (response) {
+                    console.log(response);
+                });
+            }
         }
 
         $scope.cancelChanges = function () {
             $state.go("adminActivities");
+        }
+
+        $scope.setEventActivity = function (option) {
+            switch (option) {
+                case 'event': $scope.activityDetails.IsActivity = !$scope.activityDetails.IsEvent; break;
+                case 'activity': $scope.activityDetails.IsEvent = !$scope.activityDetails.IsActivity; break;
+            }
         }
     }
     app.controller("AdminActivityDetailsController", adminActivityDetailsController);

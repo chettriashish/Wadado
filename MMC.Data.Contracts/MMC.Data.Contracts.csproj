@@ -54,6 +54,7 @@
     <Compile Include="Repository Interfaces\IActivityHolidaysRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityImagesRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityLocationRepository.cs" />
+    <Compile Include="Repository Interfaces\IActivityPriceMappingRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityRatesRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTimeSchedulerRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTypeCategoryRepository.cs" />

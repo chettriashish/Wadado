@@ -51,16 +51,60 @@
                 });
         }
 
-        var saveActivityDetails = function (activityDetails, activityDays, activityTimes, activityCategoryKey, activityLocationKey) {
+        var saveActivityDetails = function (activityDetails, activityDays, activityTimes, allActivityPricingOptions, activityCategoryKey, activityLocationKey) {
             var deferred = $q.defer();
             var time = [];
+            activityDetails.AllPriceOptions = [];
             $.each(activityTimes, function (key, value) {
                 time.push(activityTimes[key].time);
+            });
+            $.each(allActivityPricingOptions, function (key, value) {
+                var priceOption = {};
+                priceOption.OptionDescription = allActivityPricingOptions[key].OptionDescription;
+                priceOption.PriceForAdults = allActivityPricingOptions[key].PriceForAdults;
+                priceOption.PriceForChildren = allActivityPricingOptions[key].PriceForChildren;
+                priceOption.IsDeleted = false;
+                priceOption.ActivityKey = activityDetails.ActivityKey;
+                priceOption.ActivityPricingKey = '';
+                priceOption.CreatedDate = new Date();
+                activityDetails.AllPriceOptions.push(priceOption);
             });
             $http({
                 method: 'POST',
                 url: 'AdminActivity/SaveActivityDetails',
                 data: { activityDetails: activityDetails, activityDays: activityDays, activityTimes: time, activityCategoryKey: activityCategoryKey, activityLocationKey: activityLocationKey }
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+        }
+
+        var saveEventDetails = function (activityDetails, eventDateTime, allActivityPricingOptions, activityCategoryKey, activityLocationKey) {
+            var deferred = $q.defer();
+            activityDetails.AllActivityUniqueDates = [];
+            activityDetails.AllPriceOptions = [];
+            $.each(eventDateTime, function (key, value) {
+                var event = {};
+                event.Date = eventDateTime[key].Date;
+                event.Time = eventDateTime[key].time;
+                event.IsDeleted = false;
+                event.ActivityKey = activityDetails.ActivityKey;
+                event.ActivityDatesKey = '';
+                activityDetails.AllActivityUniqueDates.push(event);
+            });
+            $.each(allActivityPricingOptions, function (key, value) {
+                var priceOption = {};
+                priceOption.OptionDescription = allActivityPricingOptions[key].OptionDescription;
+                priceOption.PriceForAdults = allActivityPricingOptions[key].PriceForAdults;
+                priceOption.PriceForChildren = allActivityPricingOptions[key].PriceForChildren;
+                priceOption.IsDeleted = false;
+                priceOption.ActivityKey = activityDetails.ActivityKey;
+                priceOption.ActivityPricingKey = '';
+                priceOption.CreatedDate = new Date();
+                activityDetails.AllPriceOptions.push(priceOption);
+            });
+            $http({
+                method: 'POST',
+                url: 'AdminActivity/SaveEventDetails',
+                data: { activityDetails: activityDetails, activityCategoryKey: activityCategoryKey, activityLocationKey: activityLocationKey }
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }
@@ -73,6 +117,7 @@
             saveActivityDetails: saveActivityDetails,
             getAllAvailableLocationsAsync: getAllAvailableLocationsAsync,
             createNewActivity: createNewActivity,
+            saveEventDetails: saveEventDetails,
         }
     };
     app.factory("AdminActivityDataService", adminActivityDataService);

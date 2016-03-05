@@ -37,9 +37,16 @@ namespace MMC.Web.Controllers.Admin.Activities
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult SaveEventDetails(ActivityDetailsDataContract activityDetails, string activityCategoryKey, string activityLocationKey)
+        {
+            //Make call to service
+            _activitiesService.SaveActivityDetails(activityDetails, null, null, activityLocationKey, activityCategoryKey, "TBD");
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
         public JsonResult CreateNewActivity()
         {
-            return Json(new ActivityDetailsDataContract(), JsonRequestBehavior.AllowGet);
+            return Json(_activitiesService.CreateNewActivityDetails(), JsonRequestBehavior.AllowGet);
         }
     }
 }

@@ -45,6 +45,7 @@ namespace MMC.Data
         public DbSet<ActivityTypeCategory> ActivityTypeCategorySet { get; set; }
         public DbSet<LocationDetails> LocationDetailsSet { get; set; }
         public DbSet<TopOfferMapping> TopOfferMappingSet { get; set; }
+        public DbSet<ActivityPriceMapping> ActivityPriceMappingSet { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -76,6 +77,7 @@ namespace MMC.Data
             modelBuilder.Entity<ActivityTypeCategory>().HasKey<string>(e => e.ActivityTypeCategoryKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<LocationDetails>().HasKey<string>(e => e.LocationDetailsKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<TopOfferMapping>().HasKey<string>(e => e.TopOfferMappingKey).Ignore(e => e.EntityId);
+            modelBuilder.Entity<ActivityPriceMapping>().HasKey<string>(e => e.ActivityPricingKey).Ignore(e => e.EntityId);
             //base.OnModelCreating(modelBuilder);
         }
     }

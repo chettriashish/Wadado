@@ -9,8 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 
 namespace MMC.Client.Entities
-{
-    [DataContract(Namespace = "wadado.in")]
+{    
     public class ActivityDates : ObjectBase
     {
         #region Private variables

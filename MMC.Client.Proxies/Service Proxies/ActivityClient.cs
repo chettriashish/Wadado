@@ -235,5 +235,15 @@ namespace MMC.Client.Proxies
         {
             return Channel.GetAllUpcomingCompanyActivities(companyKey);
         }
+
+        public ActivityDetailsDataContract CreateNewActivityDetails()
+        {
+            ActivityDetailsDataContract result = new ActivityDetailsDataContract();
+            result.AllActivityUniqueDates = new List<ActivityDates>();
+            result.AllPriceOptions = new List<ActivityPriceMapping>();
+            result.IsEvent = false;
+            result.IsActivity = true;
+            return result;
+        }
     }
 }

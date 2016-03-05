@@ -47,14 +47,14 @@ namespace MMC.Client.Proxies.Tests
             //contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,9),new DateTime(2016,1,11), "smartphone");            
             try
             {
-                IEnumerable<ActivityBookingDataContract> contract = proxy.GetAllCompanyActivitiesPendingForConfirmation("KewzingKhukuri");
+                //IEnumerable<ActivityBookingDataContract> contract = proxy.GetAllCompanyActivitiesPendingForConfirmation("KewzingKhukuri");
                 //IEnumerable<ActivitySummaryDataContract> contract = proxy.GetAllActivitiesByLocation("GANGTOK", "desktop");
                 //IEnumerable<LocationDetailsDataContract> location = proxy.GetSelectedLocationDetails("DARJEELING");
                 //List<string> newList = new List<string>();
                 //newList.Add("223c0391-9c5f-4fe0-9471-bccb70084d6a");
                 //IEnumerable<ActivityTypeMaster> contract = proxy.GetSubCategoriesForSelectedActivity("ADVENTURE");
                 //proxy.SaveActivityCategoryMapping(newList,"ADVENTURE");
-                //ActivityDetailsDataContract contract = proxy.GetAllActivities(default(string), "HIGHFLY", "desktop");
+                ActivityDetailsDataContract contract = proxy.GetAllActivities(default(string), "2edead4d-4815-4907-a5be-2f42ef0976c5", "desktop");
                 //Dictionary<string, bool> activityDates = new Dictionary<string, bool>();
                 //activityDates.Add("sun", true);
                 //activityDates.Add("mon", true);
@@ -63,7 +63,31 @@ namespace MMC.Client.Proxies.Tests
                 //activityDates.Add("thu", true);
                 //activityDates.Add("fri", true);
                 //activityDates.Add("sat", true);
+                //contract.AllActivityUniqueDates = new List<ActivityDates>();
+                //List <ActivityDates> result = new List<ActivityDates>();
+                //ActivityDates newDate = new ActivityDates
+                //{
+                //    Date = DateTime.Now,
+                //    Time = "10AM",
+                //    IsDeleted = false
+                //};
 
+                List<ActivityPriceMapping> allPriceOptions = new List<ActivityPriceMapping>();
+                ActivityPriceMapping priceMapping = new ActivityPriceMapping
+                {
+                    PriceForChildren = 200,
+                    PriceForAdults = 200,
+                    ActivityKey = "2edead4d-4815-4907-a5be-2f42ef0976c5",
+                    IsDeleted = false,
+                    CreatedBy = "TBD",
+                    OptionDescription = "Front Row Tickets",
+                    CreatedDate = DateTime.Now
+
+                };
+                allPriceOptions.Add(priceMapping);
+                contract.AllPriceOptions = allPriceOptions;
+                //result.Add(newDate);
+                //contract.AllActivityUniqueDates = result;
                 //List<string> activityTimes = new List<string>();
                 //activityTimes.Add("10:00AM");
                 //activityTimes.Add("11:00AM");
@@ -72,14 +96,14 @@ namespace MMC.Client.Proxies.Tests
                 //activityTimes.Add("02:00PM");
                 //activityTimes.Add("03:00PM");
                 //activityTimes.Add("03:00PM");
-                //proxy.SaveActivityDetails(contract, activityDates, activityTimes, "GANGTOK", "PARAGLIDING", "TDB");
+                proxy.SaveActivityDetails(contract, null, null, "GANGTOK", "241b4825-248e-48ca-8225-fa3a78cd2449", "TDB");
                 (proxy as ICommunicationObject).Close();
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
             }
-            
+
         }
     }
 }

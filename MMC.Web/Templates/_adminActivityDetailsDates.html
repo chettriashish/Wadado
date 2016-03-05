@@ -1,5 +1,5 @@
 ﻿<div class="admin-list">
-    <div class="row">
+    <div class="row" ng-if="activityDetails.IsActivity">
         <div class="column-12">
             <div>
                 <div class="column-3">
@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="activityDetails.IsActivity">
         <div class="column-12">
             <div>
                 <div class="column-3">
@@ -46,7 +46,98 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="activityDetails.IsEvent">
+        <div class="column-12">
+            <div class="column-12">
+                <span>&nbsp;</span>
+            </div>
+            <div class="admin-table">
+                <div style="float:right">
+                    <div class="admin-booking">
+                        <div>
+                            <a ng-click="addNewEventDateTime()">ADD EVENT DATE TIME</a>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+            <div class="column-12">
+                <span>&nbsp;</span>
+            </div>
+
+            <div class="admin-table">
+                <div class="admin-table header">
+                    <div class="column-12">
+                        <div class="column-3">
+                            <span>DATE</span>
+                        </div>
+                        <div class="column-3">
+                            <span>TIME</span>
+                        </div>
+                        <div class="column-3">
+                            <span>&nbsp;</span>
+                        </div>
+                        <div class="column-3">
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div ng-repeat="item in AllEventDateTimes">
+                        <div class="column-12">
+                            <div class="column-3">
+                                <div class="column-12" ng-if="!item.editMode">
+                                    <span style="text-transform:uppercase;">{{item.m_date}}</span>
+                                </div>
+                                <div class="column-12" ng-if="!!item.editMode">
+                                    <div class="column-auto-nospace"><input type="date" ng-model="item.Date" /></div>
+                                </div>
+                            </div>
+                            <div class="column-3">
+                                <div class="column-12" ng-if="!item.editMode">
+                                    <span style="text-transform:uppercase;">{{item.time}}</span>
+                                </div>
+                                <div class="column-12" ng-if="!!item.editMode">
+                                    <div class="column-auto-nospace"><input type="time" ng-model="item.timeComp" step="300" placeholder="HH:mm" /></div>
+                                    <div class="column-auto-nospace"><select ng-model="item.AMPM"><option value="AM">AM</option><option value="PM">PM</option></select></div>
+                                </div>
+                            </div>
+                            <div class="column-3" ng-if="!item.editMode">
+                                <div ng-click="editSelectedDateTime(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/edit.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Edit</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column-3" ng-if="!!item.editMode">
+                                <div ng-click="saveSelectedDateTime(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/done.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Done</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column-3" ng-if="!item.editMode">
+                                <div ng-click="deleteSelectedDateTime(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/bin.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Delete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" ng-if="activityDetails.IsActivity">
         <div class="column-12">
             <div class="column-3">
                 <div class="admin-list label"><span>Activity Days</span></div>
@@ -95,7 +186,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row" ng-if="activityDetails.IsActivity">
         <div class="column-12">
             <div class="column-3">
                 <div class="admin-list label"><span>Activity Time</span></div>

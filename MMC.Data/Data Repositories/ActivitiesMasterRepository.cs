@@ -14,6 +14,7 @@ namespace MMC.Data.DataRepositories
         const string MOBILE = "_mob";
         const string TABLET = "_tab";
         const string THUMBNAIL = "_thumb";
+        const string EVENTS = "EVENTS AND FESTIVALS";
         /// <summary>
         /// overriden methods from datarepositorybase class
         /// </summary>
@@ -78,11 +79,11 @@ namespace MMC.Data.DataRepositories
                     Where(entity => entity.ActivityKey == activityKey);
 
 
-                ActivityCategoryMaster activityCategory = (from entity in entityContext.ActivityTypeCategorySet
+                IEnumerable<ActivityCategoryMaster> activityCategories = (from entity in entityContext.ActivityTypeCategorySet
                                                            join entity1 in entityContext.ActivityCategoryMasterSet
                                                            on entity.ActivityCategoryKey equals entity1.ActivityCategoryKey
                                                            where entity.ActivityTypeKey == activity.ActivityTypeKey
-                                                           select entity1).FirstOrDefault();
+                                                           select entity1);
 
                 ActivityTypeMaster activityType = (from entity in entityContext.ActivityTypeMasterSet
                                                    where entity.ActivityTypeKey == activity.ActivityTypeKey
@@ -92,14 +93,14 @@ namespace MMC.Data.DataRepositories
                     .Where(entity => entity.ActivityKey == activityKey).ToList();
 
                 result.ActivitySubCategory = activityType.ActivityType;
-                result.ActivityCategory = activityCategory != null ? activityCategory.ActivityCategory : default(string);
+                result.ActivityCategory = activityCategories != null ? activityCategories.Select(e => e.ActivityCategory).ToList() :new List<string>();
                 result.CancellationPolicy = activity.CancellationPolicy;
                 result.Cost = activity.Cost;
                 result.Currency = activity.Currency;
                 result.Description = activity.Description;
                 result.DifficultyRating = activity.DifficultyRating;
                 result.Location = activity.Address;
-                result.LocationLatLong = locationKey != default(string) ? entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == locationKey).FirstOrDefault().LocationKey).FirstOrDefault().LatLng: default(string);
+                result.LocationLatLong = locationKey != default(string) ? entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == locationKey).FirstOrDefault().LocationKey).FirstOrDefault().LatLng : default(string);
                 result.LatLong = activity.ActivityLocation;
                 result.DistanceFromNearestCity = activity.DistanceFromNearestCity;
                 result.NumAdults = activity.NumAdults;
@@ -113,11 +114,34 @@ namespace MMC.Data.DataRepositories
                 result.UserRating = activity.AverageUserRating;
                 result.IsValidated = activity.IsValidated;
                 result.Included = activity.Included;
-                result.IsPermitRequired = activity.IsPermitRequired;                
+                result.IsPermitRequired = activity.IsPermitRequired;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
                 result.ActivityKey = activity.ActivitesKey;
                 result.ActivityStartTime = activity.ActivityStartTime;
                 result.ActivityEndTime = activity.ActivityEndTime;
+                result.AllActivityUniqueDates = (from e in entityContext.ActivityDatesSet
+                                                 where e.ActivityKey == activity.ActivitesKey
+                                                 select e).ToList();
+
+                if (result.AllActivityUniqueDates == null || result.AllActivityUniqueDates.Count() == 0)
+                {
+                    result.AllActivityUniqueDates = new List<ActivityDates>();
+                }
+
+                result.AllPriceOptions = (from e in entityContext.ActivityPriceMappingSet
+                                          where e.ActivityKey == activity.ActivitesKey
+                                          select e).ToList();
+
+                if (result.AllActivityUniqueDates == null || result.AllActivityUniqueDates.Count() == 0)
+                {
+                    result.AllActivityUniqueDates = new List<ActivityDates>();
+                }
+
+                if (result.AllPriceOptions == null || result.AllPriceOptions.Count() == 0)
+                {
+                    result.AllPriceOptions = new List<ActivityPriceMapping>();
+                }
+
                 foreach (var item in activityImages)
                 {
                     if (userAgent == RepositoryResource.SMARTPHONE)
@@ -198,14 +222,24 @@ namespace MMC.Data.DataRepositories
                                                  && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
                                                  select e2).FirstOrDefault().Discount : 0
                                             }).Take(6).ToList();
-
-                if (result.SimilarActivities.Count() < 6 && activityCategory != null)
+                if (activityCategories.Any(e => e.ActivityCategory == EVENTS))
+                {
+                    result.IsEvent = true;
+                    result.IsActivity = false;
+                }
+                else
+                {
+                    result.IsEvent = false;
+                    result.IsActivity = true;
+                }
+                if (result.SimilarActivities.Count() < 6 && activityCategories != null)
                 {
                     int activitiesToBeRetrieved = 6 - result.SimilarActivities.Count();
+                    string activityCategoryKey = activityCategories.FirstOrDefault().ActivityCategoryKey;
                     result.SimilarActivities = (from entity in entityContext.ActivitiesMasterSet
                                                 join entity1 in entityContext.ActivityTypeCategorySet
                                                 on entity.ActivityTypeKey equals entity1.ActivityTypeKey
-                                                where entity1.ActivityCategoryKey == activityCategory.ActivityCategoryKey
+                                                where entity1.ActivityCategoryKey == activityCategoryKey
                                                 && entity.ActivitesKey != activity.ActivitesKey
                                                 && entity.LocationKey == locationKey
                                                 select new ActivitySummaryDataContract()
@@ -247,10 +281,13 @@ namespace MMC.Data.DataRepositories
                     Where(entity => entity.IsThumbnail == false).Select(entity => entity.ImageURL).ToList();
                 result.ImageURL = result.DefaultImageURL;
                 result.DifficultyLevel = GetDifficultyLevel(result.DifficultyRating);
-                result.AllActivityDates = ConvertDays(activityDayScheduler);
+                if (activityDayScheduler != null)
+                {
+                    result.AllActivityDates = ConvertDays(activityDayScheduler);
+                }
 
 
-                if (result.AllActivityDates.Count() == 0)
+                if (result.AllActivityDates!= null && result.AllActivityDates.Count() == 0)
                 {
                     result.NextAvaiableDate = (from entity in entityContext.ActivityDatesSet
                                                where entity.Date > DateTime.Now
@@ -430,7 +467,7 @@ namespace MMC.Data.DataRepositories
                                                  select e2).Count() > 0 ? true : false),
                               LatLong = entity.ActivityLocation,
                               Cost = entity.Cost,
-                              
+
                               Currency = entity.Currency,
                               Discount = ((from e1 in entityContext.TopOffersSet
                                            join e2 in entityContext.TopOfferMappingSet
@@ -553,6 +590,6 @@ namespace MMC.Data.DataRepositories
                 }
             }
             return finalResult;
-        }        
+        }
     }
 }

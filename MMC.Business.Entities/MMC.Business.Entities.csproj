@@ -71,6 +71,7 @@
     <Compile Include="ActivityHolidays.cs" />
     <Compile Include="ActivityImages.cs" />
     <Compile Include="ActivityLocation.cs" />
+    <Compile Include="ActivityPriceMapping.cs" />
     <Compile Include="ActivityRates.cs" />
     <Compile Include="ActivityTimeScheduler.cs" />
     <Compile Include="ActivityTypeCategory.cs" />

@@ -359,6 +359,9 @@ namespace MMC.Business.Managers
                 IActivitiesMasterRepository activitiesRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
                 IActivityDaySchedulerRepository activityDaySchedulerRepository = _DataRepositoryFactory.GetDataRepository<IActivityDaySchedulerRepository>();
                 IActivityTimeSchedulerRepository activityTimeSchedulerRepository = _DataRepositoryFactory.GetDataRepository<IActivityTimeSchedulerRepository>();
+                IActivityDatesRepository activityDatesRepository = _DataRepositoryFactory.GetDataRepository<IActivityDatesRepository>();
+                IActivityPriceMappingRepository activityPriceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
+
                 ActivitiesMaster activitiesMaster = new ActivitiesMaster();
                 activitiesMaster.ActivityEndTime = activity.ActivityEndTime;
                 activitiesMaster.ActivityLocation = activity.LatLong;
@@ -407,48 +410,92 @@ namespace MMC.Business.Managers
                     dayScheduler.ActivityDaySchedulerKey = Guid.NewGuid().ToString();
                     dayScheduler.ActivityKey = activitiesMaster.ActivitesKey;
                 }
-                int count = 0;
-                foreach (var day in activityDays)
+                
+
+                IEnumerable<ActivityPriceMapping> allPriceMappings = activityPriceMappingRepository.GetAllPriceOptionsForSelectedActivity(activitiesMaster.ActivitesKey);
+
+                if (allPriceMappings != null)
                 {
-                    switch (count)
+                    foreach (var item in allPriceMappings)
                     {
-                        case 0: dayScheduler.IsSunday = day.Value; break;
-                        case 1: dayScheduler.IsMonday = day.Value; break;
-                        case 2: dayScheduler.IsTuesday = day.Value; break;
-                        case 3: dayScheduler.IsWednesday = day.Value; break;
-                        case 4: dayScheduler.IsThursday = day.Value; break;
-                        case 5: dayScheduler.IsFriday = day.Value; break;
-                        case 6: dayScheduler.IsSaturday = day.Value; break;
+                        activityPriceMappingRepository.Remove(item);
                     }
-                    count++;
                 }
 
-                if (activityDaySchedulerRepository.Get(dayScheduler.ActivityDaySchedulerKey) != null)
+                if (activity.AllPriceOptions != null && activity.AllPriceOptions.Count() > 0)
                 {
-                    activityDaySchedulerRepository.Update(dayScheduler);
+                    foreach (var item in activity.AllPriceOptions)
+                    {
+                        item.ActivityPricingKey = Guid.NewGuid().ToString();
+                        item.ActivityKey = activitiesMaster.ActivitesKey;
+                        item.CreatedBy = user;
+                        item.CreatedDate = DateTime.Now;
+                        activityPriceMappingRepository.Add(item);
+                    }
+                }
+                
+                if (!activity.IsEvent)
+                {
+                    int count = 0;
+                    foreach (var day in activityDays)
+                    {
+                        switch (count)
+                        {
+                            case 0: dayScheduler.IsSunday = day.Value; break;
+                            case 1: dayScheduler.IsMonday = day.Value; break;
+                            case 2: dayScheduler.IsTuesday = day.Value; break;
+                            case 3: dayScheduler.IsWednesday = day.Value; break;
+                            case 4: dayScheduler.IsThursday = day.Value; break;
+                            case 5: dayScheduler.IsFriday = day.Value; break;
+                            case 6: dayScheduler.IsSaturday = day.Value; break;
+                        }
+                        count++;
+                    }
+
+                    if (activityDaySchedulerRepository.Get(dayScheduler.ActivityDaySchedulerKey) != null)
+                    {
+                        activityDaySchedulerRepository.Update(dayScheduler);
+                    }
+                    else
+                    {
+                        activityDaySchedulerRepository.Add(dayScheduler);
+                    }
+
+                    List<ActivityTimeScheduler> timeScheduler = activityTimeSchedulerRepository.Get().Where(e => e.ActivityKey == activitiesMaster.ActivitesKey).ToList();
+                    if (timeScheduler != null && timeScheduler.Count() > 0)
+                    {
+                        foreach (ActivityTimeScheduler item in timeScheduler)
+                        {
+                            activityTimeSchedulerRepository.Remove(item);
+                        }
+                    }
+                    //setting activity times after clearing the old time values
+                    //creating new activiy times
+                    timeScheduler = new List<ActivityTimeScheduler>();
+                    foreach (string time in activityTimes)
+                    {
+                        ActivityTimeScheduler newTime = new ActivityTimeScheduler() { ActivityTimeSchedulerKey = Guid.NewGuid().ToString() };
+                        newTime.ActivityKey = activitiesMaster.ActivitesKey;
+                        newTime.ActivityTime = time;
+                        activityTimeSchedulerRepository.Add(newTime);
+                    }
                 }
                 else
                 {
-                    activityDaySchedulerRepository.Add(dayScheduler);
-                }
-
-                List<ActivityTimeScheduler> timeScheduler = activityTimeSchedulerRepository.Get().Where(e => e.ActivityKey == activitiesMaster.ActivitesKey).ToList();
-                if (timeScheduler != null && timeScheduler.Count() > 0)
-                {
-                    foreach (ActivityTimeScheduler item in timeScheduler)
+                    List<ActivityDates> allActivityDates = activityDatesRepository.Get().Where(e => e.ActivityKey == activitiesMaster.ActivitesKey).ToList();
+                    if (allActivityDates.Count() > 0)
                     {
-                        activityTimeSchedulerRepository.Remove(item);
+                        foreach (var item in allActivityDates)
+                        {
+                            activityDatesRepository.Remove(item);
+                        }
                     }
-                }
-                //setting activity times after clearing the old time values
-                //creating new activiy times
-                timeScheduler = new List<ActivityTimeScheduler>();
-                foreach (string time in activityTimes)
-                {
-                    ActivityTimeScheduler newTime = new ActivityTimeScheduler() { ActivityTimeSchedulerKey = Guid.NewGuid().ToString() };
-                    newTime.ActivityKey = activitiesMaster.ActivitesKey;
-                    newTime.ActivityTime = time;
-                    activityTimeSchedulerRepository.Add(newTime);
+                    foreach (var item in activity.AllActivityUniqueDates)
+                    {
+                        item.ActivityDatesKey = Guid.NewGuid().ToString();
+                        item.ActivityKey = activitiesMaster.ActivitesKey;
+                        activityDatesRepository.Add(item);
+                    }
                 }
             });
         }

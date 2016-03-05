@@ -87,6 +87,7 @@ namespace MMC.Client.Contracts
         IEnumerable<ActivityBookingDataContract> GetAllUpcomingActivities();
         [OperationContract]
         IEnumerable<ActivityBookingDataContract> GetAllUpcomingCompanyActivities(string companyKey);
+        ActivityDetailsDataContract CreateNewActivityDetails();
         #endregion
 
         #region Async Operations
