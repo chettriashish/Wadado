@@ -23,6 +23,8 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public decimal Cost { get; set; }
         [DataMember]
+        public decimal CostChild { get; set; }
+        [DataMember]
         public string Location { get; set; }
         [DataMember]
         public string SessionKey { get; set; }
@@ -62,6 +64,8 @@ namespace MMC.Business.Contracts.DataContracts
         public string BookingNumber { get; set; }
         [DataMember]
         public string ThumbnailImage { get; set; }
+        [DataMember]
+        public string ActivityPricingKey { get; set; }
         #endregion
     }
 }

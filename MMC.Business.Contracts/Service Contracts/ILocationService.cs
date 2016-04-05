@@ -26,6 +26,8 @@ namespace MMC.Business.Contracts
 
         [OperationContract]
         IEnumerable<LocationDetailsDataContract> GetSelectedLocationDetails(string locationKey);
+        [OperationContract]
+        IEnumerable<LocationDetailsDataContract> GetSelectedLocationDetailsForClientApplication(string locationKey, string userAgent);
 
         [OperationContract]
         [TransactionFlow(TransactionFlowOption.Allowed)]

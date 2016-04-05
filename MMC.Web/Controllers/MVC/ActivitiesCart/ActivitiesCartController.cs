@@ -69,6 +69,10 @@ namespace MMC.Web.Controllers.ActivitiesCart
                 UserModel userDetails = new UserModel() { FirstName = firstName, LastName = lastName, Email = email, PhoneNumber = phoneNumber };
                 TempData.Add("userData", userDetails);
             }             
+
+            //send out emails 
+
+
             return Json(isValid, JsonRequestBehavior.AllowGet);            
         }       
     }

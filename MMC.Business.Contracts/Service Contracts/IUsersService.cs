@@ -32,5 +32,9 @@ namespace MMC.Business.Contracts
         IEnumerable<ActivitySummaryDataContract> GetFavoriteActivities(string guestKey, string userAgent);
         [OperationContract]
         bool CheckForActivityInFavorites(string guestKey, string activityKey);
+        [OperationContract]
+        CompanyMaster CheckIfUserBelongsToCompany(string userId);
+        [OperationContract]
+        CompanyMaster CreateCompanyForSelectedUser(string userId, CompanyMaster company);
     }
 }

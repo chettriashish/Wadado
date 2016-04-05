@@ -56,6 +56,7 @@
     <Compile Include="Repository Interfaces\IActivityLocationRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityPriceMappingRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityRatesRepository.cs" />
+    <Compile Include="Repository Interfaces\IActivityTagMappingRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTimeSchedulerRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTypeCategoryRepository.cs" />
     <Compile Include="Repository Interfaces\IActivityTypeMasterRepository.cs" />
@@ -68,6 +69,7 @@
     <Compile Include="Repository Interfaces\ITopOffersRepository.cs" />
     <Compile Include="Repository Interfaces\ITouristSeasonsRepository.cs" />
     <Compile Include="Repository Interfaces\IUserApplicationActivityRepository.cs" />
+    <Compile Include="Repository Interfaces\IUserCompanyMappingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Core.Common.Contracts\Core.Common.Contracts.csproj">

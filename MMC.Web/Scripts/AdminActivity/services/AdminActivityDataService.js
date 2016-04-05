@@ -65,13 +65,16 @@
                 priceOption.PriceForChildren = allActivityPricingOptions[key].PriceForChildren;
                 priceOption.IsDeleted = false;
                 priceOption.ActivityKey = activityDetails.ActivityKey;
-                priceOption.ActivityPricingKey = '';
+                priceOption.ActivityPricingKey = allActivityPricingOptions[key].ActivityPricingKey;
                 priceOption.CreatedDate = new Date();
+                priceOption.NumAdults = activityDetails.NumAdults;
+                priceOption.NumChild = activityDetails.NumChildren;
+                priceOption.CommissionPercentage = activityDetails.Comission;
                 activityDetails.AllPriceOptions.push(priceOption);
             });
             $http({
                 method: 'POST',
-                url: 'AdminActivity/SaveActivityDetails',
+                url: '/AdminActivity/SaveActivityDetails',
                 data: { activityDetails: activityDetails, activityDays: activityDays, activityTimes: time, activityCategoryKey: activityCategoryKey, activityLocationKey: activityLocationKey }
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
@@ -97,13 +100,16 @@
                 priceOption.PriceForChildren = allActivityPricingOptions[key].PriceForChildren;
                 priceOption.IsDeleted = false;
                 priceOption.ActivityKey = activityDetails.ActivityKey;
-                priceOption.ActivityPricingKey = '';
-                priceOption.CreatedDate = new Date();
+                priceOption.ActivityPricingKey = allActivityPricingOptions[key].ActivityPricingKey;
+                priceOption.CreatedDate = new Date();                
+                priceOption.NumAdults = activityDetails.NumAdults;
+                priceOption.NumChild = activityDetails.NumChildren;
+                priceOption.CommissionPercentage = activityDetails.Comission;
                 activityDetails.AllPriceOptions.push(priceOption);
             });
             $http({
                 method: 'POST',
-                url: 'AdminActivity/SaveEventDetails',
+                url: '/AdminActivity/SaveEventDetails',
                 data: { activityDetails: activityDetails, activityCategoryKey: activityCategoryKey, activityLocationKey: activityLocationKey }
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;

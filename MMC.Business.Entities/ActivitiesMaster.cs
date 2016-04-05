@@ -74,11 +74,22 @@ namespace MMC.Business.Entities
         public string CreatedBy { get; set; }
         [DataMember]
         public bool IsValidated { get; set; }
+        [DataMember]
         public string ActivityLocation { get; set; }
+        [DataMember]
         public string DistanceFromNearestCity { get; set; }
+        [DataMember]
         public decimal AverageUserRating { get; set; }
+        [DataMember]
         public string ActivityStartTime { get; set; }
+        [DataMember]
         public string ActivityEndTime { get; set; }
+        [DataMember]
+        public decimal? Comission { get; set; }
+        [DataMember]
+        public int? MaxUnits { get; set; }
+        [DataMember]
+        public bool? AllowInstantBooking { get; set; }
         #endregion
         [DataMember]
         public string EntityId

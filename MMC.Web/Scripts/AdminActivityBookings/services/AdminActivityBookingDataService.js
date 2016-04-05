@@ -5,10 +5,10 @@
         var getAllActivitiesPendingBooking = function () {
             return $http.get('AdminBookings/GetAllActivitiesPendingForConfirmation')
                 .then(function (response) {
-                return response.data;
-            }).catch(function (response) {
-                console.log(reponse);
-            });
+                    return response.data;
+                }).catch(function (response) {
+                    console.log(response);
+                });
         }
 
         var getAllUpcomingActivities = function () {
@@ -16,7 +16,7 @@
                 .then(function (response) {
                     return response.data;
                 }).catch(function (response) {
-                    console.log(reponse);
+                    console.log(response);
                 });
         }
 
@@ -25,7 +25,7 @@
                 .then(function (response) {
                     return response.data;
                 }).catch(function (response) {
-                    console.log(reponse);
+                    console.log(response);
                 });
         }
 
@@ -40,8 +40,8 @@
             $http({
                 url: "AdminBookings/GetAllActivitiesPendingForSelectedCompany",
                 params: { companyKey: companyKey },
-                method:'GET'
-                }).success(deferred.resolve).error(deferred.reject);
+                method: 'GET'
+            }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }
 
@@ -65,15 +65,37 @@
             return deferred.promise;
         }
 
+        var acceptSelectedActivityBooking = function (bookingKey, user) {
+            var deferred = $q.defer();
+            $http({
+                url: "AdminBookings/AcceptSelectedActivityBooking",
+                params: { bookingKey: bookingKey, user: user },
+                method: 'GET'
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+        }
+
+        var rejectSelectedActivityBooking = function (bookingKey, user) {
+            var deferred = $q.defer();
+            $http({
+                url: "AdminBookings/RejectSelectedActivityBooking",
+                params: { bookingKey: bookingKey, user: user },
+                method: 'GET'
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+        }
+
         /*USING THE REVEALING MODULE PATTERN TO EXPOSE ONLY THE METHODS THAT WE CHOOSE TO*/
         return {
-            getAllActivitiesPendingBooking: getAllActivitiesPendingBooking,            
+            getAllActivitiesPendingBooking: getAllActivitiesPendingBooking,
             getAllRegisteredCompanies: getAllRegisteredCompanies,
             getAllActivitiesPendingForSelectedCompany: getAllActivitiesPendingForSelectedCompany,
             getAllActivitiesCompletedForSelectedCompany: getAllActivitiesCompletedForSelectedCompany,
             getAllActivitiesCompletedBooking: getAllActivitiesCompletedBooking,
             getAllUpcomingCompanyActivities: getAllUpcomingCompanyActivities,
             getAllUpcomingActivities: getAllUpcomingActivities,
+            acceptSelectedActivityBooking: acceptSelectedActivityBooking,
+            rejectSelectedActivityBooking: rejectSelectedActivityBooking,
         }
     };
     app.factory("AdminActivityBookingDataService", adminActivityBookingDataService);

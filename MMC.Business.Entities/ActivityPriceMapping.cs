@@ -18,7 +18,12 @@ namespace MMC.Business.Entities
         public decimal PriceForChildren { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreatedDate { get; set; }
-        public string CreatedBy { get; set; } 
+        public string CreatedBy { get; set; }
+        public int NumberOfUnits { get; set; }
+        public int NumAdults { get; set; }
+        public int NumChild { get; set; }
+        public decimal CommissionPercentage { get; set; }
+        public decimal CommissionAmount { get; set; }
         #endregion
 
         public string EntityId

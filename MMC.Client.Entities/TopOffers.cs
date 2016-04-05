@@ -69,7 +69,7 @@ namespace MMC.Client.Entities
             public TopOffersValidator()
             {
                 RuleFor(obj => obj.TopOffersKey).NotNull();                
-                RuleFor(obj => obj.ImageUrl).NotNull();
+                //RuleFor(obj => obj.ImageUrl).NotNull();
                 RuleFor(obj => obj.LocationKey).NotNull();
                 RuleFor(obj => obj.OfferStartDate).NotNull();
                 RuleFor(obj => obj.OfferEndDate).NotNull();             

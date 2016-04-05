@@ -33,6 +33,11 @@ namespace MMC.Client.Contracts
         IEnumerable<ActivitySummaryDataContract> GetFavoriteActivities(string guestKey, string userAgent);
         [OperationContract]
         bool CheckForActivityInFavorites(string guestKey, string activityKey);
+        [OperationContract]
+        CompanyMaster CheckIfUserBelongsToCompany(string userId);
+        [OperationContract]
+        CompanyMaster CreateCompanyForSelectedUser(string userId, CompanyMaster company);
+        CompanyMaster CreateCompanyForSelectedUser(string userId, string companyName, string address, string telephoneNumber, string email, string contactPerson);
         #endregion
 
         #region Async Operations

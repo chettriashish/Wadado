@@ -16,6 +16,7 @@ using MMC.Common;
 using Core.Common.Exceptions;
 using MMC.Business.Contracts.DataContracts;
 using System.ServiceModel.Activation;
+using System.Security.Cryptography;
 
 namespace MMC.Business.Managers
 {
@@ -27,7 +28,9 @@ namespace MMC.Business.Managers
         const string MOBILE = "_mob";
         const string TABLET = "_tab";
         const string THUMBNAIL = "_thumb";
+        const string MMC = "MMC";
         const string ALL = "All";
+        const string ACTIVITY = "Activity";
         public ActivitiesManager(IDataRepositoryFactory dataRepositoryFactory, IBusinessEngineFactory businessEngineFactory)
         {
             _DataRepositoryFactory = dataRepositoryFactory;
@@ -41,8 +44,44 @@ namespace MMC.Business.Managers
             {
                 IActivitiesMasterRepository activitiesMasterRepository
                 = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
-
+                ITopOffersRepository topOffersRepository = _DataRepositoryFactory.GetDataRepository<ITopOffersRepository>();
+                IActivityImagesRepository activityImageRepository = _DataRepositoryFactory.GetDataRepository<IActivityImagesRepository>();
+                ITopOfferMappingRepository topOffersMappingRepository = _DataRepositoryFactory.GetDataRepository<ITopOfferMappingRepository>();
                 ActivityDetailsDataContract allActivitiesForLocation = activitiesMasterRepository.GetActivityByLocation(locationKey: locationKey, activityKey: activityKey, userAgent: userAgent);
+                IEnumerable<TopOffers> topOfferForSelectedActivity =  topOffersRepository.GetOffersForActivity(activityKey);
+                IEnumerable<TopOfferMapping> allTopOffersMapping = topOffersMappingRepository.GetAllTopActivitiesOfferForSelectedLocation(locationKey);
+                List<TopOffersDataContract> offers = new List<TopOffersDataContract>();
+                foreach (var item in topOfferForSelectedActivity)
+                {
+                    if (allTopOffersMapping.Any(e => e.TopOfferKey == item.TopOffersKey))
+                    {
+                        TopOfferMapping offerMapping = allTopOffersMapping.FirstOrDefault(e => e.TopOfferKey == item.TopOffersKey);                        
+                        ActivityImages img = activityImageRepository.GetImagesForSelectedActivity(allActivitiesForLocation.ActivityKey).FirstOrDefault(e => e.IsDefault == true);                        
+                        TopOffersDataContract topOffer = new TopOffersDataContract
+                        {
+                            TopOffersKey = item.TopOffersKey,
+                            Discount = offerMapping.Discount,                            
+                            ImageURL = string.Format("Images/{0}", img.ImageURL),
+                            Currency = allActivitiesForLocation.Currency,
+                            Location = allActivitiesForLocation.Location,
+                            Key = offerMapping.MappingType,
+                            OfferType = ACTIVITY,
+                            Value = allActivitiesForLocation.Name,
+                            Rating = allActivitiesForLocation.UserRating
+                        };
+                        offers.Add(topOffer);
+                    }                  
+                }
+                if (topOfferForSelectedActivity.Count() > 0)
+                {
+                    allActivitiesForLocation.IsTopOffer = true;
+                    allActivitiesForLocation.AllTopOffers = offers;
+                }
+                else
+                {
+                    allActivitiesForLocation.IsTopOffer = false;
+                    allActivitiesForLocation.AllTopOffers = new List<TopOffersDataContract>();
+                }
                 return allActivitiesForLocation;
             });
         }
@@ -102,11 +141,11 @@ namespace MMC.Business.Managers
                 IActivitiesBookingEngine activitiesBookingEngine
                     = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
 
-                IEnumerable<ActivitiesMaster> allActivities = activitiesMasterRepository.Get();
+                ActivitiesMaster activity = activitiesMasterRepository.Get(activityKey);
 
                 IEnumerable<ActivityBooking> allBookedActivites = activityBookingRepository.Get();
 
-                return activitiesBookingEngine.IsActivityAvailable(activityKey, bookingDate, time, allBookedActivites, adults, children, allActivities);
+                return activitiesBookingEngine.IsActivityAvailable(activityKey, bookingDate, time, allBookedActivites, adults, children, activity);
             });
         }
 
@@ -119,12 +158,14 @@ namespace MMC.Business.Managers
                   = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
                 ActivityBooking activityBooking = new ActivityBooking();
                 activityBooking.ActivityBookingKey = bookingDetails.ActivityBookingKey;
+                activityBooking.BookingNumber = string.Format("{0}{1}", MMC, GetUniqueKey());
+                activityBooking.ActivityPricingKey = bookingDetails.ActivityPricingKey;
                 activityBooking.ActivityKey = bookingDetails.ActivityKey;
                 activityBooking.BookingDate = Convert.ToDateTime(bookingDetails.BookingDate);
                 activityBooking.ChildParticipants = bookingDetails.ChildParticipants;
                 activityBooking.Participants = bookingDetails.Participants;
                 activityBooking.SessionKey = bookingDetails.SessionKey;
-                activityBooking.Time = bookingDetails.Time;
+                activityBooking.Time = bookingDetails.Time;                
                 activityBooking.IsConfirmed = bookingDetails.IsConfirmed;
                 activityBooking.IsDeleted = bookingDetails.IsDeleted;
                 activityBooking.IsCancelled = bookingDetails.IsCancelled;
@@ -148,6 +189,7 @@ namespace MMC.Business.Managers
                 IActivityLocationRepository activityLocationRepository = _DataRepositoryFactory.GetDataRepository<IActivityLocationRepository>();
                 IEnumerable<ActivityBooking> allBookedActivites = activitiesBookingEngine.GetBookedActivitiesForUser(sessionKey, default(string));
                 IActivityImagesRepository imageRepository = _DataRepositoryFactory.GetDataRepository<IActivityImagesRepository>();
+                IActivityPriceMappingRepository priceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
                 ILocationsMasterRepository locationRepository = _DataRepositoryFactory.GetDataRepository<ILocationsMasterRepository>();
                 List<ActivityBookingDataContract> result = new List<ActivityBookingDataContract>();
                 foreach (var item in allBookedActivites)
@@ -156,7 +198,8 @@ namespace MMC.Business.Managers
                     bookedActivities.ActivityBookingKey = item.ActivityBookingKey;
                     bookedActivities.ActivityKey = item.ActivityKey;
                     bookedActivities.Currency = activitiesRepository.Get(item.ActivityKey).Currency;
-                    bookedActivities.Cost = activitiesRepository.Get(item.ActivityKey).Cost;
+                    bookedActivities.Cost = priceMappingRepository.Get(item.ActivityPricingKey).PriceForAdults;
+                    bookedActivities.CostChild = priceMappingRepository.Get(item.ActivityPricingKey).PriceForChildren;
                     bookedActivities.ActivityName = activitiesRepository.Get(item.ActivityKey).Name;
                     bookedActivities.Location = locationRepository.Get(activityLocationRepository.Get().
                         Where(entity => entity.ActivityKey == item.ActivityKey).FirstOrDefault().LocationKey).LocationName.ToLower();
@@ -187,6 +230,46 @@ namespace MMC.Business.Managers
                     {
                         bookedActivities.ThumbnailImage = string.Format("Images/{0}{1}", thumbnailImageURL, MOBILE);
                     }
+                    result.Add(bookedActivities);
+                }
+                return result;
+            });
+        }
+
+        public IEnumerable<EmailDataContract> GetUsersBookingDetails(string sessionKey, string userAgent)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivitiesBookingEngine activitiesBookingEngine
+                    = _BusinessEngineFactory.GetBusinessEngine<IActivitiesBookingEngine>();
+
+                IActivitiesMasterRepository activitiesRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+                IActivityLocationRepository activityLocationRepository = _DataRepositoryFactory.GetDataRepository<IActivityLocationRepository>();
+                IEnumerable<ActivityBooking> allBookedActivites = activitiesBookingEngine.GetBookedActivitiesForUser(sessionKey, default(string));
+                IActivityImagesRepository imageRepository = _DataRepositoryFactory.GetDataRepository<IActivityImagesRepository>();
+                IActivityPriceMappingRepository priceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
+                ILocationsMasterRepository locationRepository = _DataRepositoryFactory.GetDataRepository<ILocationsMasterRepository>();
+                IActivityCompanyRepository activityCompanyMasterRepository = _DataRepositoryFactory.GetDataRepository<IActivityCompanyRepository>();
+                List<EmailDataContract> result = new List<EmailDataContract>();
+                foreach (var item in allBookedActivites)
+                {
+                    EmailDataContract bookedActivities = new EmailDataContract();                                        
+                    bookedActivities.Currency = activitiesRepository.Get(item.ActivityKey).Currency;                   
+                    bookedActivities.ActivityName = activitiesRepository.Get(item.ActivityKey).Name;
+                    bookedActivities.Address = locationRepository.Get(activityLocationRepository.Get().
+                        Where(entity => entity.ActivityKey == item.ActivityKey).FirstOrDefault().LocationKey).LocationName.ToLower();
+                    bookedActivities.BookingDate = item.BookingDate;
+                    bookedActivities.ChildParticipants = item.ChildParticipants;
+                    bookedActivities.Participants = item.Participants;                    
+                    bookedActivities.Time = item.Time;                    
+                    bookedActivities.PaymentAmount = item.PaymentAmount;
+                    bookedActivities.Email = item.Email;
+                    bookedActivities.Duration = activitiesRepository.Get(item.ActivityKey).Duration;
+                    bookedActivities.ThingsToCarry = activitiesRepository.Get(item.ActivityKey).ThingsToCarry;
+                    bookedActivities.CancellationPolicy = activitiesRepository.Get(item.ActivityKey).CancellationPolicy;
+                    bookedActivities.BookingNumber = item.BookingNumber;
+                    bookedActivities.PriceOption = priceMappingRepository.Get(item.ActivityPricingKey).OptionDescription;
+                    bookedActivities.ContactNumber = activityCompanyMasterRepository.GetCompanyByActivity(item.ActivityKey).TelephoneNumber;
                     result.Add(bookedActivities);
                 }
                 return result;
@@ -370,7 +453,7 @@ namespace MMC.Business.Managers
                 activitiesMaster.Address = activity.Location;
                 activitiesMaster.AverageUserRating = activity.UserRating;
                 activitiesMaster.DifficultyRating = activity.DifficultyRating;
-                activitiesMaster.Cost = activity.Cost;
+                activitiesMaster.AllowInstantBooking = activity.AllowInstantBooking;
                 activitiesMaster.Currency = activity.Currency;
                 activitiesMaster.Description = activity.Description;
                 activitiesMaster.MinAdults = activity.MinPeople;
@@ -389,6 +472,7 @@ namespace MMC.Business.Managers
                 activitiesMaster.IsPermitRequired = activity.IsPermitRequired;
                 activitiesMaster.Included = activity.Included;
                 activitiesMaster.Advice = activity.Advice;
+                activitiesMaster.Comission = activity.Comission;
                 activitiesMaster.ThingsToCarry = activity.ThingsToCarry;
                 if (activity.ActivityKey == default(string))
                 {
@@ -410,7 +494,7 @@ namespace MMC.Business.Managers
                     dayScheduler.ActivityDaySchedulerKey = Guid.NewGuid().ToString();
                     dayScheduler.ActivityKey = activitiesMaster.ActivitesKey;
                 }
-                
+
 
                 IEnumerable<ActivityPriceMapping> allPriceMappings = activityPriceMappingRepository.GetAllPriceOptionsForSelectedActivity(activitiesMaster.ActivitesKey);
 
@@ -418,13 +502,29 @@ namespace MMC.Business.Managers
                 {
                     foreach (var item in allPriceMappings)
                     {
-                        activityPriceMappingRepository.Remove(item);
+                        if (activity.AllPriceOptions != null && activity.AllPriceOptions.Any(e => e.ActivityPricingKey == item.ActivityPricingKey))
+                        {
+                            item.CommissionAmount = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).CommissionAmount;
+                            item.CommissionPercentage = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).CommissionPercentage;
+                            item.CreatedDate = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).CreatedDate;
+                            item.CreatedBy = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).CreatedBy;
+                            item.NumAdults = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).NumAdults;
+                            item.NumChild = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).NumChild;
+                            item.OptionDescription = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).OptionDescription;
+                            item.PriceForAdults = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).PriceForAdults;
+                            item.PriceForChildren = activity.AllPriceOptions.FirstOrDefault(e => e.ActivityPricingKey == item.ActivityPricingKey).PriceForChildren;
+                            activityPriceMappingRepository.Update(item);
+                        }
+                        else
+                        {
+                            activityPriceMappingRepository.Remove(item);
+                        }
                     }
                 }
 
                 if (activity.AllPriceOptions != null && activity.AllPriceOptions.Count() > 0)
                 {
-                    foreach (var item in activity.AllPriceOptions)
+                    foreach (var item in activity.AllPriceOptions.Where(e => e.ActivityPricingKey == string.Empty || e.ActivityPricingKey == default(string)))
                     {
                         item.ActivityPricingKey = Guid.NewGuid().ToString();
                         item.ActivityKey = activitiesMaster.ActivitesKey;
@@ -433,7 +533,7 @@ namespace MMC.Business.Managers
                         activityPriceMappingRepository.Add(item);
                     }
                 }
-                
+
                 if (!activity.IsEvent)
                 {
                     int count = 0;
@@ -497,7 +597,66 @@ namespace MMC.Business.Managers
                         activityDatesRepository.Add(item);
                     }
                 }
+                if (activity.AllTopOffers.Count() > 0)
+                {
+                    ITopOffersRepository topOffersRepository = _DataRepositoryFactory.GetDataRepository<ITopOffersRepository>();
+                    ITopOfferMappingRepository topOffersMappingRepository = _DataRepositoryFactory.GetDataRepository<ITopOfferMappingRepository>();
+                    List<TopOfferMapping> updateOfferMapping = new List<TopOfferMapping>();
+                    foreach (var item in activity.AllTopOffers)
+                    {
+                        if (topOffersRepository.Get(item.TopOffersKey) != null)
+                        {
+                            TopOffers offer = topOffersRepository.Get(item.TopOffersKey);
+                            offer.ImageUrl = activity.ImageURL;
+                            offer.OfferEndDate = item.OfferEndDate;
+                            offer.OfferStartDate = item.OfferStartDate;
+                            offer.LocationKey = locationKey;
+
+                            IEnumerable<TopOfferMapping> offerMapping = topOffersMappingRepository.Get().Where(e => e.TopOfferKey == item.TopOffersKey && e.MappingKey == activity.ActivityKey);
+                            foreach (var mapping in offerMapping)
+                            {
+                                topOffersMappingRepository.Remove(mapping);
+                            }
+                            TopOfferMapping mappingOffer = new TopOfferMapping
+                            {
+                                TopOfferKey = item.TopOffersKey,
+                                MappingKey = activity.ActivityKey,
+                                Discount = item.Discount,
+                                IsDeleted = false,
+                                MappingType = ACTIVITY,
+                                TopOfferMappingKey = Guid.NewGuid().ToString()
+                            };
+                            updateOfferMapping.Add(mappingOffer);
+                        }
+                    }
+                    //Adding all top offer mapping
+                    topOffersMappingRepository.AddAll(updateOfferMapping);
+                }
             });
+        }
+
+
+        private string GetUniqueKey()
+        {
+            int maxSize = 8;
+            char[] chars = new char[62];
+            string a;
+            a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+            chars = a.ToCharArray();
+            int size = maxSize;
+            byte[] data = new byte[1];
+            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
+            crypto.GetNonZeroBytes(data);
+            size = maxSize;
+            data = new byte[size];
+            crypto.GetNonZeroBytes(data);
+            StringBuilder result = new StringBuilder(maxSize);
+            for (int i = 0; i < maxSize; i++)
+            {
+                byte b = data[i];
+                result.Append(chars[b % (chars.Length - 1)]);
+            }
+            return result.ToString().ToUpper();
         }
 
         public IEnumerable<ActivityBookingDataContract> GetAllActivitiesPendingForConfirmation()
@@ -531,6 +690,34 @@ namespace MMC.Business.Managers
             });
         }
 
+        public bool AcceptSelectedActivityBooking(string bookingKey, string user)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                ActivityBooking selectedBooking = activityBookingRepository.Get(bookingKey);
+                selectedBooking.IsConfirmed = true;
+                selectedBooking.ConfirmationDate = DateTime.Now;
+                selectedBooking.IsPaymentComplete = true; 
+                selectedBooking.ConfirmedBy = user;
+                activityBookingRepository.Update(selectedBooking);
+                return true;
+            });
+        }
+        public bool RejectSelectedActivityBooking(string bookingKey, string user)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityBookingRepository activityBookingRepository = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+                ActivityBooking selectedBooking = activityBookingRepository.Get(bookingKey);
+                selectedBooking.IsCancelled = true;
+                selectedBooking.IsDeleted = true;
+                selectedBooking.ConfirmationDate = DateTime.Now;
+                selectedBooking.ConfirmedBy = user;
+                activityBookingRepository.Update(selectedBooking);
+                return true;
+            });
+        }
         public IEnumerable<CompanyMaster> GetAllRegisteredCompanies()
         {
             return ExecuteFaultHandledOperation(() =>
@@ -730,6 +917,15 @@ namespace MMC.Business.Managers
                 }
                 return activityBookingList.OrderBy(e => e.BookingDate);
             });
+        }
+
+        public IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivityTagMappingRepository tagMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityTagMappingRepository>();
+                return tagMappingRepository.GetActivitiesForSelectedSearchTag(tags);
+            });            
         }
     }
 }

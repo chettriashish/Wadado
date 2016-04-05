@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>wadado.in</title>
+    <title>www.mymonkeycap.com</title>
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     @*@Styles.Render("~/Content/themes/base/css")*@
@@ -16,7 +16,7 @@
         //For development
         Wadado.rootPath = 'http://localhost:4197/';
         //For Testing
-        //Wadado.rootPath = 'http://www.thefigtree.in/';
+        //Wadado.rootPath = 'http://demo.mymonkeycap.com/';
         //For Production
         //Wadado.rootPath = 'http://www.wadado.in/';
     </script>
@@ -35,7 +35,7 @@
     </script>
     <meta name="google-signin-client_id" content="906159375301-v2fqno1s4s7p6v9qktk48jqiorce7v75.apps.googleusercontent.com">
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-    @*<base href="http://www.thefigtree.in">*@	
+    @*<base href="http://www.thefigtree.in">*@
     <script src="~/Scripts/app.js"></script>
 
     <!--[if lt IE 9]>
@@ -49,7 +49,7 @@
         document.createElement('ui-select-choices');
       </script>
     <![endif]-->
-        
+
 </head>
 <body>
     <div class="spinner">
@@ -63,8 +63,19 @@
     </div>
     <footer>
         <div ng-cloak>
-            <div class="center-element-relative-table">
-                <img src="~/Images/Icons/do_mob.png" />
+            <div class="row">
+                <div class="column-4">
+                    <div style="font-size:1em;text-decoration:none;">
+                        @*<a href="http://localhost:4197/about">About Us</a>*@
+                        <a href="http://demo.mymonkeycap.com/about">About Us</a>
+                    </div>
+                    <div style="font-size:1em;text-decoration:none;">
+                        @*<a href="http://localhost:4197/termsconditions">Terms and conditions</a>*@
+                        <a href="http://demo.mymonkeycap.com/termsconditions">Terms and conditions</a>
+                    </div>
+                </div>
+                <div class="column-4">&nbsp;</div>
+                <div class="column-4">&nbsp;</div>
             </div>
         </div>
     </footer>
@@ -73,18 +84,39 @@
     <!-- *************** SCRIPT TO MAKE THE MOBILE NAV EXPAND DOWN ****************** -->
     <script>
         $(document).ready(function () {
+            var b_c = false;
             $(".nav-button").click(function () {
-                $(".nav-button,.menu-nav").toggleClass("open");
-                $(".cover").toggleClass("open");
-                preventScrolling();
+                if (!WURFL.is_mobile) {
+                    $(".nav-button,.menu-nav").toggleClass("open");
+                    b_c = true;
+                }
+                else {
+                    $(".nav-button,.menu-nav").toggleClass("open");
+                    $(".cover").toggleClass("open");
+                    preventScrolling();
+                }
             });
-            $(".cover").click(function () {
-                $(".nav-button,.menu-nav").toggleClass("open");
-                $(".cover").toggleClass("open");
-                allowScrolling();
-            });
+            if (!WURFL.is_mobile) {
+                $(".contentWrapper").click(function () {
+                    if (!b_c) {
+                        $(".nav-button,.menu-nav").removeClass("open");
+                        b_c = true;
+                    }
+                    else if (b_c == true) {
+                        b_c = false;
+                    }
+                });
+            }
+            else {
+                $(".cover").click(function () {
+                    $(".nav-button,.menu-nav").toggleClass("open");
+                    $(".cover").toggleClass("open");
+                    allowScrolling();
+                });
+            }
+
             $(".logo-button").click(function () {
-                window.location.href = "http://www.thefigtree.in";
+                window.location.href = Wadado.rootPath;
             });
 
             var preventScrolling = function () {

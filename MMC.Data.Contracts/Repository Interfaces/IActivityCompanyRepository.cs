@@ -10,5 +10,7 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
 {
     public interface IActivityCompanyRepository : IDataRepository<ActivityCompany>
     {
+        CompanyMaster GetCompanyByActivity(string activityKey);
+        IEnumerable<ActivitiesMaster> GetAllActivitiesForSelectedCompany(string companyKey);
     }
 }

@@ -11,12 +11,12 @@
             return deferred.promise;
         }
 
-        var addSelectedActivityToUsersCart = function (activityKey, numAdults, numChildren, date, time, total) {
+        var addSelectedActivityToUsersCart = function (activityKey, activityPricingKey, numAdults, numChildren, date, time, total) {
             var deferred = $q.defer();
             $http({
                 url: '/Booking/AddSelectedActivityToUsersCart',
                 method: 'GET',
-                params: { selectedActivityKey: activityKey, numAdults: numAdults, numChildren: numChildren, bookingDate: date, bookingTime: time, total: total }
+                params: { selectedActivityKey: activityKey, selectedActivityPriceOptionsKey: activityPricingKey, numAdults: numAdults, numChildren: numChildren, bookingDate: date, bookingTime: time, total: total }
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }

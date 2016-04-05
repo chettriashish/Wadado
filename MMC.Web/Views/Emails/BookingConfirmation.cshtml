@@ -1,0 +1,440 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Booking Confirmation</title>
+    <style type="text/css">
+        @@import url("http://www.google.com/fonts#UsePlace:use/Collection:Roboto:400,700,300");
+
+        #outlook a {
+            padding: 0;
+        }
+
+        a:link {
+            color: #00898B;
+        }
+        /* unvisited link */
+        a:visited {
+            color: #00898B;
+        }
+        /* visited link */
+        a:hover {
+            color: #006C79;
+        }
+        /* mouse over link */
+        a:active {
+            color: #00898B;
+        }
+        /* selected link */
+        a {
+            text-decoration: none;
+        }
+
+            a img {
+                border: none;
+            }
+
+        body {
+            width: 100% !important;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ExternalClass {
+            width: 100%;
+        }
+
+        #backgroundTable {
+            margin: 0;
+            padding: 0;
+            width: 100% !important;
+        }
+
+        img {
+            outline: none;
+            text-decoration: none;
+            -ms-interpolation-mode: bicubic;
+            display: block;
+        }
+
+        span.yshortcuts {
+            color: #000;
+            background-color: none;
+            border: none;
+        }
+
+            span.yshortcuts:hover,
+            span.yshortcuts:active,
+            span.yshortcuts:focus {
+                color: #000;
+                background-color: none;
+                border: none;
+            }
+
+        @@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+            .appleLinks a {
+                color: #999999;
+                text-decoration: none;
+            }
+
+            /* layout */
+
+            *[class=hide] {
+                display: none !important;
+            }
+
+            *[class=tableWide] {
+                width: 340px;
+                !important;
+            }
+
+            *[class=table] {
+                width: 320px;
+                !important;
+            }
+
+            *[class=image] {
+                width: 100%;
+            }
+
+            *[class=td334] {
+                width: 93%;
+            }
+
+            *[class=td334left] {
+                width: 100%;
+                padding-left: 2px;
+            }
+
+            *[class=td334right] {
+                width: 100%;
+                padding-right: 2px;
+            }
+
+            *[class=heightHalf] {
+                height: 15px;
+            }
+
+            *[class=td330] {
+                width: 95%;
+            }
+
+            *[class=td215] {
+                width: 180px;
+            }
+
+            *[class=td310] {
+                width: 93%;
+            }
+
+            *[class=logo] {
+                width: 100%;
+            }
+
+            *[class=logo2] {
+                padding-top: 10px;
+            }
+        }
+    </style>
+</head>
+<body bgcolor="#ffffff" style="-webkit-font-smoothing: antialiased; width:100% !important; background:#ffffff; -webkit-text-size-adjust:none;">
+    <table class="tableWide" width="100%" border="0" cellpadding="0" cellspacing="0" bgcolor="#ffffff">
+        <tr>
+            <td class="tableWide" style="background-repeat:repeat-x; border-collapse: collapse; left:auto; right:auto; position:absolute;" width="100%" bgcolor="#ffffff" valign="top" align="center">
+                <table class="hide" width="750" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="border-collapse: collapse;" width="14" height="35" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="360" height="27" class="hide"></td>
+                        <td style="border-collapse: collapse;" width="360" height="27" align="left" valign="bottom"></td>
+                        <td style="border-collapse: collapse;" width="14" height="27" class="hide" align="right" valign="bottom">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="hide" width="750" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td style="border-collapse: collapse;" width="750" height="10" class="table">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="table" width="750" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" align="center" valign="top">
+                    <tr>
+                        <td style="border-collapse: collapse;" width="14" height="35" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" align="left">
+                            <font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:24px; color:#000000; font-weight:400;">
+                                <strong>E-Ticket</strong>
+                            </font>
+                            <br />
+                            @*<td style="border-collapse: collapse;" align="left"><font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:24px; color:#0a336e; font-weight:400;">MyMonkeyCap Booking ID - @ViewBag.BookingNumber</font></td>*@
+                            <font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:16px; color:#000000; font-weight:400;">MyMonkeyCap Booking ID - AC12343FEEK34S</font>
+                            <br />
+                            <font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:12px; color:#000000; font-weight:400;">Booking Date: @ViewBag.Date</font>
+                            <br />
+                            <font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:12px; color:#000000; font-weight:400;">www.mymonkeycap.com</font>
+                        </td>
+                        <td style="border-collapse: collapse;" width="289" height="35" class="hide" align="right"><a target="_blank" href="#">@Html.EmbedImage("~/Images/Icons/do_email.png")</a></td>
+                        <td style="border-collapse: collapse;" width="16" height="35" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="table" width="750" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="hide" style="border-collapse: collapse;" width="14">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td class="table" width="720" bgcolor="#FFFFFF" align="center" valign="top" style="
+				            padding:0px 0px 0px 0px;
+				            -moz-background-clip: padding;
+				            -webkit-background-clip: padding-box;
+				            background-clip: padding-box;
+                            border-bottom:1px solid #c4dcfe;
+				            outline: none;
+				            display: inline-block;
+				            background-color: #ffffff;">
+                            <table class="td334" width="680" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="4">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td style="border-collapse: collapse;" width="16" height="35" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="table" width="750" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" align="center" valign="top">
+                    <tr>
+                        <td style="border-collapse: collapse;" width="14" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        @*<td style="border-collapse: collapse;" align="left"><font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:24px; color:#0a336e; font-weight:400;">MyMonkeyCap Booking ID - @ViewBag.BookingNumber</font></td>*@
+                        <td style="border-collapse: collapse;" align="left" colspan="2">
+                            <font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:18px; color:#000000; font-weight:400;">
+                                Itinerary and Booking Details
+                            </font>
+                            <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                (please carry a valid photo identity proof along with the ticket)
+                            </font>
+                        </td>                        
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="table" width="750" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="hide" style="border-collapse: collapse;" width="14">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td class="table" width="720" bgcolor="#FFFFFF" align="center" valign="top" style="
+				            padding:10px 0px 15px 0px;
+				            -moz-background-clip: padding;
+				            -webkit-background-clip: padding-box;
+				            background-clip: padding-box;
+                            border-top:1px solid #c4dcfe;
+				            border-bottom:1px solid #c4dcfe;
+				            outline: none;
+				            display: inline-block;
+				            background-color: #ffffff;">
+                            <table class="td334" width="720" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="3">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Name: </strong>@ViewBag.Name
+                                        </font>
+                                    </td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Number of People: </strong>@ViewBag.NumPeople
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:2px 0 0 0;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Contact Number: </strong>@ViewBag.PhoneNumber
+                                        </font>
+                                    </td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:2px 0 0 0;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Email: </strong>@ViewBag.Email
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:20px 0 0 0;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Activity/Event Name: </strong>@ViewBag.ActivityName
+                                        </font>
+                                    </td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:20px 0 0 0;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Activity Date and Time: </strong>@ViewBag.BookingDateTime
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:2px 0 0 0;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Booking For: </strong>@ViewBag.PriceOption
+                                        </font>
+                                    </td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:2px 0 0 0;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Duration: </strong>@ViewBag.Duration
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:2px 0 0 0;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Activity/Event Contact: </strong>@ViewBag.ContactNumber
+                                        </font>
+                                    </td>
+                                    <td align="left" valign="top" style="line-height:15px;width:50%;padding:2px 0 0 0;">                                        
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:100%;padding:20px 0 0 0;" colspan="2">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Activity/Event Address </strong><br /> @ViewBag.Address
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:100%;padding:20px 0 0 0;" colspan="2">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Things to carry </strong><br /> @ViewBag.ThingsToCarry
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:100%;padding:20px 0 0 0;" colspan="2">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            <strong>Restrictions </strong><br /> @ViewBag.Restrictions
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="hide" style="border-collapse: collapse;" width="16"><img style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; display:block;" width="16" alt="" /></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="table" width="750" border="0" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF" align="center" valign="top">
+                    <tr>
+                        <td style="border-collapse: collapse;" width="14" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        @*<td style="border-collapse: collapse;" align="left"><font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:24px; color:#0a336e; font-weight:400;">MyMonkeyCap Booking ID - @ViewBag.BookingNumber</font></td>*@
+                        <td style="border-collapse: collapse;" align="left">
+                            <font style="font-family:'Roboto',Arial,Helvetica,sans-serif; font-size:18px; color:#000000; font-weight:400;">
+                                Cancellation Policy
+                            </font>
+                        </td>
+                        <td style="border-collapse: collapse;" width="289" class="hide" align="right"><a target="_blank" href="#">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="table" width="750" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="hide" style="border-collapse: collapse;" width="14">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td class="table" width="720" bgcolor="#FFFFFF" align="center" valign="top" style="
+				            padding:10px 0px 15px 0px;
+				            -moz-background-clip: padding;
+				            -webkit-background-clip: padding-box;
+				            background-clip: padding-box;
+                            border-top:1px solid #c4dcfe;
+				            border-bottom:1px solid #c4dcfe;
+				            outline: none;
+				            display: inline-block;
+				            background-color: #ffffff;">
+                            <table class="td334" width="720" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="3">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:100%;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            @ViewBag.CancellationPolicy
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="hide" style="border-collapse: collapse;" width="16"><img style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; display:block;" width="16" alt="" /></td>
+                    </tr>
+                </table>
+                <table>
+                    <tr>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td style="border-collapse: collapse;" width="16" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                    </tr>
+                </table>
+                <table class="table" width="750" border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="hide" style="border-collapse: collapse;" width="14">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                        <td class="table" width="720" bgcolor="#FFFFFF" align="center" valign="top" style="
+				            padding:10px 0px 15px 0px;
+				            -moz-background-clip: padding;
+				            -webkit-background-clip: padding-box;
+				            background-clip: padding-box;                            
+				            border-bottom:1px solid #c4dcfe;
+				            outline: none;
+				            display: inline-block;
+				            background-color: #ffffff;">
+                            <table class="td334" width="720" border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    <td colspan="3">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                </tr>
+                                <tr>
+                                    <td align="left" valign="top" class="hide">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                    <td align="left" valign="top" style="line-height:15px;width:100%;">
+                                        <font style="text-decoration:none; color:#333333; font-size:12px; line-height:13px; font-family:'Roboto',Arial,Helvetica,sans-serif;">
+                                            For all queries please get in touch with us at support@mymonkeycap.com. 
+                                        </font>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">@Html.EmbedImage("~/Images/Icons/spacer.gif")</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td class="hide" style="border-collapse: collapse;" width="16"><img style="outline:none; text-decoration:none; -ms-interpolation-mode: bicubic; display:block;" width="16" alt="" /></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

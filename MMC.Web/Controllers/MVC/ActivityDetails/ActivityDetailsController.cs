@@ -7,6 +7,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace MMC.Web.Controllers.ActivityDetails
 {
@@ -17,7 +18,7 @@ namespace MMC.Web.Controllers.ActivityDetails
         {
             _activitiesService = activitiesService;           
         }
-
+        [OutputCache(CacheProfile = "global", Location = OutputCacheLocation.Server)]
         public JsonResult GetSelectedActivityDetails(string selectedLocation, string activityKey)
         {
             string device = GetDeviceInformation();

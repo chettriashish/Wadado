@@ -67,5 +67,13 @@ namespace MMC.Business.Contracts
         IEnumerable<ActivityBookingDataContract> GetAllUpcomingActivities();
         [OperationContract]
         IEnumerable<ActivityBookingDataContract> GetAllUpcomingCompanyActivities(string companyKey);
+        [OperationContract]
+        bool AcceptSelectedActivityBooking(string bookingKey, string user);
+        [OperationContract]
+        bool RejectSelectedActivityBooking(string bookingKey, string user);
+        [OperationContract]
+        IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags);
+        [OperationContract]
+        IEnumerable<EmailDataContract> GetUsersBookingDetails(string sessionKey, string userAgent);
     }
 }

@@ -24,7 +24,7 @@
                     <div><span>:</span></div>
                 </div>
                 <div class="column-8">
-                    <div class="column-auto"><label><input type="checkbox" ng-model="activityDetails.IsEvent" ng-click="setEventActivity('event')"/>Event</label></div>
+                    <div class="column-auto"><label><input type="checkbox" ng-model="activityDetails.IsEvent" ng-click="setEventActivity('event')" />Event</label></div>
                     <div class="column-auto"><label><input type="checkbox" ng-model="activityDetails.IsActivity" ng-click="setEventActivity('activity')" />Activity</label></div>
                 </div>
             </div>
@@ -50,7 +50,8 @@
                 <div class="column-8" ng-if="!isEdit">
                     <ui-select ng-model="item.selected" theme="selectize" class="admin-category-select" on-select="setSelectedSubCategory(item)">
                         <ui-select-match placeholder=" eg. paragliding">
-                        {{$select.selected.ActivityType}}</ui-select-match>
+                            {{$select.selected.ActivityType}}
+                        </ui-select-match>
                         <ui-select-choices repeat="item in allActivitySubCategories | filter: $select.search">
                             <span ng-bind-html="item.ActivityType | highlight: $select.search"></span>
                         </ui-select-choices>
@@ -116,7 +117,22 @@
                 </div>
             </div>
         </div>
-    </div>      
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Allow Instant Booking</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-8">
+                    <div class="column-auto"><label><input type="checkbox" ng-model="activityDetails.AllowInstantBooking" ng-click="setEventActivity('event')" />Yes</label></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="row">
         <div class="column-12">
             <div>
@@ -146,7 +162,7 @@
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     <div class="row">
         <div class="column-12">
             <div>
@@ -161,5 +177,5 @@
                 </div>
             </div>
         </div>
-    </div>                           
+    </div>
 </div>

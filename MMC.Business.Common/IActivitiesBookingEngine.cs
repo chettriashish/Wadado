@@ -10,8 +10,9 @@ namespace MMC.Business.Common
 {
     public interface IActivitiesBookingEngine : IBusinessEngine
     {
-        bool IsActivityAvailable(string activityKey, DateTime bookingDate, string bookingTime,
-            IEnumerable<ActivityBooking> bookedActivites, int adults,int children, IEnumerable<ActivitiesMaster> allActivities);
+        bool IsActivityAvailable(string activityPricingKey, DateTime bookingDate, string bookingTime,
+            IEnumerable<ActivityBooking> bookedActivites, int adults, int children, ActivitiesMaster activity);
+
         ActivityBooking BookActivityForUser(ActivityBooking bookedActivity);
 
         void UpdateActivityForUser(string sessionKey, string userKey);

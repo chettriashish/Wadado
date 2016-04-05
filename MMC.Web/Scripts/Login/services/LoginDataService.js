@@ -55,9 +55,9 @@
         var returnUser = function (returnURL) {
             if (returnURL.length < 4) {
                 /************FOR LOCAL TESTING*************/
-                returnURL = "http://localhost:4197/";
+                //returnURL = "http://localhost:4197/";
                 /************FOR TESTING*************/
-                //returnURL = "http://www.thefigtree.in";
+                returnURL = Wadado.rootPath;
             }
             $window.location.href = returnURL.replace(/\/$/, "");
         }

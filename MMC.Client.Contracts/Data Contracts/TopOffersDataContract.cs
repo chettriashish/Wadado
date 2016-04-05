@@ -30,5 +30,8 @@ namespace MMC.Client.Contracts.DataContracts
         public string ImageURL { get; set; }
         [DataMember]
         public string Location { get; set; }
+        [DataMember]
+        public DateTime OfferEndDate { get; set; }
+        public DateTime OfferStartDate { get; set; }
     }
 }

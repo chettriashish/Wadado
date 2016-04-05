@@ -96,9 +96,9 @@
                     $scope.Action = response.Action;
                     $scope.ActivityKey = response.ActivityKey;
                 }
-                else {
-                    $scope.AllowGuest = true;
-                }
+                //else {
+                //    $scope.AllowGuest = true;
+                //}
             });
         }
         getAllActions();

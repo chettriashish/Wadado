@@ -222,6 +222,18 @@
                     }
                 }
             }
+        })
+        .state('adminCompanyDetails', {
+            url: '/company-details',
+            templateUrl: Wadado.rootPath + '/Templates/_adminCompanyDetails.html',
+            controller: 'AdminCompanyController',
+            controllerAs:'vm',
+            resolve: {
+                companyDetails: function (AdminCompanyDataService) {
+                    var userId = sessionStorage.getItem("userId");
+                    return AdminCompanyDataService.checkIfUserBelongsToCompany(userId);
+                }
+            }
         });
 
         //.state('adminSubCategoryList', {

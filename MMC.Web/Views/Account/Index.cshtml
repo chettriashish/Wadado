@@ -1,7 +1,44 @@
 ﻿@model MMC.Web.Model.AccountLoginModel
-@{    
-    ViewBag.Name = "Login";
+@{
+    ViewBag.Title = "WADADO.IN";
 }
+<!--SLIDER REFERENCE-->
+<script src="~/Scripts/slider/jssor.js"></script>
+<script src="~/Scripts/slider/jssor.slider.js"></script>
+<script src="~/Scripts/slider/slider.js"></script>
 
-<div data-ng-controller="AccountController" ng-init="returnUrl = '@Model.ReturnUrl'">
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+
+<!--WADADO REFERENCE-->
+<script src="~/Scripts/Video/video.js"></script>
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+<link href="~/Content/homedesktopmenu.css" rel="stylesheet" />
+
+<link href="~/Content/tablet.css" rel="stylesheet" />
+<link href="~/Content/desktop.css" rel="stylesheet" />
+
+<div id="colorbar">
+</div>
+<div class="cover"></div>
+<div id="contentWrapper" data-ng-controller="LoginController" ng-init="returnUrl ='@Model.ReturnUrl'">   
+    <div>
+        @Html.Partial("../Partial/_desktopHomeMenu")
+    </div>
+    <div>
+        @Html.Partial("../Partial/_login")
+    </div>
 </div>

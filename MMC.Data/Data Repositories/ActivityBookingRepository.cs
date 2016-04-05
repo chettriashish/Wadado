@@ -66,10 +66,10 @@ namespace MMC.Data.DataRepositories
         {
             using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext()) 
             {
-                var query = (from e in entityContext.ActivityBookingSet
-                             join e1 in entityContext.ActivityCompanySet
-                             on e.ActivityKey equals e1.ActivityKey
-                             where e1.CompanyKey == companyKey
+                var query = (from e in entityContext.ActivityBookingSet                             
+                             join e3 in entityContext.ActivityCompanySet
+                             on e.ActivityKey equals e3.ActivityKey
+                             where e3.CompanyKey == companyKey
                              && e.IsConfirmed == false &&  e.IsDeleted == false
                              select e);
 
@@ -94,7 +94,7 @@ namespace MMC.Data.DataRepositories
         {
             using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
             {
-                var query = (from e in entityContext.ActivityBookingSet
+                var query = (from e in entityContext.ActivityBookingSet                                                      
                              join e1 in entityContext.ActivityCompanySet
                              on e.ActivityKey equals e1.ActivityKey
                              where e1.CompanyKey == companyKey
@@ -124,7 +124,7 @@ namespace MMC.Data.DataRepositories
         {
             using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
             {
-                var query = (from e in entityContext.ActivityBookingSet
+                var query = (from e in entityContext.ActivityBookingSet                             
                              join e1 in entityContext.ActivityCompanySet
                              on e.ActivityKey equals e1.ActivityKey
                              where e1.CompanyKey == companyKey

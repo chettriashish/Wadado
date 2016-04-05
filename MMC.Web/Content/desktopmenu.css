@@ -38,7 +38,7 @@
         height: 90px;
         top: 0em;
         left: 5em;
-        background-color: rgb(251,189,19);
+        background-color: rgb(255,255,255);
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
@@ -57,6 +57,7 @@
         .logo-button:hover {
             background-position-y: 20px;
             height: 110px;
+            background-color: rgb(255,255,255);
         }
 
 

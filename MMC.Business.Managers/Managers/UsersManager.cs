@@ -197,5 +197,56 @@ namespace MMC.Business.Managers
                 return userDetailsBusinessEngine.CheckForActivityInFavorites(guestKey, activityKey);
             });
         }
+
+        public CompanyMaster CreateCompanyForSelectedUser(string userId, CompanyMaster company)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                ICompanyMasterRepository companyMasterRepository = _DataRepositoryFactory.GetDataRepository<ICompanyMasterRepository>();
+                IUserCompanyMappingRepository userCompanyRepository = _DataRepositoryFactory.GetDataRepository<IUserCompanyMappingRepository>();
+
+                if (!string.IsNullOrWhiteSpace(company.CompanyKey))
+                {
+                    CompanyMaster updateCompany = companyMasterRepository.Get(company.CompanyKey);
+                    updateCompany.Address = company.Address;
+                    updateCompany.Name = company.Name;
+                    updateCompany.ContactPerson = company.ContactPerson;
+                    updateCompany.Email = company.Email;
+                    updateCompany.LocationCoordinates = company.LocationCoordinates;
+                    companyMasterRepository.Update(updateCompany);
+                }
+
+                else
+                {
+                    company.CompanyKey = Guid.NewGuid().ToString();
+                    companyMasterRepository.Add(company);
+                    UserCompanyMapping userCompany = new UserCompanyMapping
+                    {
+                        UserCompanyKey = Guid.NewGuid().ToString(),
+                        UserKey = userId,
+                        CompanyKey = company.CompanyKey,
+                        IsDeleted = false,
+                    };
+                    userCompanyRepository.Add(userCompany);
+                }                
+                return company;
+            });
+        }
+
+        public CompanyMaster CheckIfUserBelongsToCompany(string userId)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IUserCompanyMappingRepository userCompanyRepository = _DataRepositoryFactory.GetDataRepository<IUserCompanyMappingRepository>();
+                if (userCompanyRepository.IsUserMappedToCompany(userId))
+                {
+                    return userCompanyRepository.GetUserCompanyDetails(userId);
+                }
+                else
+                {
+                    return new CompanyMaster();
+                }
+            });
+        }
     }
 }

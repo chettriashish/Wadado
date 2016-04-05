@@ -96,7 +96,7 @@ img.scale, object.scale, .cover-height img {
 /***********SEARCH BLOCK*******************/
 .cover-search {
     position: absolute;
-    top: 15%;
+    top: 10%;
     width: 100%;
     left: 0;
     min-height: 200px;
@@ -495,21 +495,24 @@ img.scale, object.scale, .crop-height:hover img {
 /*******************END COLUMN  STYLES**************************/
 
 /*----- FOOTER -----*/
-.footerWrapper {    
+.footerWrapper {
     width: 100%;
-    min-width: 700px;    
-    bottom: 0;    
+    min-width: 700px;
+    bottom: 0;
 }
 
-footer {    
-    font-size: 1.5em;
+footer {
+    font-size: 1em;
     color: #fff;
     text-align: center;
-    padding: 1em 0;
+    padding: 2em 0;
+    display:table;
 }
 
     footer a {
         color: #fff;
+        text-decoration:none;
+        padding:.5em 0;
     }
 
 .subHeader, .subHeaderRight, .subHeaderCenter {
@@ -554,287 +557,299 @@ label {
     border-radius: 2px;
 }
 
-/********************ACTIVITY CART END**************************/
+/*Changes for desktop home menu*/
+.menu-nav.open li a {
+    border-bottom: 1px solid #ccc;
+    display: block;
+    padding: 1em;
+    margin: 0 auto;
+    font-size: 1em;
+    font-weight: normal;
+    /* text-shadow: -1px -1px 0 rgba(0, 0, 0, 0.15); */
+    color: black;
+    text-decoration: none;
+}
+    /********************ACTIVITY CART END**************************/
 
-@media only screen and (min-width:600px) {
-    .column-2 {
-        width: 16.6%;
-    }
-    /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
-    .location-activity-wrapper .activityCategoryDetails > div {
-        font-size: 1.2em;
-    }
-
-        .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
-            font-size: 1.4em;
+    @media only screen and (min-width:600px) {
+        .column-2 {
+            width: 16.6%;
+        }
+        /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
+        .location-activity-wrapper .activityCategoryDetails > div {
+            font-size: 1.2em;
         }
 
-    .list-booking-wrapper .activitybookingDetails div:first-of-type {
-        font-size: 1.2em;
-        padding: .1em .5em 0 0;
-        float: left;
-        font-weight: 400;
-    }
+            .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
+                font-size: 1.4em;
+            }
 
-    .caption {
-        font-weight: 600;
-        font-size: 1.5em;
-    }
+        .list-booking-wrapper .activitybookingDetails div:first-of-type {
+            font-size: 1.2em;
+            padding: .1em .5em 0 0;
+            float: left;
+            font-weight: 400;
+        }
 
-    .location {
-        top: -1.5em;
-        font-size: 3.5em;
-    }
-
-    .bestMonthsToVisitWrapper.item {
-        float: left;
-        padding: 0em 0.5em .2em;
-        font-size: 1.2em;
-    }
-
-    .bestMonthsToVisitWrapper.litem {
-        float: left;
-        padding: 0em 0.5em;
-        font-size: 1.2em;
-    }
-
-    .location-activity-wrapper {
-        height: 80px;
-        border-radius: 5px;
-        padding: 5% 0;
-        cursor: pointer;
-    }
-    /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
-}
-
-.header-upper-noborder-left {
-    font-size: 1.4em;
-}
-
-@media only screen and (min-width:700px) {
-
-    .rating {
-        font-size: 1.1em;
-        margin: -0.5em auto auto auto;
-        width: 5.8em;
-    }
-
-    .rating-outer {
-        margin: 0em;
-    }
-
-    .subHeader, .subHeaderRight, .subHeaderCenter {
-        font-size: 1em;
-        font-weight: 600;
-        padding: 0 1em;
-    }
-    /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
-    .location {
-        top: -1em;
-        font-size: 4em;
-    }
-
-    .location-activity-wrapper .activityCategoryDetails > div {
-        font-size: 1.2em;
-    }
-
-        .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
+        .caption {
+            font-weight: 600;
             font-size: 1.5em;
         }
 
-    .bestMonthsToVisitWrapper.item {
-        float: left;
-        padding: 0em 0.8em .2em;
-        font-size: 1.3em;
-        text-align: left;
-    }
-
-    .bestMonthsToVisitWrapper.litem {
-        float: left;
-        padding: 0em 0.8em;
-        font-size: 1.3em;
-    }
-
-    .labelPlain {
-        font-size: 1.2em;
-        padding: .1em 0em;
-        margin: 0;
-    }
-
-    label {
-        font-size: .9em;
-    }
-
-    .error, .error-init {
-        font-size: 1.2em;
-    }
-
-    .error-init {
-        visibility: hidden;
-        height: 1.5em;
-        position: relative;
-        color: red;
-        transition: opacity 1s linear;
-        opacity: 0;
-    }
-
-        .error-init.show {
-            opacity: 1;
-            visibility: visible;
+        .location {
+            top: -1.5em;
+            font-size: 3.5em;
         }
-    /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
-    .list-booking-wrapper > div:first-of-type {
-        float: left;
-        width: 40%;
-        padding: 2em 0;
-    }
 
-    .list-booking-wrapper .activitybookingDetails {
-        float: right;
-        width: 60%;
-        text-align: left;
-    }
-
-    footer img {
-        transform: scale(.7);
-    }
-}
-
-@media only screen and (min-width: 900px) {
-
-    /************ACTIVITY CART START**************/
-    .list-booking-wrapper .activitybookingDetails div:first-of-type {
-        font-size: 1.5em;
-        letter-spacing: 1px;
-        padding: 0 .5em 0 0;
-        float: left;
-        font-weight: 500;
-    }
-
-    .list-booking-wrapper .activitybookingDetails > div {
-        font-size: 1.1em;
-        padding: .1em .5em 0 0;
-        float: left;
-        font-weight: 500;
-    }
-
-    .header-upper-noborder-left {
-        font-size: 1.2em;
-    }
-}
-
-@media only screen and (min-width: 1140px) {
-
-    /**************OVERDDIDING CALENDAR STYLES*******************/
-    .date-default-outer-container {
-        min-width: 300px;
-    }
-
-    .month-container {
-        font-size: 1em;
-    }
-
-    .days-container {
-        font-size: 1.1em;
-    }
-
-    .month-label-container {
-        float: left;
-        display: table;
-        width: 72%;
-    }
-
-        .month-label-container > div {
+        .bestMonthsToVisitWrapper.item {
+            float: left;
+            padding: 0em 0.5em .2em;
             font-size: 1.2em;
         }
-    /**************END OVERDDIDING CALENDAR STYLES*******************/
-    .subHeader, .subHeaderRight, .subHeaderCenter {
-        font-size: 1.25em;
-        font-weight: 600;
-        padding: 0 0em;
-    }
 
-
-    .location {
-        top: -2.5em;
-        font-size: 4.5em;
-    }
-
-    .location-activity-wrapper .activityCategoryDetails > div {
-        font-size: 1.4em;
-    }
-
-        .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
-            font-size: 1.8em;
+        .bestMonthsToVisitWrapper.litem {
+            float: left;
+            padding: 0em 0.5em;
+            font-size: 1.2em;
         }
 
-    .bestMonthsToVisitWrapper.item {
-        float: left;
-        padding: 0em 0.8em 0em;
-        font-size: 1.5em;
-        text-align: left;
-    }
-
-    .bestMonthsToVisitWrapper.litem {
-        float: left;
-        padding: 0em 0.8em;
-        font-size: 1.5em;
-    }
-
-    /*-----INSIDE THE WRAPPERS-----*/
-    header, nav, footer, .row {
-        margin: 0 auto; /*centers everything on the page*/
-        max-width: 1920px;
-    }
-
-    .location-activity-wrapper {
-        height: 100px;
-        border-radius: 5px;
-        padding: 5% 0;
-        cursor: pointer;
-    }
-
-    .location-detailsSpace {
-        font-size: 1.2em;
-        padding: 0 .5em 0 0;
-    }
-
-    /*******SETTING MAP HEIGHT********/
-    .map-container > div:nth-of-type(2) {
-        position: relative;
-        min-height: 26em;
-    }
-
-    .list-booking-wrapper > div:first-of-type {
-        float: left;
-        width: 25%;
-        padding: 1em 0;
-    }
-
-    .list-booking-wrapper .activitybookingDetails {
-        float: right;
-        width: 70%;
-        text-align: left;
-    }
-    /*-----COLUMNS -----*/
-
-    .column-2 {
-        width: 16.66%;
+        .location-activity-wrapper {
+            height: 80px;
+            border-radius: 5px;
+            padding: 5% 0;
+            cursor: pointer;
+        }
+        /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
     }
 
     .header-upper-noborder-left {
         font-size: 1.4em;
     }
 
-    input[type=text], input[type=email], input[type=tel], input[type=password] {
-        min-height: 2.8em;
+    @media only screen and (min-width:700px) {
+
+        .rating {
+            font-size: 1.1em;
+            margin: -0.5em auto auto auto;
+            width: 5.8em;
+        }
+
+        .rating-outer {
+            margin: 0em;
+        }
+
+        .subHeader, .subHeaderRight, .subHeaderCenter {
+            font-size: 1em;
+            font-weight: 600;
+            padding: 0 1em;
+        }
+        /*******************LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
+        .location {
+            top: -1em;
+            font-size: 4em;
+        }
+
+        .location-activity-wrapper .activityCategoryDetails > div {
+            font-size: 1.2em;
+        }
+
+            .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
+                font-size: 1.5em;
+            }
+
+        .bestMonthsToVisitWrapper.item {
+            float: left;
+            padding: 0em 0.8em .2em;
+            font-size: 1.3em;
+            text-align: left;
+        }
+
+        .bestMonthsToVisitWrapper.litem {
+            float: left;
+            padding: 0em 0.8em;
+            font-size: 1.3em;
+        }
+
+        .labelPlain {
+            font-size: 1.2em;
+            padding: .1em 0em;
+            margin: 0;
+        }
+
+        label {
+            font-size: .9em;
+        }
+
+        .error, .error-init {
+            font-size: 1.2em;
+        }
+
+        .error-init {
+            visibility: hidden;
+            height: 1.5em;
+            position: relative;
+            color: red;
+            transition: opacity 1s linear;
+            opacity: 0;
+        }
+
+            .error-init.show {
+                opacity: 1;
+                visibility: visible;
+            }
+        /*******************END LOCATION PAGE STYLES OVERRIDING TABLET STYLES**************************/
+        .list-booking-wrapper > div:first-of-type {
+            float: left;
+            width: 40%;
+            padding: 2em 0;
+        }
+
+        .list-booking-wrapper .activitybookingDetails {
+            float: right;
+            width: 60%;
+            text-align: left;
+        }
+
+        footer img {
+            transform: scale(.7);
+        }
     }
 
-    footer img {
-        transform: scale(.8);
+    @media only screen and (min-width: 900px) {
+
+        /************ACTIVITY CART START**************/
+        .list-booking-wrapper .activitybookingDetails div:first-of-type {
+            font-size: 1.5em;
+            letter-spacing: 1px;
+            padding: 0 .5em 0 0;
+            float: left;
+            font-weight: 500;
+        }
+
+        .list-booking-wrapper .activitybookingDetails > div {
+            font-size: 1.1em;
+            padding: .1em .5em 0 0;
+            float: left;
+            font-weight: 500;
+        }
+
+        .header-upper-noborder-left {
+            font-size: 1.2em;
+        }
     }
 
-    .dummy img {
-        transform: scale(.5);
+    @media only screen and (min-width: 1140px) {
+
+        /**************OVERDDIDING CALENDAR STYLES*******************/
+        .date-default-outer-container {
+            min-width: 300px;
+        }
+
+        .month-container {
+            font-size: 1em;
+        }
+
+        .days-container {
+            font-size: 1.1em;
+        }
+
+        .month-label-container {
+            float: left;
+            display: table;
+            width: 72%;
+        }
+
+            .month-label-container > div {
+                font-size: 1.2em;
+            }
+        /**************END OVERDDIDING CALENDAR STYLES*******************/
+        .subHeader, .subHeaderRight, .subHeaderCenter {
+            font-size: 1.25em;
+            font-weight: 600;
+            padding: 0 0em;
+        }
+
+
+        .location {
+            top: -2.5em;
+            font-size: 4.5em;
+        }
+
+        .location-activity-wrapper .activityCategoryDetails > div {
+            font-size: 1.4em;
+        }
+
+            .location-activity-wrapper .activityCategoryDetails > div:first-of-type {
+                font-size: 1.8em;
+            }
+
+        .bestMonthsToVisitWrapper.item {
+            float: left;
+            padding: 0em 0.8em 0em;
+            font-size: 1.5em;
+            text-align: left;
+        }
+
+        .bestMonthsToVisitWrapper.litem {
+            float: left;
+            padding: 0em 0.8em;
+            font-size: 1.5em;
+        }
+
+        /*-----INSIDE THE WRAPPERS-----*/
+        header, nav, footer, .row {
+            margin: 0 auto; /*centers everything on the page*/
+            max-width: 1920px;
+        }
+
+        .location-activity-wrapper {
+            height: 100px;
+            border-radius: 5px;
+            padding: 5% 0;
+            cursor: pointer;
+        }
+
+        .location-detailsSpace {
+            font-size: 1.2em;
+            padding: 0 .5em 0 0;
+        }
+
+        /*******SETTING MAP HEIGHT********/
+        .map-container > div:nth-of-type(2) {
+            position: relative;
+            min-height: 26em;
+        }
+
+        .list-booking-wrapper > div:first-of-type {
+            float: left;
+            width: 25%;
+            padding: 1em 0;
+        }
+
+        .list-booking-wrapper .activitybookingDetails {
+            float: right;
+            width: 70%;
+            text-align: left;
+        }
+        /*-----COLUMNS -----*/
+
+        .column-2 {
+            width: 16.66%;
+        }
+
+        .header-upper-noborder-left {
+            font-size: 1.4em;
+        }
+
+        input[type=text], input[type=email], input[type=tel], input[type=password], input[type=number] {
+            min-height: 2.8em;
+        }
+
+        footer img {
+            transform: scale(.8);
+        }
+
+        .dummy img {
+            transform: scale(.5);
+        }
     }
-}

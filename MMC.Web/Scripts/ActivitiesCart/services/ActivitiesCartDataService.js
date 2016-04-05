@@ -28,7 +28,16 @@
             return deferred.promise;
         }
         var userValidatedSendToPayment = function () {
-            $window.location.href = "/Confirmation";
+            $http({
+                method: 'POST',
+                url: '/Communication/SendEmail'
+            }).then(function (response) {
+                $window.location.href = "/Confirmation";
+            })
+            .catch(function (reponse) {
+
+            });
+            
         }
         /*USING THE REVEALING MODULE PATTERN TO EXPOSE ONLY THE METHODS THAT WE CHOOSE TO*/
         return {

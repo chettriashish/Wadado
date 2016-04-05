@@ -80,10 +80,10 @@ namespace MMC.Data.DataRepositories
 
 
                 IEnumerable<ActivityCategoryMaster> activityCategories = (from entity in entityContext.ActivityTypeCategorySet
-                                                           join entity1 in entityContext.ActivityCategoryMasterSet
-                                                           on entity.ActivityCategoryKey equals entity1.ActivityCategoryKey
-                                                           where entity.ActivityTypeKey == activity.ActivityTypeKey
-                                                           select entity1);
+                                                                          join entity1 in entityContext.ActivityCategoryMasterSet
+                                                                          on entity.ActivityCategoryKey equals entity1.ActivityCategoryKey
+                                                                          where entity.ActivityTypeKey == activity.ActivityTypeKey
+                                                                          select entity1);
 
                 ActivityTypeMaster activityType = (from entity in entityContext.ActivityTypeMasterSet
                                                    where entity.ActivityTypeKey == activity.ActivityTypeKey
@@ -93,9 +93,13 @@ namespace MMC.Data.DataRepositories
                     .Where(entity => entity.ActivityKey == activityKey).ToList();
 
                 result.ActivitySubCategory = activityType.ActivityType;
-                result.ActivityCategory = activityCategories != null ? activityCategories.Select(e => e.ActivityCategory).ToList() :new List<string>();
+                result.ActivityCategory = activityCategories != null ? activityCategories.Select(e => e.ActivityCategory).ToList() : new List<string>();
                 result.CancellationPolicy = activity.CancellationPolicy;
-                result.Cost = activity.Cost;
+                result.ActivityPriceOption = (from entity in entityContext.ActivityPriceMappingSet
+                                              where entity.ActivityKey == activity.ActivitesKey
+                                              select entity).OrderBy(e => e.PriceForAdults).ToList();
+
+                result.AllowInstantBooking = activity.AllowInstantBooking == null ? false : Convert.ToBoolean(activity.AllowInstantBooking);
                 result.Currency = activity.Currency;
                 result.Description = activity.Description;
                 result.DifficultyRating = activity.DifficultyRating;
@@ -103,6 +107,8 @@ namespace MMC.Data.DataRepositories
                 result.LocationLatLong = locationKey != default(string) ? entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == locationKey).FirstOrDefault().LocationKey).FirstOrDefault().LatLng : default(string);
                 result.LatLong = activity.ActivityLocation;
                 result.DistanceFromNearestCity = activity.DistanceFromNearestCity;
+                result.PermitRequired = activity.IsPermitRequired;
+                result.ThingsToCarry = activity.ThingsToCarry;
                 result.NumAdults = activity.NumAdults;
                 result.CostForChild = activity.CostForChild;
                 result.NumChildren = activity.NumChildren;
@@ -113,6 +119,7 @@ namespace MMC.Data.DataRepositories
                 result.Duration = activity.Duration;
                 result.UserRating = activity.AverageUserRating;
                 result.IsValidated = activity.IsValidated;
+                result.Comission = Convert.ToDecimal(activity.Comission);
                 result.Included = activity.Included;
                 result.IsPermitRequired = activity.IsPermitRequired;
                 result.AllActivityTimes = activityTimeScheduler.Select(entity => entity.ActivityTime).ToList();
@@ -121,12 +128,7 @@ namespace MMC.Data.DataRepositories
                 result.ActivityEndTime = activity.ActivityEndTime;
                 result.AllActivityUniqueDates = (from e in entityContext.ActivityDatesSet
                                                  where e.ActivityKey == activity.ActivitesKey
-                                                 select e).ToList();
-
-                if (result.AllActivityUniqueDates == null || result.AllActivityUniqueDates.Count() == 0)
-                {
-                    result.AllActivityUniqueDates = new List<ActivityDates>();
-                }
+                                                 select e).ToList();              
 
                 result.AllPriceOptions = (from e in entityContext.ActivityPriceMappingSet
                                           where e.ActivityKey == activity.ActivitesKey
@@ -287,7 +289,7 @@ namespace MMC.Data.DataRepositories
                 }
 
 
-                if (result.AllActivityDates!= null && result.AllActivityDates.Count() == 0)
+                if (result.AllActivityDates != null && result.AllActivityDates.Count() == 0)
                 {
                     result.NextAvaiableDate = (from entity in entityContext.ActivityDatesSet
                                                where entity.Date > DateTime.Now
@@ -388,6 +390,7 @@ namespace MMC.Data.DataRepositories
                           on entity.ActivityTypeKey equals entity1.ActivityTypeKey
                           where entity.LocationKey == locationKey
                           && entity1.ActivityCategoryKey == activityCategoryKey
+                          && entity.IsValidated == true
                           select new ActivitySummaryDataContract()
                           {
                               ActivityKey = entity.ActivitesKey,
@@ -406,7 +409,8 @@ namespace MMC.Data.DataRepositories
                                                  && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
                                                  select e2).Count() > 0 ? true : false),
                               LatLong = entity.ActivityLocation,
-                              Cost = entity.Cost,
+                              Cost = entityContext.ActivityPriceMappingSet.Any(e => e.ActivityKey == entity.ActivitesKey) ?
+                              entityContext.ActivityPriceMappingSet.Where(e => e.ActivityKey == entity.ActivitesKey).Min(e => e.PriceForAdults) : 0,
                               Currency = entity.Currency,
                               Discount = ((from e1 in entityContext.TopOffersSet
                                            join e2 in entityContext.TopOfferMappingSet
@@ -449,7 +453,8 @@ namespace MMC.Data.DataRepositories
             {
                 result = (from entity in entityContext.ActivitiesMasterSet
                           where entity.LocationKey == locationKey
-                          select new ActivitySummaryDataContract()
+                          //&& entity.IsValidated == true
+                          select new ActivitySummaryDataContract
                           {
                               ActivityKey = entity.ActivitesKey,
                               ActivityName = entity.Name,
@@ -457,7 +462,7 @@ namespace MMC.Data.DataRepositories
                               ImageURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
                               Location = entityContext.LocationMasterSet.Where(e1 => e1.LocationKey == entityContext.ActivityLocationSet.Where(e => e.LocationKey == entity.LocationKey).FirstOrDefault().LocationKey).FirstOrDefault().LocationName,
                               Rating = entity.AverageUserRating,
-                              ThumbNailURL = entityContext.ActivityImagesSet.Where(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).FirstOrDefault().ImageURL,
+                              ThumbNailURL = entityContext.ActivityImagesSet.FirstOrDefault(e => e.ActivityKey == entity.ActivitesKey && e.IsDefault == true).ImageURL,
                               IsSpecialOffer = ((from e1 in entityContext.TopOffersSet
                                                  join e2 in entityContext.TopOfferMappingSet
                                                  on e1.TopOffersKey equals e2.TopOfferKey
@@ -466,7 +471,8 @@ namespace MMC.Data.DataRepositories
                                                  && (e1.OfferStartDate <= DateTime.Now && e1.OfferEndDate > DateTime.Now)
                                                  select e2).Count() > 0 ? true : false),
                               LatLong = entity.ActivityLocation,
-                              Cost = entity.Cost,
+                              Cost = entityContext.ActivityPriceMappingSet.Any(e => e.ActivityKey == entity.ActivitesKey) ?
+                               entityContext.ActivityPriceMappingSet.Where(e => e.ActivityKey == entity.ActivitesKey).Min(e => e.PriceForAdults) : 0,
 
                               Currency = entity.Currency,
                               Discount = ((from e1 in entityContext.TopOffersSet

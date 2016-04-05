@@ -35,6 +35,27 @@
                 formatDate();
             });
         }
+
+        vm.confirmSelectedActivity = function (item) {
+            AdminActivityBookingDataService.acceptSelectedActivityBooking(item.ActivityBookingKey, sessionStorage.userId).then(function (response) {
+                var index = vm.allActivities.indexOf(item);
+                if (index > -1) {
+                    vm.allActivities.splice(index, 1);
+                }
+            }).catch(function (response) {
+            });           
+        }
+
+        vm.rejectSelectedActivity = function (item) {
+            AdminActivityBookingDataService.rejectSelectedActivityBooking(item.ActivityBookingKey, sessionStorage.userId).then(function (response) {
+                var index = vm.allActivities.indexOf(item);
+                if (index > -1) {
+                    vm.allActivities.splice(index, 1);
+                }
+            }).catch(function (response) {
+            });
+        }
+
         formatDate();
     }
     app.controller("AdminActivityBookingController", ["allActivities", "AdminActivityBookingDataService", adminActivityBookingController]);

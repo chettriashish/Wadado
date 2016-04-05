@@ -4,7 +4,7 @@
 
         var getAllLocations = function () {
             var deferred = $q.defer();
-            $http.get('/Search/GetAllLocations').success(deferred.resolve).error(deferred.reject);
+            $http.get('/Location/GetAllOtherLocations').success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }
         var getAllActivitiesForLocation = function (locationKey) {

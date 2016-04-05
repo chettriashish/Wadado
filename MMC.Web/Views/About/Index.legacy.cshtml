@@ -1,0 +1,67 @@
+﻿@{
+    ViewBag.Title = "About us";
+}
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+
+<!--SEARCH REFERENCE-->
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+<link href="~/Content/mobilemenu.css" rel="stylesheet" />
+
+<link href="~/Content/phone.css" rel="stylesheet" />
+<div id="colorbar">
+</div>
+<div class="cover"></div>
+<div class="contentWrapper">
+    <div>
+        @Html.Partial("../Partial/_search")
+    </div>
+    <div>
+        @Html.Partial("../Partial/_mobilemenu")
+    </div>
+    <!--row start-->
+    <div class="text-content">
+        <div class="row">
+            <div class="column-12">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+        <!--row end-->
+        <!--row start-->
+        <div class="row">
+            <div class="column-12">
+                <div class="content-header">
+                    <span>About</span><span> Us</span>
+                    <br />
+                </div>
+                <br />
+                <div>
+                    <p>
+                        Mymonkeycap.com is a global ticketing platform which helps event organizers and activity owners and business owners move to a more organized ticketing/payment space. We build the technology to
+                        allow anyone to create, share, find and attend new things to do.
+                        <br />
+                        Anyone from around the globe can create or book Events, Activities, Accommodation, Food offerings and much more. Our goal is to enable communities
+                        and people from the furthest corners of the world to showcase their offerings.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--row end-->
+    </div>
+</div>

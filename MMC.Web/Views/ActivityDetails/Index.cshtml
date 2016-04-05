@@ -68,7 +68,7 @@
                             <div class="header-left">
                                 <!--JS APPEND-->
                             </div>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="column-12 top">
                         <span>&nbsp;</span>
@@ -82,7 +82,7 @@
                                 <div class="location-details">
                                     <span>{{selectedActivityDetails.Location}}</span>
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                         <div class="column-12 top">
                             <div class="column-auto-nospace">
@@ -123,6 +123,21 @@
                                     <div class="buttonNoBorder">
                                         <a ng-click="showMore()">{{descriptionAction}}</a>
                                     </div>
+                                </div>
+                            </div>
+                            <div class="column-top">
+                                <span>&nbsp;</span>
+                            </div>
+                            <div class="subHeader">
+                                <div class="column-top">
+                                    <span>
+                                        Pricing Options
+                                    </span>
+                                </div>
+                            </div>
+                            <div ng-repeat="item in selectedActivityDetails.AllPriceOptions track by $index" ng-cloak>
+                                <div class="column-top">
+                                    <label><input type="radio" name="options" ng-model="p_option.val" ng-value="item.ActivityPricingKey" ng-click="setPriceOption(item)"><label>{{item.OptionDescription}} - {{selectedActivityDetails.Currency}} {{item.PriceForAdults}} (Adults) </label><label ng-if="item.NumChild > 0">, {{selectedActivityDetails.Currency}} {{item.PriceForChildren}} (Children)</label></label>
                                 </div>
                             </div>
                             <div class="rating-outer">
@@ -171,7 +186,7 @@
                                         {{selectedActivityDetails.CancellationPolicy}}
                                     </span>
                                 </div>
-                            </div>                           
+                            </div>
                         </div>
                         <div class="column-12">
                             <nds-maps nds-data-source="selectedActivityDetails" center="selectedActivityDetails.LocationLatLong" activity-icon="ActivityIconURL"

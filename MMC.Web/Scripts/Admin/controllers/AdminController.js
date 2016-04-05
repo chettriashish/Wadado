@@ -1,6 +1,6 @@
 ﻿(function () {
     var app = angular.module("appMain");
-    var adminController = function ($scope, $state, userAccount, $stateParams) {
+    var adminController = function ($scope, $state, userAccount, $stateParams, AdminCompanyDataService) {
         $scope.isUserLoggedIn = false;
         $scope.$on("DIALOG_S", function (event, args) {
             $scope.$broadcast("SHOWDIALOG", args);
@@ -12,6 +12,15 @@
         $scope.$on("u_l", function (event, args) {
             $scope.isUserLoggedIn = userAccount.isUserloggedIn();            
         });
+
+        AdminCompanyDataService.checkIfUserBelongsToCompanyAsync(sessionStorage.userId).then(function (response) {
+            if (response.CompanyKey) {
+                $scope.isUserLoggedIn = userAccount.isUserloggedIn();
+            }
+            else {
+                $scope.isUserLoggedIn = false;
+            }
+        })
         if (userAccount.isUserloggedIn() == false) {
             $state.go("adminLogin");
         }
@@ -34,14 +43,13 @@
                 $('#' + current).parent().removeClass('active');
                 $('#' + selectedItem).parent().addClass('active');
             }                        
-        }
+        }        
         window.onload = function () {
             setDefaultUrl();
         }
         $scope.setActive = function (content) {
             setActive(content);
-        }
-        $scope.isUserLoggedIn = userAccount.isUserloggedIn();
+        }       
     }
-    app.controller("AdminController", ["$scope", "$state", "userAccount", "$stateParams", adminController]);
+    app.controller("AdminController", ["$scope", "$state", "userAccount", "$stateParams", "AdminCompanyDataService", adminController]);
 }());

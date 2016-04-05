@@ -16,15 +16,38 @@ namespace MMC.Common.Extensions
         }
         public static Boolean IsLegacy(this HttpRequestBase request)
         {
-            return IsLegacyInternal(request.UserAgent);
+            if (request.UserAgent != null)
+            {
+                return IsLegacyInternal(request.UserAgent);
+            }
+            else
+            {
+                return false;
+            }
+            
         }
         public static Boolean IsSmartphone(this HttpRequestBase request)
         {
-            return IsSmartPhoneInternal(request.UserAgent);
+            if (request.UserAgent != null)
+            {
+                return IsSmartPhoneInternal(request.UserAgent);
+            }
+            else
+            {
+                return false;
+            }
+            
         }
         public static Boolean IsTablet(this HttpRequestBase request)
         {
-            return IsTabletInternal(request.UserAgent);
+            if (request.UserAgent != null)
+            {
+                return IsTabletInternal(request.UserAgent);
+            }
+            else
+            {
+                return false;
+            }            
         }
 
         #region Internals

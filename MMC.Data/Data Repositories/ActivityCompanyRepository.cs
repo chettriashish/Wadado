@@ -38,5 +38,26 @@ namespace MMC.Data.DataRepositories
 
             return results;
         }
+
+        public CompanyMaster GetCompanyByActivity(string activityKey)
+        {
+            CompanyMaster result = new CompanyMaster();
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.CompanyMasterSet
+                             join e1 in entityContext.ActivityCompanySet
+                             on e.CompanyKey equals e1.CompanyKey
+                             where e1.ActivityKey == activityKey
+                             select e).ToList();
+
+                result = query.FirstOrDefault();
+            }
+            return result;
+        }
+
+        public IEnumerable<ActivitiesMaster> GetAllActivitiesForSelectedCompany(string companyKey)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

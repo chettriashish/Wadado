@@ -46,6 +46,9 @@ namespace MMC.Data
         public DbSet<LocationDetails> LocationDetailsSet { get; set; }
         public DbSet<TopOfferMapping> TopOfferMappingSet { get; set; }
         public DbSet<ActivityPriceMapping> ActivityPriceMappingSet { get; set; }
+        public DbSet<UserCompanyMapping> UserCompanyMappingSet { get; set; }
+
+        public DbSet<ActivityTagMapping> ActivityTagMappingSet { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
@@ -78,6 +81,8 @@ namespace MMC.Data
             modelBuilder.Entity<LocationDetails>().HasKey<string>(e => e.LocationDetailsKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<TopOfferMapping>().HasKey<string>(e => e.TopOfferMappingKey).Ignore(e => e.EntityId);
             modelBuilder.Entity<ActivityPriceMapping>().HasKey<string>(e => e.ActivityPricingKey).Ignore(e => e.EntityId);
+            modelBuilder.Entity<UserCompanyMapping>().HasKey<string>(e => e.UserCompanyKey).Ignore(e => e.EntityId);
+            modelBuilder.Entity<ActivityTagMapping>().HasKey<string>(e => e.ActivityTagKey).Ignore(e => e.EntityId);
             //base.OnModelCreating(modelBuilder);
         }
     }

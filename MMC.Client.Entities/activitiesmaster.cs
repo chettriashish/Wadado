@@ -44,6 +44,9 @@ namespace MMC.Client.Entities
         private decimal _averageUserRating;
         private string _activityEndTime;
         private string _activityStartTime;
+        private decimal? _Comission;
+        private int? _MaxUnits;
+        private bool? _AllowInstantBooking;
         #endregion
 
         #region Properties
@@ -400,7 +403,7 @@ namespace MMC.Client.Entities
                 _averageUserRating = value;
                 OnPropertyChanged(() => AverageUserRating);
             }
-        }        
+        }
 
         public string ActivityStartTime
         {
@@ -420,6 +423,36 @@ namespace MMC.Client.Entities
             {
                 _activityEndTime = value;
                 OnPropertyChanged(() => ActivityEndTime);
+            }
+        }
+
+        public decimal? Comission
+        {
+            get { return _Comission; }
+            set
+            {
+                _Comission = value;
+                OnPropertyChanged(() => Comission);
+            }
+        }
+
+        public int? MaxUnits
+        {
+            get { return _MaxUnits; }
+            set
+            {
+                _MaxUnits = value;
+                OnPropertyChanged(() => MaxUnits);
+            }
+        }       
+
+        public bool? AllowInstantBooking
+        {
+            get { return _AllowInstantBooking; }
+            set
+            {
+                _AllowInstantBooking = value;
+                OnPropertyChanged(() => AllowInstantBooking);
             }
         }
 
@@ -445,7 +478,7 @@ namespace MMC.Client.Entities
                 RuleFor(obj => obj.NumChildren).GreaterThanOrEqualTo(0);
                 RuleFor(obj => obj.CancellationPolicy).NotEmpty();
                 RuleFor(obj => obj.AverageUserRating).GreaterThanOrEqualTo(0);
-                //RuleFor(obj => obj.CreatedBy).NotEmpty();
+                RuleFor(obj => obj.MaxUnits).GreaterThan(0);
             }
         }
         /// <summary>

@@ -2,7 +2,7 @@
     var app = angular.module("appMain");
 
     var activitiesCartController = function ($scope, $http, $timeout, $interval, $location, $routeParams, ActivitiesCartDataService) {
-        $scope.selectedLocation = "Select location";
+        $scope.selectedLocation = "Select location";       
         $scope.userInfo = {
             firstName:"",
             lastName: "",
@@ -18,9 +18,9 @@
             }
         }
         setLayout();
-
-        var setImages = function () {
-            if (WURFL.is_mobile) {
+        $scope.Total = 0;
+        var setImages = function () {            
+            if (WURFL.is_mobile) {               
                 $.each($scope.activities, function (key, value) {
                     /*SETTING LOCATION INFORMATION*/
                     $scope.activities[key].ActivityWithLocation = $scope.activities[key].ActivityName + "\t-\t" + $scope.activities[key].Location + "";
@@ -28,10 +28,10 @@
                     var regex = /[0-9]+/;
                     var date = $scope.activities[key].BookingDate;
                     var result = Number(date.match(regex)[0]);
-                    $scope.activities[key].f_BookingDate = new Date(result).toDateString();
+                    $scope.activities[key].f_BookingDate = new Date(result).toDateString();                    
                     $scope.activities[key].f_Cost = $scope.activities[key].Currency + "\t" + $scope.activities[key].Cost + "";
                     $scope.activities[key].f_pax = $scope.activities[key].Participants + (parseInt($scope.activities[key].Participants) > 1 ? "\PAX\t," : "\PAX\t,");
-                    $scope.Total = $scope.Total + parseFloat($scope.activities[key].Cost);
+                    $scope.Total = $scope.Total + parseFloat($scope.activities[key].PaymentAmount);
                     $scope.activities[key].ImageURL = Wadado.rootPath + "/" + $scope.activities[key].ThumbnailImage + "_portrait.jpg";
                 });
             }
@@ -48,7 +48,7 @@
                     $scope.activities[key].f_Cost = $scope.activities[key].Currency + "\t" + $scope.activities[key].Cost + "";
                     $scope.activities[key].f_pax = $scope.activities[key].Participants + (parseInt($scope.activities[key].Participants) > 1 ? "\tPersons\t," : "\tPerson\t,");
                     $scope.activities[key].ImageURL = Wadado.rootPath + "/" + $scope.activities[key].ThumbnailImage + "_portrait.jpg";
-                    $scope.Total = $scope.Total + parseFloat($scope.activities[key].Cost);
+                    $scope.Total = $scope.Total + parseFloat($scope.activities[key].PaymentAmount);
                 });
             }           
         };
@@ -108,6 +108,7 @@
                         return false;
                     }
                 }
+                $scope.Currency = $scope.activities[0].Currency;
                 setImages();
             });
         }

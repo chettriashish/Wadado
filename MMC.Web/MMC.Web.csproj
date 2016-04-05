@@ -207,6 +207,15 @@
     <Reference Include="Owin">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
     </Reference>
+    <Reference Include="Postal">
+      <HintPath>..\packages\Postal.Mvc4.1.2.0\lib\net40\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="Postal.NET">
+      <HintPath>..\packages\Postal.NET.1.0.0.1\lib\net45\Postal.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.3.0\lib\net40\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="RouteDebugger">
       <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
     </Reference>
@@ -354,6 +363,7 @@
     <Compile Include="App_Start\WurflConfig.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\API\AccountApiController.cs" />
+    <Compile Include="Controllers\MVC\About\AboutController.cs" />
     <Compile Include="Controllers\MVC\Account\AccountController.cs" />
     <Compile Include="Controllers\MVC\ActivitiesCart\ActivitiesCartController.cs" />
     <Compile Include="Controllers\MVC\Activities\ActivitiesController.cs" />
@@ -367,11 +377,14 @@
     <Compile Include="Controllers\MVC\Admin\Login\AdminLoginController.cs" />
     <Compile Include="Controllers\MVC\BaseViewController.cs" />
     <Compile Include="Controllers\MVC\Booking\BookingController.cs" />
+    <Compile Include="Controllers\MVC\Communication\CommuncationController.cs" />
     <Compile Include="Controllers\MVC\Confirmation\ConfirmationController.cs" />
+    <Compile Include="Controllers\MVC\Contact\ContactController.cs" />
     <Compile Include="Controllers\MVC\Home\HomeController.cs" />
     <Compile Include="Controllers\MVC\Location\LocationController.cs" />
     <Compile Include="Controllers\MVC\Menu\MenuController.cs" />
     <Compile Include="Controllers\MVC\Search\SearchController.cs" />
+    <Compile Include="Controllers\MVC\TermsConditions\TermsConditionsController.cs" />
     <Compile Include="Core\ISecurityAdapter.cs" />
     <Compile Include="Core\ViewControllerBase.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -404,6 +417,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\default.css" />
     <Content Include="Content\Fonts\Dooodleista.svg" />
+    <Content Include="Content\homedesktopmenu.css" />
     <Content Include="Content\homemobilemenu.css" />
     <Content Include="Content\hometabmenu.css" />
     <Content Include="Content\jquery-ui-1.10.1.css" />
@@ -457,6 +471,10 @@
     <Content Include="COPYING.txt" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\Icons\23x23social_facebook.gif" />
+    <Content Include="Images\Icons\23x23social_gplus.gif" />
+    <Content Include="Images\Icons\23x23social_linkedin.gif" />
+    <Content Include="Images\Icons\23x23social_twitter.gif" />
     <Content Include="Images\Icons\a21.png" />
     <Content Include="Images\Icons\Adventure.png" />
     <Content Include="Images\Icons\b21.png" />
@@ -472,6 +490,7 @@
     <Content Include="Images\Icons\insta_icon_mobile.png" />
     <Content Include="Images\Icons\insta_icon_web.png" />
     <Content Include="Images\Icons\Learn.png" />
+    <Content Include="Images\Icons\line-sep.gif" />
     <Content Include="Images\Icons\location_nav.png" />
     <Content Include="Images\Icons\menu-icon-large.png" />
     <Content Include="Images\Icons\MustDo.png" />
@@ -480,6 +499,7 @@
     <Content Include="Images\Icons\offer_icon_web.png" />
     <Content Include="Images\Icons\people_web.png" />
     <Content Include="Images\Icons\select2.png" />
+    <Content Include="Images\Icons\spacer.gif" />
     <Content Include="Images\Icons\time_duration_web.png" />
     <Content Include="Images\Icons\twitter_icon_mobile.png" />
     <Content Include="Images\Icons\twitter_icon_web.png" />
@@ -506,6 +526,8 @@
     <Content Include="Scripts\AdminCategory\controllers\AdminCategoryTypeMappingController.js" />
     <Content Include="Scripts\AdminCategory\controllers\AdminSubCategoryController.js" />
     <Content Include="Scripts\AdminCategory\services\AdminCategoryDataService.js" />
+    <Content Include="Scripts\AdminCompanies\controllers\AdminCompanyController.js" />
+    <Content Include="Scripts\AdminCompanies\services\AdminCompanyDataService.js" />
     <Content Include="Scripts\AdminLocationSummary\controllers\AdminLocationSummaryController.js" />
     <Content Include="Scripts\AdminLocationSummary\services\AdminLocationSummaryDataService.js" />
     <Content Include="Scripts\AdminLocation\controllers\AdminLocationController.js" />
@@ -566,6 +588,7 @@
     <Content Include="Scripts\Directives\Date\datedirective1.js" />
     <Content Include="Scripts\Directives\Favorites\FavoritesDirective.js" />
     <Content Include="Scripts\Directives\Maps\MapsDirective.js" />
+    <Content Include="Scripts\Directives\UniversalSearch\UniversalSearchDirective.js" />
     <Content Include="Scripts\facebook.js" />
     <Content Include="Scripts\Home\controllers\HomeController.js" />
     <Content Include="Scripts\Home\directives\HomeDirective.js" />
@@ -1343,6 +1366,7 @@
     <Content Include="Scripts\slider\owl.video.js" />
     <Content Include="Scripts\slider\slider.js" />
     <Content Include="Scripts\Video\video.js" />
+    <Content Include="Templates\_adminCompanyDetails.html" />
     <Content Include="Templates\_adminActivityBookingDetailsContainer.html" />
     <Content Include="Templates\_adminActivityDashboard.html" />
     <Content Include="Templates\_adminActivityDetails.html" />
@@ -1374,6 +1398,13 @@
     <Content Include="Views\Partial\_confirmationmobilemenu.cshtml" />
     <Content Include="Views\Partial\_confirmationdesktopmenu.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Partial\_desktopHomeMenu.cshtml" />
+    <Content Include="Views\Emails\BookingConfirmation.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
+    <Content Include="Views\About\Index.tablet.cshtml" />
+    <Content Include="Views\About\Index.smartphone.cshtml" />
+    <Content Include="Views\About\Index.legacy.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
     <None Include="Views\Partial\_favourites.cshtml" />
     <Content Include="Views\Templates\choices.tpl.html" />
     <Content Include="Views\Templates\match-multiple.tpl.html" />
@@ -1474,6 +1505,10 @@
     <Content Include="Scripts\version.json" />
     <Content Include="Views\Partial\_desktopmenu.cshtml" />
     <Content Include="Views\Partial\_login.cshtml" />
+    <Content Include="Views\TermsConditions\Index.cshtml" />
+    <Content Include="Views\TermsConditions\Index.legacy.cshtml" />
+    <Content Include="Views\TermsConditions\Index.smartphone.cshtml" />
+    <Content Include="Views\TermsConditions\Index.tablet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Scripts\ActivitiesCart\directives\" />
@@ -1482,6 +1517,7 @@
     <Folder Include="Scripts\Location\directives\" />
     <Folder Include="Scripts\Login\directives\" />
     <Folder Include="Views\BaseView\" />
+    <Folder Include="Views\Communication\" />
     <Folder Include="Views\Menu\" />
     <Folder Include="Views\Search\" />
   </ItemGroup>

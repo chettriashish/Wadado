@@ -31,6 +31,10 @@ namespace MMC.Client.Proxies
         public void UpdateLocationDetails(LocationDetailsDataContract locationDetails)
         {
             Channel.UpdateLocationDetails(locationDetails);
-        }       
+        }
+        public IEnumerable<LocationDetailsDataContract> GetSelectedLocationDetailsForClientApplication(string locationKey, string userAgent)
+        {
+            return Channel.GetSelectedLocationDetailsForClientApplication(locationKey, userAgent);
+        }
     }
 }

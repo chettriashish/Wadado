@@ -47,6 +47,7 @@
     <Compile Include="Data Contracts\ActivityDetailsDataContract.cs" />
     <Compile Include="Data Contracts\ActivitySummaryDataContract.cs" />
     <Compile Include="Data Contracts\CustomerActivitiesBookingData.cs" />
+    <Compile Include="Data Contracts\EmailDataContract.cs" />
     <Compile Include="Data Contracts\LocationDetailsDataContract.cs" />
     <Compile Include="Data Contracts\TopOffersDataContract.cs" />
     <Compile Include="Data Contracts\UserSessionDataContract.cs" />

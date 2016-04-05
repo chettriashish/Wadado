@@ -17,13 +17,24 @@
         <div class="row">
             <div class="column-12">
                 <div class="table-10">
-                    <div ng-repeat="item in selectedActivityDetails.AllActivityTimes">
+                    <div ng-repeat="item in selectedActivityDetails.AllActivityTimes" ng-if="!!radio">
                         <div class="column-6">
                             <label class="radio">
                                 <input type="radio" ng-model="time.val" name="act-time" value="{{item}}" ng-click="selectTime()">{{item}}
                             </label>
                         </div>
                     </div>
+                    <div ng-if="!radio">
+                        <div class="column-3">
+                            <span>&nbsp;</span>
+                        </div>
+                        <div class="column-6">
+                            <select ng-options="option for option in selectedActivityDetails.AllActivityTimes" ng-model="time.val" ng-change="selectTime()"></select>
+                        </div>
+                        <div class="column-3">
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>

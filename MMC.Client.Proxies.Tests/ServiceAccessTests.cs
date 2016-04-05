@@ -39,14 +39,33 @@ namespace MMC.Client.Proxies.Tests
             ChannelFactory<IActivitiesService> channelFactory =
                    new ChannelFactory<IActivitiesService>("");
             IActivitiesService proxy = channelFactory.CreateChannel();
-            ///ChannelFactory<ILocationService> channelFactory =
+            //ChannelFactory<ILocationService> channelFactory =
             //      new ChannelFactory<ILocationService>("");
             //ILocationService proxy = channelFactory.CreateChannel();
             (proxy as ICommunicationObject).Open();
+
+            //CompanyMaster newCompany = new CompanyMaster
+            //{
+            //    Address = "asdsd",
+            //    ContactPerson = "dasdsad",
+            //    Email = "dasdasd",
+            //    Name = "dasdsads",
+            //    TelephoneNumber = "DSadasd",
+            //    CreatedDate = DateTime.Now,
+            //    CreatedBy = "nexus1234@gmail.com",
+            //    Rating = 0,
+            //};
+
+            //CompanyMaster company = proxy.CreateCompanyForSelectedUser("nexus1234@gmail.com", newCompany);
             //ActivityDetailsDataContract contract = new ActivityDetailsDataContract();
+            
             //contract = proxy.GetAllActivitiesByLocationFilteredCategory("GANGTOK", "ADVENTURE",new DateTime(2016,1,9),new DateTime(2016,1,11), "smartphone");            
+            //IEnumerable<ActivityBookingDataContract> contract = proxy.GetAllActivitiesPendingForConfirmation();
             try
             {
+                //IEnumerable<ActivitySummaryDataContract> contract = proxy.GetAllActivitiesByLocation("GANGTOK", "desktop");            
+                //List<string> tags = new List<string>() { "GANGTOK", "PARAGLIDING" };
+                //IEnumerable<ActivitiesMaster> result = proxy.GetActivitiesForSelectedSearchTag(tags);
                 //IEnumerable<ActivityBookingDataContract> contract = proxy.GetAllCompanyActivitiesPendingForConfirmation("KewzingKhukuri");
                 //IEnumerable<ActivitySummaryDataContract> contract = proxy.GetAllActivitiesByLocation("GANGTOK", "desktop");
                 //IEnumerable<LocationDetailsDataContract> location = proxy.GetSelectedLocationDetails("DARJEELING");
@@ -54,15 +73,16 @@ namespace MMC.Client.Proxies.Tests
                 //newList.Add("223c0391-9c5f-4fe0-9471-bccb70084d6a");
                 //IEnumerable<ActivityTypeMaster> contract = proxy.GetSubCategoriesForSelectedActivity("ADVENTURE");
                 //proxy.SaveActivityCategoryMapping(newList,"ADVENTURE");
-                ActivityDetailsDataContract contract = proxy.GetAllActivities(default(string), "2edead4d-4815-4907-a5be-2f42ef0976c5", "desktop");
-                //Dictionary<string, bool> activityDates = new Dictionary<string, bool>();
-                //activityDates.Add("sun", true);
-                //activityDates.Add("mon", true);
-                //activityDates.Add("tue", true);
-                //activityDates.Add("wed", true);
-                //activityDates.Add("thu", true);
-                //activityDates.Add("fri", true);
-                //activityDates.Add("sat", true);
+                ActivityDetailsDataContract contract = proxy.GetAllActivities("GANGTOK", "MEDIUMFLY", "desktop");
+                contract.AllowInstantBooking = true;
+                Dictionary<string, bool> activityDates = new Dictionary<string, bool>();
+                activityDates.Add("sun", true);
+                activityDates.Add("mon", true);
+                activityDates.Add("tue", true);
+                activityDates.Add("wed", true);
+                activityDates.Add("thu", true);
+                activityDates.Add("fri", true);
+                activityDates.Add("sat", true);
                 //contract.AllActivityUniqueDates = new List<ActivityDates>();
                 //List <ActivityDates> result = new List<ActivityDates>();
                 //ActivityDates newDate = new ActivityDates
@@ -70,40 +90,24 @@ namespace MMC.Client.Proxies.Tests
                 //    Date = DateTime.Now,
                 //    Time = "10AM",
                 //    IsDeleted = false
-                //};
-
-                List<ActivityPriceMapping> allPriceOptions = new List<ActivityPriceMapping>();
-                ActivityPriceMapping priceMapping = new ActivityPriceMapping
-                {
-                    PriceForChildren = 200,
-                    PriceForAdults = 200,
-                    ActivityKey = "2edead4d-4815-4907-a5be-2f42ef0976c5",
-                    IsDeleted = false,
-                    CreatedBy = "TBD",
-                    OptionDescription = "Front Row Tickets",
-                    CreatedDate = DateTime.Now
-
-                };
-                allPriceOptions.Add(priceMapping);
-                contract.AllPriceOptions = allPriceOptions;
+                //};                
                 //result.Add(newDate);
                 //contract.AllActivityUniqueDates = result;
-                //List<string> activityTimes = new List<string>();
-                //activityTimes.Add("10:00AM");
-                //activityTimes.Add("11:00AM");
-                //activityTimes.Add("12:00PM");
-                //activityTimes.Add("01:00PM");
-                //activityTimes.Add("02:00PM");
-                //activityTimes.Add("03:00PM");
-                //activityTimes.Add("03:00PM");
-                proxy.SaveActivityDetails(contract, null, null, "GANGTOK", "241b4825-248e-48ca-8225-fa3a78cd2449", "TDB");
+                List<string> activityTimes = new List<string>();
+                activityTimes.Add("10:00AM");
+                activityTimes.Add("11:00AM");
+                activityTimes.Add("12:00PM");
+                activityTimes.Add("01:00PM");
+                activityTimes.Add("02:00PM");
+                activityTimes.Add("03:00PM");
+                activityTimes.Add("03:00PM");
+                proxy.SaveActivityDetails(contract, activityDates, activityTimes, "GANGTOK", "PARAGLIDING", "TDB");
                 (proxy as ICommunicationObject).Close();
             }
             catch (Exception ex)
             {
                 string message = ex.Message;
             }
-
         }
     }
 }

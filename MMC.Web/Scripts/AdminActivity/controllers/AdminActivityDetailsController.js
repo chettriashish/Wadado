@@ -194,6 +194,7 @@
                 priceOption.OptionDescription = $scope.activityDetails.AllPriceOptions[key].OptionDescription;
                 priceOption.PriceForAdults = $scope.activityDetails.AllPriceOptions[key].PriceForAdults;
                 priceOption.PriceForChildren = $scope.activityDetails.AllPriceOptions[key].PriceForChildren;
+                priceOption.ActivityPricingKey = $scope.activityDetails.AllPriceOptions[key].ActivityPricingKey;
                 priceOption.editMode = false;
                 $scope.AllActivityPricingOptions.push(priceOption);
             });
@@ -322,6 +323,7 @@
         $scope.addPriceOption = function () {
             var newPriceOption = {
                 ActivityKey: $scope.activityDetails.ActivityKey,
+                ActivityPricingKey:'',
                 OptionDescription: '',
                 PriceForAdults: 0,
                 PriceForChildren: 0,

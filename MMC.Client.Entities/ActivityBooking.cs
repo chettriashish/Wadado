@@ -8,12 +8,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MMC.Client.Entities
-{    
+{
     public class ActivityBooking : ObjectBase
     {
         #region Private Variables
         private string _ActivityBookingKey;
-        private string _ActivityKey;
+        private string _ActivityPricingKey;
         private string _AccountKey;
         private DateTime _BookingDate;
         private string _Time;
@@ -32,6 +32,7 @@ namespace MMC.Client.Entities
         private decimal _RefundAmount;
         private string _BookingNumber;
         private string _GuestKey;
+        private string _ActivityKey;
         #endregion
 
         #region Properties
@@ -44,13 +45,13 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => ActivityBookingKey);
             }
         }
-        public string ActivityKey
+        public string ActivityPricingKey
         {
-            get { return _ActivityKey; }
+            get { return _ActivityPricingKey; }
             set
             {
-                _ActivityKey = value;
-                OnPropertyChanged(() => ActivityKey);
+                _ActivityPricingKey = value;
+                OnPropertyChanged(() => ActivityPricingKey);
             }
         }
 
@@ -62,7 +63,7 @@ namespace MMC.Client.Entities
                 _AccountKey = value;
                 OnPropertyChanged(() => SessionKey);
             }
-        }       
+        }
 
         public string GuestKey
         {
@@ -231,6 +232,16 @@ namespace MMC.Client.Entities
                 _BookingNumber = value;
                 OnPropertyChanged(() => BookingNumber);
             }
+        }       
+
+        public string ActivityKey
+        {
+            get { return _ActivityKey; }
+            set
+            {
+                _ActivityKey = value;
+                OnPropertyChanged(() => ActivityKey);
+            }
         }
 
 
@@ -240,7 +251,7 @@ namespace MMC.Client.Entities
             public ActivityBookingValidator()
             {
                 RuleFor(obj => obj.ActivityBookingKey).NotEmpty();
-                RuleFor(obj => obj.ActivityKey).NotEmpty();
+                RuleFor(obj => obj.ActivityPricingKey).NotEmpty();
                 RuleFor(obj => obj.BookingDate).NotNull();
                 RuleFor(obj => obj.SessionKey).NotEmpty();
                 RuleFor(obj => obj.Participants).GreaterThanOrEqualTo(1);

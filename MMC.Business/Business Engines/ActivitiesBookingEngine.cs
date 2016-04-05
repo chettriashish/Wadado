@@ -27,38 +27,32 @@ namespace MMC.Business.BusinessEngines
         ///3. based on time 
         ///4. check for other user booked activity to see if feasible
         ///5. check any other factors        
-        public bool IsActivityAvailable(string activityKey, DateTime bookingDate, string bookingTime,
-            IEnumerable<ActivityBooking> bookedActivites, int adults, int children, IEnumerable<ActivitiesMaster> allActivities)
+        public bool IsActivityAvailable(string activityPricingKey, DateTime bookingDate, string bookingTime,
+            IEnumerable<ActivityBooking> bookedActivites, int adults, int children,  ActivitiesMaster activity)
         {
             bool available = true;
-
-            //ActivityBooking bookings = bookedActivites.Where(item => item.ActivityKey == activityKey && item.BookingDate == bookingDate);
-            //if (bookings != null && (
-            //    (bookingDate == bookings.BookingDate && bookingTime == bookings.Time)))
-            //{
-            //    available = false;
-            //}
             if (available)
             {
                 ///Getting total number of participants that have already 
                 ///booked the activity for the date and time selected 
                 ///by the user
-                int numAdultParticipantsAlreadyPresent = bookedActivites.Where(item => item.ActivityKey == activityKey)
+                ///
+                IActivityPriceMappingRepository activityPriceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
+                ActivityPriceMapping activityPricing = activityPriceMappingRepository.GetAllPriceOptionsForSelectedActivity(activity.ActivitesKey).FirstOrDefault();
+
+                int numAdultParticipantsAlreadyPresent = bookedActivites.Where(item => item.ActivityPricingKey == activityPricingKey)
                     .Where(item => item.Time == bookingTime).Where(item => item.BookingDate == bookingDate).Sum(item => item.Participants);
 
-                int numChildParticipantsAlreadyPresent = bookedActivites.Where(item => item.ActivityKey == activityKey)
-                    .Where(item => item.Time == bookingTime).Where(item => item.BookingDate == bookingDate).Sum(item => item.ChildParticipants);
+                int numChildParticipantsAlreadyPresent = bookedActivites.Where(item => item.ActivityPricingKey == activityPricingKey)
+                    .Where(item => item.Time == bookingTime).Where(item => item.BookingDate == bookingDate).Sum(item => item.ChildParticipants);                
 
-                ActivitiesMaster activity = allActivities.Where(item => item.ActivitesKey == activityKey).FirstOrDefault();
                 adults = adults + numAdultParticipantsAlreadyPresent;
                 children = children + numChildParticipantsAlreadyPresent;
 
-                if (activity.MaxAdults < adults || activity.MinAdults > adults)
-                {
-                    available = false;
-                }
+                int totalNumberOfParticipants = adults + children;
 
-                if (activity.MaxChildren < children || activity.MinChildren > children)
+
+                if ((activityPricing.NumAdults + activityPricing.NumChild) < totalNumberOfParticipants || activity.MaxUnits < totalNumberOfParticipants)
                 {
                     available = false;
                 }
@@ -69,14 +63,17 @@ namespace MMC.Business.BusinessEngines
         {
             IActivityBookingRepository activityBookingRepository
                 = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+
+            IActivityPriceMappingRepository activityPriceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
             bool booked = false;
             IEnumerable<ActivityBooking> result = activityBookingRepository.GetBookedActivitiesBySession(sessionKey: sessionKey);
 
             if (result.Count() > 0 &&
-                result.Where(item => item.ActivityKey == activityKey).Count() > 0)
+                result.Where(e => e.ActivityKey == activityKey).Count() > 0)
             {
-                booked = true;
+                booked = true;                
             }
+
 
             return booked;
         }
@@ -84,11 +81,11 @@ namespace MMC.Business.BusinessEngines
         {
             IActivityBookingRepository activityBookingRepository
                 = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+            IActivityPriceMappingRepository activityPriceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
             bool booked = false;
             IEnumerable<ActivityBooking> result = activityBookingRepository.GetBookedActivitiesByUserKey(userKey);
-
             if (result.Count() > 0 &&
-                result.Where(item => item.ActivityKey == activityKey).Count() > 0)
+                result.Where(e => e.ActivityKey == activityKey).Count() > 0)
             {
                 booked = true;
             }
@@ -132,13 +129,17 @@ namespace MMC.Business.BusinessEngines
         {
             IActivityBookingRepository activityBookingRepository
             = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
+            IActivityPriceMappingRepository activityPriceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
+            IEnumerable<ActivityPriceMapping> priceMappingOptions = activityPriceMappingRepository.GetAllPriceOptionsForSelectedActivity(activityKey);
+            foreach(var item in priceMappingOptions)
+            {
+                ActivityBooking bookedActivity = activityBookingRepository.Get()
+                .Where(e => e.ActivityPricingKey == item.ActivityPricingKey)
+                .Where(e => e.IsDeleted == false).FirstOrDefault();
 
-            ActivityBooking bookedActivity = activityBookingRepository.Get()
-                .Where(item => item.ActivityKey == activityKey)
-                .Where(item => item.IsDeleted == false).FirstOrDefault();
-
-            bookedActivity.IsDeleted = true;
-            activityBookingRepository.Update(bookedActivity);
+                bookedActivity.IsDeleted = true;
+                activityBookingRepository.Update(bookedActivity);
+            }            
         }
         public void CancelActivity(Action codetoExecute)
         {
@@ -163,7 +164,7 @@ namespace MMC.Business.BusinessEngines
             IActivityBookingRepository activityBookingRepository
                 = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
 
-            IEnumerable<ActivitiesMaster> allActivities = activitiesMasterRepository.Get();
+            ActivitiesMaster activity = activitiesMasterRepository.Get(bookingDetails.ActivityKey);
 
             IEnumerable<ActivityBooking> allBookedActivites = activityBookingRepository.Get();
 
@@ -172,11 +173,11 @@ namespace MMC.Business.BusinessEngines
                 throw new UnableToRentForDateException(string.Format("Cannot book activity for date {0} yet.", bookingDetails.BookingDate.ToShortDateString()));
             }
             bool isActivityAvailable = IsActivityAvailable(bookingDetails.ActivityKey, bookingDetails.BookingDate, bookingDetails.Time, allBookedActivites,
-                bookingDetails.Participants, bookingDetails.ChildParticipants, allActivities);
+                bookingDetails.Participants, bookingDetails.ChildParticipants, activity);
 
             ///TBD ONCE LOGIN IS IMPLEMENTED
             //IAccountRepository accountRepository
-                  //= _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
+            //= _DataRepositoryFactory.GetDataRepository<IAccountRepository>();
 
             //Account authAccount = accountRepository.ValidateUserByLogin(loginUser);
 
@@ -185,20 +186,26 @@ namespace MMC.Business.BusinessEngines
             //    throw new NotFoundException(string.Format("No account found for login '{0}'.", loginUser));
             //}
 
+            //Check to support instant booking 
+            if (activity.AllowInstantBooking != null && Convert.ToBoolean(activity.AllowInstantBooking))
+            {
+                bookingDetails.IsConfirmed = true;
+                bookingDetails.IsPaymentComplete = true;
+            }
             ActivityBooking savedActivity = activityBookingRepository.Add(bookingDetails);
             return savedActivity;
         }
         public void UpdateActivityForUser(string sessionKey, string userKey)
         {
             IActivityBookingRepository activityBookingRepository
-                = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();           
+                = _DataRepositoryFactory.GetDataRepository<IActivityBookingRepository>();
             IEnumerable<ActivityBooking> result = activityBookingRepository.GetBookedActivitiesBySession(sessionKey: sessionKey);
 
             foreach (ActivityBooking booking in result)
             {
                 booking.GuestKey = userKey;
                 activityBookingRepository.Update(booking);
-            }            
+            }
         }
 
         public IEnumerable<ActivityBooking> GetBookedActivitiesForUser(string sessionKey, string guestKey)
@@ -210,11 +217,11 @@ namespace MMC.Business.BusinessEngines
 
             if (sessionKey != default(string))
             {
-                result = activityBookingRepository.GetBookedActivitiesBySession(sessionKey: sessionKey);                
+                result = activityBookingRepository.GetBookedActivitiesBySession(sessionKey: sessionKey);
             }
-            else if(guestKey != default(string))
+            else if (guestKey != default(string))
             {
-                result = activityBookingRepository.GetBookedActivitiesByUserKey(guestKey);                
+                result = activityBookingRepository.GetBookedActivitiesByUserKey(guestKey);
             }
             return result.OrderBy(entity => entity.BookingDate);
         }

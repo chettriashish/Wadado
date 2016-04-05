@@ -41,10 +41,10 @@ namespace MMC.Client.Contracts
         [OperationContract]
         IEnumerable<ActivityBookingDataContract> GetUsersCurrentActivityCart(string sessionKey, string userAgent);
         [OperationContract]
-        ActivityBookingDataContract AddUserActivityToCart(string activityKey, int adults,
+        ActivityBookingDataContract AddUserActivityToCart(string activityKey, string selectedActivityPriceOptionsKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey);
 
-        ActivityBookingDataContract AddUserActivityToCart(string activityKey, int adults,
+        ActivityBookingDataContract AddUserActivityToCart(string activityKey, string selectedActivityPriceOptionsKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey, string guestKey);
         [OperationContract]
         IEnumerable<ActivitySummaryDataContract> GetAllActivitiesByLocationAndType(string locationKey, string activityCategoryKey, string userAgent);
@@ -88,6 +88,14 @@ namespace MMC.Client.Contracts
         [OperationContract]
         IEnumerable<ActivityBookingDataContract> GetAllUpcomingCompanyActivities(string companyKey);
         ActivityDetailsDataContract CreateNewActivityDetails();
+        [OperationContract]
+        bool AcceptSelectedActivityBooking(string bookingKey, string user);
+        [OperationContract]
+        bool RejectSelectedActivityBooking(string bookingKey, string user);
+        [OperationContract]
+        IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags);
+        [OperationContract]
+        IEnumerable<EmailDataContract> GetUsersBookingDetails(string sessionKey, string userAgent);
         #endregion
 
         #region Async Operations

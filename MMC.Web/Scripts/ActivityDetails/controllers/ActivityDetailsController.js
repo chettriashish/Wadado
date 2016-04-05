@@ -105,10 +105,14 @@
         $scope.$on("ACTIVITYUPDATED", function (event, args) {
             $scope.$broadcast('ACTIVITYUPDATEBR', { message: "ACTIVITYUPDATEBR" });
         });
-        /*END UPDATING THE ACTIVITIES COUNT IN THE MENU CONTROLLER ONLY AFTER AN ACTIVITY HAS BEEN ADDED TO THE LIST*/
-
+        /*END UPDATING THE ACTIVITIES COUNT IN THE MENU CONTROLLER ONLY AFTER AN ACTIVITY HAS BEEN ADDED TO THE LIST*/        
         ActivityDetailsDataService.getSelectedActivityDetails().then(function (selectedActivityDetails) {
             $scope.selectedActivityDetails = selectedActivityDetails;
+            $scope.p_option = {};
+            if ($scope.selectedActivityDetails.AllPriceOptions.length > 0) {
+                $scope.p_option.val = $scope.selectedActivityDetails.AllPriceOptions[0].ActivityPricingKey; 
+                setDefaultPricingOptions($scope.selectedActivityDetails.AllPriceOptions[0]);
+            }            
             /*SET LOCATION FOR ACTIVITY ONLY IF THE THE ACTIVITY EXISTS AND DATA IS RETURNED FROM THE SERVER CORRECTLY*/
             if (purl().segment().length > 2) {
                 if (purl().segment(2).trim().length > 0 && purl().segment(3).trim().length) {
@@ -118,7 +122,7 @@
                     }
                     else {
                         $scope.greaterThan = false;
-                    }
+                    }                    
                     setSimilarActivityImages();
                     setRating();
                     $scope.NumberOfPeople = $scope.selectedActivityDetails.MinPeople + "-" + $scope.selectedActivityDetails.MaxPeople;
@@ -129,7 +133,7 @@
                 return true;
             }
 
-            $scope.Cost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "person";
+            $scope.Cost = 'From\t' + $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.ActivityPriceOption[0].PriceForAdults + "/" + "person";
             if (WURFL.form_factor == "Smartphone") {
                 $scope.limit = $scope.selectedActivityDetails.Description.length / 1.5;
             }
@@ -187,6 +191,15 @@
             }
             /*************SHOW BOOKING DETAILS ONLY AFTER DATA HAS BEEN FETCHED FROM SERVER********/
         });
+
+        var setDefaultPricingOptions = function (item) {
+            $scope.selectedPriceOption = item;
+            $scope.$broadcast("OPTIONCHANGED", item);
+        }
+
+        $scope.setPriceOption = function (item) {
+            setDefaultPricingOptions(item);                    
+        }
         var setRating = function () {
             if (WURFL.is_mobile) {
                 $.each($scope.selectedActivityDetails.SimilarActivities, function (key, value) {

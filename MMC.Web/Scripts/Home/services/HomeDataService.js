@@ -30,6 +30,16 @@
             $window.location.href = "/Location/" + locationName;
         }
 
+        var getActivitiesForSelectedSearchTag = function (tags) {
+            var deferred = $q.defer();
+            $http({
+                url: '/Home/GetActivitiesForSelectedSearchTag',
+                method: 'GET',
+                params: { tags: tags }
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+        }
+
         var setSlider = function () {
             $('.owl-carousel').owlCarousel({
                 loop: true,
@@ -37,14 +47,14 @@
                 responsiveClass: true,
                 autoplay: true,
                 autoplayHoverPause: true,
-                dots:true,
+                dots: true,
                 responsiveBaseElement: window,
                 responsiveRefreshRate: 50,
                 animateOut: 'fadeOut',
-                animateIn: 'flipIn',                
-                smartSpeed:450,
+                animateIn: 'flipIn',
+                smartSpeed: 450,
                 dotsEach: true,
-                nav: true,                
+                nav: true,
                 responsive: {
                     0: {
                         items: 1,
@@ -59,7 +69,7 @@
                         loop: true,
                         touchDrag: true,
                         margin: 4,
-                       
+
                     },
                     960: {
                         items: 3,
@@ -68,16 +78,16 @@
                         loop: true,
                         touchDrag: true,
                         margin: 5,
-                        autoplayTimeout:5000,
-                        
+                        autoplayTimeout: 5000,
+
                     },
                     1200: {
                         items: 4,
                         nav: true,
                         navText: ["<img src='../Images/Icons/prev.png' />", "<img  src='../Images/Icons/next.png' />"],
                         loop: true,
-                        touchDrag: false,                                               
-                        margin: 5                        
+                        touchDrag: false,
+                        margin: 5
                     }
                 }
             })
@@ -91,6 +101,7 @@
             searchForLocation: searchForLocation,
             getLatestNews: getLatestNews,
             setSlider: setSlider,
+            getActivitiesForSelectedSearchTag: getActivitiesForSelectedSearchTag,
         }
     };
     app.factory("HomeDataService", homeDataService);

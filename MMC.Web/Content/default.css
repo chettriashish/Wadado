@@ -1,8 +1,8 @@
 ﻿/*-----Prevents iPhone from resizing in landscape mode -----*/
-html,body {
-    -webkit-text-size-adjust: none;    
-    box-sizing: border-box;    	
-	height:88%;
+html, body {
+    -webkit-text-size-adjust: none;
+    box-sizing: border-box;
+    height: 88%;
 }
 
 /*----------- apply a natural box layout model to all elements --------------*/
@@ -114,13 +114,25 @@ header {
 .center-element-relative {
     margin: 0 auto;
     min-width: 320px;
-    height: auto;    
+    height: auto;
 }
 
-.top-center-element{
-    position:relative;   
-    margin: 10% auto;    
-    width:40%;
+.top-center-element {
+    position: relative;
+    margin: 10% auto;
+    width: 40%;
+}
+
+.center-element-sixty {
+    position: relative;
+    margin: 0 auto;
+    width: 60%;
+}
+
+.center-element-seventy {
+    position: relative;
+    margin: 0 auto;
+    width: 70%;
 }
 
 .dummy {
@@ -169,9 +181,9 @@ nav ul li:last-child a {
 /*-----CONTENT -----*/
 .contentWrapper {
     background-color: rgb(255,255,255);
-    transition: 1s all;  
-    min-height:100%;
-	position:relative;     
+    transition: 1s all;
+    min-height: 100%;
+    position: relative;
 }
 
     .contentWrapper .row:after {
@@ -243,6 +255,40 @@ nav ul li:last-child a {
     .uppercontent .row span, .uppercontent .quote span {
         font-size: .8em;
         padding: .1em 0;
+    }
+
+    .uppercontent .row p {
+        font-size: 1em;
+        line-height: 1.2em;
+        text-align: justify;
+    }
+
+.text-content .row p {
+    font-size: 1em;
+    line-height: 2.2em;
+    quotes: "“" "”" "‘" "’";
+    text-align: justify;
+}
+
+    .text-content .row p:before {
+        font-size: 1.5em;
+        content: open-quote;
+        font-weight: bold;
+    }
+
+    .text-content .row p:after {
+        font-size: 1.5em;
+        content: close-quote;
+        font-weight: bold;
+    }
+
+.content-header {
+    font-size: 1.5em;
+}
+
+    .content-header span:first-of-type {
+        padding: 0 0 .2em 0;
+        border-bottom: 4px solid rgb(251,189,19);
     }
 
 .home-search-content {
@@ -951,20 +997,27 @@ nav ul li:last-child a {
 
 /*----- FOOTER -----*/
 footer {
-    clear: both;          
-    background-color: rgb(0,0,0);  
-    width:100%;
-	bottom:0;
-	left:0;      
+    clear: both;
+    background-color: rgb(0,0,0);
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    min-height: 8em;
 }
 
     footer a {
         color: #fff;
+        font-size: 1em;        
+    }
+
+    footer div {
+        text-align: left;
+        padding:.5em 1em;
     }
 
     footer img {
         transform: scale(.5);
-        position: relative;        
+        position: relative;
     }
 
 /*----- OTHER -----*/
@@ -1034,6 +1087,13 @@ footer {
         border-color: #fff;
     }
 
+.arrow-up {
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 5px solid black;
+}
 /*---------SEARCH START---------*/
 .mobile-search {
     position: fixed;
@@ -1712,6 +1772,10 @@ input[type=time], select {
     margin-top: -0.5em;
 }
 
+select {
+    min-width: 80px;
+}
+
 input:required:valid {
     -moz-box-shadow: none;
     background-position: right top;
@@ -1989,7 +2053,7 @@ span.buttonText {
     position: relative;
     width: 90%;
     margin: 0 auto;
-    display: table;    
+    display: table;
 }
 
     .admin-table.header {

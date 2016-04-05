@@ -48,5 +48,14 @@ namespace MMC.Web.Controllers.Admin.Bookings
         {
             return Json(_activitiesService.GetAllUpcomingCompanyActivities(companyKey), JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult AcceptSelectedActivityBooking(string bookingKey, string user)
+        {
+            return Json(_activitiesService.AcceptSelectedActivityBooking(bookingKey, user), JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult RejectSelectedActivityBooking(string bookingKey, string user)
+        {
+            return Json(_activitiesService.RejectSelectedActivityBooking(bookingKey, user), JsonRequestBehavior.AllowGet);
+        }
     }
 }

@@ -15,6 +15,8 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public string ActivityKey { get; set; }
         [DataMember]
+        public bool IsTopOffer { get; set; }
+        [DataMember]
         public string Name { get; set; }
         [DataMember]
         public string Location { get; set; }
@@ -51,18 +53,17 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public decimal DifficultyRating { get; set; }
         [DataMember]
-        public string  DifficultyLevel { get; set; }
+        public string DifficultyLevel { get; set; }
         [DataMember]
         public string CancellationPolicy { get; set; }
         [DataMember]
-        public decimal Cost { get; set; }
+        public IEnumerable<ActivityPriceMapping> ActivityPriceOption { get; set; }
         [DataMember]
         public decimal CostForChild { get; set; }
         [DataMember]
         public string Currency { get; set; }
         [DataMember]
         public string LocationLatLong { get; set; }
-
         [DataMember]
         public string LatLong { get; set; }
         [DataMember]
@@ -98,8 +99,14 @@ namespace MMC.Client.Contracts.DataContracts
         [DataMember]
         public IEnumerable<ActivityDates> AllActivityUniqueDates { get; set; }
         [DataMember]
+        public IEnumerable<TopOffersDataContract> AllTopOffers { get; set; }
+        [DataMember]
         public bool IsActivity { get; set; }
         [DataMember]
         public bool IsEvent { get; set; }
+        [DataMember]
+        public decimal Comission { get; set; }
+        [DataMember]
+        public bool AllowInstantBooking { get; set; }
     }
 }

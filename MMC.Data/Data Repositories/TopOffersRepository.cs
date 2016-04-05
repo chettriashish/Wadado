@@ -27,7 +27,7 @@ namespace MMC.Data.DataRepositories
         {
             return (from e in entityContext.TopOffersSet
                     select e);
-        }        
+        }
 
         protected override TopOffers GetEntity(MyMonkeyCapContext entityContext, string key)
         {
@@ -36,6 +36,38 @@ namespace MMC.Data.DataRepositories
                          select e);
             var results = query.FirstOrDefault();
 
+            return results;
+        }
+
+        public IEnumerable<TopOffers> GetTopOffersForLocation(string locationKey)
+        {
+            IEnumerable<TopOffers> results = new List<TopOffers>();
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.TopOffersSet
+                             where e.LocationKey == locationKey
+                             && e.OfferStartDate <= DateTime.Now && e.OfferEndDate >= DateTime.Now
+                             select e).OrderBy(e => e.OfferStartDate);
+
+                results =  query.ToList();
+            }
+            return results;
+        }
+
+        public IEnumerable<TopOffers> GetOffersForActivity(string activityKey)
+        {
+            IEnumerable<TopOffers> results = new List<TopOffers>();
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                var query = (from e in entityContext.TopOffersSet
+                             join e1 in entityContext.TopOfferMappingSet
+                             on e.TopOffersKey equals e1.TopOfferKey
+                             where e1.MappingKey == activityKey                             
+                             && e.OfferStartDate <= DateTime.Now && e.OfferEndDate >= DateTime.Now
+                             select e).OrderBy(e => e.OfferStartDate);
+
+                results = query.ToList();
+            }
             return results;
         }
     }

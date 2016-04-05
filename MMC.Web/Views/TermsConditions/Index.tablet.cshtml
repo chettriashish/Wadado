@@ -1,0 +1,135 @@
+﻿@{
+    ViewBag.Title = "About us";
+}
+<!--JQUERY UI REFERENCE-->
+<link href="~/Content/jquery-ui-1.10.1.css" rel="stylesheet" />
+
+<!--UI SELECT REFERENCE-->
+<link href="~/Content/ui-select/select.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2.css" rel="stylesheet" />
+<link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+
+<!--SEARCH REFERENCE-->
+<script src="~/Scripts/Common/services/SearchDataService.js"></script>
+<script src="~/Scripts/Common/controllers/SearchController.js"></script>
+
+<!--ACCOUNT REFERENCE-->
+<script src="~/Scripts/Login/Model/AccountLoginModel.js"></script>
+<script src="~/Scripts/Login/services/LoginDataService.js"></script>
+<script src="~/Scripts/Login/controllers/LoginController.js"></script>
+
+<!--MENU REFERENCE-->
+<script src="~/Scripts/Common/services/MenuDataService.js"></script>
+<script src="~/Scripts/Common/controllers/MenuController.js"></script>
+<<link href="~/Content/tabmenu.css" rel="stylesheet" />
+<link href="~/Content/tablet.css" rel="stylesheet" />
+
+<div id="colorbar">
+</div>
+<div class="cover"></div>
+<div class="contentWrapper">
+    <div>
+        @Html.Partial("../Partial/_search")
+    </div>
+    <div>
+        @Html.Partial("../Partial/_mobilemenu")
+    </div>
+    <!--row start-->
+    <div class="uppercontent">
+        <div class="row">
+            <div class="column-12">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+        <!--row end-->
+        <!--row start-->
+        <div class="row">
+            <div class="column-12">
+                <div class="content-header">
+                    <span>Terms</span><span> & Conditions</span>
+                    <br /><br />
+                </div>
+                <br />
+                <div class="subHeader">
+                    <span>Overview</span>
+                </div>
+                <br />
+                <div>
+                    <p>
+                        Mymonkeycap.com purely provides activity/event organisers an online platform to help facilitate with booking/ticket purchases to activities/events, this is the only way it is associated with any activity/event which is listed on Mymonkeycap.com. Moral and legal responsibilities for an activity/event are solely the responsibility of the activity /event organiser.
+                        <br /><br />
+                        Details including the prices of an activity/event which is listed on Mymonkeycap.com has been provided by the activity/event organiser.Any complaints made towards the details of an activity/event on mymonkeycap.com for example 'a complaint made towards misrepresentation of an activity'event'  are solely the responsibility of the activity/event organiser.'
+                        <br /><br />
+                        You as a user of mymonkeycap.com agree not to involve mymonkeycap.com in any dispute that may occur between yourself and an activity/event organiser with regards to the activity /event.
+                        <br /><br />
+                        For each activity/event listed on mymonkeycap.com users can check availability dates and ticket number availability. For some activities users can send booking requests to partake in an activity at a specific date if it is not currently listed in the availability date calendar on mymonkeycap.com. Such request will then either be accepted or denied within forty eight hours.
+                        <br /><br />
+                        For those activities/ events which have been indicated as available on mymonkeycap.com but are not actually available will be the sole responsibility of the activity/event organiser. Mymonkeycap.com is in no way liable for such errors made by an activity/event organiser.
+                        <br /><br />
+                        Activity/event organisers have the right to cancel any activity/event due to the following: Health and safety concerns, weather conditions, natural disasters, insufficient number of people attending or any other unforeseen event or circumstance that may arise.
+                    </p>
+                </div>
+                <br />
+                <div class="subHeader">
+                    <span>Your booking/ticket </span>
+                </div>
+                <br />
+                <div>
+                    <p>
+                        Once you have successfully booked and paid for a activity/event through mymonkeycap.com  you will be able to print out your online booking/ticket  by selecting 'download and print booking/ticket '. Your booking/ticket will also be attached with an automated email sent through to your email address confirming your purchase to an activity/event.
+                        <br /><br />
+                        Each booking/ticket will contain a unique code which can only be used once.
+                        <br /><br />
+                        You must bring and show the appropriate photo identification for those activities/events that require identification as either proof of age or identity.
+                        <br /><br />
+                        The currency in which prices for activities/events are shown will depend on the country’s currency where the activity/event is taken place. All prices for activities/events will include local taxes where applicable.
+                    </p>
+                </div>
+                <br />
+                <div class="subHeader">
+                    <span>Activity/Event cancellations </span>
+                </div>
+                <br />
+                <div>
+                    <p>
+                        All cancellation and booking changes rely on a activity/event organizer’s  terms /conditions and policies. Each time a booking is made to a specific activity/event through mymonkeycap.com you agree to oblige to that event/activities terms /conditions and policies.
+                    </p>
+                </div>
+                <br />
+                <div class="subHeader">
+                    <span>Customer cancellations </span>
+                </div>
+                <br />
+                <div>
+                    <p>
+                        Activity and events which have stated that they are non-transferable & non-refundable                 can neither be changed nor refunded and any stage.
+                        <br /><br />
+                        If you would like to cancel or change a booking made on mymonkeycap.com to another date for any activities/ events that allow cancellations or booking changes you can contact us. Please state the following: Your reason for wanting a refund or change, your full name and booking reference. Refund/booking depends on the cancellation policy described by each activity organizer, which would be clearly mentioned in the activity/events page and also in the e-ticket.
+                        <br /><br />
+                        In those instances where an activity/event organiser approves a refund mymonkeycap.com will provide a refund to the card that the user originally made the booking/ticket purchase on.The refund amount will be the total amount for the booking /ticket purchase to the activity/event.
+                    </p>
+                </div>
+                <br />
+                <div class="subHeader">
+                    <span>Cancellation made by activity/event organiser's </span>
+                </div>
+                <br />
+                <div>
+                    <p>
+                        Mymonkeycap.com will provide each customer who has successfully purchased a booking/ticket to a cancelled activity/event through the mymonkeycap.com platform an immediate refund as soon as we are notified by an activity/event organiser that an activity/event has been cancelled. The time the refunded money will appear in the customers account depends on the time taken by the third party payment gateway policies.
+                        <br /><br />
+                        Money will be refunded to the credit/debit card which the customer used to purchase a booking/ticket to the activity/event.
+                        <br /><br />
+                        Bookings/tickets for activities/events which have been postponed will still be valid for new dates unless otherwise stated.
+                        <br /><br />
+                        Those who have purchased bookings/tickets to an activity/event which has been postponed can ask for a full refund by contacting us, refund requested must be made before the activity/event occurs.
+                        <br /><br />
+                        Customers will not be charged any cancellation fee for any activity/event that was cancelled by the activity/event organiser.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!--row end-->
+    </div>
+</div>

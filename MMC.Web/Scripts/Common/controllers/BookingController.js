@@ -24,11 +24,11 @@
                         $scope.ErrorMessage = null;
                         $scope.Error = false;
                         if ($scope.selectedActivityDetails.NumChildren == 0) {
-                            $scope.Total = $scope.selectedActivityDetails.Currency + " " + $scope.NumAdults * $scope.selectedActivityDetails.Cost;
+                            $scope.Total = $scope.selectedActivityDetails.Currency + " " + $scope.NumAdults * $scope.selectedPriceOption.PriceForAdults;
                         }
                         else {
-                            $scope.Total = $scope.selectedActivityDetails.Currency + " " + ($scope.NumAdults * $scope.selectedActivityDetails.Cost +
-                                $scope.NumChildren * $scope.selectedActivityDetails.CostForChild);
+                            $scope.Total = $scope.selectedActivityDetails.Currency + " " + ($scope.NumAdults * $scope.selectedPriceOption.PriceForAdults +
+                                $scope.NumChildren * $scope.selectedPriceOption.PriceForChildren);
                         }
                     }
                 });
@@ -73,18 +73,22 @@
                 if (!$(".booking-wrapper").hasClass("open")) {
                     $(".desktop-book").addClass("hide");
                     $(".booking-wrapper").addClass("open");
-                    $scope.Total = $scope.selectedActivityDetails.Currency + " " + $scope.NumAdults * $scope.selectedActivityDetails.Cost;
+                    $scope.Total = $scope.selectedActivityDetails.Currency + " " + $scope.NumAdults * $scope.selectedPriceOption.PriceForAdults;
                     $scope.ShowChildren = function () {
                         if ($scope.selectedActivityDetails.NumChildren > 0) {
-                            $scope.Total = $scope.selectedActivityDetails.Currency + " " + ($scope.NumAdults * $scope.selectedActivityDetails.Cost +
-                                    $scope.NumChildren * $scope.selectedActivityDetails.CostForChild);
-                            $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "adult";
-                            $scope.ChildCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.CostForChild + "/" + "child";
+                            $scope.Total = $scope.selectedActivityDetails.Currency + " " + ($scope.NumAdults * $scope.selectedPriceOption.PriceForAdults +
+                                    $scope.NumChildren * $scope.selectedPriceOption.PriceForChildren);
+                            $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedPriceOption.PriceForAdults + "/" + "adult";
+                            $scope.ChildCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedPriceOption.PriceForChildren + "/" + "child";
                             return true;
                         }
                         else {
-                            $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedActivityDetails.Cost + "/" + "person";
+                            $scope.AdultCost = $scope.selectedActivityDetails.Currency + " " + $scope.selectedPriceOption.PriceForAdults + "/" + "person";
                             return false;
+                        }
+                        if ($scope.selectedActivityDetails.AllActivityTimes.length > 4) {
+                            $scope.radio = false;
+                            $scope.selectedTime = {};
                         }
                     }
                     //$scope.$apply();
@@ -95,7 +99,12 @@
                 spinner();
             }            
         }
-
+        $scope.$on("OPTIONCHANGED", function (event, args)
+        {
+            $scope.currentPriceOption = {};
+            $scope.currentPriceOption = args;
+            checkForAvailability();
+        });
         $scope.addActivityToCart = function () {          
             if ($scope.selectedDate != '') {
                 spinner();
@@ -109,13 +118,13 @@
                     else {
                         var total = 0;
                         if ($scope.selectedActivityDetails.NumChildren == 0) {
-                            total = $scope.NumAdults * $scope.selectedActivityDetails.Cost;
+                            total = $scope.NumAdults * $scope.selectedPriceOption.PriceForAdults; //$scope.selectedActivityDetails.Cost;
                         }
                         else {
-                            total = ($scope.NumAdults * $scope.selectedActivityDetails.Cost +
-                                $scope.NumChildren * $scope.selectedActivityDetails.CostForChild);
+                            total = ($scope.NumAdults * $scope.selectedPriceOption.PriceForAdults +
+                                $scope.NumChildren * $scope.selectedPriceOption.PriceForChildren);
                         }
-                        BookingDataService.addSelectedActivityToUsersCart($scope.selectedActivityDetails.ActivityKey,
+                        BookingDataService.addSelectedActivityToUsersCart($scope.selectedActivityDetails.ActivityKey, $scope.currentPriceOption.ActivityPricingKey,
                            $scope.NumAdults, $scope.NumChildren, $scope.selectedDate, $scope.time.val, total).then(function (response) {
                                console.log("activity added to cart");
                                $scope.$emit("ACTIVITYUPDATED", { message: "ACTIVITYUPDATED" })
@@ -130,8 +139,7 @@
                 $scope.Error = true;
             }
 
-        }
-
+        }       
         /***************SHOW/HIDE THE LOADING SPINNER*************************/
         var spinner = function () {
             if ($('.spinner').hasClass('show')) {

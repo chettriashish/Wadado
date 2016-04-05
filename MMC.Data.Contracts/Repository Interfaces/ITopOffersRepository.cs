@@ -10,5 +10,7 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
 {
     public interface ITopOffersRepository : IDataRepository<TopOffers>
     {
+        IEnumerable<TopOffers> GetTopOffersForLocation(string locationKey);
+        IEnumerable<TopOffers> GetOffersForActivity(string activityKey);
     }
 }

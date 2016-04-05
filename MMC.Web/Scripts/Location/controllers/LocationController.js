@@ -91,7 +91,7 @@
 
         $scope.locations = {};
         LocationDataService.getSelectedLocationDetails().then(function (selectedLocation) {
-            $scope.location = selectedLocation;
+            $scope.location = selectedLocation[0];
             /*SET LOCATION FOR ACTIVITY ONLY IF THE THE ACTIVITY EXISTS AND DATA IS RETURNED FROM THE SERVER CORRECTLY*/
             if (purl().segment().length >= 2) {
                 if (purl().segment(2).trim().length > 0) {
@@ -119,7 +119,7 @@
                         }
                     }
                 });
-            });            
+            });
         });
 
         var setRatings = function (allActivities) {
@@ -160,7 +160,7 @@
             $scope.ActivityType = item.ActivityName;
             LocationDataService.getActivitiesForType($scope.ActivityType, $scope.locationName);
         };
-        /*END LOADING SELECTED LOCATION ACTIVITY TYPE*/        
+        /*END LOADING SELECTED LOCATION ACTIVITY TYPE*/
     }
     app.controller("LocationController", locationController);
 }());

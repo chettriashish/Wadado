@@ -10,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Globalization;
 using System.Web.Script.Serialization;
+using System.Web.UI;
 
 namespace MMC.Web.Controllers.Activities
 {
@@ -30,7 +31,7 @@ namespace MMC.Web.Controllers.Activities
             SessionHandler("Activities");
             return View();
         }
-
+        [OutputCache(CacheProfile = "global", Location = OutputCacheLocation.Server,VaryByParam="selectedActivityCategory")]
         public ActionResult GetSelectedActivityType(string selectedLocation, string selectedActivityCategory)
         {
             //DUMMY IMPLEMENTATION FOR TILL ACTUAL DATA IS AVALABLE - THIS SECTION WILL BE REMOVED ONCE DATA IS AVAILABLE

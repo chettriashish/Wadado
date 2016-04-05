@@ -1,0 +1,70 @@
+﻿<form>
+    <div class="center-element-sixty">
+        <div class="row">
+            <div class="column-12">
+                <span>
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <span>
+                    &nbsp;
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <span>
+                    Company Details
+                </span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <input type="text"
+                       placeholder="company name "
+                       ng-model="vm.company.Name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <textarea type="text" ng-model="vm.company.Address" class="multiline" required placeholder="address" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <input type="text"
+                       placeholder="telephone/mobile number "
+                       ng-model="vm.company.TelephoneNumber">
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <input type="email" ng-model="vm.company.Email" required placeholder="email" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-12">
+                <input type="text" ng-model="vm.company.ContactPerson" required placeholder="contact person name" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="column-4">
+                <span>&nbsp;</span>
+            </div>
+            <div class="column-4">
+                <div class="center-element-sixty">
+                    <button type="submit"
+                            ng-click="vm.saveCompanyDetails()">
+                        SAVE
+                    </button>
+                </div>
+            </div>
+            <div class="column-4">
+                <span>&nbsp;</span>
+            </div>
+        </div>
+    </div>
+</form>

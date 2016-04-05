@@ -30,12 +30,13 @@ namespace MMC.Client.Proxies
             return Channel.CheckForActivityAvailablity(activityKey, adults, children, bookingDate, time);
         }
 
-        public ActivityBookingDataContract AddUserActivityToCart(string activityKey, int adults,
+        public ActivityBookingDataContract AddUserActivityToCart(string activityKey, string selectedActivityPriceOptionsKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey)
         {
             ActivityBookingDataContract bookingDetails = new ActivityBookingDataContract();
             bookingDetails.ActivityBookingKey = Guid.NewGuid().ToString();
             bookingDetails.ActivityKey = activityKey;
+            bookingDetails.ActivityPricingKey = selectedActivityPriceOptionsKey;
             bookingDetails.BookingDate = bookingDate;
             bookingDetails.CreatedDate = DateTime.Now;
             bookingDetails.ChildParticipants = children;
@@ -53,12 +54,13 @@ namespace MMC.Client.Proxies
             return BookActivityForUser(bookingDetails);
         }
 
-        public ActivityBookingDataContract AddUserActivityToCart(string activityKey, int adults,
+        public ActivityBookingDataContract AddUserActivityToCart(string activityKey, string selectedActivityPriceOptionsKey, int adults,
             int children, DateTime bookingDate, string time, decimal total, string sessionKey, string guestKey)
         {
             ActivityBookingDataContract bookingDetails = new ActivityBookingDataContract();
             bookingDetails.ActivityBookingKey = Guid.NewGuid().ToString();
             bookingDetails.ActivityKey = activityKey;
+            bookingDetails.ActivityPricingKey = selectedActivityPriceOptionsKey;
             bookingDetails.BookingDate = bookingDate;
             bookingDetails.CreatedDate = DateTime.Now;
             bookingDetails.GuestKey = guestKey;
@@ -200,7 +202,19 @@ namespace MMC.Client.Proxies
         public void SaveActivityDetails(ActivityDetailsDataContract activity, Dictionary<string, bool> activityDays,
             IEnumerable<string> activityTimes, string locationKey, string activityTypeKey, string user)
         {
-            Channel.SaveActivityDetails(activity, activityDays, activityTimes, locationKey, activityTypeKey, user);
+            try
+            {
+                foreach (var item in activity.ActivityPriceOption)
+                {
+                    item.CreatedDate = DateTime.Now;
+                }                
+                Channel.SaveActivityDetails(activity, activityDays, activityTimes, locationKey, activityTypeKey, user);
+            }
+            catch (Exception ex)
+            {
+                string message = ex.Message;
+            }
+            
         }
 
         public IEnumerable<ActivityBookingDataContract> GetAllActivitiesPendingForConfirmation()
@@ -244,6 +258,25 @@ namespace MMC.Client.Proxies
             result.IsEvent = false;
             result.IsActivity = true;
             return result;
+        }
+
+        public bool AcceptSelectedActivityBooking(string bookingKey, string user)
+        {
+            return Channel.AcceptSelectedActivityBooking(bookingKey, user);
+        }
+
+        public bool RejectSelectedActivityBooking(string bookingKey, string user)
+        {
+            return Channel.RejectSelectedActivityBooking(bookingKey, user);
+        }
+        public IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags)
+        {
+            return Channel.GetActivitiesForSelectedSearchTag(tags);
+        }
+
+        public IEnumerable<EmailDataContract> GetUsersBookingDetails(string sessionKey, string userAgent)
+        {
+            return Channel.GetUsersBookingDetails(sessionKey, userAgent);
         }
     }
 }

@@ -1,10 +1,18 @@
 ﻿(function () {
     var app = angular.module("appMain");
-    var adminLoginController = function (userAccount, isLoggedIn, $state, $scope) {
+    var adminLoginController = function (userAccount, isLoggedIn, $state, $scope, AdminCompanyDataService) {
         vm = this;
         vm.isLoggedIn = userAccount.isUserloggedIn();
         if (vm.isLoggedIn) {
-            $state.go("adminbookings_parent.adminActivityBookingsPending");
+            AdminCompanyDataService.checkIfUserBelongsToCompanyAsync(sessionStorage.userId).then(function (response) {
+                vm.company = response;
+                if (vm.company.CompanyKey) {
+                    $state.go("adminbookings_parent.adminActivityBookingsPending");                   
+                }
+                else {
+                    $state.go("adminCompanyDetails");
+                }
+            });           
         }
         
         vm.message = '';
@@ -14,6 +22,11 @@
             password: '',
             confirmPassword: ''
         };
+
+        var setToken = function (){
+           
+        }
+
         vm.login = function () {
             vm.userData.grant_type = "password";
             vm.userData.userName = vm.userData.email;
@@ -23,11 +36,22 @@
                     vm.message = "";
                     vm.password = "";
                     vm.token = data.access_token;
+                    vm.userId = data.userId;
                     if (typeof (Storage) !== 'undefined') {
                         sessionStorage.token = vm.token;
-                        $scope.$emit("u_l", true);
+                        sessionStorage.userId = vm.userData.email;                       
                     }
-                    $state.go("adminbookings_parent.adminActivityBookingsPending");
+                    AdminCompanyDataService.checkIfUserBelongsToCompanyAsync(data.userName).then(function (response) {
+                        vm.company = response;
+                        if (vm.company.CompanyKey) {
+                            $state.go("adminbookings_parent.adminActivityBookingsPending");
+                            $scope.$emit("u_l", true);
+                        }
+                        else {
+                            $state.go("adminCompanyDetails");
+                        }
+                    });                    
+                    
                 },
                 function (response) {
                     vm.password = "";
@@ -52,5 +76,5 @@
             $state.go("adminRegisterUser");
         }
     }
-    app.controller("AdminLoginController", ["userAccount", "isLoggedIn", "$state", "$scope", adminLoginController]);
+    app.controller("AdminLoginController", ["userAccount", "isLoggedIn", "$state", "$scope","AdminCompanyDataService", adminLoginController]);
 }());

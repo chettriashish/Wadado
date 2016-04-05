@@ -122,6 +122,7 @@
     <Compile Include="Data Repositories\ActivityLocationRepository.cs" />
     <Compile Include="Data Repositories\ActivityPriceMappingRepository.cs" />
     <Compile Include="Data Repositories\ActivityRatesRepository.cs" />
+    <Compile Include="Data Repositories\ActivityTagMappingRepository.cs" />
     <Compile Include="Data Repositories\ActivityTimeSchedulerRepository.cs" />
     <Compile Include="Data Repositories\ActivityTypeCategoryRepository.cs" />
     <Compile Include="Data Repositories\ActivityTypeMasterRepository.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="Data Repositories\TopOffersRepository.cs" />
     <Compile Include="Data Repositories\TouristSeasonsRepository.cs" />
     <Compile Include="Data Repositories\UserApplicationActivityRepository.cs" />
+    <Compile Include="Data Repositories\UserCompanyMappingRepository.cs" />
     <Compile Include="DataRepositoryBase.cs" />
     <Compile Include="DataRepositoryFactory.cs" />
     <Compile Include="Data Repositories\GuestFavoritesRepository.cs" />

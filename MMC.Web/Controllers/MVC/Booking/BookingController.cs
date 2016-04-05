@@ -43,27 +43,27 @@ namespace MMC.Web.Controllers.Booking
             }                       
         }
 
-        public JsonResult AddSelectedActivityToUsersCart(string selectedActivityKey, int numAdults,
+        public JsonResult AddSelectedActivityToUsersCart(string selectedActivityKey,string selectedActivityPriceOptionsKey, int numAdults,
            int numChildren, string bookingDate, string bookingTime, decimal total)
         {
             if (Session["sessionKey"] != null && Session["guestKey"] != null)
             {
                 string sessionKey = Convert.ToString(Session["sessionKey"]);
                 string guestKey = Convert.ToString(Session["guestKey"]);
-                return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey, numAdults,
+                return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey,selectedActivityPriceOptionsKey, numAdults,
                 numChildren, DateTime.ParseExact(bookingDate, "d/MM/yyyy", CultureInfo.InvariantCulture), bookingTime, total, sessionKey, guestKey), JsonRequestBehavior.AllowGet);
             }
             else if (Session["sessionKey"] != null)
             {
                 string sessionKey = Convert.ToString(Session["sessionKey"]);
-                return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey, numAdults,
+                return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey,selectedActivityPriceOptionsKey, numAdults,
                 numChildren, DateTime.ParseExact(bookingDate, "d/MM/yyyy", CultureInfo.InvariantCulture), bookingTime, total, sessionKey), JsonRequestBehavior.AllowGet);
             }
             else
             {
                 LogUserSession();
                 string sessionKey = Convert.ToString(Session["sessionKey"]);
-                return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey, numAdults,
+                return Json(_activitiesService.AddUserActivityToCart(selectedActivityKey,selectedActivityPriceOptionsKey, numAdults,
                 numChildren, DateTime.ParseExact(bookingDate, "d/MM/yyyy", CultureInfo.InvariantCulture), bookingTime, total, sessionKey), JsonRequestBehavior.AllowGet);
             }
         }

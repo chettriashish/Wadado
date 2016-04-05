@@ -15,7 +15,7 @@ namespace MMC.Business.Entities
         [DataMember]
         public string ActivityBookingKey { get; set; }
         [DataMember]
-        public string ActivityKey { get; set; }
+        public string ActivityPricingKey { get; set; }
         [DataMember]
         public string SessionKey { get; set; }
         [DataMember]
@@ -52,6 +52,8 @@ namespace MMC.Business.Entities
         public decimal RefundAmount { get; set; }
         [DataMember]
         public string BookingNumber { get; set; }
+        [DataMember]
+        public string ActivityKey { get; set; }
         #endregion
 
         [DataMember]

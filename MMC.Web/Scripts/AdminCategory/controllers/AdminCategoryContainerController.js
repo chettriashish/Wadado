@@ -2,7 +2,7 @@
     var app = angular.module("appMain");
     var adminCategoryContainerController = function ($scope, $http, $timeout, $interval, $location, $state) {
         $scope.loadContent = function (content) {            
-            if (content == 'category') {
+            if (content == 'main-category') {
                 $scope.isSubCategory = false;
                 $scope.isSubCategoryMapping = false;
                 $scope.isCategory = true;
@@ -20,11 +20,17 @@
                 $scope.isSubCategoryMapping = true;
                 $state.go('admincategory_parent.admincategorytypemapping');
             }
-            if ($('.active a')[0].id != content) {
-                var current = $('.active a')[0].id;
+
+            if ($('.active a')[1].id != content) {
+                var current = $('.active a')[1].id;
                 $('#' + current).parent().removeClass('active');
-                $('#' + content).parent().addClass('active');                
+                $('#' + content).parent().addClass('active');
             }
+            //if ($('.active a')[1].id != content) {
+            //    var current = $('.active a')[1].id;
+            //    $('#' + current).parent().removeClass('active');
+            //    $('#' + content).parent().addClass('active');                
+            //}
         }
 
         var setDefaults = function () {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace MMC.Web.Controllers.Search
 {
@@ -22,6 +23,8 @@ namespace MMC.Web.Controllers.Search
             IEnumerable<ActivitySummaryDataContract> result = _searchDataService.GetAllActivitiesForLocation(Request.UserAgent, locationKey);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        [OutputCache(CacheProfile = "global", Location = OutputCacheLocation.Server)]
         public ActionResult GetAllLocations()
         {
             IEnumerable<LocationsMaster> results = _searchDataService.GetAllLocations();

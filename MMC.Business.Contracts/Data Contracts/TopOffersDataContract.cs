@@ -13,7 +13,7 @@ namespace MMC.Business.Contracts.DataContracts
         [DataMember]
         public string TopOffersKey { get; set; }
         [DataMember]
-        public string Key { get; set; }       
+        public string Key { get; set; }
         [DataMember]
         public string Value { get; set; }
         [DataMember]
@@ -30,5 +30,8 @@ namespace MMC.Business.Contracts.DataContracts
         public string ImageURL { get; set; }
         [DataMember]
         public string Location { get; set; }
+        [DataMember]
+        public DateTime OfferEndDate { get; set; }
+        public DateTime OfferStartDate { get; set; }
     }
 }

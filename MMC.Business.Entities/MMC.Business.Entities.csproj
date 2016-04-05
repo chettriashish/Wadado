@@ -73,6 +73,7 @@
     <Compile Include="ActivityLocation.cs" />
     <Compile Include="ActivityPriceMapping.cs" />
     <Compile Include="ActivityRates.cs" />
+    <Compile Include="ActivityTagMapping.cs" />
     <Compile Include="ActivityTimeScheduler.cs" />
     <Compile Include="ActivityTypeCategory.cs" />
     <Compile Include="ActivityTypeMaster.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="TopOffers.cs" />
     <Compile Include="TouristSeasons.cs" />
     <Compile Include="UserApplicationActivityDetails.cs" />
+    <Compile Include="UserCompanyMapping.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

@@ -37,6 +37,18 @@ namespace MMC.Data.DataRepositories
             var results = query.FirstOrDefault();
 
             return results;
-        }        
+        }
+
+        public IEnumerable<ActivityImages> GetImagesForSelectedActivity(string activityKey)
+        {
+            List<ActivityImages> result = new List<ActivityImages>();
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                result = (from e in entityContext.ActivityImagesSet
+                          where e.ActivityKey == activityKey
+                          select e).ToList();
+            }
+            return result;
+        }
     }
 }

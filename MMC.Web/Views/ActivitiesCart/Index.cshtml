@@ -40,8 +40,8 @@
 <link href="~/Content/desktop.css" rel="stylesheet" />
 <div class="cover"></div>
 <div class="contentWrapper" data-ng-controller="ActivitiesCartController">
-    <div id="colorbar">
-    </div>
+    @*<div id="colorbar">
+    </div>*@
     <div>
         @Html.Partial("../Partial/_desktopmenu")
     </div>
@@ -169,7 +169,7 @@
                                             <span>Packages</span>
                                         </div>
                                         <div>
-                                            <span>INR 10,000</span>
+                                            <span>{{Currency}} {{Total}}</span>
                                         </div>
                                     </div>
                                     <div>
@@ -177,7 +177,7 @@
                                             <span>VAT</span>
                                         </div>
                                         <div>
-                                            <span>INR 2,000</span>
+                                            <span>{{Currency}} 2,000</span>
                                         </div>
                                     </div>
                                     <div>
@@ -185,7 +185,7 @@
                                             <span>Total</span>
                                         </div>
                                         <div>
-                                            <span>INR 12,000</span>
+                                            <span>{{Currency}} {{Total}}</span>
                                         </div>
                                     </div>
                                 </div>

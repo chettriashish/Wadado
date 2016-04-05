@@ -97,7 +97,17 @@
             else {
                 $scope.removeFilter = false;
             }
-        })
+        });
+
+        if (!WURFL.is_mobile) {
+            var createAutoComplete = function () {
+                var $input = $(this);
+                $input.autocomplete({
+                    source: MenuDataService.getActivitiesForSelectedSearchTag(),
+                    select: submitAutoCompleteForm
+                });
+            };
+        }
     }
     app.controller("MenuController", menuController);
 }());

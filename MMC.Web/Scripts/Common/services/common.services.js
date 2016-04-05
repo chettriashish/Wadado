@@ -6,6 +6,6 @@
                     ["ngResource"])
     	.constant("appSettings",
         {
-            serverPath: "http://localhost:4197"
+            serverPath: Wadado.rootPath
         });
 }());

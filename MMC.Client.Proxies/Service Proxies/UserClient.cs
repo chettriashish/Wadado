@@ -72,5 +72,29 @@ namespace MMC.Client.Proxies
         {
             return Channel.CheckForActivityInFavorites(guestKey, activityKey);
         }
+        public CompanyMaster CheckIfUserBelongsToCompany(string userId)
+        {
+            return Channel.CheckIfUserBelongsToCompany(userId);
+        }
+        public CompanyMaster CreateCompanyForSelectedUser(string userId, CompanyMaster company)
+        {
+            return Channel.CreateCompanyForSelectedUser(userId, company);
+        }
+
+        public CompanyMaster CreateCompanyForSelectedUser(string userId, string companyName, string address, string telephoneNumber, string email, string contactPerson)
+        {
+            CompanyMaster newCompany = new CompanyMaster
+            {
+                Address = address,
+                ContactPerson = contactPerson,
+                Email = email,
+                Name = companyName,
+                TelephoneNumber = telephoneNumber,
+                CreatedDate = DateTime.Now,
+                CreatedBy = userId,
+                Rating = 0,                 
+            };
+            return CreateCompanyForSelectedUser(userId, newCompany);
+        }
     }
 }

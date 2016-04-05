@@ -19,6 +19,11 @@ namespace MMC.Client.Entities
         private bool _IsDeleted;
         private DateTime? _CreatedDate;
         private string _CreatedBy;
+        private int _NumberOfUnits;
+        private int _NumAdults;
+        private int _NumChild;
+        private decimal _CommissionPercentage;
+        private decimal _CommissionAmount;
         #endregion
 
         #region Properties
@@ -49,7 +54,7 @@ namespace MMC.Client.Entities
                 _OptionDescription = value;
                 OnPropertyChanged(() => OptionDescription);
             }
-        }       
+        }
 
         public decimal PriceForAdults
         {
@@ -99,7 +104,56 @@ namespace MMC.Client.Entities
                 _CreatedBy = value;
                 OnPropertyChanged(() => CreatedBy);
             }
+        }        
+        public int NumberOfUnits
+        {
+            get { return _NumberOfUnits; }
+            set
+            {
+                _NumberOfUnits = value;
+                OnPropertyChanged(() => NumberOfUnits);
+            }
         }
+        public int NumAdults
+        {
+            get { return _NumAdults; }
+            set
+            {
+                _NumAdults = value;
+                OnPropertyChanged(() => NumAdults);
+            }
+        }
+        public int NumChild
+        {
+            get { return _NumChild; }
+            set
+            {
+                _NumChild = value;
+                OnPropertyChanged(() => NumChild);
+            }
+        }
+        public decimal CommissionPercentage
+        {
+            get { return _CommissionPercentage; }
+            set
+            {
+                _CommissionPercentage = value;
+                OnPropertyChanged(() => CommissionPercentage);
+            }
+        }
+
+        public decimal CommissionAmount
+        {
+            get { return _CommissionAmount; }
+            set
+            {
+                _CommissionAmount = value;
+                OnPropertyChanged(() => CommissionAmount);
+            }
+        }
+
+
+
         #endregion
 
         class ActivityPriceMappingValidator : AbstractValidator<ActivityPriceMapping>
@@ -110,6 +164,8 @@ namespace MMC.Client.Entities
                 RuleFor(obj => obj.ActivityKey).NotEmpty();
                 RuleFor(obj => obj.PriceForAdults).NotNull();
                 RuleFor(obj => obj.PriceForChildren).NotNull();
+                //RuleFor(obj => obj.NumAdults).GreaterThan(0);
+                //RuleFor(obj => obj.NumberOfUnits).GreaterThan(0);
                 RuleFor(obj => obj.OptionDescription).NotEmpty();
             }
         }

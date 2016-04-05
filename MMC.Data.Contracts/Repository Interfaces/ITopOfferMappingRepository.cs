@@ -12,5 +12,7 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
     {
         IEnumerable<TopOfferMapping> GetAllTopActivitiesOfferForSelectedLocation(string locationKey);
         TopOfferMapping CheckAndFetchSingleOfferExists(string mappingKey, string mappingType);
+
+        bool AddAll(IEnumerable<TopOfferMapping> mappings);
     }
 }
