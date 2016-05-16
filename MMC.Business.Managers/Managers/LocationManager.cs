@@ -113,6 +113,7 @@ namespace MMC.Business.Managers
                             locationDetail.MustEat = detail.ActivityDescription;
                         }
                     }
+                    locationDetail.ImageURL = selectedLocation.LocationImage;
                     result.Add(locationDetail);
                 }
                 else

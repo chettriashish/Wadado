@@ -1,17 +1,17 @@
 ﻿(function () {
     var app = angular.module("appMain");
     var searchController = function ($scope, $http, $timeout, $interval, $location, SearchDataService) {
-        $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';        
+        $scope.selectionInformation = 'SELECT LOCATION TO SEARCH';
         $scope.activityName = "Explore";
         $scope.isLocationSelected = false;
         /***************************LOADING SELECTED LOCATIONS ACTIVITY LIST *************************/
         $scope.loadSelectedLocationDetails = function (item, model) {
             if (!WURFL.is_mobile) {
-                $scope.locationName = item.LocationName;
+                $scope.locationKey = item.LocationKey;
                 onLocationActivityCategorySelected();
             }
             else {
-                loadSelectedLocationActivities(item.LocationName);
+                loadSelectedLocationActivities(item.LocationKey);
             }
         };
         /*END LOADING SELECTED LOCATIONS ACTIVITY LIST*/
@@ -41,14 +41,14 @@
         }
         //this is for desktop
         var onLocationActivityCategorySelected = function () {
-            if ($scope.locationName != null && $scope.locationName.trim() != "") {
-                SearchDataService.getSelectedDetails($scope.activityCategory, $scope.locationName);
+            if ($scope.locationKey != null && $scope.locationKey.trim() != "") {
+                SearchDataService.getSelectedDetails($scope.activityCategory, $scope.locationKey);
             }
         }
         //this is for mobile devices
         var onLocationActivitySelected = function () {
-            if ($scope.locationName != null && $scope.locationName.trim() != "") {
-                SearchDataService.getSelectedDetails($scope.activityName, $scope.locationName);
+            if ($scope.locationKey != null && $scope.locationKey.trim() != "") {
+                SearchDataService.getSelectedDetails($scope.activityName, $scope.locationKey);
             }
             else {
                 $scope.$broadcast("BUTTONCLICK", 'OPEN');
@@ -65,9 +65,9 @@
             $scope.selectionInformation = 'VIEW SELECTED ACTIVITY DETAILS';
         };
 
-        var loadSelectedLocationActivities = function (locationName) {
-            $scope.locationName = locationName;
-            SearchDataService.getAllActivitiesForLocation($scope.locationName).then(function (activities) {
+        var loadSelectedLocationActivities = function (locationKey) {
+            $scope.locationKey = locationKey;
+            SearchDataService.getAllActivitiesForLocation($scope.locationKey).then(function (activities) {
                 $scope.activities = activities;
                 $scope.selectionInformation = "VIEW \t\t" + $scope.activities.length + "\t\t ACTIVITIES";
                 makeBold();
@@ -80,7 +80,7 @@
             groupBy(alllocations, 'Country', 'location');
             if (purl().segment().length > 1) {
                 if (purl().segment(2).trim().length > 0) {
-                    var selectedLocation = purl().segment(2);                   
+                    var selectedLocation = purl().segment(2);
                     loadSelectedLocationActivities(selectedLocation);
                     $scope.isLocationSelected = true;
                 }

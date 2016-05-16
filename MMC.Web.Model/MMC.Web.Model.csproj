@@ -46,6 +46,7 @@
     <Compile Include="ActivityAvailabilityDetails.cs" />
     <Compile Include="ActivityCategoryModel.cs" />
     <Compile Include="ActivityFilterModel.cs" />
+    <Compile Include="AdminImageModel.cs" />
     <Compile Include="AdminLocationModel.cs" />
     <Compile Include="CompanyModel.cs" />
     <Compile Include="ContactEmailModel.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TopOffersModel.cs" />
     <Compile Include="ActivitiesModel.cs" />
+    <Compile Include="UserCredentialsModel.cs" />
     <Compile Include="UserModel.cs" />
   </ItemGroup>
   <ItemGroup>

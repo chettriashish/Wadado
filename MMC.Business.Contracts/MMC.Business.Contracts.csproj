@@ -64,6 +64,7 @@
     <Compile Include="Data Contracts\ActivityBookingDataContract.cs" />
     <Compile Include="Data Contracts\ActivityCategoryDataContract.cs" />
     <Compile Include="Data Contracts\ActivityDetailsDataContract.cs" />
+    <Compile Include="Data Contracts\ActivitySearchDataContract.cs" />
     <Compile Include="Data Contracts\ActivitySummaryDataContract.cs" />
     <Compile Include="Data Contracts\CustomerActivitiesBookingData.cs" />
     <Compile Include="Data Contracts\EmailDataContract.cs" />

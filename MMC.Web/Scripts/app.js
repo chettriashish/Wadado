@@ -4,7 +4,7 @@
 ///<reference path="angular-ui/ui-bootstrap.js" />
 (function () {
     //var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'ngAnimate', 'ui.bootstrap', 'ngRoute']);
-    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'common.services', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-click-outside', 'ui.router'])
+    var app = angular.module('appMain', ['ngSanitize', 'ui.select', 'common.services', 'ngAnimate', 'ngRoute', 'ngResource', 'angular-click-outside', 'ui.router', 'uni-search', 'ImageCropper'])
 
     window.fbAsyncInit = function () {
         FB.init({
@@ -29,28 +29,28 @@
         $urlRouterProvider.otherwise("/");
 
         $stateProvider
-        .state('adminLogin', {
-            url: '/',
-            controller: 'AdminLoginController',
-            controllerAs: 'vm',
-            templateUrl: Wadado.rootPath + '/Templates/_adminLogin.html',
-            resolve: {
-                isLoggedIn: function () {
-                    return false;
-                }
-            }
-        })
-        .state('adminRegisterUser', {
-            url: '/register',
-            controller: 'AdminLoginController',
-            controllerAs: 'vm',
-            templateUrl: Wadado.rootPath + '/Templates/_registration.html',
-            resolve: {
-                isLoggedIn: function () {
-                    return false;
-                }
-            }
-        })
+        //.state('adminLogin', {
+        //    url: '/',
+        //    controller: 'AdminLoginController',
+        //    controllerAs: 'vm',
+        //    templateUrl: Wadado.rootPath + '/Templates/_adminLogin.html',
+        //    resolve: {
+        //        isLoggedIn: function () {
+        //            return false;
+        //        }
+        //    }
+        //})
+        //.state('adminRegisterUser', {
+        //    url: '/register',
+        //    controller: 'AdminLoginController',
+        //    controllerAs: 'vm',
+        //    templateUrl: Wadado.rootPath + '/Templates/_registration.html',
+        //    resolve: {
+        //        isLoggedIn: function () {
+        //            return false;
+        //        }
+        //    }
+        //})
         .state('adminLocation', {
             url: '/location',
             controller: 'AdminLocationSummaryController',

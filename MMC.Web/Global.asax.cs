@@ -30,7 +30,10 @@ namespace MMC.Web
             // Initialize WURFL
             WurflConfig.Initialize();
             // Added to make the site device-aware. (Disable this to get back to default behavior.)
-            DisplayConfig.RegisterDisplayModes(DisplayModeProvider.Instance.Modes);            
+            DisplayConfig.RegisterDisplayModes(DisplayModeProvider.Instance.Modes);
+            //Removing the default JSON Factory and adding a custom factory to accomodate large JSON
+            ValueProviderFactories.Factories.Remove(ValueProviderFactories.Factories.OfType<System.Web.Mvc.JsonValueProviderFactory>().FirstOrDefault());
+            ValueProviderFactories.Factories.Add(new CustomJsonValueProviderFactory());
         }
     }
 }

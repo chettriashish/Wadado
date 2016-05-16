@@ -1,6 +1,9 @@
 using System.Web.Mvc;
 using Microsoft.Practices.Unity;
 using Unity.Mvc4;
+using Core.Common.Contracts;
+using MMC.Data.Contracts.RepositoryInterfaces;
+using MMC.Data.DataRepositories;
 
 namespace MMC.Data
 {
@@ -30,7 +33,12 @@ namespace MMC.Data
 
     public static void RegisterTypes(IUnityContainer container)
     {
-    
+        container.RegisterTypes(AllClasses.FromLoadedAssemblies(),
+                           WithMappings.FromMatchingInterface,
+                           WithName.Default);
+
+        container.RegisterType<IDataRepositoryFactory, DataRepositoryFactory>();
+        container.RegisterType<ILocationsMasterRepository, LocationsMasterRepository>();   
     }
   }
 }

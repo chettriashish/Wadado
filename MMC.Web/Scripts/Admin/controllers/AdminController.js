@@ -1,4 +1,5 @@
 ﻿(function () {
+    'use strict';
     var app = angular.module("appMain");
     var adminController = function ($scope, $state, userAccount, $stateParams, AdminCompanyDataService) {
         $scope.isUserLoggedIn = false;
@@ -10,24 +11,34 @@
             $scope.$broadcast("HIDEDIALOG", args);
         });
         $scope.$on("u_l", function (event, args) {
-            $scope.isUserLoggedIn = userAccount.isUserloggedIn();            
+            $scope.isUserLoggedIn = userAccount.isUserloggedIn();
+        });
+        $scope.$on("DIALOG_IMAGE_S", function (event, args) {
+            $scope.$broadcast("SHOWIMAGEDIALOG", args);
+        });
+
+        $scope.$on("IMAGE_CROPPED", function (event, args) {
+            $scope.$broadcast("IMAGE_CROPPED_REDIRECT", args);
         });
 
         AdminCompanyDataService.checkIfUserBelongsToCompanyAsync(sessionStorage.userId).then(function (response) {
             if (response.CompanyKey) {
                 $scope.isUserLoggedIn = userAccount.isUserloggedIn();
+                sessionStorage.companyKey = response.CompanyKey;
+                AdminCompanyDataService.checkForAdminAsync(sessionStorage.userId).then(function (response) {
+                    AdminCompanyDataService.setAdmin(response);
+                    $scope.isAdmin = AdminCompanyDataService.getAdmin();
+                    //$state.go("adminbookings_parent.adminActivityBookingsPending");
+                });                
             }
             else {
                 $scope.isUserLoggedIn = false;
+                $state.go("adminCompanyDetails");
             }
-        })
-        if (userAccount.isUserloggedIn() == false) {
-            $state.go("adminLogin");
-        }
+        });
         $scope.logout = function () {
             userAccount.logout();
-            $scope.isUserLoggedIn = userAccount.isUserloggedIn();
-            $state.go("adminLogin");
+            $scope.isUserLoggedIn = userAccount.isUserloggedIn();        
         }
         var setActive = function (content) {
             if ($('.active a')[0] != null && $('.active a')[0].id != content) {
@@ -37,19 +48,19 @@
             }
         }
         var setDefaultUrl = function () {
-            var current = typeof $('.active a')[0] != 'undefined' ? $('.active a')[0].id : '';            
-            selectedItem = window.location.href.split('/')[4];
+            var current = typeof $('.active a')[0] != 'undefined' ? $('.active a')[0].id : '';
+            var selectedItem = window.location.href.split('/')[4];
             if (current != selectedItem) {
                 $('#' + current).parent().removeClass('active');
                 $('#' + selectedItem).parent().addClass('active');
-            }                        
-        }        
+            }
+        }
         window.onload = function () {
             setDefaultUrl();
         }
         $scope.setActive = function (content) {
             setActive(content);
-        }       
+        }
     }
     app.controller("AdminController", ["$scope", "$state", "userAccount", "$stateParams", "AdminCompanyDataService", adminController]);
 }());

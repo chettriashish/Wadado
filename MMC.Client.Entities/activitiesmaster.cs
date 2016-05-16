@@ -62,7 +62,7 @@ namespace MMC.Client.Entities
                 }
             }
         }
-        [ForeignKey("ActivitiesTypeMaster")]
+       
         public string ActivityTypeKey
         {
             get { return _ActivityTypeKey; }
@@ -72,7 +72,7 @@ namespace MMC.Client.Entities
                 OnPropertyChanged(() => ActivityTypeKey, true);
             }
         }
-        [ForeignKey("LocationsMaster")]
+       
         public string LocationKey
         {
             get { return _locationKey; }

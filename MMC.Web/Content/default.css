@@ -1002,17 +1002,17 @@ footer {
     width: 100%;
     bottom: 0;
     left: 0;
-    min-height: 8em;
+    min-height: 12em;
 }
 
     footer a {
         color: #fff;
-        font-size: 1em;        
+        font-size: 1em;
     }
 
     footer div {
         text-align: left;
-        padding:.5em 1em;
+        padding: .5em 1em;
     }
 
     footer img {
@@ -2081,26 +2081,31 @@ span.buttonText {
         font-size: .9em;
     }
 
+.admin-button-dialog {
+    margin: 0em 0 0 0em;
+    float: left;
+    display: table;
+}
+
 .admin-booking {
     margin: 0em 0 0 1em;
     float: left;
     display: table;
 }
 
-    .admin-booking div:first-of-type {
+    .admin-booking div:first-of-type, .admin-button-dialog div:first-of-type {
         transition: margin .2s linear;
         margin: 0em auto;
         text-align: center;
     }
 
-    .admin-booking div {
+    .admin-booking div, .admin-button-dialog div {
         margin: 1em auto;
         text-align: center;
         position: relative;
     }
 
-    .admin-booking a {
-        margin: 0 auto;
+    .admin-booking a, .admin-button-dialog a {
         height: 1em;
         font-size: .8em;
         padding: .8em 3em;
@@ -2131,6 +2136,29 @@ span.buttonText {
     padding: 0;
     font-family: 'Lato';
 }
+
+.image-dialog {    
+    position: fixed; /* Stay in place */
+    z-index: 100; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+    .image-dialog > div {
+        background-color: #fefefe;
+        margin:0 auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 1024px;
+        height:800px;
+    }
+
 
 .dialog-header {
     position: relative;

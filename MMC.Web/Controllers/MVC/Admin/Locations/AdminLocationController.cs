@@ -1,5 +1,6 @@
 ﻿using MMC.Client.Contracts;
 using MMC.Client.Contracts.DataContracts;
+using MMC.Web.Helpers;
 using MMC.Web.Model;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,13 @@ namespace MMC.Web.Controllers.Admin.Locations
                 _locationService.CreateNewLocation(locationDetails);
             }
 
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UploadImages(List<AdminImageModel> locationImages)
+        {
+            ImagesHelper imageHelper = new ImagesHelper();
+            imageHelper.ResizeAndUpload(locationImages.Where(e => e.Result != null).ToList(), true);            
             return Json(true, JsonRequestBehavior.AllowGet);
         }
     }

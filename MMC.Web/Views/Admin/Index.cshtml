@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Location";
+    ViewBag.Title = "Admin";
 }
 <script src="~/Scripts/Admin/controllers/AdminController.js"></script>
 <script src="~/Scripts/AdminLogin/services/UserAccountDataService.js"></script>
@@ -22,8 +22,11 @@
 <script src="~/Scripts/AdminCompanies/services/AdminCompanyDataService.js"></script>
 <script src="~/Scripts/AdminCompanies/controllers/AdminCompanyController.js"></script>
 <script src="~/Scripts/Common/controllers/DialogController.js"></script>
-<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
+<!--Image cropping reference-->
+<link href="~/Content/image-crop-styles.css" rel="stylesheet" />
+
 <!--UI SELECT REFERENCE-->
+<script src="~/Scripts/angular-ui/ui-select/select.js"></script>
 <link href="~/Content/ui-select/select.css" rel="stylesheet" />
 <link href="~/Content/ui-select/select2.css" rel="stylesheet" />
 <link href="~/Content/ui-select/select2-bootstrap.css" rel="stylesheet" />
@@ -42,8 +45,8 @@
                 <div ng-click="home()">
                 </div>
                 <ul ng-if="isUserLoggedIn" ng-cloak>
-                    <li ng-click="setActive('location')"><a ui-sref="adminLocation" id="location">Location</a></li>
-                    <li ng-click="setActive('category')"><a ui-sref="admincategory_parent.admincategories" id="category">Categories</a></li>
+                    <li ng-click="setActive('location')" ng-if="isAdmin"><a ui-sref="adminLocation" id="location">Location</a></li>
+                    <li ng-click="setActive('category')" ng-if="isAdmin"><a ui-sref="admincategory_parent.admincategories" id="category">Categories</a></li>
                     <li ng-click="setActive('activities')"><a ui-sref="adminActivities" id="activities">Activity</a></li>
                     <li ng-click="setActive('bookings')" class="active"><a ui-sref="adminbookings_parent.adminActivityBookingsPending" id="bookings">Bookings</a></li>
                     <li ng-click="setActive('company-details')"><a ui-sref="adminCompanyDetails" id="company-details">Company Details</a></li>
@@ -58,6 +61,9 @@
     </div>
     <div>
         <ng-include src="'Templates/_dialog.html'" autoscroll="false" />
+    </div>
+    <div>
+        <ng-include src="'Templates/_adminImageUploadDialog.html'" autoscroll="false" />
     </div>
     <div ui-view></div>
 </div>

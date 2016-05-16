@@ -5,10 +5,16 @@
             <li id="services"><a ng-click="Login()">{{LoginStatus}}</a></li>
             <li id="checkout" ng-show="ActivityInCart()"><a ng-click="showCart()">View Cart ({{ActivityCount}})</a></li>
             <li id="careers"><a href="#">About Us</a></li>
-            <li id="contact"><a href="#">FAQs</a></li>            
+            <li id="contact"><a href="#">FAQs</a></li>
         </ul>
         <button class="logo-button">Logo Button</button>
-        <div><input type="text" placeholder="Search" /></div>
+        <div>
+            <nds-uni-search search-results="applicationData"
+                            min-word-length-for-filter="2" nds-on-item-selected="showResult(filter)"
+                            nds-get-filtered-results="getApplicationData(filter)">
+
+            </nds-uni-search>
+        </div>
         <button class="nav-button"><div>{{ActivityCount}}</div></button>
     </nav>
 </div>

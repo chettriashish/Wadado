@@ -16,7 +16,16 @@
             });
 
         }
+        var uploadImages = function (imagesToUpload) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                data: { locationImages: imagesToUpload },
+                url: '/AdminLocation/UploadImages'
+            }).success(deferred.resolve).error(deferred.reject);
 
+            return deferred.promise;
+        }
         var setNewLocationDetails = function () {
             return $http({
                 url: '/AdminLocation/CreateNewLocation',
@@ -44,6 +53,7 @@
             getSelectedLocationDetails: getSelectedLocationDetails,
             saveLocationDetails: saveLocationDetails,
             setNewLocationDetails: setNewLocationDetails,
+            uploadImages: uploadImages,
         }
     };
     app.factory("AdminLocationDataService", adminLocationDataService);

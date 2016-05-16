@@ -1,6 +1,6 @@
 ﻿(function () {
     var app = angular.module("appMain");
-    var homeDataService = function ($http, $q) {
+    var homeDataService = function ($http, $q, $window) {
 
         var getHomeScreenDetails = function () {
             var deferred = $q.defer();
@@ -32,12 +32,17 @@
 
         var getActivitiesForSelectedSearchTag = function (tags) {
             var deferred = $q.defer();
+            tags = tags.split(' ');
             $http({
                 url: '/Home/GetActivitiesForSelectedSearchTag',
                 method: 'GET',
                 params: { tags: tags }
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
+        }
+
+        var getSelectedActivity = function (searchUrl) {
+            $window.location.href = searchUrl;
         }
 
         var setSlider = function () {
@@ -102,6 +107,7 @@
             getLatestNews: getLatestNews,
             setSlider: setSlider,
             getActivitiesForSelectedSearchTag: getActivitiesForSelectedSearchTag,
+            getSelectedActivity: getSelectedActivity,
         }
     };
     app.factory("HomeDataService", homeDataService);

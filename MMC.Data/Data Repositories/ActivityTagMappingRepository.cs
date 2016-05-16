@@ -20,11 +20,11 @@ namespace MMC.Data.DataRepositories
                                                     on e.ActivityKey equals e1.ActivitesKey
                                                     select e1).ToList();
                 foreach (var tag in tags)
-                {
+                {                    
                     subresult = (from e1 in subresult
                                  join e2 in entityContext.ActivityTagMappingSet
                                  on e1.ActivitesKey equals e2.ActivityKey
-                                 where e2.Tag.Contains(tag)
+                                 where e2.Tag.ToLower().Contains(tag.ToLower())
                                  select e1).GroupBy(e => e.ActivitesKey).Select(grp => grp.First()).ToList();
                 }
                 result = subresult;
@@ -59,6 +59,18 @@ namespace MMC.Data.DataRepositories
             var results = query.FirstOrDefault();
 
             return results;
+        }
+
+        public List<ActivityTagMapping> GetTagsForSelectedActivity(string activityKey)
+        {
+            List<ActivityTagMapping> result = new List<ActivityTagMapping>();
+            using (MyMonkeyCapContext entityContext = new MyMonkeyCapContext())
+            {
+                result = (from e in entityContext.ActivityTagMappingSet
+                        where e.ActivityKey == activityKey
+                        select e).ToList();                
+                return result;
+            }
         }
     }
 }

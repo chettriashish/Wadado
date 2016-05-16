@@ -29,7 +29,7 @@
                     }
                     else {
 
-                    }                    
+                    }
                 }
                 else {
                     $scope.ActivityCount = null;
@@ -50,7 +50,7 @@
                         return false;
                     }
                 }
-            });           
+            });
         }
         $scope.userLogIn = function () {
             if ($scope.userDetails != null && $scope.userDetails.GuestKey != null) {
@@ -60,10 +60,15 @@
                 return false;
             }
         }
-        
+
         /*UPDATING THE NUMBER OF ACTIVITIES BOOKED IN MENU CONTROLLER*/
         $scope.$on("ACTIVITYUPDATEBR", function (event, args) {
             checkForActivities();
+        });
+
+        /*SEARCH FILTER RESULTS*/
+        $scope.$on("SEARCHFILTER", function (event, args) {
+            $scope.applicationData = args;
         });
 
         $scope.Login = function () {

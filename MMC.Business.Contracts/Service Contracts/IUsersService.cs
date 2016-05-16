@@ -36,5 +36,9 @@ namespace MMC.Business.Contracts
         CompanyMaster CheckIfUserBelongsToCompany(string userId);
         [OperationContract]
         CompanyMaster CreateCompanyForSelectedUser(string userId, CompanyMaster company);
+        [OperationContract]
+        bool RegisterUser(string email, string password);
+        [OperationContract]
+        bool CheckAdminUser(string email);
     }
 }

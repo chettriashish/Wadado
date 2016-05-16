@@ -269,14 +269,19 @@ namespace MMC.Client.Proxies
         {
             return Channel.RejectSelectedActivityBooking(bookingKey, user);
         }
-        public IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags)
+        public IEnumerable<ActivitySearchDataContract> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags)
         {
-            return Channel.GetActivitiesForSelectedSearchTag(tags);
+            IEnumerable<ActivitySearchDataContract> results = Channel.GetActivitiesForSelectedSearchTag(tags.ToList());
+            return results;
         }
 
         public IEnumerable<EmailDataContract> GetUsersBookingDetails(string sessionKey, string userAgent)
         {
             return Channel.GetUsersBookingDetails(sessionKey, userAgent);
+        }
+        public bool SaveActivityImages(string activityKey, List<string> images)
+        {
+            return Channel.SaveActivityImages(activityKey, images);
         }
     }
 }

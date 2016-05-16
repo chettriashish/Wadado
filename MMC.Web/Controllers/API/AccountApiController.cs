@@ -14,16 +14,13 @@ using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
 using MMC.Web.Models;
-using MMC.Web.Providers;
-using MMC.Web.Results;
 
 
 namespace MMC.Web.Controllers.API
 {
     public class AccountApiController : ApiController
     {
-        private const string LocalLoginProvider = "Local";
-        private ApplicationUserManager _userManager;
+        private const string LocalLoginProvider = "Local";        
 
         public AccountApiController()
         {

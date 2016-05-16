@@ -13,6 +13,25 @@
         var patt1 = /[0-9]/g;
         var patt2 = /[a-z A-Z]/g;
         $scope.activityStartEnd = {};
+        $scope.imagesForActivity = [];
+        if ($scope.activityDetails.ActivityImages != null) {
+            if ($scope.activityDetails.ActivityImages.length > 0) {
+                for (i = 0; i < $scope.activityDetails.ActivityImages.length; i++) {
+                    var image = { result: "", name: $scope.activityDetails.ActivityImages[i].split('/')[1] };
+                    $scope.imagesForActivity.push(image);
+                }
+            }
+        }
+        $scope.allSelectedActivityTags = [];
+        $scope.tag = { Tag: "" };
+        /*Setting initial activity tags if present*/
+        if ($scope.activityDetails.Tags != null && $scope.activityDetails.Tags.length > 0) {
+            $.each($scope.activityDetails.Tags, function (key, value) {
+                $scope.tag.Tag = $scope.activityDetails.Tags[key];
+                $scope.allSelectedActivityTags.push($scope.tag);
+                $scope.tag = { Tag: "" };
+            });
+        }
         /*Setting activity start end times */
         if ($scope.activityDetails.ActivityStartTime) {
             var timeComp = $scope.activityDetails.ActivityStartTime.match(patt1);
@@ -88,10 +107,15 @@
 
         $scope.setSelectedSubCategory = function (item) {
             $scope.category = item;
+            $scope.tag.Tag = item;
+            $scope.$scope.allSelectedActivityTags.push(tag);
         }
 
         $scope.selectedLocation = function (item) {
             $scope.location = item;
+            var tag = { Tag: "" };
+            tag.Tag = item;
+            $scope.$scope.allSelectedActivityTags.push(tag);
         }
 
         AdminActivityDataService.getAllAvailableLocationsAsync().then(function (response) {
@@ -164,11 +188,11 @@
             $.each($scope.activityDetails.AllActivityUniqueDates, function (key, value) {
                 var eventDateTime = {};
                 eventDateTime.ActivityKey = $scope.activityDetails.ActivityKey;
-                eventDateTime.time = $scope.activityDetails.AllActivityUniqueDates[key].Time;                
+                eventDateTime.time = $scope.activityDetails.AllActivityUniqueDates[key].Time;
                 eventDateTime.editMode = false;
                 var regex = /[0-9]+/;
                 var date = $scope.activityDetails.AllActivityUniqueDates[key].Date;
-                var result = Number(date.match(regex)[0]);                
+                var result = Number(date.match(regex)[0]);
                 eventDateTime.m_date = new Date(result).toDateString();
                 eventDateTime.Date = new Date(result);
                 var timeComp = eventDateTime.time.match(patt1);
@@ -253,14 +277,14 @@
                 if (index > -1) {
                     $scope.AllEventDateTimes.splice(index, 1);
                     item.editMode = false;
-                }                
+                }
             }
             else {
                 item.time = (item.timeComp.getHours() == 12 ? 12 : item.timeComp.getHours() % 12) + (item.timeComp.getMinutes() > 0 ? ':' + item.timeComp.getMinutes() : '') + item.AMPM;
                 item.editMode = false;
                 //Setting Dates Correctly
                 var regex = /[0-9]+/;
-                var date = item.Date.toDateString();               
+                var date = item.Date.toDateString();
                 item.m_date = date;
             }
         }
@@ -286,8 +310,8 @@
                     item.editMode = false;
                 }
             }
-            else {                
-                item.editMode = false;                
+            else {
+                item.editMode = false;
             }
         }
         $scope.addNewEventDateTime = function () {
@@ -323,11 +347,11 @@
         $scope.addPriceOption = function () {
             var newPriceOption = {
                 ActivityKey: $scope.activityDetails.ActivityKey,
-                ActivityPricingKey:'',
+                ActivityPricingKey: '',
                 OptionDescription: '',
                 PriceForAdults: 0,
                 PriceForChildren: 0,
-                editMode:true
+                editMode: true
             };
             if ($scope.AllActivityPricingOptions.length > 0) {
                 $scope.isPriceOptionEvent = true;
@@ -426,20 +450,35 @@
         }
 
         $scope.saveChanges = function () {
+            if ($scope.allSelectedActivityTags != null) {
+                for (i = 0; i < $scope.allSelectedActivityTags.length; i++) {
+                    var tag = $scope.allSelectedActivityTags[i].Tag;
+                    if ($scope.activityDetails.Tags.indexOf(tag) == -1) {
+                        $scope.activityDetails.Tags.push(tag);
+                    }
+                };
+            }
             if ($scope.activityDetails.IsActivity) {
                 $scope.activityDetails.ActivityStartTime = ($scope.activityStartEnd.activityStartTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityStartTime.getHours() % 12) + ($scope.activityStartEnd.activityStartTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityStartTime.getMinutes() : '') + $scope.activityStartEnd.activityStartTimeAMPM;
                 $scope.activityDetails.ActivityEndTime = ($scope.activityStartEnd.activityEndTime.getHours() == 12 ? 12 : $scope.activityStartEnd.activityEndTime.getHours() % 12) + ($scope.activityStartEnd.activityEndTime.getMinutes() > 0 ? ':' + $scope.activityStartEnd.activityEndTime.getMinutes() : '') + $scope.activityStartEnd.activityEndTimeAMPM;
-                AdminActivityDataService.saveActivityDetails($scope.activityDetails, $scope.days, $scope.AllActivityTimes,$scope.AllActivityPricingOptions, $scope.category.selected.ActivityTypeKey, $scope.location.selected.LocationKey).then(function (response) {
+                AdminActivityDataService.saveActivityDetails($scope.activityDetails, $scope.days, $scope.AllActivityTimes, $scope.AllActivityPricingOptions, $scope.category.selected.ActivityTypeKey, $scope.location.selected.LocationKey).then(function (response) {
                     if (response == true) {
-                        var message = {};
-                        message.header = 'Confirmation';
-                        message.body = 'activity has been saved';
-                        message.showButtons = false;
-                        message.isUserAction = false;
-                        $scope.$emit("DIALOG_S", message);
-                        setTimeout(function () {
-                            $scope.$emit("DIALOG_H", message);
-                        }, 1500);
+                        if ($scope.imagesForActivity.length > 0) {
+                            AdminActivityDataService.uploadImages($scope.activityDetails.ActivityKey, $scope.imagesForActivity).then(function (response) {
+                                var message = {};
+                                message.header = 'Confirmation';
+                                message.body = 'activity has been saved';
+                                message.showButtons = false;
+                                message.isUserAction = false;
+                                $scope.$emit("DIALOG_S", message);
+                                setTimeout(function () {
+                                    $scope.$emit("DIALOG_H", message);
+                                }, 1500);
+                            })
+                            .catch(function (response) {
+                                console.log(response);
+                            });;
+                        }
                     }
                 })
                 .catch(function (response) {
@@ -474,6 +513,27 @@
             switch (option) {
                 case 'event': $scope.activityDetails.IsActivity = !$scope.activityDetails.IsEvent; break;
                 case 'activity': $scope.activityDetails.IsEvent = !$scope.activityDetails.IsActivity; break;
+            }
+        }
+
+        $scope.addImage = function () {
+            $scope.$emit("DIALOG_IMAGE_S", "NEW");
+        }
+        $scope.$on("IMAGE_CROPPED_REDIRECT", function (event, args) {
+            var image = { result: "", name: "" };
+            image.result = args.result;
+            image.name = args.name;
+            $scope.imagesForActivity.push(image);
+        });
+        $scope.addNewTag = function () {
+            $scope.allSelectedActivityTags.push($scope.tag);
+            $scope.tag = { Tag: "" };
+        }
+
+        $scope.removeSelectedTag = function (item) {
+            var index = $scope.allSelectedActivityTags.indexOf(item);
+            if (index > -1) {
+                $scope.allSelectedActivityTags.splice(index, 1);
             }
         }
     }

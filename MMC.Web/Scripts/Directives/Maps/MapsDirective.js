@@ -28,7 +28,7 @@
                     var long = parseFloat($scope.center.split(',')[1]);
                     var mapOptions = {
                         center: new google.maps.LatLng(lat, long),
-                        zoom: 11,
+                        zoom: 13,
                         mapTypeId: google.maps.MapTypeId.ROADMAP,
                         mapTypeControl: false,
                         scrollwheel:false,

@@ -17,11 +17,10 @@ namespace MMC.Business.Entities
         #region Properties
         [DataMember]
         public string ActivityImageKey { get; set; }
-        [DataMember]
-        [ForeignKey("ActivitiesMaster")]
+        [DataMember]      
         public string ActivityKey { get; set; }
 
-        [ForeignKey("LocationsMaster")]
+        [DataMember]      
         public string LocationKey { get; set; }
 
         [DataMember]

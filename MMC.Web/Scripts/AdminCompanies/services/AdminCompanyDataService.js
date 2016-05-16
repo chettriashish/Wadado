@@ -3,6 +3,7 @@
     var app = angular.module("appMain");
 
     var adminCompanyDataService = function ($http, $q) {
+        var _isAdmin = false;
         var checkIfUserBelongsToCompany = function (userId) {
             return $http({
                 url: 'AdminLogin/CheckIfUserBelongsToCompany',
@@ -26,6 +27,24 @@
 
         }
 
+        var checkForAdminAsync = function (userId) {
+            var deferred = $q.defer();
+            $http({
+                url: 'AdminLogin/CheckAdminUser',
+                params: { userId: userId },
+                method: 'GET'
+            }).success(deferred.resolve).error(deferred.reject);
+            return deferred.promise;
+
+        }
+
+        var setAdmin = function (isAdmin) {
+            _isAdmin = isAdmin;
+        }
+
+        var getAdmin = function () {
+            return _isAdmin;
+        }
         var createCompanyForSelectedUser = function (userId, company) {
             var deferred = $q.defer();
             $http({
@@ -40,6 +59,9 @@
             checkIfUserBelongsToCompany: checkIfUserBelongsToCompany,
             createCompanyForSelectedUser: createCompanyForSelectedUser,
             checkIfUserBelongsToCompanyAsync: checkIfUserBelongsToCompanyAsync,
+            checkForAdminAsync: checkForAdminAsync,
+            getAdmin: getAdmin,
+            setAdmin: setAdmin,
         }
     }
 

@@ -158,6 +158,29 @@
             }
         }
 
+
+        $scope.getApplicationData = function (filter) {
+            HomeDataService.getActivitiesForSelectedSearchTag(filter.selected).then(function (response) {
+                $scope.searchResults = response;
+                $scope.$broadcast("SEARCHFILTER", response);                
+            });
+        }
+        $scope.showResult = function (filter) {
+            $scope.filter = filter;
+            showActivityDetails();
+        }
+
+        var showActivityDetails = function () {
+            var searchUrl = null;
+            $.each($scope.searchResults, function (key, value) {
+                if ($scope.searchResults[key].ActivityName == $scope.filter) {
+                    //searchUrl = "/ActivityDetails/Gangtok"+     "/" + $scope.searchResults[key].ActivityKey;
+                    searchUrl = "/ActivityDetails/" + $scope.searchResults[key].LocationKey + "/" + $scope.searchResults[key].ActivityKey;
+                    HomeDataService.getSelectedActivity(searchUrl);
+                    return;
+                }
+            })
+        }
         /***********************SETTING TOP LEVEL CONTROLS********************************/
         var setBackground = function () {
             var windowHeight = $(window).height() * (0.85);

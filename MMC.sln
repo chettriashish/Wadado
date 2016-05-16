@@ -75,6 +75,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC.Login.Contracts", "MMC.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC.Login", "MMC.Login\MMC.Login.csproj", "{AC981606-60BB-4C4D-BC58-C3D032383717}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{F6CFB6D7-B787-463E-AC05-A51F2C544B61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MMC.IdentityServer", "MMC.IdentityServer\MMC.IdentityServer.csproj", "{97CF195B-68D5-4C83-AE7C-C4B813CC6CC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -197,6 +201,10 @@ Global
 		{AC981606-60BB-4C4D-BC58-C3D032383717}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC981606-60BB-4C4D-BC58-C3D032383717}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC981606-60BB-4C4D-BC58-C3D032383717}.Release|Any CPU.Build.0 = Release|Any CPU
+		{97CF195B-68D5-4C83-AE7C-C4B813CC6CC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97CF195B-68D5-4C83-AE7C-C4B813CC6CC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97CF195B-68D5-4C83-AE7C-C4B813CC6CC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97CF195B-68D5-4C83-AE7C-C4B813CC6CC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -231,6 +239,7 @@ Global
 		{15099144-586D-471F-A030-D734D193A5AD} = {B5391216-E9DE-4D64-94EF-F08C2DA5C596}
 		{9F411590-5227-48DB-9B32-E6916FDB8C2D} = {6AF1473E-4EE8-4AFE-946C-EC7C01635518}
 		{AC981606-60BB-4C4D-BC58-C3D032383717} = {6AF1473E-4EE8-4AFE-946C-EC7C01635518}
+		{97CF195B-68D5-4C83-AE7C-C4B813CC6CC6} = {F6CFB6D7-B787-463E-AC05-A51F2C544B61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.0\lib\NET35

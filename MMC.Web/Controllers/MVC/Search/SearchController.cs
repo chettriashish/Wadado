@@ -1,4 +1,5 @@
-﻿using MMC.Client.Contracts.DataContracts;
+﻿using MMC.Client.Contracts;
+using MMC.Client.Contracts.DataContracts;
 using MMC.Client.Entities;
 using MMC.Web.Contracts;
 using MMC.Web.Model;
@@ -14,9 +15,11 @@ namespace MMC.Web.Controllers.Search
     public class SearchController : Controller
     {
         private ISearchDataService _searchDataService;
-        public SearchController(ISearchDataService searchDataService)
+        private ILocationService _locationService;
+        public SearchController(ISearchDataService searchDataService, ILocationService locationService)
         {
             _searchDataService = searchDataService;
+            _locationService = locationService;
         }
         public ActionResult GetAllActivitiesForLocation(string locationKey)
         {
@@ -27,7 +30,7 @@ namespace MMC.Web.Controllers.Search
         [OutputCache(CacheProfile = "global", Location = OutputCacheLocation.Server)]
         public ActionResult GetAllLocations()
         {
-            IEnumerable<LocationsMaster> results = _searchDataService.GetAllLocations();
+            IEnumerable<LocationsMaster> results = _locationService.GetAllLocations();
             return Json(results, JsonRequestBehavior.AllowGet);
         }
     }

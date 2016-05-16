@@ -248,5 +248,25 @@ namespace MMC.Business.Managers
                 }
             });
         }
+
+        public bool RegisterUser(string email, string password)
+        {
+            IRegisteredUsersRepository registeredUsersRepository = _DataRepositoryFactory.GetDataRepository<IRegisteredUsersRepository>();
+
+            return ExecuteFaultHandledOperation(() =>
+            {
+                return registeredUsersRepository.RegisterUser(email, password);
+            });
+        }
+
+        public bool CheckAdminUser(string email)
+        {
+            IRegisteredUsersRepository registeredUsersRepository = _DataRepositoryFactory.GetDataRepository<IRegisteredUsersRepository>();
+
+            return ExecuteFaultHandledOperation(() =>
+            {
+                return registeredUsersRepository.CheckAdminUser(email);
+            });
+        }
     }
 }

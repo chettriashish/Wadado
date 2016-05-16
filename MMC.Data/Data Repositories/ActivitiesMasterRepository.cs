@@ -134,6 +134,10 @@ namespace MMC.Data.DataRepositories
                                           where e.ActivityKey == activity.ActivitesKey
                                           select e).ToList();
 
+                result.Tags = (from e in entityContext.ActivityTagMappingSet
+                               where e.ActivityKey == activity.ActivitesKey
+                               select e.Tag).ToList();
+
                 if (result.AllActivityUniqueDates == null || result.AllActivityUniqueDates.Count() == 0)
                 {
                     result.AllActivityUniqueDates = new List<ActivityDates>();

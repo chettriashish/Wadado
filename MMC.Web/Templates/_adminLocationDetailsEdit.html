@@ -16,6 +16,63 @@
     </div>
     <div class="row">
         <div class="column-12">
+            <div class="column-3">
+                <div class="admin-list label"><span>Images</span></div>
+            </div>
+            <div class="column-col">
+                <div><span>:</span></div>
+            </div>
+            <div class="column-8" ng-if="!imagesForLocation.length > 0">
+                <div class="admin-button-dialog">
+                    <div>
+                        <a ng-click="addImage()">ADD IMAGE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-2">
+            <span>&nbsp;</span>
+        </div>
+        <div class="column-10">
+            <div class="admin-table">
+                <div class="admin-table header" ng-if="imagesForLocation.length > 0">
+                    <div class="column-12">
+                        <div class="column-9">
+                            <span>IMAGE NAME</span>
+                        </div>
+                        <div class="column-2">
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div ng-repeat="item in imagesForLocation">
+                        <div class="column-12">
+                            <div class="column-9">
+                                <div class="column-12">
+                                    <span>{{item.name}}</span>
+                                </div>
+                            </div>
+                            <div class="column-2">
+                                <div ng-click="deleteSelectedImage(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/bin.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Delete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
             <div>
                 <div class="column-3">
                     <div class="admin-list label"><span>Location(lat and long)</span></div>

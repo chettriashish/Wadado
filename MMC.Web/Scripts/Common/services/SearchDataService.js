@@ -4,7 +4,7 @@
 
         var getAllLocations = function () {
             var deferred = $q.defer();
-            $http.get('/Location/GetAllOtherLocations').success(deferred.resolve).error(deferred.reject);
+            $http.get('/Search/GetAllLocations').success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }
         var getAllActivitiesForLocation = function (locationKey) {
@@ -26,7 +26,7 @@
         return {
             getAllLocations: getAllLocations,
             getAllActivitiesForLocation: getAllActivitiesForLocation,
-            getSelectedDetails: getSelectedDetails,           
+            getSelectedDetails: getSelectedDetails,
         };
     };
     app.factory("SearchDataService", searchDataService);

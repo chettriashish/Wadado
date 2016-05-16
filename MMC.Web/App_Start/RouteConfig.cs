@@ -71,7 +71,7 @@ namespace MMC.Web
 
             routes.MapRoute("Admin",
               "professional",
-              new { controller = "Admin", action = "Index" });
+              new { controller = "Admin", action = "Index" });           
 
             routes.MapRoute("GetAllAdminLocations",
              "AdminLocation/GetAllLocations",

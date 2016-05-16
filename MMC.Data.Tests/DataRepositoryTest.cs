@@ -34,6 +34,7 @@ namespace MMC.Data.Tests
         {
             ///Creates a new instance every time
             RepositoryFactoryClassTest repositoryTest = ObjectBase.Container.Resolve<RepositoryFactoryClassTest>();
+
             //ActivityDetailsDataContract activities = repositoryTest.GetActivities();
             IEnumerable<LocationsMaster> locations = repositoryTest.GetLocations();
             //Assert.IsTrue(activities != null);

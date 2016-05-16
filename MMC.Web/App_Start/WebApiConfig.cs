@@ -11,8 +11,8 @@ namespace MMC.Web
         {
             config.Routes.MapHttpRoute(
                 name: "Account",
-                routeTemplate: "api/account/register",
-                defaults: new { controller = "accountapi", Action = "Register" }
+                routeTemplate: "api/account",
+                defaults: new { controller = "account",  }
             );
 
             // Uncomment the following line of code to enable query support for actions with an IQueryable or IQueryable<T> return type.

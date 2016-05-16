@@ -38,6 +38,10 @@ namespace MMC.Client.Contracts
         [OperationContract]
         CompanyMaster CreateCompanyForSelectedUser(string userId, CompanyMaster company);
         CompanyMaster CreateCompanyForSelectedUser(string userId, string companyName, string address, string telephoneNumber, string email, string contactPerson);
+        [OperationContract]
+        bool RegisterUser(string email, string password);
+        [OperationContract]
+        bool CheckAdminUser(string email);
         #endregion
 
         #region Async Operations
@@ -53,6 +57,8 @@ namespace MMC.Client.Contracts
         Task<bool> UpdateGuestInformationAsync(UserSessionDataContract userInformation);
         [OperationContract]
         Task<UserSessionDataContract> GetGuestInformationAsync(string guestKey);
+        [OperationContract]
+        Task<bool> RegisterUserAsync(string email, string password);
         #endregion
     }
 }

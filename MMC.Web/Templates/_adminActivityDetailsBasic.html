@@ -32,6 +32,63 @@
     </div>
     <div class="row">
         <div class="column-12">
+            <div class="column-3">
+                <div class="admin-list label"><span>Images</span></div>
+            </div>
+            <div class="column-col">
+                <div><span>:</span></div>
+            </div>
+            <div class="column-8">
+                <div class="admin-button-dialog">
+                    <div>
+                        <a ng-click="addImage()">ADD IMAGE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-2">
+            <span>&nbsp;</span>
+        </div>
+        <div class="column-10">
+            <div class="admin-table">
+                <div class="admin-table header" ng-if="imagesForActivity.length > 0">
+                    <div class="column-12">
+                        <div class="column-9">
+                            <span>IMAGE NAME</span>
+                        </div>
+                        <div class="column-2">
+                            <span>&nbsp;</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div ng-repeat="item in imagesForActivity">
+                        <div class="column-12">
+                            <div class="column-9">
+                                <div class="column-12">
+                                    <span>{{item.name}}</span>
+                                </div>
+                            </div>
+                            <div class="column-2">
+                                <div ng-click="deleteSelectedImage(item)" class="column-button">
+                                    <div class="column-0">
+                                        <img src="/Images/Icons/bin.png" />
+                                    </div>
+                                    <div class="column-2">
+                                        <span>Delete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
             <div>
                 <div class="column-3">
                     <div class="admin-list label"><span>Category</span></div>
@@ -131,6 +188,44 @@
                     <div class="column-auto"><label><input type="checkbox" ng-model="activityDetails.AllowInstantBooking" ng-click="setEventActivity('event')" />Yes</label></div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="column-12">
+            <div>
+                <div class="column-3">
+                    <div class="admin-list label"><span>Tags</span></div>
+                </div>
+                <div class="column-col">
+                    <div><span>:</span></div>
+                </div>
+                <div class="column-4">
+                    <div>
+                        <input type="text" ng-model="tag.Tag" required placeholder="Add Tags eg. Adventure" />                                
+                    </div>
+                    <div class="row">
+                        <div ng-repeat="item in allSelectedActivityTags">
+                            <div class="column-auto">
+                                <div class="selected-filter">
+                                    <div class="column-auto">
+                                        <span>{{item.Tag}}</span>
+                                    </div>
+                                    <div class="column-0" ng-click="removeSelectedTag(item)">
+                                        <span style="cursor:pointer;">x</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>                    
+                </div>
+                <div class="column-4">
+                    <div class="admin-button-dialog">
+                        <div class="column-12">
+                            <a ng-click="addNewTag()">ADD</a>
+                        </div>
+                    </div>
+                </div>                                      
+            </div>            
         </div>
     </div>
     <div class="row">

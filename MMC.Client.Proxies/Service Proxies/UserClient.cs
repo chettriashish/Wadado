@@ -96,5 +96,20 @@ namespace MMC.Client.Proxies
             };
             return CreateCompanyForSelectedUser(userId, newCompany);
         }
+
+        public bool RegisterUser(string email, string password)
+        {
+            var isRegistered = Channel.RegisterUser(email, password);
+            return isRegistered;
+        }
+        public bool CheckAdminUser(string email)
+        {
+            return Channel.CheckAdminUser(email);
+        }
+        public async Task<bool> RegisterUserAsync(string email, string password)
+        {
+            var isRegistered = await Channel.RegisterUserAsync(email, password);
+            return isRegistered;
+        }
     }
 }

@@ -11,5 +11,7 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
     public interface IActivityImagesRepository:IDataRepository<ActivityImages>
     {
         IEnumerable<ActivityImages> GetImagesForSelectedActivity(string activityKey);
+        bool RemoveImagesForActivity(string activityKey);
+        bool AddImagesForActivity(string activityKey, List<string> images, string locationKey);
     }
 }

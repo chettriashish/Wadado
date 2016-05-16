@@ -1,5 +1,7 @@
 ﻿using MMC.Client.Contracts;
 using MMC.Client.Contracts.DataContracts;
+using MMC.Web.Helpers;
+using MMC.Web.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,8 +34,21 @@ namespace MMC.Web.Controllers.Admin.Activities
 
         public JsonResult SaveActivityDetails(ActivityDetailsDataContract activityDetails, Dictionary<string, bool> activityDays, IEnumerable<string> activityTimes, string activityCategoryKey, string activityLocationKey)
         {
-            //Make call to service
+            //Make call to service                      
             _activitiesService.SaveActivityDetails(activityDetails, activityDays, activityTimes, activityLocationKey, activityCategoryKey, "TBD");
+            return Json(true, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult UploadImages(string activityKey, List<AdminImageModel> activityImages)
+        {
+            ImagesHelper imageHelper = new ImagesHelper();
+            imageHelper.ResizeAndUpload(activityImages.Where(e => e.Result != null).ToList(), false);
+            List<string> images = new List<string>();
+            foreach (var item in activityImages)
+            {
+                images.Add(item.Name);
+            }
+            _activitiesService.SaveActivityImages(activityKey, images);
             return Json(true, JsonRequestBehavior.AllowGet);
         }
 

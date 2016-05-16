@@ -93,9 +93,11 @@ namespace MMC.Client.Contracts
         [OperationContract]
         bool RejectSelectedActivityBooking(string bookingKey, string user);
         [OperationContract]
-        IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags);
+        IEnumerable<ActivitySearchDataContract> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags);
         [OperationContract]
         IEnumerable<EmailDataContract> GetUsersBookingDetails(string sessionKey, string userAgent);
+        [OperationContract]
+        bool SaveActivityImages(string activityKey, List<string> images);
         #endregion
 
         #region Async Operations

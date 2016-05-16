@@ -11,5 +11,6 @@ namespace MMC.Data.Contracts.RepositoryInterfaces
     public interface IActivityTagMappingRepository : IDataRepository<ActivityTagMapping>
     {
         IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags);
+        List<ActivityTagMapping> GetTagsForSelectedActivity(string activityKey);
     }
 }

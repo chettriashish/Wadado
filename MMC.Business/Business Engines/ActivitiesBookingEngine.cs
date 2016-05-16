@@ -6,6 +6,7 @@ using MMC.Common;
 using MMC.Data.Contracts.RepositoryInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.ServiceModel;
 using System.Text;
@@ -26,7 +27,8 @@ namespace MMC.Business.BusinessEngines
         ///2. based on number of participants(total number of people that have already booked and are currently booking)
         ///3. based on time 
         ///4. check for other user booked activity to see if feasible
-        ///5. check any other factors        
+        ///5. check any other factors                
+        
         public bool IsActivityAvailable(string activityPricingKey, DateTime bookingDate, string bookingTime,
             IEnumerable<ActivityBooking> bookedActivites, int adults, int children,  ActivitiesMaster activity)
         {

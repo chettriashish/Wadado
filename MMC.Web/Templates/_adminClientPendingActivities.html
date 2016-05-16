@@ -9,9 +9,9 @@
     </div>
 </div>
 <div class="row">
-    <div class="admin-table">
-        <div class="column-12">          
-            <div style="float:right;">                
+    <div class="admin-table" ng-if="vm.isAdmin">
+        <div class="column-12">
+            <div style="float:right;">
                 <div class="column-3">
                     <ui-select ng-model="vm.company.selected" theme="selectize" on-select="vm.getAllActivitiesPendingForSelectedCompany(item)" class="admin-category-select">
                         <ui-select-match placeholder="Select a company to filter">{{$select.selected.Name}}</ui-select-match>

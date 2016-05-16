@@ -8,6 +8,8 @@ using MMC.Login.Contracts;
 using MMC.Login;
 using MMC.Web.Core;
 using MMC.Web.Adapters;
+using System.Web.Http;
+using WebApiContrib.IoC.Unity;
 
 namespace MMC.Web
 {
@@ -18,7 +20,8 @@ namespace MMC.Web
             var container = BuildUnityContainer();
 
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
-
+            //To support Web Api
+            GlobalConfiguration.Configuration.DependencyResolver = new UnityResolver(container);
             return container;
         }
 

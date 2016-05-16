@@ -27,7 +27,8 @@ namespace MMC.Web
                "~/Scripts/clickoutside.directive.js",    
                "~/Scripts/angular-ui-router.min.js",
                "~/Scripts/Common/services/common.services.js",
-               //"~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+               "~/Scripts/Directives/UniversalSearch/UniversalSearchDirective.js",
+               "~/Scripts/Directives/Image/image-crop.js",
                "~/Scripts/app.js"));
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at http://modernizr.com to pick only the tests you need.

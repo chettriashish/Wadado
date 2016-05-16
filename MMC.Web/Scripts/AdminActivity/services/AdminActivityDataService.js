@@ -75,7 +75,7 @@
             $http({
                 method: 'POST',
                 url: '/AdminActivity/SaveActivityDetails',
-                data: { activityDetails: activityDetails, activityDays: activityDays, activityTimes: time, activityCategoryKey: activityCategoryKey, activityLocationKey: activityLocationKey }
+                data: { activityDetails: activityDetails, activityDays: activityDays, activityTimes: time, activityCategoryKey: activityCategoryKey, activityLocationKey: activityLocationKey}
             }).success(deferred.resolve).error(deferred.reject);
             return deferred.promise;
         }
@@ -115,6 +115,17 @@
             return deferred.promise;
         }
 
+        var uploadImages = function (activityKey, imagesToUpload) {
+            var deferred = $q.defer();
+            $http({
+                method: 'POST',
+                data: { activityKey: activityKey, activityImages: imagesToUpload },
+                url: '/AdminActivity/UploadImages'
+            }).success(deferred.resolve).error(deferred.reject);
+
+            return deferred.promise;
+        }
+
         /*USING THE REVEALING MODULE PATTERN TO EXPOSE ONLY THE METHODS THAT WE CHOOSE TO*/
         return {
             getAllAvailableLocations: getAllAvailableLocations,
@@ -124,6 +135,7 @@
             getAllAvailableLocationsAsync: getAllAvailableLocationsAsync,
             createNewActivity: createNewActivity,
             saveEventDetails: saveEventDetails,
+            uploadImages: uploadImages,
         }
     };
     app.factory("AdminActivityDataService", adminActivityDataService);

@@ -16,11 +16,10 @@ namespace MMC.Business.Entities
         [DataMember]
         public string ActivitesKey { get; set; }
 
-        [DataMember]
-        [ForeignKey("ActivitiesTypeMaster")]
+        [DataMember]        
         public string ActivityTypeKey { get; set; }
 
-        [ForeignKey("LocationsMaster")]
+        [DataMember]
         public string LocationKey { get; set; }
         [DataMember]
         public string Name { get; set; }

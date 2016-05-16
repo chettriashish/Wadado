@@ -31,6 +31,7 @@ namespace MMC.Web.Controllers.Activities
             SessionHandler("Activities");
             return View();
         }
+        
         [OutputCache(CacheProfile = "global", Location = OutputCacheLocation.Server,VaryByParam="selectedActivityCategory")]
         public ActionResult GetSelectedActivityType(string selectedLocation, string selectedActivityCategory)
         {

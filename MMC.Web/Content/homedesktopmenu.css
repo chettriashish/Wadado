@@ -315,9 +315,10 @@
     nav > div {
         width: 100%;
         float: right;
-        right: 15px;
+        right: 50px;
         top: 10px;
         width: 10em;
+       
         position: absolute;
     }
     /*end style for menu*/
@@ -333,7 +334,7 @@
         height: 90px;
         top: 0em;
         left: 5em;
-        background-color: rgb(255,255,255);
+        background-color: rgb(251,189,19);
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
         background-image: url('../Images/Icons/do_mob.png');
@@ -352,6 +353,6 @@
         .logo-button:hover {
             background-position-y: 20px;
             height: 110px;
-            background-color: rgb(255,255,255);
+            background-color: rgb(251,189,19);
         }
 }

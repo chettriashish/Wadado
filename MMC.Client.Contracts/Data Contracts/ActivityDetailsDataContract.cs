@@ -108,5 +108,7 @@ namespace MMC.Client.Contracts.DataContracts
         public decimal Comission { get; set; }
         [DataMember]
         public bool AllowInstantBooking { get; set; }
+        [DataMember]
+        public List<string> Tags { get; set; }
     }
 }

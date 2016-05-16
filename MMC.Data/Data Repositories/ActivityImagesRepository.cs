@@ -50,5 +50,36 @@ namespace MMC.Data.DataRepositories
             }
             return result;
         }
+
+
+        public bool RemoveImagesForActivity(string activityKey)
+        {
+            IEnumerable<ActivityImages> allActivityImages = GetImagesForSelectedActivity(activityKey);
+            foreach (var item in allActivityImages)
+            {
+                Remove(item);
+            }
+            return true;
+        }
+
+        public bool AddImagesForActivity(string activityKey, List<string> images, string locationKey)
+        {
+            int count = 0;
+            foreach (var image in images)
+            {
+                ActivityImages item = new ActivityImages
+                {
+                    ActivityImageKey = Guid.NewGuid().ToString(),
+                    ActivityKey = activityKey,                    
+                    ImageURL = image,
+                    LocationKey = locationKey,
+                    IsDefault = count == 0 ? true : false
+                };
+                Add(item);
+                count++;
+            }
+
+            return true;
+        }
     }
 }

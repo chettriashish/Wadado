@@ -444,7 +444,7 @@ namespace MMC.Business.Managers
                 IActivityTimeSchedulerRepository activityTimeSchedulerRepository = _DataRepositoryFactory.GetDataRepository<IActivityTimeSchedulerRepository>();
                 IActivityDatesRepository activityDatesRepository = _DataRepositoryFactory.GetDataRepository<IActivityDatesRepository>();
                 IActivityPriceMappingRepository activityPriceMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityPriceMappingRepository>();
-
+                IActivityTagMappingRepository activityTagRepository = _DataRepositoryFactory.GetDataRepository<IActivityTagMappingRepository>();
                 ActivitiesMaster activitiesMaster = new ActivitiesMaster();
                 activitiesMaster.ActivityEndTime = activity.ActivityEndTime;
                 activitiesMaster.ActivityLocation = activity.LatLong;
@@ -462,7 +462,7 @@ namespace MMC.Business.Managers
                 activitiesMaster.CostForChild = activity.CostForChild;
                 activitiesMaster.Duration = activity.Duration;
                 activitiesMaster.MaxAdults = activity.NumAdults;
-                activitiesMaster.MaxChildren = activity.NumChildren;
+                activitiesMaster.MaxChildren = activity.NumChildren;                
                 activitiesMaster.NumAdults = activity.NumAdults;
                 activitiesMaster.NumChildren = activity.NumChildren;
                 activitiesMaster.LocationKey = locationKey;
@@ -477,16 +477,40 @@ namespace MMC.Business.Managers
                 if (activity.ActivityKey == default(string))
                 {
                     activitiesMaster.ActivitesKey = Guid.NewGuid().ToString();
-                    activitiesMaster.IsValidated = false;
+                    //This has to be changed later
+                    activitiesMaster.IsValidated = true;
                     activitiesRepository.Add(activitiesMaster);
                 }
                 else
                 {
                     activitiesMaster.ActivitesKey = activity.ActivityKey;
-                    activitiesMaster.IsValidated = activity.IsValidated;
+                    //This has to be changed later
+                    activitiesMaster.IsValidated = true;
                     activitiesRepository.Update(activitiesMaster);
                 }
-
+                //Getting existing tags and removing it
+                List<ActivityTagMapping> activityTags = activityTagRepository.GetTagsForSelectedActivity(activity.ActivityKey);
+                if (activityTags.Count() > 0)
+                {
+                    foreach (var item in activityTags)
+                    {
+                        activityTagRepository.Remove(item);
+                    }
+                }
+                //Adding fresh tags
+                if (activity.Tags.Count() > 0)
+                {
+                    foreach (var item in activity.Tags)
+                    {
+                        ActivityTagMapping tag = new ActivityTagMapping
+                        {
+                            ActivityTagKey = Guid.NewGuid().ToString(),
+                            ActivityKey = activity.ActivityKey,
+                            Tag = item
+                        };
+                        activityTagRepository.Add(tag);
+                    }
+                }
                 ActivityDayScheduler dayScheduler = activityDaySchedulerRepository.Get().Where(e => e.ActivityKey == activitiesMaster.ActivitesKey).FirstOrDefault();
                 if (dayScheduler == null)
                 {
@@ -524,13 +548,16 @@ namespace MMC.Business.Managers
 
                 if (activity.AllPriceOptions != null && activity.AllPriceOptions.Count() > 0)
                 {
-                    foreach (var item in activity.AllPriceOptions.Where(e => e.ActivityPricingKey == string.Empty || e.ActivityPricingKey == default(string)))
+                    foreach (var item in activity.AllPriceOptions)
                     {
-                        item.ActivityPricingKey = Guid.NewGuid().ToString();
-                        item.ActivityKey = activitiesMaster.ActivitesKey;
-                        item.CreatedBy = user;
-                        item.CreatedDate = DateTime.Now;
-                        activityPriceMappingRepository.Add(item);
+                        if (string.IsNullOrEmpty(item.ActivityPricingKey))
+                        {
+                            item.ActivityPricingKey = Guid.NewGuid().ToString();
+                            item.ActivityKey = activitiesMaster.ActivitesKey;
+                            item.CreatedBy = user;
+                            item.CreatedDate = DateTime.Now;
+                            activityPriceMappingRepository.Add(item);
+                        }                        
                     }
                 }
 
@@ -630,8 +657,8 @@ namespace MMC.Business.Managers
                         }
                     }
                     //Adding all top offer mapping
-                    topOffersMappingRepository.AddAll(updateOfferMapping);
-                }
+                    topOffersMappingRepository.AddAll(updateOfferMapping);                    
+                }               
             });
         }
 
@@ -919,13 +946,33 @@ namespace MMC.Business.Managers
             });
         }
 
-        public IEnumerable<ActivitiesMaster> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags)
+        public IEnumerable<ActivitySearchDataContract> GetActivitiesForSelectedSearchTag(IEnumerable<string> tags)
         {
             return ExecuteFaultHandledOperation(() =>
             {
                 IActivityTagMappingRepository tagMappingRepository = _DataRepositoryFactory.GetDataRepository<IActivityTagMappingRepository>();
-                return tagMappingRepository.GetActivitiesForSelectedSearchTag(tags);
+                IEnumerable<ActivitiesMaster> allActivities =  tagMappingRepository.GetActivitiesForSelectedSearchTag(tags);
+                List<ActivitySearchDataContract> results = new List<ActivitySearchDataContract>();
+                foreach (var item in allActivities)
+                {
+                    ActivitySearchDataContract search = new ActivitySearchDataContract() { ActivityKey = item.ActivitesKey, ActivityName = item.Name, LocationKey = item.LocationKey };
+                    results.Add(search);
+                }
+                return results;
             });            
+        }
+
+        public bool SaveActivityImages(string activityKey, List<string> images)
+        {
+            return ExecuteFaultHandledOperation(() =>
+            {
+                IActivitiesMasterRepository activityRepository = _DataRepositoryFactory.GetDataRepository<IActivitiesMasterRepository>();
+                string locationKey = activityRepository.Get(activityKey).LocationKey;
+                IActivityImagesRepository imageRepository = _DataRepositoryFactory.GetDataRepository<IActivityImagesRepository>();
+                imageRepository.RemoveImagesForActivity(activityKey);
+                imageRepository.AddImagesForActivity(activityKey, images, locationKey);
+                return true;
+            });
         }
     }
 }
